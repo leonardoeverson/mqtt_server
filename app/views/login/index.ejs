@@ -11,20 +11,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
   </head>
 
   <body class="text-center">
-    <form class="form-signin" >
+    <form class="form-signin" method="post" action="/login" >
       <h1 class="h3 mb-3 font-weight-normal">Login</h1>
       <label for="inputEmail" class="sr-only">Email</label>
-      <input id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" type="email">
+      <input id="inputEmail" class="form-control" placeholder="E-mail" name="email" required="" autofocus="" type="email">
       <label for="inputPassword" class="sr-only">Senha</label>
-      <input id="inputPassword" class="form-control" placeholder="Password" required="" type="password">
+      <input id="inputPassword" class="form-control" placeholder="Senha" name="senha" required="" type="password">
       <div class="checkbox mb-3">
         <label>
           <input value="remember-me"type="checkbox"> Lembrar-me

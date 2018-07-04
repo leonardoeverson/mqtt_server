@@ -27,7 +27,7 @@ def on_close(ws):
 def on_open(ws):
     def run(*args):
         #Enviar dados do cliente e autenticar
-        ws.send(json.dumps({'command':'subscribe','nome_usuario':'leonardo','senha':'12345678','topic':'sensor/temp'}))
+        ws.send(json.dumps({'cmd':'publish','qos':'0','topic':'sensor/temp'}))
         # for i in range(3):
         #     time.sleep(1)
         #     #ws.send("Hello %d" % i)
@@ -41,7 +41,7 @@ def on_open(ws):
 
 if __name__ == "__main__":
     websocket.enableTrace(True)
-    ws = websocket.WebSocketApp("ws://localhost/ws",
+    ws = websocket.WebSocketApp("ws://localhost:8888",
                               on_message = on_message,
                               on_error = on_error,
                               on_close = on_close)

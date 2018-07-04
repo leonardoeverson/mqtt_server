@@ -9,7 +9,7 @@ module.exports = function(app){
 	})
 
 	app.post('/login',function(request, response){
-
+		app.app.controllers.login.login_usuario(app, request, response);
 	})
 
 

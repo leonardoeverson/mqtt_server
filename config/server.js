@@ -1,8 +1,17 @@
 var express = require('express');
 var consign = require('consign');
+var bodyParser = require('body-parser')
+var helmet = require('helmet')
 
 //Express
 var app = express()
+
+//body parser
+//Informando ao express para usar o body parser
+app.use(bodyParser.urlencoded({extended: true}));
+
+//helmet
+app.use(helmet())
 
 //Arquivos Estáticos
 //Pastas estáticas

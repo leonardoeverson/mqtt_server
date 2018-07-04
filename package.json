@@ -5,9 +5,11 @@
   "main": "index.js",
   "dependencies": {
     "aedes": "^0.35.0",
+    "body-parser": "^1.18.3",
     "consign": "^0.1.6",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "helmet": "^3.12.1",
     "websocket-stream": "^5.1.2"
   },
   "devDependencies": {},
