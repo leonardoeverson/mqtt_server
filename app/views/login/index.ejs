@@ -20,7 +20,6 @@
 
   <body class="text-center">
     <form class="form-signin" >
-      <img class="mb-4" src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Login</h1>
       <label for="inputEmail" class="sr-only">Email</label>
       <input id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" type="email">
@@ -34,7 +33,14 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
       <p class="mt-5 mb-3 text-muted"></p>
     </form>
-  
+
+    <button class="btn btn-success" id="cadastro" type="button" style="width:300px ">Cadastre-se</button>
+
+<script type="text/javascript">
+  $("#cadastro").on('click',function(e){
+      location.href = '/cadastro'
+  })
+</script>
 <style type="text/css">
     html,
 body {
@@ -43,7 +49,6 @@ body {
 
 body {
   display: -ms-flexbox;
-  display: flex;
   -ms-flex-align: center;
   align-items: center;
   padding-top: 40px;
@@ -79,6 +84,10 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+#cadastro{
+
 }
 
 </style>
