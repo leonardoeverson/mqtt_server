@@ -1,0 +1,31 @@
+{
+  "name": "mqtt_server",
+  "version": "1.0.0",
+  "description": "Servidor MQTT",
+  "main": "index.js",
+  "dependencies": {
+    "aedes": "^0.35.0",
+    "consign": "^0.1.6",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "websocket-stream": "^5.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardoeverson/mqtt_server.git"
+  },
+  "keywords": [
+    "mqtt",
+    "server"
+  ],
+  "author": "Leonardo Everson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leonardoeverson/mqtt_server/issues"
+  },
+  "homepage": "https://github.com/leonardoeverson/mqtt_server#readme"
+}

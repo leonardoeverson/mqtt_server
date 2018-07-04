@@ -4,6 +4,10 @@ var consign = require('consign');
 //Express
 var app = express()
 
+//Arquivos Estáticos
+//Pastas estáticas
+app.use(express.static('public'));
+
 //Configurando Engine
 app.set('view engine','ejs');
 
