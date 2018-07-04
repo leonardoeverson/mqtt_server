@@ -1,42 +1,10 @@
-var aedes = require('aedes')()
-var server = require('net').createServer(aedes.handle)
-var httpServer = require('http').createServer()
-var ws = require('websocket-stream')
-var port = 1883
-var wsPort = 8888
+//Servidor HTTP
+var app = require('./config/server');
 
-server.listen(port, function () {
-  console.log('server listening on port', port)
+app.listen(80,function(){
+  console.log('Servidor Iniciado na Porta 80');
 })
 
-ws.createServer({
-  server: httpServer
-}, aedes.handle)
+//Servidor MQTT e WS
+var aedes = require('./config/aedes_server');
 
-httpServer.listen(wsPort, function () {
-  console.log('websocket server listening on port', wsPort)
-})
-
-aedes.on('clientError', function (client, err) {
-  console.log('client error', client.id, err.message, err.stack)
-})
-
-aedes.on('connectionError', function (client, err) {
-  console.log('client error', client, err.message, err.stack)
-})
-
-aedes.on('publish', function (packet, client) {
-  if (client) {
-    console.log('message from client', client.id)
-  }
-})
-
-aedes.on('subscribe', function (subscriptions, client) {
-  if (client) {
-    console.log('subscribe from client', subscriptions, client.id)
-  }
-})
-
-aedes.on('client', function (client) {
-  console.log('new client', client.id)
-})
