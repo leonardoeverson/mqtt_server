@@ -29,11 +29,9 @@
     
     <% if(typeof(validacao) != "undefined"){%>
         <div class="alert alert-danger" role="alert">
-         <ul>
         <% for(var i = 0; i < validacao.length; i++){ %>
-            <li><%= validacao[i].msg %></li>        
+            <%= validacao[i].msg %>   
         <% } %>
-         </ul>
         </div>
     <% }%>
     

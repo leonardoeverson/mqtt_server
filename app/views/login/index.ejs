@@ -26,7 +26,15 @@
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-      <p class="mt-5 mb-3 text-muted"></p>
+      <p class="mt-5 mb-3 text-muted">
+        <% if(typeof(validacao) != "undefined"){%>
+            <div class="alert alert-danger" role="alert">
+            <% for(var i = 0; i < validacao.length; i++){ %>
+                <%= validacao[i].msg %>       
+            <% } %>
+            </div>
+        <% }%>
+      </p>
     </form>
 
     <button class="btn btn-success" id="cadastro" type="button" style="width:300px ">Cadastre-se</button>

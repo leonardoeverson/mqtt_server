@@ -48,7 +48,11 @@ module.exports.cadastro_usuario = function(app, request, response){
 		function(callback){
 			cadastroUsuario.grava_usuario(body, function(error, result){
 				if(!error && result.affectedRows > 0){
-					response.redirect("/");
+					request.session.autorizado = true;
+					request.session.nome = body.nome;
+					request.session.user = body.nome_usuario;
+					request.session.user_id = result.insertId;
+					response.redirect("/home");
 				}else{
 					nivel++;
 					if(error){
