@@ -4,6 +4,12 @@ module.exports.cadastro_usuario = function(app, request, response){
 	var body = request.body
 	console.log(body);
 
+	//Erros de cadastro
+	var erro_cadastro = [];
+	var nivel = 0;
+	erro_cadastro.push({ 'msg': 'email existente, insira outro'});
+	erro_cadastro.push({ 'msg': 'falha ao cadastrar o usuario'});
+
 	request.assert('email', 'O campo email não pode ficar vazio').trim().notEmpty().isEmail();
 	request.assert('senha', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
 	request.assert('senhav', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
@@ -16,18 +22,50 @@ module.exports.cadastro_usuario = function(app, request, response){
 		return;
 	}
 
+	//Encadeamento de funções
+	/*
+		1 - Verifica se o email existe
+		2 - Se não existe, grava o usuário
+	*/
+	var async = require('async');
+	async.series([
+		function(callback){
+			cadastroUsuario.verifica_email_existente(body, function(error, result){
+				if(!error && result.length > 0){
+					callback("null", result);
+				}else{
+					if(error){
+						callback("null",error);
+					}
 
-	cadastroUsuario.grava_usuario(body, function(error, result){
-		if(!error && result.length > 0){
-			response.redirect("/");
-		}else{
-			if(error){
-				console.log(error);
-			}
+					if(result){
+						callback("null",result);
+					}
 
-			if(result.length == 0){
-				console.log(result);
-			}
+				}
+			})
+		},
+		function(callback){
+			cadastroUsuario.grava_usuario(body, function(error, result){
+				if(!error && result.affectedRows > 0){
+					response.redirect("/");
+				}else{
+					nivel++;
+					if(error){
+						callback("null",error);
+					}
+
+					if(result){
+						callback("null",result);
+					}
+				}
+			})
+		}
+
+	], function(err, results){
+		if(err){
+			response.render('cadastro/cadastro',{validacao : [erro_cadastro[nivel]]});
 		}
 	})
+
 }
