@@ -6,7 +6,7 @@ module.exports.cadastro_usuario = function(app, request, response){
 
 	request.assert('email', 'O campo email não pode ficar vazio').trim().notEmpty().isEmail();
 	request.assert('senha', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
-	request.assert('senhav', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty();
+	request.assert('senhav', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
 	request.assert('senha', 'as senhas não são iguais').trim().isEqual(body.senhav);
 
 	var erros = request.validationErrors();
