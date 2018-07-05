@@ -1,6 +1,6 @@
 module.exports = function(app){
 	app.get('/cadastro',function(request, response){
-		response.render("login/cadastro");
+		response.render("cadastro/cadastro");
 	})
 
 	app.post('/cadastro',function(request, response){

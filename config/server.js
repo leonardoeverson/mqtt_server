@@ -15,7 +15,7 @@ app.use(helmet())
 
 //Express Session
 app.use(session({
-  secret: '1234567890!@#$%¨&*()_+qazxswedcvfrtgbnyujmkiolpç^~~;.',
+  secret: '1234567890![]?:>.;@#$%¨&*()_+qazxswedcvfrtgbnyujmkiolpç^~~;.',
   resave: false,
   saveUninitialized: false
 }))
@@ -30,10 +30,23 @@ app.set('view engine','ejs');
 //Localizando Views
 app.set('views','./app/views');
 
+//Express Validator
+var expressValidator = require('express-validator');
+
+//validação de senhas
+app.use(expressValidator({
+  customValidators: {
+    isEqual: (value1, value2) => {
+      return value1 === value2
+    }
+  }
+}))
+
 //Localizando arquivos
 //Localizando rotas e models
 consign()
   .include('./app/routes')
+  .then('./config/dbconn.js')
   .then('app/models')
   .then('app/controllers')
   .into(app);
