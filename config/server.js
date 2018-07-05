@@ -1,8 +1,8 @@
 var express = require('express');
 var consign = require('consign');
-var bodyParser = require('body-parser')
-var helmet = require('helmet')
-
+var bodyParser = require('body-parser');
+var helmet = require('helmet');
+var session = require("express-session");
 //Express
 var app = express()
 
@@ -12,6 +12,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //helmet
 app.use(helmet())
+
+//Express Session
+app.use(session({
+  secret: '1234567890!@#$%¨&*()_+qazxswedcvfrtgbnyujmkiolpç^~~;.',
+  resave: false,
+  saveUninitialized: false
+}))
 
 //Arquivos Estáticos
 //Pastas estáticas
