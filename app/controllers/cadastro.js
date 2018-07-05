@@ -31,8 +31,8 @@ module.exports.cadastro_usuario = function(app, request, response){
 	async.series([
 		function(callback){
 			cadastroUsuario.verifica_email_existente(body, function(error, result){
-				if(!error && result.length > 0){
-					callback("null", result);
+				if(!error && result.length == 0){
+					callback(null, result);
 				}else{
 					if(error){
 						callback("null",error);
