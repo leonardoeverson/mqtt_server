@@ -8,4 +8,6 @@ loginDAO.prototype.valida_login = function(dados, callback) {
 	connection.query(query,[body],callback);
 };
 
-module.exports = loginDAO;
+module.exports = function(){
+	return loginDAO;
+}

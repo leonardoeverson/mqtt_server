@@ -3,8 +3,8 @@ module.exports = function(app){
 		response.render("cadastro/cadastro");
 	})
 
-	app.post('/cadastro',function(request, response){
+	app.post('/cadastro/inserir',function(request, response){
 		//response.render("login/cadastro");
-		app.app.controllers.cadastro_usuario(app, request, response)
+		app.app.controllers.cadastro.cadastro_usuario(app, request, response)
 	})
 }

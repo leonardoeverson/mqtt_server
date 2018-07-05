@@ -8,4 +8,6 @@ cadastroDAO.prototype.grava_usuario = function(dados, callback) {
 };
 
 
-module.exports = cadastroDAO;
+module.exports = function() {
+	return cadastroDAO;
+}
