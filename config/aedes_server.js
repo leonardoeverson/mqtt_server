@@ -40,3 +40,5 @@ aedes.on('subscribe', function (subscriptions, client) {
 aedes.on('client', function (client) {
   console.log('new client', client.id)
 })
+
+module.exports = aedes

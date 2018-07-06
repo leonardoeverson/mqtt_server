@@ -12,10 +12,8 @@ cadastroDAO.prototype.grava_usuario = function(dados, callback) {
 	this.connection.query(query, callback);
 };
 
-
 cadastroDAO.prototype.verifica_email_existente = function(email, callback) {
 	var query = "select email from usuarios where email ='"+email+"'";
-
 	this.connection.query(query, callback);
 };
 

@@ -26,4 +26,42 @@ module.exports.login_usuario = function(app, request, response){
 			}
 		}
 	})
+
+}
+
+
+module.exports.login_dispositivo = function(app, client, username, password, cb){
+
+	var conn = app.config.dbconn();
+	var loginUsuario = new app.app.models.loginDAO(conn);
+	var bcrypt = require('bcrypt');
+	dados = {};
+	dados.email = username;
+	var auth_error = new Error('Auth error')
+  	
+  
+	loginUsuario.valida_login(dados, function(error, result){
+		if(!error && result.length > 0){
+			bcrypt.compare(password.toString(), result[0].senha, function(err, res) {
+			    if(res == true){
+			    	cb(null, true)
+			    }else{
+			    	auth_error.returnCode = 4
+			    	cb(auth_error, null)
+			    }
+			})
+			
+		}else{
+			if(error){
+				auth_error.returnCode = 3
+			    cb(auth_error, null)
+
+			}
+
+			if(result.length == 0){
+				auth_error.returnCode = 4
+			    cb(eauth_error, null)
+			}
+		}
+	})
 }

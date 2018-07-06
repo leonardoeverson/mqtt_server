@@ -8,3 +8,12 @@ app.listen(80,function(){
 //Servidor MQTT e WS
 var aedes = require('./config/aedes_server');
 
+aedes.authenticate = function (client, username, password, callback) {
+   //checar novo de usuário e senha
+   //Gerenciando logins
+   app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
+   
+   //permitir acesso
+
+   //negar
+}

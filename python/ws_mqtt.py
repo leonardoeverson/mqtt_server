@@ -17,6 +17,7 @@ def on_log(mqttc, obj, level, string):
     print(string)
 
 mqttc = mqtt.Client(transport='websockets')   
+mqttc.username_pw_set("leonardo@batista.g12.br", "12345678")
 mqttc.on_message = on_message
 mqttc.on_connect = on_connect
 mqttc.on_publish = on_publish

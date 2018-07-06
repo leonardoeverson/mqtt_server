@@ -12,5 +12,7 @@ module.exports = function(app){
 		app.app.controllers.login.login_usuario(app, request, response);
 	})
 
-
+	app.get('/logout',function(request, response){
+		response.redirect("/")
+	})
 }
