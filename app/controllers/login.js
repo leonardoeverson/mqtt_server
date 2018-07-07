@@ -39,7 +39,8 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 	dados.email = username;
 	var auth_error = new Error('Auth error')
   	
-  
+  	console.log(client.conn.socket._socket.remoteAddress)
+  	console.log(client.conn.socket._socket.remotePort)
 	loginUsuario.valida_login(dados, function(error, result){
 		if(!error && result.length > 0){
 			bcrypt.compare(password.toString(), result[0].senha, function(err, res) {

@@ -1,4 +1,5 @@
 import sys
+import random
 import paho.mqtt.client as mqtt
 
 def on_connect(mqttc, obj, flags, rc):
@@ -25,7 +26,7 @@ mqttc.on_subscribe = on_subscribe
 
 mqttc.connect("localhost", 8888, 60)
 
-mqttc.publish("sensor/temp", 0)
+mqttc.publish("sensor/temp", str(random.normalvariate(50, 35)))
 #mqttc.subscribe("$SYS/#", 0)
 
 mqttc.loop_forever()

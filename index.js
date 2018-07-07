@@ -8,12 +8,50 @@ app.listen(80,function(){
 //Servidor MQTT e WS
 var aedes = require('./config/aedes_server');
 
+//Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
    //checar novo de usuário e senha
-   //Gerenciando logins
    app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
-   
-   //permitir acesso
-
-   //negar
 }
+
+//Autorização de publish
+aedes.authorizePublish = function (client, packet, callback) {
+  if (packet.topic === 'aaaa') {
+    return callback(new Error('wrong topic'))
+  }
+
+  if (packet.topic === 'bbb') {
+    packet.payload = new Buffer('overwrite packet payload')
+  }
+
+  callback(null)
+}
+
+//Aedes Events
+aedes.on("clientDisconnect",function(client){
+	 console.log('cliente de id:', client.id, 'desconectou');
+})
+
+aedes.on('clientError', function (client, err) {
+  console.log('client error', client.id, err.message, err.stack)
+})
+
+aedes.on('connectionError', function (client, err) {
+  console.log('client error', client, err.message, err.stack)
+})
+
+aedes.on('publish', function (packet, client) {
+  if (client) {
+    console.log('message from client', client.id)
+  }
+})
+
+aedes.on('subscribe', function (subscriptions, client) {
+  if (client) {
+    console.log('subscribe from client', subscriptions, client.id)
+  }
+})
+
+aedes.on('client', function (client) {
+  console.log('new client', client.id)
+})

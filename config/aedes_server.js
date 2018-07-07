@@ -4,6 +4,12 @@ var httpServer = require('http').createServer()
 var ws = require('websocket-stream')
 var port = 1883
 var wsPort = 8888
+var aedesPersistenceDB = require('aedes-persistence-mongodb')
+
+var persistence = aedesPersistenceDB({
+  url: "mongodb://localhost:27017/aedes_persistence"
+})
+
 
 server.listen(port, function () {
   console.log('server listening on port', port)
@@ -17,28 +23,5 @@ httpServer.listen(wsPort, function () {
   console.log('websocket server listening on port', wsPort)
 })
 
-aedes.on('clientError', function (client, err) {
-  console.log('client error', client.id, err.message, err.stack)
-})
-
-aedes.on('connectionError', function (client, err) {
-  console.log('client error', client, err.message, err.stack)
-})
-
-aedes.on('publish', function (packet, client) {
-  if (client) {
-    console.log('message from client', client.id)
-  }
-})
-
-aedes.on('subscribe', function (subscriptions, client) {
-  if (client) {
-    console.log('subscribe from client', subscriptions, client.id)
-  }
-})
-
-aedes.on('client', function (client) {
-  console.log('new client', client.id)
-})
 
 module.exports = aedes
