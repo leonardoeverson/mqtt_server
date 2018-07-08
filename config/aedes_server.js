@@ -3,30 +3,29 @@ var httpServer = require('http').createServer()
 var ws = require('websocket-stream')
 var port = 1883
 var wsPort = 8888
-var aedesPersistenceDB = require('aedes-persistence-mongodb')
-var mongodb = require('mqemitter-mongodb')
+var aedesPersistenceMongoDB = require('aedes-persistence-mongodb')
 
+//Aedes Persistence
+var persistence = aedesPersistenceMongoDB({url: 'mongodb://127.0.0.1:27017/aedes_persistence'})
 
-var persistence = aedesPersistenceDB({
-  url: "mongodb://localhost:27017/aedes_persistence"
+//Emitter
+var mqmongo = require('mqemitter-mongodb')
+
+var emitter = mqmongo({
+    url: 'mongodb://localhost:27017/aedes_mq'
 })
 
-let aedesOpt = {
-  persistence: persistence
-}
+//Aedes Server
+var aedes = require("aedes")({
+    mq: emitter,
+    persistence: persistence
+});
 
-/*
-var emitter =mongodb({
-  url: 'mongodb://localhost:27017/mqemitter'
-})
-*/
-
-var aedes = require('aedes')(aedesOpt)
 var server = require('net').createServer(aedes.handle)
 
 //Servidor na porta 1883
 server.listen(port, function (socket) {
-  console.log('server listening on port', port)
+  console.log('Servidor escutando na porta:', port)
 })
 
 server.on('connection', function(client) {
@@ -40,7 +39,7 @@ ws.createServer({
 
 
 httpServer.listen(wsPort, function () {
-  console.log('websocket server listening on port', wsPort)
+  console.log('Servidor websocket escutando na porta:', wsPort)
 })
 
 module.exports = aedes

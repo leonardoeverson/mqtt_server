@@ -34,6 +34,7 @@ aedes.on("clientDisconnect",function(client){
 
 aedes.on('clientError', function (client, err) {
   console.log('client error', client.id, err.message, err.stack)
+  app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
 })
 
 aedes.on('connectionError', function (client, err) {
