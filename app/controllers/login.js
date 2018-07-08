@@ -38,9 +38,31 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 	dados = {};
 	dados.email = username;
 	var auth_error = new Error('Auth error')
+  	var ip;
+  	var port;
+  	var method;
   	
-  	console.log(client.conn.socket._socket.remoteAddress)
-  	console.log(client.conn.socket._socket.remotePort)
+  	try{
+  		method = "socket"
+  		ip = client.conn.remoteAddress;
+  		port = client.conn.remotePort;
+  	}catch(e){
+  		console.log(e)
+ 	}
+
+  	if(ip == undefined){
+  		
+  		try{
+  			ip = client.conn.socket._socket.remoteAddress;
+  			port = client.conn.socket._socket.remotePort;
+  			method = "ws";
+  		}catch(e){
+  			console.log(e)
+  		}
+  	}
+
+  	console.log(method, ip)
+
 	loginUsuario.valida_login(dados, function(error, result){
 		if(!error && result.length > 0){
 			bcrypt.compare(password.toString(), result[0].senha, function(err, res) {
@@ -61,7 +83,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 
 			if(result.length == 0){
 				auth_error.returnCode = 4
-			    cb(eauth_error, null)
+			    cb(auth_error, null)
 			}
 		}
 	})

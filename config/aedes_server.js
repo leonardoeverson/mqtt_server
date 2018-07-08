@@ -24,17 +24,23 @@ var emitter =mongodb({
 var aedes = require('aedes')(aedesOpt)
 var server = require('net').createServer(aedes.handle)
 
-server.listen(port, function () {
+//Servidor na porta 1883
+server.listen(port, function (socket) {
   console.log('server listening on port', port)
 })
 
+server.on('connection', function(client) {
+   console.log("novo client", client.remoteAddress)
+})
+
+//Servidor na porta 8888
 ws.createServer({
   server: httpServer
 }, aedes.handle)
 
+
 httpServer.listen(wsPort, function () {
   console.log('websocket server listening on port', wsPort)
 })
-
 
 module.exports = aedes

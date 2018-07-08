@@ -6,7 +6,7 @@ import threading
 import sys
 
 mqttc = mqtt.Client("leonardo", clean_session=True, userdata=None, transport="tcp")
-mqttc.username_pw_set("Leonardo", "Everson")
+mqttc.username_pw_set("leonardo@batista.g12.br", "12345678")
 mqttc.connect("localhost", 1883, 60)
 
 def pub():
