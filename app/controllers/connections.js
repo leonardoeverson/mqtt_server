@@ -35,3 +35,23 @@ module.exports.conn_mgmt_delete = function(app, user_id, client_id, client_addre
 		}
 	})
 }
+
+
+module.exports.conn_mgmt_delete_all = function(){
+	var conn = app.config.dbconn();
+	var connMgmt = new app.app.models.connectionsDAO(conn)
+
+	connMgmt.conn_db_delete_all(null, function(err, result){
+		if(!err){
+			return
+		}else{
+			if(err){
+				console.log("erro:",err)
+			}
+
+			if(result){
+				console.log("result",result)
+			}
+		}
+	})
+}
