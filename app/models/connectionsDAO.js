@@ -13,7 +13,7 @@ connectionsDAO.prototype.conn_db_delete = function(user_id, client_id, client_ad
 };
 
 connectionsDAO.prototype.conn_db_delete_all = function(arg, callback) {
-	var query = "delete * from connected_clients";
+	var query = "delete from connected_clients";
 	this.connection.query(query, callback);
 };
 

@@ -37,7 +37,7 @@ module.exports.conn_mgmt_delete = function(app, user_id, client_id, client_addre
 }
 
 
-module.exports.conn_mgmt_delete_all = function(){
+module.exports.conn_mgmt_delete_all = function(app){
 	var conn = app.config.dbconn();
 	var connMgmt = new app.app.models.connectionsDAO(conn)
 
