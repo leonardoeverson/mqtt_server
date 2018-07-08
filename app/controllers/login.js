@@ -71,7 +71,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 			    	client.conn.remoteIp = ip;
 			    	client.conn.remotePort = port;
 			    	client.conn.method_ = method;
-			    	client.conn.user_id = user_id;
+			    	client.conn.user_id = result[0].id_usuario;
 			    	app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_usuario, client.id, ip, port);
 			    }else{
 			    	auth_error.returnCode = 4

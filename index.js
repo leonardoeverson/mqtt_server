@@ -30,6 +30,7 @@ aedes.authorizePublish = function (client, packet, callback) {
 //Aedes Events
 aedes.on("clientDisconnect",function(client){
 	 console.log('cliente de id:', client.id, 'desconectou');
+	 app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
 })
 
 aedes.on('clientError', function (client, err) {
