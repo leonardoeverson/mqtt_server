@@ -4,9 +4,7 @@ module.exports = function(app){
 	})
 
 	app.post('/devices/register', function(request, response){
-		app.app.controllers.devices.register_devices(app, request, response);
-		
-		
+		app.app.controllers.devices.register_devices(app, request, response);	
 	})
 
 

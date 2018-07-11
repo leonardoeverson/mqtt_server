@@ -15,7 +15,7 @@ app.use(helmet())
 
 //Express Session
 app.use(session({
-  secret: '1234567890![]?:>.;@#$%¨&*()_+qazxswedcvfrtgbnyujmkiolpç^~~;.',
+  secret: '1234567890![]?:>.;@#$%¨&*()_-+§qazxswedcvfrtgbnyujmkiolpç^~;.',
   resave: false,
   saveUninitialized: false
 }))
