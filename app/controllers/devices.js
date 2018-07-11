@@ -12,10 +12,10 @@ module.exports.register_devices = function(app, request, response){
 
     dadosDispositivos.register_devices_db(dados, function(error, result){
     	if(!error){
-    		response.render("/devices/register",{validacao:[{'mensagem':'dados gravados com sucesso', 'status': 0}]});
+    		response.render("devices/register",{validacao:[{'mensagem':'dados gravados com sucesso', 'status': 0}]});
     	}else{
     		console.log(error)
-    		response.render("/devices/register",{validacao:[{'mensagem':'erro ao cadastrar o dispositivo', 'status': 1}]});
+    		response.render("devices/register",{validacao:[{'mensagem':'erro ao cadastrar o dispositivo', 'status': 1}]});
     	}
     })
 

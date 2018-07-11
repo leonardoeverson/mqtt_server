@@ -6,6 +6,23 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
+
+    <% if(typeof(validacao) != 'undefined'){
+    		if(validacao[0].status == 0){
+    			%>
+    			<div class="alert alert-success" role="alert">
+    			  <%= validacao[0].mensagem %>
+    			</div>
+    			<%
+    		}else{
+    			%>	
+    			<div class="alert alert-danger" role="alert">
+    		  		<%= validacao[0].mensagem %>
+    			</div>
+    		<% 
+    	}
+    }
+    %>
 <form action = "/devices/register" method="post">
   <div class="form-group">
     <label for="exampleFormControlInput1">Nome do dispositivo</label>
