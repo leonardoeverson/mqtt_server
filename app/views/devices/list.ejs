@@ -1,0 +1,38 @@
+<%- include('../header'); %>
+
+<div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Listagem</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <table class="table table-bordered table-hover table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">Nome do dispositivo</th>
+          <th scope="col">Visualizar dados</th>
+          <th scope="col">Topic</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%
+            if(typeof(validacao) != 'undefined'){
+            for (var i = 0; i < validacao.length; i++) {
+                %>
+                <tr>
+                    <th scope="row"> <%= validacao[i].device_name %> </th>
+                    <td> </td>
+                    <td> <%= validacao[i].device_topic %></td>
+                    <td></td>
+                </tr>
+                <%
+            }
+
+           } 
+        %>
+      </tbody>
+    </table>
+
+<%- include('../footer'); %>

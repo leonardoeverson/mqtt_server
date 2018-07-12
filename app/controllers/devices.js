@@ -8,10 +8,10 @@ module.exports.list_devices = function(app, request, response){
 
 	dadosDispositivos.list_devices_db(dados, function(error, result){
 		if(!error){
-			response.render("devices/register",{validacao : result});
+			response.render("devices/list",{validacao : result});
 		}else{
 			console.log(error)
-			response.render("devices/register",{validacao : {}});
+			response.render("devices/list",{validacao : {}});
 		}
 	})
 }
@@ -23,6 +23,9 @@ module.exports.register_devices = function(app, request, response){
     var dados = request.body;
     dados.user_id = request.session.user_id;
     //
+    if(dados.device_topic == 'undefined'){
+    	dados.device_topic = '';
+    }
 
     dadosDispositivos.register_devices_db(dados, function(error, result){
     	if(!error){

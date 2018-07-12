@@ -9,6 +9,6 @@ module.exports = function(app){
 
 
 	app.get('/devices/list',function(request, response){
-		response.render('devices/list');
+		app.app.controllers.devices.list_devices(app, request, response);
 	})
 }
