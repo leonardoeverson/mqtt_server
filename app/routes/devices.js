@@ -13,6 +13,6 @@ module.exports = function(app){
 	})
 
 	app.get('/devices/connected', function(request, response){
-		response.render('devices/connected',{validacao:{}});
+		
 	})
 }

@@ -23,10 +23,11 @@ CREATE TABLE IF NOT EXISTS `connected_clients` (
   `client_id` varchar(200) NOT NULL,
   `client_address` varchar(100) NOT NULL,
   `client_port` int(6) NOT NULL,
+  `device_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_conn`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.connected_clients: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.connected_clients: ~0 rows (aproximadamente)
 DELETE FROM `connected_clients`;
 /*!40000 ALTER TABLE `connected_clients` DISABLE KEYS */;
 /*!40000 ALTER TABLE `connected_clients` ENABLE KEYS */;
@@ -38,11 +39,14 @@ CREATE TABLE IF NOT EXISTS `user_devices` (
   `device_name` varchar(200) NOT NULL DEFAULT '0',
   `device_topic` varchar(200) NOT NULL,
   PRIMARY KEY (`device_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.user_devices: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.user_devices: ~2 rows (aproximadamente)
 DELETE FROM `user_devices`;
 /*!40000 ALTER TABLE `user_devices` DISABLE KEYS */;
+INSERT INTO `user_devices` (`user_id`, `device_id`, `device_name`, `device_topic`) VALUES
+	(3, 9, 'nodemcu', 'sensor/temp'),
+	(3, 10, 'nodemcu1', '');
 /*!40000 ALTER TABLE `user_devices` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.usuarios

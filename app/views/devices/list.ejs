@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <th scope="col">Nome do dispositivo</th>
+          <th>Status</th>
           <th scope="col">Visualizar dados</th>
           <th scope="col">Excluir</th>
         </tr>
@@ -22,6 +23,7 @@
                 %>
                 <tr>
                     <th scope="row"> <%= validacao[i].device_name %> </th>
+                    <td></td>
                     <td><button type="button" class="btn btn-primary" op="1" device_id="<%= validacao[i].device_id %>">Visualizar dados</button></td>
                     <td><button type="button" class="btn btn-danger" op="2" device_id="<%= validacao[i].device_id %>">Excluir</button></td>
                 </tr>
@@ -37,6 +39,8 @@
       $('.btn').on('click',function(){
           console.log($(this).attr('device_id'))
       })
+
+
     </script>
 
 <%- include('../footer'); %>
