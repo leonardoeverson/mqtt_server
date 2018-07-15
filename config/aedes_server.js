@@ -25,7 +25,7 @@ var server = require('net').createServer(aedes.handle)
 
 //Servidor na porta 1883
 server.listen(port, function (socket) {
-  console.log('Servidor escutando na porta:', port)
+  console.log('Servidor MQTT escutando na porta:', port)
 })
 
 server.on('connection', function(client) {

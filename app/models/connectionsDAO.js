@@ -17,6 +17,12 @@ connectionsDAO.prototype.conn_db_delete_all = function(arg, callback) {
 	this.connection.query(query, callback);
 };
 
+connectionsDAO.prototype.connected_device_user = function(user_id, callback) {
+	var query = "select * from connected_clients where user_id = " + user_id;
+	this.connection.query(query, callback);
+};
+
+
 module.exports = function(){
 	return connectionsDAO;
 }
