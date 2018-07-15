@@ -12,8 +12,7 @@
         <tr>
           <th scope="col">Nome do dispositivo</th>
           <th scope="col">Visualizar dados</th>
-          <th scope="col">Topic</th>
-          <th scope="col">Handle</th>
+          <th scope="col">Excluir</th>
         </tr>
       </thead>
       <tbody>
@@ -23,9 +22,8 @@
                 %>
                 <tr>
                     <th scope="row"> <%= validacao[i].device_name %> </th>
-                    <td> </td>
-                    <td> <%= validacao[i].device_topic %></td>
-                    <td><button type="button" class="btn btn-primary" device_id="<%= validacao[i].device_id %>">Visualizar dados</button></td>
+                    <td><button type="button" class="btn btn-primary" op="1" device_id="<%= validacao[i].device_id %>">Visualizar dados</button></td>
+                    <td><button type="button" class="btn btn-danger" op="2" device_id="<%= validacao[i].device_id %>">Excluir</button></td>
                 </tr>
                 <%
             }
