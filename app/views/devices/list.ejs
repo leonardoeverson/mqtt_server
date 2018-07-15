@@ -25,7 +25,7 @@
                     <th scope="row"> <%= validacao[i].device_name %> </th>
                     <td> </td>
                     <td> <%= validacao[i].device_topic %></td>
-                    <td></td>
+                    <td><button type="button" class="btn btn-primary" device_id="<%= validacao[i].device_id %>">Visualizar dados</button></td>
                 </tr>
                 <%
             }
@@ -34,5 +34,11 @@
         %>
       </tbody>
     </table>
+    <script>
+
+      $('.btn').on('click',function(){
+          console.log($(this).attr('device_id'))
+      })
+    </script>
 
 <%- include('../footer'); %>
