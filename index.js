@@ -1,31 +1,22 @@
 //Servidor HTTP
 let app = require('./config/server');
 
-let reference = null;
-
-if(typeof(app.app) == "undefined"){
-    reference = app;
-}else{
-    reference = app.app;
-}
-
-
 let port = process.env.PORT || 3000
 app.listen(port,function(){
 	console.log('Servidor Iniciado na Porta ', port);
-})
+});
 
 //Servidor MQTT e WS
 let aedes = require('./config/aedes_server');
 
 //Exclui os registros das conexões anteriores
-reference.controllers.connections.conn_mgmt_delete_all(app)
+app.app.controllers.connections.conn_mgmt_delete_all(app)
 
 //Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
    //checar novo de usuário e senha
-   reference.controllers.login.login_dispositivo(reference, client, username, password, callback)
-}
+   app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
+};
 
 //Autorização de publish
 aedes.authorizePublish = function (client, packet, callback) {
@@ -38,22 +29,22 @@ aedes.authorizePublish = function (client, packet, callback) {
 	}
 
 	callback(null)
-}
+};
 
 //Aedes Events
-// aedes.on("clientDisconnect",function(client){
-// 	console.log('cliente de id:', client.id, 'desconectou');
-// 	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
-// })
+aedes.on("clientDisconnect",function(client){
+	console.log('cliente de id:', client.id, 'desconectou');
+	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
+});
 
-// aedes.on('clientError', function (client, err) {
-// 	console.log('client error', client.id, err.message, err.stack)
-// 	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
-// })
+aedes.on('clientError', function (client, err) {
+	console.log('client error', client.id, err.message, err.stack)
+	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
+});
 
 aedes.on('connectionError', function (client, err) {
 	console.log('client error', client, err.message, err.stack)
-})
+});
 
 aedes.on('publish', function (packet, client) {
 	if (client) {

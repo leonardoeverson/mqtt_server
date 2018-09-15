@@ -1,9 +1,7 @@
 
 node_modules
 public
-workspace.xml
-./idea
-npm-debug.log
+/.idea/workspace.xml
 .DS_Store
 /*.env
 
