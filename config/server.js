@@ -54,7 +54,7 @@ app.use(expressValidator({
 //Localizando arquivos
 //Localizando rotas e models
 
-consign({cwd: process.cwd()+"/app"})
+consign({cwd: process.cwd()})
   .include('./app/routes')
   .then('./config/dbconn.js')
   .then('app/models')
