@@ -1,7 +1,7 @@
 //Servidor HTTP
 let app = require('./config/server');
 
-let port = process.env.PORT || 80
+let port = process.env.PORT || 3000
 app.listen(port,function(){
 	console.log('Servidor Iniciado na Porta ', port);
 })
