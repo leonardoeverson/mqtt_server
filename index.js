@@ -10,12 +10,12 @@ app.listen(port,function(){
 var aedes = require('./config/aedes_server');
 
 //Exclui os registros das conexões anteriores
-app.app.controllers.connections.conn_mgmt_delete_all(app)
+app.controllers.connections.conn_mgmt_delete_all(app)
 
 //Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
    //checar novo de usuário e senha
-   app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
+   app.controllers.login.login_dispositivo(app, client, username, password, callback)
 }
 
 //Autorização de publish
