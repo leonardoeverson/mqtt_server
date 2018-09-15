@@ -9,15 +9,13 @@ app.listen(port,function(){
 //Servidor MQTT e WS
 let aedes = require('./config/aedes_server');
 
-console.log(app.controllers);
-
 //Exclui os registros das conexões anteriores
-app.controllers.connections.conn_mgmt_delete_all(app)
+app.app.controllers.connections.conn_mgmt_delete_all(app)
 
 //Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
    //checar novo de usuário e senha
-   app.controllers.login.login_dispositivo(app, client, username, password, callback)
+   app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
 }
 
 //Autorização de publish

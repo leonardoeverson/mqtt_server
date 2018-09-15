@@ -53,6 +53,7 @@ app.use(expressValidator({
 
 //Localizando arquivos
 //Localizando rotas e models
+console.log({cwd: process.cwd()});
 
 consign({cwd: process.cwd()})
   .include('./app/routes')
