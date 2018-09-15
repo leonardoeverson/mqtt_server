@@ -30,11 +30,6 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "proxy": {
-    "/app": {
-      "target": "http://localhost:3000"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leonardoeverson/mqtt_server.git"

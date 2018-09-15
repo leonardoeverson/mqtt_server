@@ -1,6 +1,15 @@
 //Servidor HTTP
 let app = require('./config/server');
 
+let reference = null;
+
+if(typeof(app.app) == "undefined"){
+    reference = app;
+}else{
+    reference = app.app;
+}
+
+
 let port = process.env.PORT || 3000
 app.listen(port,function(){
 	console.log('Servidor Iniciado na Porta ', port);
@@ -10,12 +19,12 @@ app.listen(port,function(){
 let aedes = require('./config/aedes_server');
 
 //Exclui os registros das conexões anteriores
-app.app.controllers.connections.conn_mgmt_delete_all(app)
+reference.controllers.connections.conn_mgmt_delete_all(app)
 
 //Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
    //checar novo de usuário e senha
-   app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
+   reference.controllers.login.login_dispositivo(reference, client, username, password, callback)
 }
 
 //Autorização de publish
