@@ -1,8 +1,9 @@
 //Servidor HTTP
 var app = require('./config/server');
 
-app.listen(80,function(){
-	console.log('Servidor Iniciado na Porta 80');
+var port = process.env.PORT || 3000
+app.listen(port,function(){
+	console.log('Servidor Iniciado na Porta ', port);
 })
 
 //Servidor MQTT e WS
