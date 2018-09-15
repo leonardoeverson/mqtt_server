@@ -2,9 +2,9 @@ var mysql = require('mysql');
 
 var dbconn = function(){
 		return conn = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password : 'db_node_01#',
+		host: 'cnsede.dyndns.org:20000',
+		user: 'mqtt',
+		password : 'mqtt_server_01#',
 		database: 'mqtt'});
 }
 
