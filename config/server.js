@@ -37,7 +37,7 @@ app.use(express.static('public'));
 app.set('view engine','ejs');
 
 //Localizando Views
-app.set('views','./app/views');
+app.set('views','./application/views');
 
 //Express Validator
 let expressValidator = require('express-validator');
@@ -56,10 +56,10 @@ app.use(expressValidator({
 console.log({cwd: process.cwd()});
 
 consign({cwd: process.cwd()})
-  .include('./app/routes')
+  .include('./application/routes')
   .then('./config/dbconn.js')
-  .then('app/models')
-  .then('app/controllers')
+  .then('application/models')
+  .then('application/controllers')
   .into(app);
 
 module.exports = app
