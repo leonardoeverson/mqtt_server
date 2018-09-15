@@ -9,7 +9,7 @@ app.listen(port,function(){
 //Servidor MQTT e WS
 let aedes = require('./config/aedes_server');
 
-console.log(app.app.controllers);
+console.log(app.app);
 
 //Exclui os registros das conexões anteriores
 app.app.controllers.connections.conn_mgmt_delete_all(app)
