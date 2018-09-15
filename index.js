@@ -1,21 +1,21 @@
 //Servidor HTTP
-var app = require('./config/server');
+let __app = require('./config/server');
 
-var port = process.env.PORT || 80
-app.listen(port,function(){
+let port = process.env.PORT || 80
+__app.listen(port,function(){
 	console.log('Servidor Iniciado na Porta ', port);
 })
 
 //Servidor MQTT e WS
-var aedes = require('./config/aedes_server');
+let aedes = require('./config/aedes_server');
 
 //Exclui os registros das conexões anteriores
-app.app.controllers.connections.conn_mgmt_delete_all(app)
+__app.app.controllers.connections.conn_mgmt_delete_all(__app)
 
 //Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
    //checar novo de usuário e senha
-   app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
+   __app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
 }
 
 //Autorização de publish

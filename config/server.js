@@ -4,14 +4,14 @@ let bodyParser = require('body-parser');
 let helmet = require('helmet');
 let session = require("express-session");
 //Express
-let app = express()
+let app = express();
 
 //body parser
 //Informando ao express para usar o body parser
 app.use(bodyParser.urlencoded({extended: true}));
 
 //helmet
-app.use(helmet())
+app.use(helmet());
 
 //Express Session
 app.use(session({
