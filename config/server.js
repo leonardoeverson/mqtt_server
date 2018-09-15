@@ -3,6 +3,7 @@ let consign = require('consign');
 let bodyParser = require('body-parser');
 let helmet = require('helmet');
 let session = require("express-session");
+let morgan = require("morgan");
 //Express
 let app = express();
 
@@ -29,6 +30,11 @@ app.use(function(request, response, next){
   next();
 })
 
+//morgan
+if(app.get('env') == 'development'){
+    app.use(morgan('dev'))
+}
+
 //Arquivos Estáticos
 //Pastas estáticas
 app.use(express.static('public'));
@@ -37,7 +43,7 @@ app.use(express.static('public'));
 app.set('view engine','ejs');
 
 //Localizando Views
-app.set('views','./application/views');
+app.set('views','./app/views');
 
 //Express Validator
 let expressValidator = require('express-validator');
@@ -56,10 +62,10 @@ app.use(expressValidator({
 console.log({cwd: process.cwd()});
 
 consign({cwd: process.cwd()})
-  .include('./application/routes')
+  .include('./app/routes')
   .then('./config/dbconn.js')
-  .then('application/models')
-  .then('application/controllers')
+  .then('app/models')
+  .then('app/controllers')
   .into(app);
 
 module.exports = app
