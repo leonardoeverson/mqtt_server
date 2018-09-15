@@ -20,6 +20,10 @@
     "npm": "^6.4.1",
     "websocket-stream": "^5.1.2"
   },
+  "engines": {
+    "node": "6.9.2",
+    "npm": "3.10.9"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
