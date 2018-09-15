@@ -21,8 +21,8 @@
     "websocket-stream": "^5.1.2"
   },
   "engines": {
-    "node": "7.10.1",
-    "npm": "4.2.0"
+    "node": "8.0.0",
+    "npm": "5.0.0"
   },
   "devDependencies": {},
   "scripts": {
