@@ -1,5 +1,5 @@
 //Servidor HTTP
-let app = require('../config/server');
+let app = require('./config/server');
 
 let port = process.env.PORT || 80
 app.listen(port,function(){
@@ -8,6 +8,8 @@ app.listen(port,function(){
 
 //Servidor MQTT e WS
 let aedes = require('./config/aedes_server');
+
+console.log(app);
 
 //Exclui os registros das conexões anteriores
 app.app.controllers.connections.conn_mgmt_delete_all(app)
