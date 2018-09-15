@@ -1,7 +1,7 @@
 //Servidor HTTP
 var app = require('./config/server');
 
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 80
 app.listen(port,function(){
 	console.log('Servidor Iniciado na Porta ', port);
 })
@@ -10,12 +10,12 @@ app.listen(port,function(){
 var aedes = require('./config/aedes_server');
 
 //Exclui os registros das conexões anteriores
-app.controllers.connections.conn_mgmt_delete_all(app)
+app.app.controllers.connections.conn_mgmt_delete_all(app)
 
 //Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
    //checar novo de usuário e senha
-   app.controllers.login.login_dispositivo(app, client, username, password, callback)
+   app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
 }
 
 //Autorização de publish
@@ -32,15 +32,15 @@ aedes.authorizePublish = function (client, packet, callback) {
 }
 
 //Aedes Events
-aedes.on("clientDisconnect",function(client){
-	console.log('cliente de id:', client.id, 'desconectou');
-	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
-})
+// aedes.on("clientDisconnect",function(client){
+// 	console.log('cliente de id:', client.id, 'desconectou');
+// 	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
+// })
 
-aedes.on('clientError', function (client, err) {
-	console.log('client error', client.id, err.message, err.stack)
-	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
-})
+// aedes.on('clientError', function (client, err) {
+// 	console.log('client error', client.id, err.message, err.stack)
+// 	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
+// })
 
 aedes.on('connectionError', function (client, err) {
 	console.log('client error', client, err.message, err.stack)

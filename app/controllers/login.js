@@ -9,7 +9,7 @@ module.exports.login_usuario = function(app, request, response){
 			bcrypt.compare(body.senha, result[0].senha, function(err, res) {
 			    if(res == true){
 			    	request.session.user_id = result[0].id_usuario;
-			    	console.log("entrou aqui");
+			    	response.redirect("/home");
 			    }else{
 			    	response.render("login/index",{validacao : [{'msg':'usuário ou senha incorretos'}]})
 			    }
