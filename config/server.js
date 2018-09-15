@@ -1,10 +1,10 @@
-var express = require('express');
-var consign = require('consign');
-var bodyParser = require('body-parser');
-var helmet = require('helmet');
-var session = require("express-session");
+let express = require('express');
+let consign = require('consign');
+let bodyParser = require('body-parser');
+let helmet = require('helmet');
+let session = require("express-session");
 //Express
-var app = express()
+let app = express()
 
 //body parser
 //Informando ao express para usar o body parser
@@ -40,7 +40,7 @@ app.set('view engine','ejs');
 app.set('views','./app/views');
 
 //Express Validator
-var expressValidator = require('express-validator');
+let expressValidator = require('express-validator');
 
 //validação de senhas
 app.use(expressValidator({
@@ -53,12 +53,14 @@ app.use(expressValidator({
 
 //Localizando arquivos
 //Localizando rotas e models
+
+console.log({cwd: process.cwd()+"/app"});
+
 consign()
   .include('./app/routes')
   .then('./config/dbconn.js')
   .then('app/models')
   .then('app/controllers')
   .into(app);
-
 
 module.exports = app
