@@ -17,6 +17,7 @@
     "helmet": "^3.13.0",
     "morgan": "^1.9.1",
     "mqemitter-mongodb": "^4.0.1",
+    "mqtt": "^2.18.8",
     "mysql": "^2.16.0",
     "npm": "^6.4.1",
     "websocket-stream": "^5.1.2"
