@@ -1,9 +1,18 @@
 module.exports = function(app){
 	app.get('/home',function(request, response){
-		response.render('home/index');
+		if(request.session.logado){
+			response.render('home/index');
+		}else{
+			response.redirect("/")
+		}
+		
 	})
 
 	app.get('/index',function(request, response){
-		response.render('home/index');
+		if(request.session.logado){
+			response.render('home/index');
+		}else{
+			response.redirect("/");
+		}
 	})
 }

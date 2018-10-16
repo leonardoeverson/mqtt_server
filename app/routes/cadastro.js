@@ -7,4 +7,8 @@ module.exports = function(app){
 		//response.render("login/cadastro");
 		app.app.controllers.cadastro.cadastro_usuario(app, request, response)
 	})
+
+	app.get('/profile', function(request, response){
+		response.render('profile');
+	})
 }

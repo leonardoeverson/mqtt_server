@@ -20,13 +20,13 @@ aedes.authenticate = function (client, username, password, callback) {
 
 //Autorização de publish
 aedes.authorizePublish = function (client, packet, callback) {
-	if (packet.topic === 'aaaa') {
-		return callback(new Error('wrong topic'))
-	}
+	// if (packet.topic === 'aaaa') {
+	// 	return callback(new Error('wrong topic'))
+	// }
 
-	if (packet.topic === 'bbb') {
-		packet.payload = new Buffer('overwrite packet payload')
-	}
+	// if (packet.topic === 'bbb') {
+	// 	packet.payload = new Buffer('overwrite packet payload')
+	// }
 
 	callback(null)
 };
@@ -43,7 +43,7 @@ aedes.on('clientError', function (client, err) {
 });
 
 aedes.on('connectionError', function (client, err) {
-	console.log('client error', client, err.message, err.stack)
+	console.log('Erro de conexão', client, err.message, err.stack)
 });
 
 aedes.on('publish', function (packet, client) {

@@ -8,7 +8,8 @@ module.exports.login_usuario = function(app, request, response){
 		if(!error && result.length > 0){
 			bcrypt.compare(body.senha, result[0].senha, function(err, res) {
 			    if(res == true){
-			    	request.session.user_id = result[0].id_usuario;
+					request.session.user_id = result[0].id_usuario;
+					request.session.logado = true;
 			    	response.redirect("/home");
 			    }else{
 			    	response.render("login/index",{validacao : [{'msg':'usuário ou senha incorretos'}]})
@@ -36,14 +37,14 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 	var conn = app.config.dbconn();
 	var loginUsuario = new app.app.models.loginDAO(conn);
 	var bcrypt = require('bcrypt');
-	dados = {};
-	dados.email = username;
 	var auth_error = new Error('Auth error')
   	var ip;
   	var port;
   	var method;
-  	
-  	try{
+	dados = {};
+	dados.email = username;
+	  
+	try{
   		method = "mqtt_socket"
   		ip = client.conn.remoteAddress;
   		port = client.conn.remotePort;
@@ -52,7 +53,6 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
  	}
 
   	if(ip == undefined){
-  		
   		try{
   			method = "websocket";
   			ip = client.conn.socket._socket.remoteAddress;
