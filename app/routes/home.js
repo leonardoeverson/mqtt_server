@@ -6,7 +6,7 @@ module.exports = function(app){
 			response.redirect("/")
 		}
 		
-	})
+	});
 
 	app.get('/index',function(request, response){
 		if(request.session.logado){
@@ -15,4 +15,4 @@ module.exports = function(app){
 			response.redirect("/");
 		}
 	})
-}
+};

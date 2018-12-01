@@ -11,4 +11,4 @@ dadosUsuariosDAO.prototype.verifica_dados_usuarios = function(dados, callback) {
 
 module.exports = function(){
 	return dadosUsuariosDAO;
-}
+};

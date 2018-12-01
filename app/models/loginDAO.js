@@ -9,4 +9,4 @@ loginDAO.prototype.valida_login = function(dados, callback) {
 
 module.exports = function(){
 	return loginDAO;
-}
+};

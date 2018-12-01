@@ -10,11 +10,11 @@ module.exports.list_devices = function(app, request, response){
 		if(!error){
 			response.render("devices/list",{validacao : result});
 		}else{
-			console.log(error)
+			console.log(error);
 			response.render("devices/list",{validacao : {}});
 		}
 	})
-}
+};
 
 module.exports.register_devices = function(app, request, response){
     var conn = app.config.dbconn();
@@ -31,9 +31,9 @@ module.exports.register_devices = function(app, request, response){
     	if(!error){
     		response.render("devices/register",{validacao:[{'mensagem':'dados gravados com sucesso', 'status': 0}]});
     	}else{
-    		console.log(error)
+    		console.log(error);
     		response.render("devices/register",{validacao:[{'mensagem':'erro ao cadastrar o dispositivo', 'status': 1}]});
     	}
     })
 
-}
+};

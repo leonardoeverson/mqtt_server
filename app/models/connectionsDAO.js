@@ -25,4 +25,4 @@ connectionsDAO.prototype.connected_device_user = function(user_id, callback) {
 
 module.exports = function(){
 	return connectionsDAO;
-}
+};

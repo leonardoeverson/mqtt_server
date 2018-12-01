@@ -19,4 +19,4 @@ cadastroDAO.prototype.verifica_email_existente = function(email, callback) {
 
 module.exports = function() {
 	return cadastroDAO;
-}
+};

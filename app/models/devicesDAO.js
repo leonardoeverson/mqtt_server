@@ -10,8 +10,8 @@ devicesDAO.prototype.register_devices_db = function(dados, callback) {
 devicesDAO.prototype.list_devices_db = function(dados, callback){
 	var query = "SELECT device_id, device_name, device_topic FROM user_devices where user_id = "+dados.user_id;
 	this.connection.query(query, callback);
-}
+};
 
 module.exports = function(){
 	return devicesDAO;
-}
+};

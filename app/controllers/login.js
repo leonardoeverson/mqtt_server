@@ -18,18 +18,18 @@ module.exports.login_usuario = function(app, request, response){
 			
 		}else{
 			if(error){
-				response.render("login/index",{validacao : [{'msg':'error'}]})
+				response.render("login/index",{validacao : [{'msg':'error'}]});
 				return
 			}
 
 			if(result.length == 0){
-				response.render("login/index",{validacao : [{'msg':'usuário não encontrado'}]})
-				return
+				response.render("login/index",{validacao : [{'msg':'usuário não encontrado'}]});
+
 			}
 		}
 	})
 
-}
+};
 
 
 module.exports.login_dispositivo = function(app, client, username, password, cb){
@@ -37,7 +37,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 	var conn = app.config.dbconn();
 	var loginUsuario = new app.app.models.loginDAO(conn);
 	var bcrypt = require('bcrypt');
-	var auth_error = new Error('Auth error')
+	var auth_error = new Error('Auth error');
   	var ip;
   	var port;
   	var method;
@@ -45,7 +45,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 	dados.email = username;
 	  
 	try{
-  		method = "mqtt_socket"
+  		method = "mqtt_socket";
   		ip = client.conn.remoteAddress;
   		port = client.conn.remotePort;
   	}catch(e){
@@ -62,7 +62,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
   		}
   	}
 
-  	console.log(method, ip)
+  	console.log(method, ip);
 
 	loginUsuario.valida_login(dados, function(error, result){
 		if(!error && result.length > 0){
@@ -80,22 +80,22 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 			    	//callback de aceitação da conexão do dispositivo
 			    	cb(null, true);
 			    }else{
-			    	auth_error.returnCode = 4
+			    	auth_error.returnCode = 4;
 			    	cb(auth_error, null)
 			    }
 			})
 			
 		}else{
 			if(error){
-				auth_error.returnCode = 3
+				auth_error.returnCode = 3;
 			    cb(auth_error, null)
 
 			}
 
 			if(result.length == 0){
-				auth_error.returnCode = 4
+				auth_error.returnCode = 4;
 			    cb(auth_error, null)
 			}
 		}
 	})
-}
+};

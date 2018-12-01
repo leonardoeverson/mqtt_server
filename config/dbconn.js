@@ -6,9 +6,9 @@ var dbconn = function(){
 		user: 'root',
 		password : 'db_node_01#',
 		database: 'mqtt'});
-}
+};
 
 
 module.exports = function(){
 	return dbconn;
-}
+};

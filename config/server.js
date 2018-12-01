@@ -19,19 +19,19 @@ app.use(session({
   secret: '1234567890![]?:>.;@#$%¨&*()_-+§qazxswedcvfrtgbnyujmkiolpç^~;.',
   resave: false,
   saveUninitialized: false
-}))
+}));
 
 app.use(function(request, response, next){
   //response.setHeader("Access-Control-Allow-Origin","*")//Cross-domain
-  response.setHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE")//Cross-domain
+  response.setHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");//Cross-domain
   //response.setHeader("Access-Control-Allow-Headers","*")//Cross-domain
-  response.setHeader("Access-Control-Allow-Credentials",true)//Cross-domain
+  response.setHeader("Access-Control-Allow-Credentials",true);//Cross-domain
 
   next();
-})
+});
 
 //morgan
-if(app.get('env') == 'development'){
+if(app.get('env') === 'development'){
     app.use(morgan('dev'))
 }
 
@@ -55,7 +55,7 @@ app.use(expressValidator({
       return value1 === value2
     }
   }
-}))
+}));
 
 //Localizando arquivos
 //Localizando rotas e models
@@ -67,4 +67,4 @@ consign({cwd: process.cwd()})
   .then('app/controllers')
   .into(app);
 
-module.exports = app
+module.exports = app;

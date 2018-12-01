@@ -1,7 +1,7 @@
 //Servidor HTTP
 let app = require('./config/server');
 
-let port = process.env.PORT || 3000
+let port = process.env.PORT || 3000;
 app.listen(port, function(){
 	console.log('Servidor Iniciado na Porta:',port);
 });
@@ -10,7 +10,7 @@ app.listen(port, function(){
 let aedes = require('./config/aedes_server');
 
 //Exclui os registros das conexões anteriores
-app.app.controllers.connections.conn_mgmt_delete_all(app)
+app.app.controllers.connections.conn_mgmt_delete_all(app);
 
 //Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
@@ -38,7 +38,7 @@ aedes.on("clientDisconnect",function(client){
 });
 
 aedes.on('clientError', function (client, err) {
-	console.log('client error', client.id, err.message, err.stack)
+	console.log('client error', client.id, err.message, err.stack);
 	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
 });
 
@@ -50,14 +50,14 @@ aedes.on('publish', function (packet, client) {
 	if (client) {
     //console.log('message from client', client.id)
 }
-})
+});
 
 aedes.on('subscribe', function (subscriptions, client) {
 	if (client) {
     //console.log('subscribe from client', subscriptions, client.id)
 }
-})
+});
 
 aedes.on('client', function (client) {
 	console.log('new client', client.id)
-})
+});
