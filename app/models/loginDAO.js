@@ -3,7 +3,7 @@ function loginDAO(conn){
 }
 
 loginDAO.prototype.valida_login = function(dados, callback) {
-	var query = "SELECT * FROM usuarios where email = ?";
+	var query = "SELECT * FROM users where email = ?";
 	this.connection.query(query,[dados.email],callback);
 };
 
