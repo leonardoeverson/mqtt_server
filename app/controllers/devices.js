@@ -1,8 +1,8 @@
 module.exports.list_devices = function(app, request, response){
-	var conn = app.config.dbconn();
-	var dadosDispositivos = new app.app.models.devicesDAO(conn);
+	let conn = app.config.dbconn();
+	let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
-	var dados = {};
+	let dados = {};
 	dados.user_id = request.session.user_id;
 	//
 
@@ -17,10 +17,10 @@ module.exports.list_devices = function(app, request, response){
 };
 
 module.exports.register_devices = function(app, request, response){
-    var conn = app.config.dbconn();
-    var dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let conn = app.config.dbconn();
+    let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
-	var dados = request.body;
+	let dados = request.body;
 	
 	console.log(dados);
 	
@@ -40,3 +40,25 @@ module.exports.register_devices = function(app, request, response){
     })
 
 };
+
+module.exports.count_devices_db = function(app, request, response){
+	let conn = app.config.dbconn();
+	let dadosDispositivos = new app.app.models.devicesDAO(conn);
+
+	let dados = {};
+	dados.user_id = request.session.user_id;
+	let count = 0;
+
+	dadosDispositivos.list_devices_db(dados, function(error, result){
+		if(!error){
+			console.log(result);
+			result.length;
+		}else{
+			 console.log(null);
+		}
+	})
+
+	console.log(count);
+	return count;
+
+}

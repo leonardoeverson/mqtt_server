@@ -10,7 +10,7 @@ serverDAO.prototype.get_server_user_settings = function (id_user, callback){
 };
 
 serverDAO.prototype.post_server_user_settings = function (id_user, callback){
-    let query = "select * from server_options left join user_options on server_options.id_option = user_options.id_server_option and user_options.id_user = " + id_user;
+    let query = "";
 
     conn.query(query, callback);
 
