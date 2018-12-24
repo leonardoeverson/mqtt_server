@@ -3,7 +3,7 @@ module.exports.list_devices = function(app, request, response){
 	let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
 	let dados = {};
-	dados.user_id = request.session.user_id;
+	dados.id_user = request.session.id_user;
 	//
 
 	dadosDispositivos.list_devices_db(dados, function(error, result){
@@ -24,7 +24,7 @@ module.exports.register_devices = function(app, request, response){
 	
 	console.log(dados);
 	
-    dados.user_id = request.session.user_id;
+    dados.id_user = request.session.id_user;
     //
     if(dados.device_topic == 'undefined'){
     	dados.device_topic = '';
@@ -46,19 +46,24 @@ module.exports.count_devices_db = function(app, request, response){
 	let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
 	let dados = {};
-	dados.user_id = request.session.user_id;
-	let count = 0;
+	dados.id_user = request.session.id_user;
+	let count;
 
-	dadosDispositivos.list_devices_db(dados, function(error, result){
-		if(!error){
-			console.log(result);
-			result.length;
-		}else{
-			 console.log(null);
-		}
-	})
 
-	console.log(count);
-	return count;
+	return new Promise(function(resolve, reject){
 
-}
+		dadosDispositivos.list_devices_db(dados, function(error, result){
+			if(!error){
+				resolve(result)
+			}else{
+				console.log(error);
+				reject(error);
+			}
+		});
+	});
+
+
+
+
+
+};

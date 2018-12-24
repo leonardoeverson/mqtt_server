@@ -4,8 +4,8 @@ module.exports = function(app){
 		response.render('login/index');		
 	});
 
-	app.get('/',function(request, response){		
-		response.render('login/index')		
+	app.get('/',function(request, response){
+		response.render('login/index')
 	});
 
 	app.post('/login',function(request, response){
@@ -13,6 +13,8 @@ module.exports = function(app){
 	});
 
 	app.get('/logout',function(request, response){
-		response.redirect("/")
+		request.session.destroy(function(err){
+			response.redirect("/")
+		});
 	})
 };

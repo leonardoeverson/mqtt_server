@@ -6,18 +6,18 @@ module.exports.login_usuario = function(app, request, response){
 
 	loginUsuario.valida_login(body, function(error, result){
 		if(!error && result.length > 0){
-			bcrypt.compare(body.senha, result[0].senha, function(err, res) {
-			    if(res == true){
+			bcrypt.compare(body.senha, result[0].senha,  function (err, res) {
+				if (res == true) {
+
 					request.session.id_user = result[0].id_user;
-					app.app.id_user = result[0].id_user;
-					request.session.logado = true;
+					request.session.logged = true;
+					response.redirect("/home");
 
-					let devicesCount = app.app.controllers.devices.count_devices_db(app, request, response);
+				} else {
 
-			    	response.redirect("/home");
-			    }else{
-			    	response.render("login/index",{validacao : [{'msg':'usuário ou senha incorretos'}]})
-			    }
+					response.render("login/index", {validacao: [{'msg': 'usuário ou senha incorretos'}]})
+
+				}
 			})
 			
 		}else{
