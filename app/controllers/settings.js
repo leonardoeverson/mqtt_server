@@ -1,17 +1,27 @@
-module.exports.server_opts = function(app, request, response){
-    var conn = app.config.dbconn();
-    var serverDAO = new app.app.models.serverDAO(conn);
+module.exports.get_server_opts = function(app, request, response){
+    let conn = app.config.dbconn();
+    let serverDAO = new app.app.models.serverDAO(conn);
 
-    serverDAO.server_user_settings(request.session.id_user,(error, result) =>{
+    serverDAO.get_server_user_settings(request.session.id_user,(error, result) =>{
         if(!error){
-            response.render("settings",{opts:{result}});
+            response.render("settings",{flag: true,  opts:result});
         }else{
-            console.log(error);
+            response.render("settings",{flag: false, opts:result});
         }
     })
 }
 
 
-module.exports.user_opts = function(){
+module.exports.post_server_opts = function(app, request, response){
 
+    let conn = app.config.dbconn();
+    let serverDAO = new app.app.models.serverDAO(conn);
+
+    serverDAO.post_server_user_settings(request.session.id_user,(error, result) =>{
+        if(!error){
+            response.render("settings",{flag: true,  opts:result});
+        }else{
+            response.render("settings",{flag: false, opts:result});
+        }
+    })
 }

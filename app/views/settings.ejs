@@ -1,4 +1,3 @@
-
 <%- include('header'); %>
 
 <div class="row">
@@ -9,18 +8,45 @@
 </div>
 
 <div class="row">
-    <div class="form-group">
-        <input type="checkbox" id="1" class="form-check-input"> 
-        <label class="form-check-label" for="defaultCheck1">Permitir subscribe e publish de qualquer um que tiver dos dados de login</label>
-    </div>
-    <div class="form-group">
-        <input type="button" class="btn btn-primary" value="Salvar">
-    </div>
+
+    <%
+    if(typeof (opts) != "undefined"){
+        for (let i = 0; i < opts.length; i++){
+
+            console.log(opts);
+    %>
+        <div class="form-group">
+
+            <%
+
+                if(opts[i].id_server_option != null){
+                    %>
+                        <input type="checkbox" id=<%= opts[i].id_option %> checked="" class="form-check-input">
+                    <%
+                }else{
+                    %>
+                         <input type="checkbox" id=<%= opts[i].id_option %> class="form-check-input">
+                    <%
+                }
+            %>
+
+            <label class="form-check-label" for="defaultCheck1"><%= opts[i].description %></label>
+        </div>
+
+
+    <%
+         }
+    }
+    %>
+
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" value="Salvar">
+        </div>
 </div>
 
 
 <script>
-    function salva_config(){
+    function salva_config() {
         $.ajax({
             url: '/server/user/settings',
             type: 'POST',
@@ -39,7 +65,7 @@
             });
     }
 
-            
+
 </script>
 
 <%- include('footer'); %>
