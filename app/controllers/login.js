@@ -8,7 +8,8 @@ module.exports.login_usuario = function(app, request, response){
 		if(!error && result.length > 0){
 			bcrypt.compare(body.senha, result[0].senha, function(err, res) {
 			    if(res == true){
-					request.session.user_id = result[0].id_usuario;
+					request.session.user_id = result[0].id_user;
+					app.app.user_id = result[0].id_user;
 					request.session.logado = true;
 			    	response.redirect("/home");
 			    }else{
@@ -73,6 +74,10 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 			    	client.conn.remotePort = port;
 			    	client.conn.method_ = method;
 			    	client.conn.user_id = result[0].id_usuario;
+					app.app.data_perm = {};
+
+					//app.app.device_perm.publish = result[0].publish;
+					//app.app.device_perm.subscribe = result[0].subscribe;
 
 			    	//controller de conexões
 			    	app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_usuario, client.id, ip, port);

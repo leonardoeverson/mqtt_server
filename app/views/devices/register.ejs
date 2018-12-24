@@ -28,10 +28,22 @@
     <label for="exampleFormControlInput1">Nome do dispositivo</label>
     <input type="text" class="form-control" id="device_name" name="device_name" required>
   </div>
-  <!--<div class="form-group">-->
-    <!--<label for="exampleFormControlInput1">Tópico</label>-->
-    <!--<input type="text" class="form-control" id="device_topic" name="device_topic" >-->
-  <!--</div>-->
+   <div class="form-group">
+    <label for="exampleFormControlSelect1">Permissão de publish</label>
+    <select class="form-control" id="publish" name="publish">
+      <option value="1">Publicar em um tópico específico</option>
+      <option value="2">Qualquer tópico</option>
+      <option value="3">Não publicar</option>
+    </select>
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlSelect1">Permissão de subscribe</label>
+    <select class="form-control" id="subscribe" name="subscribe">
+      <option value="1">Subscrever um tópico específico</option>
+      <option value="2">Qualquer tópico</option>
+      <option value="3">Não permitir subscrever</option>
+    </select>
+  </div>
   <input type="submit" class="btn btn-primary" value="Cadastrar">
 </form>
 

@@ -20,7 +20,10 @@ module.exports.register_devices = function(app, request, response){
     var conn = app.config.dbconn();
     var dadosDispositivos = new app.app.models.devicesDAO(conn);
 
-    var dados = request.body;
+	var dados = request.body;
+	
+	console.log(dados);
+	
     dados.user_id = request.session.user_id;
     //
     if(dados.device_topic == 'undefined'){
