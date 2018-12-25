@@ -21,6 +21,10 @@ module.exports = function(app){
 	});
 
 	app.get('/devices/connected', function(request, response){
-		
+		if(request.session.logged){
+			app.app.controllers.devices.connected_devices(app, request, response);
+		}else{
+			response.redirect("/");
+		}
 	})
 };

@@ -47,8 +47,6 @@ module.exports.count_devices_db = function(app, request, response){
 
 	let dados = {};
 	dados.id_user = request.session.id_user;
-	let count;
-
 
 	return new Promise(function(resolve, reject){
 
@@ -61,9 +59,8 @@ module.exports.count_devices_db = function(app, request, response){
 			}
 		});
 	});
-
-
-
-
-
 };
+
+module.exports.connected_devices = function(app, request, response){
+
+}
