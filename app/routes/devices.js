@@ -26,5 +26,13 @@ module.exports = function(app){
 		}else{
 			response.redirect("/");
 		}
-	})
+	});
+
+	app.delete('/device/delete', function(request, response){
+		if(request.session.logged){
+			app.app.controllers.devices.delete_device(app, request, response);
+		}else{
+			response.redirect("/");
+		}
+	});
 };

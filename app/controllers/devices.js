@@ -62,5 +62,20 @@ module.exports.count_devices_db = function(app, request, response){
 };
 
 module.exports.connected_devices = function(app, request, response){
+	let conn = app.config.dbconn();
+	let dadosDispositivos = new app.app.models.devicesDAO(conn);
+};
 
-}
+module.exports.delete_device = function(app, request, response){
+	let conn = app.config.dbconn();
+	let dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let dados = request.body;
+
+	dadosDispositivos.delete_device_db(dados.device_id, (error, result) =>{
+        if(!error){
+            response.send(JSON.stringify('ok')).end();
+        }else{
+            response.sendStatus(200).end();
+        }
+    })
+};

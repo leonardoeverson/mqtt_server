@@ -35,10 +35,10 @@
         $('.btn').on('click',function(){
             var id_ = $(this).attr('device_id')
             console.log(id_)
-            if($(this).attr('device_id') == 1){
+            if($(this).attr('op') == 1){
                 window.location.href = '/device/data?device_id='+id_;
             }
-            else if($(this).attr('device_id') == 2){
+            else if($(this).attr('op') == 2){
                 $.ajax({
                     url: '/device/delete',
                     type: 'DELETE',
@@ -46,7 +46,8 @@
                     data: {device_id: id_},
                 })
                     .done(function() {
-                        console.log("success");
+                        alert("success");
+                        location.reload(true);
                     })
                     .fail(function() {
                         console.log("error");

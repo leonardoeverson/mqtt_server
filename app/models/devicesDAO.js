@@ -12,6 +12,15 @@ devicesDAO.prototype.list_devices_db = function(dados, callback){
 	this.connection.query(query, callback);
 };
 
+devicesDAO.prototype.delete_device_db = function(device_id, callback){
+	let query = "DELETE FROM user_devices WHERE device_id =" + device_id;
+	this.connection.query(query, callback);
+};
+
+devicesDAO.prototype.connected_device_db = function(id_user, callback){
+
+};
+
 module.exports = function(){
 	return devicesDAO;
 };
