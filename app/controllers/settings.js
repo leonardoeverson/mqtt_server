@@ -26,10 +26,10 @@ module.exports.post_server_opts = function(app, request, response){
     console.log(result);
     serverDAO.post_server_user_settings(result, request.session.id_user, (error, result) =>{
         if(!error){
-            response.sendStatus(200);
+            response.send(JSON.stringify('OK')).end();
         }else{
             console.log(error);
-            response.send(JSON.stringify(error));
+            response.sendStatus(500).end();
         }
     })
 };

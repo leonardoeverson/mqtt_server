@@ -3,45 +3,50 @@ function serverDAO(conn){
 }
 
 serverDAO.prototype.get_server_user_settings = function (id_user, callback){
-    let query = "select * from server_options left join user_options on server_options.id_option = user_options.id_server_option and user_options.id_user = " + id_user;
-
+    let query = "select * from server_options left join user_options on server_options.id_option = user_options.id_server_option";
+    query += " and user_options.id_user = " + id_user + " order by server_options.id_option";
     conn.query(query, callback);
-
 };
 
 serverDAO.prototype.post_server_user_settings = function (dados, id_user, callback){
 
-    conn.beginTransaction(function(err) {
-        if (err) { throw err; }
-        conn.query('DELETE FROM user_options where id_user = '+ id_user, function(err, result) {
+    if(dados.length > 0){
+        conn.beginTransaction(function(err) {
             if (err) {
-                conn.rollback(function() {
-                    callback(err, null);
-                });
+                callback(err, null);
             }
-
-            conn.query('insert into user_options(id_user, id_server_option) values ?', function(err, result) {
+            conn.query('DELETE FROM user_options where id_user = '+ id_user, function(err, result) {
                 if (err) {
                     conn.rollback(function() {
                         callback(err, null);
                     });
                 }
-                conn.commit(function(err) {
+                conn.query('insert into user_options(id_user, id_server_option) values ?', [dados], function(err, result) {
                     if (err) {
                         conn.rollback(function() {
-                            callback(err, result);
+                            callback(err, null);
                         });
                     }
+                    conn.commit(function(err) {
+                        if (err) {
+                            conn.rollback(function() {
+                                callback(err, result);
+                            });
+                        }
 
-                    console.log('Transaction Complete.');
-                    conn.end();
+                        console.log('Transaction Complete.');
+                        conn.end();
 
-                    callback(null, 'Transaction Complete.');
+                        callback(null, 'Transaction Complete.');
 
+                    });
                 });
             });
         });
-    });
+    }else{
+        conn.query('DELETE FROM user_options where id_user = '+ id_user, callback);
+    }
+
 };
 
 module.exports= function(){
