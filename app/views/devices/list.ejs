@@ -1,38 +1,34 @@
 <%- include('../header'); %>
 
-<div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Listagem</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-
-    <table class="table table-bordered table-hover table-responsive">
-      <thead>
+<div class="col-sm-8">
+    <h1>Itens cadastrados</h1>
+    <hr/>
+    <table class="table table-bordered table-hover">
+        <thead>
         <tr>
-          <th scope="col">Nome do dispositivo</th>
-          <th>Status</th>
-          <th scope="col">Visualizar dados</th>
-          <th scope="col">Excluir</th>
+            <th scope="col">Nome do dispositivo</th>
+            <th>Status</th>
+            <th scope="col">Visualizar dados</th>
+            <th scope="col">Excluir</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <%
-            if(typeof(validacao) != 'undefined'){
-            for (var i = 0; i < validacao.length; i++) {
-                %>
-                <tr>
-                    <th scope="row"> <%= validacao[i].device_name %> </th>
-                    <td>Desconectado</td>
-                    <td><button type="button" class="btn btn-primary" op="1" device_id="<%= validacao[i].device_id %>">Visualizar dados</button></td>
-                    <td><button type="button" class="btn btn-danger" op="2" device_id="<%= validacao[i].device_id %>">Excluir</button></td>
-                </tr>
-                <%
-            }
-
-           } 
+        if(typeof(validacao) != 'undefined'){
+        for (var i = 0; i < validacao.length; i++) {
         %>
-      </tbody>
+            <tr>
+                <th scope="row"> <%= validacao[i].device_name %> </th>
+                <td>Desconectado</td>
+                <td><button type="button" class="btn btn-primary" op="1" device_id="<%= validacao[i].device_id %>">Visualizar dados</button></td>
+                <td><button type="button" class="btn btn-danger" op="2" device_id="<%= validacao[i].device_id %>">Excluir</button></td>
+            </tr>
+        <%
+        }
+
+        }
+        %>
+        </tbody>
     </table>
     <script>
 
@@ -49,20 +45,27 @@
                     dataType: 'json',
                     data: {device_id: id_},
                 })
-                .done(function() {
-                    console.log("success");
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    console.log("complete");
-                });
-                
+                    .done(function() {
+                        console.log("success");
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+
             }
         })
 
 
     </script>
+
+</div>
+<div class="d-none d-xl-block col-xl-2 bd-toc">
+
+</div>
+
+</div>
 
 <%- include('../footer'); %>

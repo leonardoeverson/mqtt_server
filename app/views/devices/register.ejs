@@ -1,50 +1,58 @@
 <%- include('../header'); %>
 
-<div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Cadastro de Dispositivos</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
 
-    <% if(typeof(validacao) != 'undefined'){
-    		if(validacao[0].status == 0){
-    			%>
-    			<div class="alert alert-success" role="alert">
-    			  <%= validacao[0].mensagem %>
-    			</div>
-    			<%
-    		}else{
-    			%>	
-    			<div class="alert alert-danger" role="alert">
-    		  		<%= validacao[0].mensagem %>
-    			</div>
-    		<% 
-    	}
+<div class="col-sm-8">
+    <h1>Cadastro de Dispositivos</h1>
+    <hr/>
+    <% if(typeof (validacao) != 'undefined'){
+            if(validacao[0].status == 0){
+    %>
+        <div class="alert alert-success" role="alert">
+            <%= validacao[0].mensagem %>
+        </div>
+    <%
+        }else{
+    %>
+        <div class="alert alert-danger" role="alert">
+            <%= validacao[0].mensagem %>
+        </div>
+    <%
+        }
     }
     %>
-<form action = "/devices/register" method="post">
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Nome do dispositivo</label>
-    <input type="text" class="form-control" id="device_name" name="device_name" required>
-  </div>
-   <div class="form-group">
-    <label for="exampleFormControlSelect1">Permissão de publish</label>
-    <select class="form-control" id="publish" name="publish">
-      <option value="1">Publicar em um tópico específico</option>
-      <option value="2">Qualquer tópico</option>
-      <option value="3">Não publicar</option>
-    </select>
-  </div>
-   <div class="form-group">
-    <label for="exampleFormControlSelect1">Permissão de subscribe</label>
-    <select class="form-control" id="subscribe" name="subscribe">
-      <option value="1">Subscrever um tópico específico</option>
-      <option value="2">Qualquer tópico</option>
-      <option value="3">Não permitir subscrever</option>
-    </select>
-  </div>
-  <input type="submit" class="btn btn-primary" value="Cadastrar">
-</form>
+    <form action="/devices/register" method="post">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Nome do dispositivo</label>
+            <input type="text" class="form-control" id="device_name" name="device_name" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Permissão de publish</label>
+            <select class="form-control" id="publish" name="publish">
+                <option value="1">Publicar em um tópico específico</option>
+                <option value="2">Qualquer tópico</option>
+                <option value="3">Não publicar</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Permissão de subscribe</label>
+            <select class="form-control" id="subscribe" name="subscribe">
+                <option value="1">Subscrever um tópico específico</option>
+                <option value="2">Qualquer tópico</option>
+                <option value="3">Não permitir subscrever</option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Cadastrar">
+    </form>
+</div>
+
+
+
+
+</div>
+<div class="d-none d-xl-block col-xl-2 bd-toc">
+
+</div>
+
+</div>
 
 <%- include('../footer'); %>
