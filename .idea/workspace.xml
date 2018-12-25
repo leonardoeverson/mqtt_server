@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/views/settings.ejs" line="11" />
+    <bookmark url="file://$PROJECT_DIR$/app/views/settings.ejs" line="2" />
     <bookmark url="file://$PROJECT_DIR$/app/models/devicesDAO.js" line="5" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/views/devices/list.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devices/list.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/devices/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devices/register.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/header.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/devices/data_device.ejs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/profile.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/profile.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/settings.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/settings.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,24 +47,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes/settings.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes/login.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/header.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="353">
@@ -82,7 +64,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/devices/list.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
@@ -100,11 +82,34 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/settings.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/devices/register.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            <state relative-caret-position="-55">
+              <caret line="7" column="8" lean-forward="true" selection-end-line="57" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/login/index.ejs">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/profile.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -116,11 +121,6 @@
               <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="18" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes/cadastro.js">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -145,11 +145,9 @@
         <option value="$PROJECT_DIR$/app/controllers/connections.js" />
         <option value="$PROJECT_DIR$/config/server.js" />
         <option value="$PROJECT_DIR$/config/dbconn.js" />
-        <option value="$PROJECT_DIR$/app/views/profile.ejs" />
         <option value="$PROJECT_DIR$/app/models/cadastroDAO.js" />
         <option value="$PROJECT_DIR$/app/models/dadosUsuarioDAO.js" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/11a9c702-7edd-4c4f-8695-08c59773de07/console_2.sql" />
-        <option value="$PROJECT_DIR$/app/views/settings.ejs" />
         <option value="$PROJECT_DIR$/app/controllers/settings.js" />
         <option value="$PROJECT_DIR$/app/models/serverDAO.js" />
         <option value="$PROJECT_DIR$/app/models/devicesDAO.js" />
@@ -165,6 +163,9 @@
         <option value="$PROJECT_DIR$/app/views/header.ejs" />
         <option value="$PROJECT_DIR$/app/views/devices/register.ejs" />
         <option value="$PROJECT_DIR$/app/views/devices/list.ejs" />
+        <option value="$PROJECT_DIR$/app/views/devices/data_device.ejs" />
+        <option value="$PROJECT_DIR$/app/views/profile.ejs" />
+        <option value="$PROJECT_DIR$/app/views/settings.ejs" />
       </list>
     </option>
   </component>
@@ -302,12 +303,12 @@
       <workItem from="1544452219823" duration="669000" />
       <workItem from="1545673833740" duration="75000" />
       <workItem from="1545673962547" duration="99000" />
-      <workItem from="1545674087866" duration="19556000" />
+      <workItem from="1545674087866" duration="19840000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38991000" />
+    <option name="totallyTimeSpent" value="39275000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -374,13 +375,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/devices/data_device.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -413,13 +407,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="9381" column="19" lean-forward="true" selection-start-line="9381" selection-start-column="19" selection-end-line="9381" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/profile.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="43" column="26" lean-forward="true" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -474,13 +461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/settings.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/application.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -525,9 +505,6 @@
           <caret line="33" column="72" selection-start-line="33" selection-start-column="72" selection-end-line="33" selection-end-column="72" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/login/index.ejs">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/login.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -588,10 +565,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devices/register.ejs">
+    <entry file="file://$PROJECT_DIR$/app/views/devices/list.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        <state relative-caret-position="85">
+          <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -602,10 +579,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devices/list.ejs">
+    <entry file="file://$PROJECT_DIR$/app/views/login/index.ejs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devices/data_device.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
+        <state relative-caret-position="544">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devices/register.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-55">
+          <caret line="7" column="8" lean-forward="true" selection-end-line="57" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/profile.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/settings.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
