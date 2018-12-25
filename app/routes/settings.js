@@ -8,8 +8,12 @@ module.exports =  function(app){
         }
     });
 
-    app.post('/settings', function(request, response){
-        console.log("OK");
+    app.post('/settings', function(request, response){        
+        if(request.session.logged){
+            app.app.controllers.settings.post_server_opts(app, request, response);
+        }else{
+            response.redirect("/");
+        }
     });
 
     app.get('/dados/dispositivos', async function(request, response){

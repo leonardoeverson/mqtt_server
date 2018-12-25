@@ -9,10 +9,10 @@ serverDAO.prototype.get_server_user_settings = function (id_user, callback){
 
 };
 
-serverDAO.prototype.post_server_user_settings = function (id_user, callback){
-    let query = "";
+serverDAO.prototype.post_server_user_settings = function (dados, callback){
+    let query = "insert into user_option(id_user, id_server_option) values ?";
 
-    conn.query(query, callback);
+    conn.query(query, dados, callback);
 
 }
 
