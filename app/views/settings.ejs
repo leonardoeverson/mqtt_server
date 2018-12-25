@@ -1,62 +1,68 @@
 <%- include('header'); %>
 
+<div class="col-sm-8">
+    <h1>Configurações</h1>
+    <hr/>
     <%
     if(typeof (opts) != "undefined"){
         for (let i = 0; i < opts.length; i++){
-
-            console.log(opts);
+        console.log(opts);
     %>
-        <div class="form-group">
-
-            <%
-
-                if(opts[i].id_server_option != null){
-                    %>
-                        <input type="checkbox" id=<%= opts[i].id_option %> checked="" class="form-check-input">
-                    <%
-                }else{
-                    %>
-                         <input type="checkbox" id=<%= opts[i].id_option %> class="form-check-input">
-                    <%
-                }
+    <div class="form-group">
+        <%
+        if(opts[i].id_server_option != null){
             %>
+                <input type="checkbox" id=<%= opts[i].id_option %> checked="" class="form-check-input"/>
+            <%
+        }else{
+            %>
+                <input type="checkbox" id=<%= opts[i].id_option %> class="form-check-input"/>
+            <%
+        }
+        %>
 
-            <label class="form-check-label" for="defaultCheck1"><%= opts[i].description %></label>
-        </div>
-
+        <label class="form-check-label" for="defaultCheck1"><%= opts[i].description %></label>
+    </div>
 
     <%
          }
     }
     %>
 
-        <div class="form-group">
-            <input type="button" class="btn btn-primary" value="Salvar">
-        </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-primary" value="Salvar"/>
+    </div>
 
 
 
-<script>
-    function salva_config() {
-        $.ajax({
-            url: '/server/user/settings',
-            type: 'POST',
-            dataType: 'html',
-            data: {param1: 'value1'},
-        })
-
-            .done(function () {
-                console.log("success");
+    <script>
+        function salva_config() {
+            $.ajax({
+                url: '/server/user/settings',
+                type: 'POST',
+                dataType: 'html',
+                data: {param1: 'value1'},
             })
-            .fail(function () {
-                console.log("error");
-            })
-            .always(function () {
-                console.log("complete");
-            });
-    }
+
+                .done(function () {
+                    console.log("success");
+                })
+                .fail(function () {
+                    console.log("error");
+                })
+                .always(function () {
+                    console.log("complete");
+                });
+        }
 
 
-</script>
+    </script>
+</div>
+<div class="d-none d-xl-block col-xl-2 bd-toc">
+
+</div>
+
+</div>
+
 
 <%- include('footer'); %>
