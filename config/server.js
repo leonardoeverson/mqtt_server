@@ -9,7 +9,9 @@ let app = express();
 
 //body parser
 //Informando ao express para usar o body parser
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.use(bodyParser.json());
 
 //helmet
 app.use(helmet());
