@@ -73,3 +73,18 @@ module.exports.cadastro_usuario = function(app, request, response){
 	})
 
 };
+
+/*
+TODO:
+1. Perfil para mudança dos dados cadastrados
+
+*/
+
+
+module.exports.dados_cadastro = function(app, request, response){
+
+};
+
+module.exports.grava_dados_cadastro = function(app, request, response){
+
+};

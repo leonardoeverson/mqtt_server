@@ -6,10 +6,10 @@ var wsPort = 8888;
 var aedesPersistenceMongoDB = require('aedes-persistence-mongodb')
 
 //Aedes Persistence
-let persistence = aedesPersistenceMongoDB({url: 'mongodb://127.0.0.1:27017/aedes_persistence'})
+let persistence = aedesPersistenceMongoDB({url: 'mongodb://127.0.0.1:27017/aedes_persistence'});
 
 //Emitter
-let mqmongo = require('mqemitter-mongodb')
+let mqmongo = require('mqemitter-mongodb');
 
 
 let emitter = mqmongo({

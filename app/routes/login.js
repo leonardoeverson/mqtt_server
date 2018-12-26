@@ -17,4 +17,8 @@ module.exports = function(app){
 			response.redirect("/")
 		});
 	})
+
+	app.get('/password/change',function(request, response){
+
+	})
 };

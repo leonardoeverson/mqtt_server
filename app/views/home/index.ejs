@@ -1,14 +1,52 @@
 <!-- Navigation -->
 <%- include('../header'); %>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <div class="col-sm-8">
-    <h1>Dashboard</h1>
+    <h3>Dashboard</h3>
     <hr/>
+    <div class="row col-sm-10">
+        <h4>Stats</h4>
+        <hr/>
 
+        <canvas id="canvas" width="400" height="200">
+
+        </canvas>
+    </div>
+    <div class="row col-sm-4">
+        <h4>Clientes</h4>
+        <hr/>
+    </div>
+    <div class="row col-sm-2">
+
+    </div>
 </div>
 <div class="d-none d-xl-block col-xl-2 bd-toc">
 
 </div>
+
+<script>
+    var ctx = document.getElementById("canvas");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 
 </div>
 

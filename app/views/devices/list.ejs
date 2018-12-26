@@ -10,6 +10,7 @@
             <th>Status</th>
             <th scope="col">Visualizar dados</th>
             <th scope="col">Excluir</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@
                 <td>Desconectado</td>
                 <td><button type="button" class="btn btn-primary" op="1" device_id="<%= validacao[i].device_id %>">Visualizar dados</button></td>
                 <td><button type="button" class="btn btn-danger" op="2" device_id="<%= validacao[i].device_id %>">Excluir</button></td>
+                <td><button type="button" class="btn btn-primary" op="3" device_id="<%= validacao[i].device_id %>">Desconectar</button></td>
             </tr>
         <%
         }
@@ -46,11 +48,12 @@
                     data: {device_id: id_},
                 })
                     .done(function() {
-                        alert("success");
+                        alert("Operação concluída com sucesso");
                         location.reload(true);
                     })
                     .fail(function() {
-                        console.log("error");
+                        alert("falha na execução da operação");
+                        location.reload(true);
                     })
                     .always(function() {
                         console.log("complete");
@@ -58,8 +61,6 @@
 
             }
         })
-
-
     </script>
 
 </div>
