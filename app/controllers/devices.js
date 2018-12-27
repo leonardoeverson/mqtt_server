@@ -60,6 +60,19 @@ module.exports.count_devices_db = function(app, request, response){
 module.exports.connected_devices = function(app, request, response){
 	let conn = app.config.dbconn();
 	let dadosDispositivos = new app.app.models.devicesDAO(conn);
+	let dados = {};
+	dados.id_user = request.session.id_user;
+
+	return new Promise((resolve, reject)=>{
+		dadosDispositivos.connected_device_db(dados, function(error, result){
+			if(!error){
+				resolve(result)
+			}else{
+				console.log(error);
+				reject(error);
+			}
+		});
+	})
 };
 
 module.exports.delete_device = function(app, request, response){
