@@ -8,8 +8,9 @@
         <tr>
             <th scope="col">Nome do dispositivo</th>
             <th>Status</th>
-            <th scope="col">Visualizar dados</th>
-            <th scope="col">Excluir</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -20,10 +21,15 @@
         %>
             <tr>
                 <th scope="row"> <%= validacao[i].device_name %> </th>
-                <td>Desconectado</td>
+                <% if(validacao[i].conn_id != null){ %>
+                    <td>Online</td>
+                <% }else{ %>
+                    <td>Desconectado</td>
+                <% } %>
                 <td><button type="button" class="btn btn-primary" op="1" device_id="<%= validacao[i].device_id %>">Visualizar dados</button></td>
-                <td><button type="button" class="btn btn-danger" op="2" device_id="<%= validacao[i].device_id %>">Excluir</button></td>
+                <td><button type="button" class="btn btn-primary" op="4" device_id="<%= validacao[i].device_id %>">Alterar permissões</button></td>
                 <td><button type="button" class="btn btn-primary" op="3" device_id="<%= validacao[i].device_id %>">Desconectar</button></td>
+                <td><button type="button" class="btn btn-danger" op="2" device_id="<%= validacao[i].device_id %>">Excluir</button></td>
             </tr>
         <%
         }
@@ -35,7 +41,7 @@
     <script>
 
         $('.btn').on('click',function(){
-            var id_ = $(this).attr('device_id')
+            let id_ = $(this).attr('device_id')
             console.log(id_)
             if($(this).attr('op') == 1){
                 window.location.href = '/device/data?device_id='+id_;

@@ -20,18 +20,39 @@ USE `mqtt`;
 CREATE TABLE IF NOT EXISTS `conn_clients` (
   `id_conn` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `client_id` varchar(200) NOT NULL,
+  `client_name` varchar(200) NOT NULL,
   `client_address` varchar(100) NOT NULL,
   `client_port` int(6) NOT NULL,
   `device_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=381 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.conn_clients: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.conn_clients: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `conn_clients` DISABLE KEYS */;
-REPLACE INTO `conn_clients` (`id_conn`, `id_user`, `client_id`, `client_address`, `client_port`, `device_id`) VALUES
-	(243, 3, 'ESP8266Client-9812', '::ffff:192.168.10.100', 49169, NULL);
+REPLACE INTO `conn_clients` (`id_conn`, `id_user`, `client_name`, `client_address`, `client_port`, `device_id`) VALUES
+	(380, 3, 'ESP8266Client-fa1b', '::ffff:192.168.10.104', 49170, NULL);
 /*!40000 ALTER TABLE `conn_clients` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela mqtt.conn_log
+CREATE TABLE IF NOT EXISTS `conn_log` (
+  `id_conn` int(11) NOT NULL AUTO_INCREMENT,
+  `device_id` int(11) DEFAULT NULL,
+  `client_name` varchar(100) DEFAULT NULL,
+  `client_address` varchar(100) DEFAULT NULL,
+  `client_port` int(11) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `datetime` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id_conn`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela mqtt.conn_log: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `conn_log` DISABLE KEYS */;
+REPLACE INTO `conn_log` (`id_conn`, `device_id`, `client_name`, `client_address`, `client_port`, `id_user`, `datetime`) VALUES
+	(1, NULL, 'ESP8266Client-a619', '::ffff:192.168.10.104', 49166, 3, '2018-12-27 19:25:59'),
+	(2, NULL, 'ESP8266Client-af5b', '::ffff:192.168.10.104', 49167, 3, '2018-12-27 19:26:53'),
+	(3, NULL, 'ESP8266Client-227b', '::ffff:192.168.10.104', 49168, 3, '2018-12-27 19:27:07'),
+	(4, NULL, 'ESP8266Client-fa1b', '::ffff:192.168.10.104', 49170, 3, '2018-12-27 19:27:44');
+/*!40000 ALTER TABLE `conn_log` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.server_options
 CREATE TABLE IF NOT EXISTS `server_options` (
@@ -70,13 +91,12 @@ CREATE TABLE IF NOT EXISTS `user_devices` (
   `publish` int(1) DEFAULT NULL,
   `subscribe` int(1) DEFAULT NULL,
   PRIMARY KEY (`device_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.user_devices: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.user_devices: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `user_devices` DISABLE KEYS */;
 REPLACE INTO `user_devices` (`id_user`, `device_id`, `device_name`, `publish`, `subscribe`) VALUES
-	(3, 11, 'NodeRed', 1, 1),
-	(3, 12, 'NodeRed', 2, 2);
+	(3, 13, 'NodeRed', 2, 2);
 /*!40000 ALTER TABLE `user_devices` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.user_options
@@ -85,8 +105,10 @@ CREATE TABLE IF NOT EXISTS `user_options` (
   `id_server_option` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.user_options: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.user_options: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `user_options` DISABLE KEYS */;
+REPLACE INTO `user_options` (`id_user`, `id_server_option`) VALUES
+	(3, 2);
 /*!40000 ALTER TABLE `user_options` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -1313,138 +1313,182 @@
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
     <table id="329" parent="3" name="conn_clients"/>
-    <table id="330" parent="3" name="server_options"/>
-    <table id="331" parent="3" name="user_devices"/>
-    <table id="332" parent="3" name="user_options"/>
-    <table id="333" parent="3" name="users"/>
-    <column id="334" parent="329" name="id_conn">
+    <table id="330" parent="3" name="conn_log"/>
+    <table id="331" parent="3" name="server_options"/>
+    <table id="332" parent="3" name="user_devices"/>
+    <table id="333" parent="3" name="user_options"/>
+    <table id="334" parent="3" name="users"/>
+    <column id="335" parent="329" name="id_conn">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="335" parent="329" name="id_user">
+    <column id="336" parent="329" name="id_user">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="336" parent="329" name="client_id">
+    <column id="337" parent="329" name="client_id">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="337" parent="329" name="client_address">
+    <column id="338" parent="329" name="client_address">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="338" parent="329" name="client_port">
+    <column id="339" parent="329" name="client_port">
       <Position>5</Position>
       <DataType>int(6)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="339" parent="329" name="device_id">
+    <column id="340" parent="329" name="device_id">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="340" parent="329" name="PRIMARY">
+    <key id="341" parent="329" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_conn</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="341" parent="330" name="id_option">
+    <column id="342" parent="330" name="id_conn">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="342" parent="330" name="description">
+    <column id="343" parent="330" name="device_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="344" parent="330" name="client_id">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="345" parent="330" name="client_address">
+      <Position>4</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="346" parent="330" name="client_port">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="347" parent="330" name="id_user">
+      <Position>6</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="348" parent="330" name="datetime">
+      <Position>7</Position>
+      <DataType>timestamp|0s</DataType>
+      <DefaultExpression>current_timestamp()</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="349" parent="330" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_conn</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="350" parent="331" name="id_option">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="351" parent="331" name="description">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="343" parent="330" name="Index 1">
+    <index id="352" parent="331" name="Index 1">
       <ColNames>id_option</ColNames>
       <Type>btree</Type>
     </index>
-    <column id="344" parent="331" name="id_user">
+    <column id="353" parent="332" name="id_user">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="345" parent="331" name="device_id">
+    <column id="354" parent="332" name="device_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="346" parent="331" name="device_name">
+    <column id="355" parent="332" name="device_name">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="347" parent="331" name="publish">
+    <column id="356" parent="332" name="publish">
       <Position>4</Position>
       <DataType>int(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="348" parent="331" name="subscribe">
+    <column id="357" parent="332" name="subscribe">
       <Position>5</Position>
       <DataType>int(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="349" parent="331" name="PRIMARY">
+    <key id="358" parent="332" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>device_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="350" parent="332" name="id_user">
+    <column id="359" parent="333" name="id_user">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="351" parent="332" name="id_server_option">
+    <column id="360" parent="333" name="id_server_option">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="352" parent="333" name="id_user">
+    <column id="361" parent="334" name="id_user">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="353" parent="333" name="nome">
+    <column id="362" parent="334" name="nome">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="354" parent="333" name="email">
+    <column id="363" parent="334" name="email">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="355" parent="333" name="senha">
+    <column id="364" parent="334" name="senha">
       <Position>4</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="356" parent="333" name="PRIMARY">
+    <key id="365" parent="334" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_user</ColNames>
       <Primary>1</Primary>
