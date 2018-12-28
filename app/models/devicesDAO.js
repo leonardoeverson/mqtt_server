@@ -19,8 +19,8 @@ devicesDAO.prototype.delete_device_db = function(device_id, callback){
 	this.connection.query(query, callback);
 };
 
-devicesDAO.prototype.connected_device_db = function(id_user, callback){
-	let query = "SELECT * FROM conn_clients WHERE id_user="+id_user;
+devicesDAO.prototype.connected_device_db = function(dados, callback){
+	let query = "SELECT * FROM conn_clients WHERE id_user="+dados.id_user;
 	this.connection.query(query, callback);
 };
 
