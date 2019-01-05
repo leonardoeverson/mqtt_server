@@ -7,6 +7,7 @@ module.exports.list_devices = function(app, request, response){
 
 	dadosDispositivos.list_devices_db(dados, function(error, result){
 		if(!error){
+			conn.destroy();
 			response.render("devices/list",{validacao : result});
 		}else{
 			console.log(error);
@@ -29,6 +30,7 @@ module.exports.register_devices = function(app, request, response){
 
     dadosDispositivos.register_devices_db(dados, function(error, result){
     	if(!error){
+			conn.destroy();
     		response.render("devices/register",{validacao:[{'mensagem':'dados gravados com sucesso', 'status': 0}]});
     	}else{
     		console.log(error);
@@ -48,6 +50,7 @@ module.exports.count_devices_db = function(app, request, response){
 
 		dadosDispositivos.list_devices_db(dados, function(error, result){
 			if(!error){
+				conn.destroy();
 				resolve(result)
 			}else{
 				console.log(error);
@@ -103,6 +106,7 @@ module.exports.delete_device = function(app, request, response){
 
 	dadosDispositivos.delete_device_db(dados.device_id, (error, result) =>{
         if(!error){
+			conn.destroy();
             response.send(JSON.stringify('ok')).end();
         }else{
             response.sendStatus(200).end();

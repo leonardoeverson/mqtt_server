@@ -11,6 +11,7 @@ module.exports.login_usuario = function(app, request, response){
 
 					request.session.id_user = result[0].id_user;
 					request.session.logged = true;
+					conn.destroy();
 					response.redirect("/home");
 
 				} else {

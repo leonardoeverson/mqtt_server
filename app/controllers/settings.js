@@ -4,6 +4,7 @@ module.exports.get_server_opts = function(app, request, response){
 
     serverDAO.get_server_user_settings(request.session.id_user,(error, result) =>{
         if(!error){
+            conn.destroy();
             response.render("settings",{flag: true,  opts:result, id_user: request.session.id_user});
         }else{
             response.render("settings",{flag: false, opts:result});
@@ -26,6 +27,7 @@ module.exports.post_server_opts = function(app, request, response){
     console.log(result);
     serverDAO.post_server_user_settings(result, request.session.id_user, (error, result) =>{
         if(!error){
+            conn.destroy();
             response.send(JSON.stringify('OK')).end();
         }else{
             console.log(error);
