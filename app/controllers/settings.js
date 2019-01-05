@@ -45,9 +45,11 @@ module.exports.get_server_option = function(app, id_option, id_user){
     return new Promise((resolve, reject)=>{
         serverOPT.get_server_option_db(dados, function(error, result){
             if(!error){
+                conn.destroy();
                 resolve(result)
             }else{
                 console.log(error);
+                conn.destroy();
                 reject(error);
             }
         });

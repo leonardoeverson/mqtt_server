@@ -4,7 +4,7 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 
 	connMgmt.conn_db_insert(user_id, client_id, client_address, client_port, function(err, result){
 		if(!err && result.affectedRows > 0){
-
+			conn.destroy();
 		}else{
 			if(err){
 				console.log(err)
@@ -23,7 +23,7 @@ module.exports.conn_mgmt_delete = function(app, user_id, client_id, client_addre
 
 	connMgmt.conn_db_delete(user_id, client_id, client_address, client_port, function(err, result){
 		if(!err){
-
+			conn.destroy();
 		}else{
 			if(err){
 				console.log("erro:",err)
@@ -43,7 +43,7 @@ module.exports.conn_mgmt_delete_all = function(app){
 
 	connMgmt.conn_db_delete_all(null, function(err, result){
 		if(!err){
-
+			conn.destroy();
 		}else{
 			if(err){
 				console.log("erro:",err)

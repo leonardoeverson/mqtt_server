@@ -66,6 +66,7 @@ module.exports.connected_devices = function(app, request, response){
 	return new Promise((resolve, reject)=>{
 		dadosDispositivos.connected_device_db(dados, function(error, result){
 			if(!error){
+				conn.destroy();
 				resolve(result)
 			}else{
 				console.log(error);
@@ -85,6 +86,7 @@ module.exports.check_device_reg = function(app, id_user, client_id){
 	return new Promise((resolve, reject)=>{
 		dadosDispositivos.check_device_reg_db(dados, function(error, result){
 			if(!error){
+				conn.destroy();
 				resolve(result);
 			}else{
 				console.log(error);

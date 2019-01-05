@@ -77,7 +77,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 					client.conn.method_ = method;
 					client.conn.id_user = result[0].id_user;
 					app.app.data_perm = {};
-
+					conn.destroy();
 					let result1, result2;
 
 					try{
@@ -89,6 +89,8 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 					}catch (e) {
 						console.log(e)
 					}
+
+
 
 					if(result2.length > 0){
 						auth_error.returnCode = 3;
