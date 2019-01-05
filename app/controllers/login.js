@@ -1,5 +1,5 @@
 module.exports.login_usuario = function(app, request, response){
-	var conn = app.config.dbconn();
+	var conn = app.config.dbconn;
 	var loginUsuario = new app.app.models.loginDAO(conn);
 	var body = request.body;
 	var bcrypt = require('bcrypt');
@@ -38,7 +38,7 @@ module.exports.login_usuario = function(app, request, response){
 
 module.exports.login_dispositivo = function(app, client, username, password, cb){
 
-	var conn = app.config.dbconn();
+	var conn = app.config.dbconn;
 	var loginUsuario = new app.app.models.loginDAO(conn);
 	var bcrypt = require('bcrypt');
 	var auth_error = new Error('Auth error');
@@ -90,7 +90,8 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 
 					if(result2.length > 0){
 						auth_error.returnCode = 3;
-						cb(auth_error, null)
+						cb(auth_error, null);
+						return;
 					}
 
 					//controller de conexões

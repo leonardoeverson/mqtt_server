@@ -1,5 +1,5 @@
 module.exports.get_server_opts = function(app, request, response){
-    let conn = app.config.dbconn();
+    let conn = app.config.dbconn;
     let serverDAO = new app.app.models.serverDAO(conn);
 
     serverDAO.get_server_user_settings(request.session.id_user,(error, result) =>{
@@ -14,7 +14,7 @@ module.exports.get_server_opts = function(app, request, response){
 
 module.exports.post_server_opts = function(app, request, response){
 
-    let conn = app.config.dbconn();
+    let conn = app.config.dbconn;
     let serverDAO = new app.app.models.serverDAO(conn);
     let dados = request.body;
     let result = [];
@@ -35,7 +35,7 @@ module.exports.post_server_opts = function(app, request, response){
 };
 
 module.exports.get_server_option = function(app, id_option, id_user){
-    let conn = app.config.dbconn();
+    let conn = app.config.dbconn;
     let serverOPT = new app.app.models.serverDAO(conn);
     let dados = {};
     dados.id_user = id_user;
