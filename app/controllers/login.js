@@ -70,27 +70,38 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 
 	loginUsuario.valida_login(dados, function(error, result){
 		if(!error && result.length > 0){
-			bcrypt.compare(password.toString(), result[0].senha, function(err, res) {
-			    if(res == true){
-			    	//informações de conexão do cliente conectado
-			    	client.conn.remoteIp = ip;
-			    	client.conn.remotePort = port;
-			    	client.conn.method_ = method;
-			    	client.conn.id_user = result[0].id_user;
+			bcrypt.compare(password.toString(), result[0].senha, async function (err, res) {
+				if (res == true) {
+					//informações de conexão do cliente conectado
+					client.conn.remoteIp = ip;
+					client.conn.remotePort = port;
+					client.conn.method_ = method;
+					client.conn.id_user = result[0].id_user;
 					app.app.data_perm = {};
 
 					//app.app.device_perm.publish = result[0].publish;
 					//app.app.device_perm.subscribe = result[0].subscribe;
 
-			    	//controller de conexões
-			    	app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_user, client.id, ip, port);
-			    
-			    	//callback de aceitação da conexão do dispositivo
-			    	cb(null, true);
-			    }else{
-			    	auth_error.returnCode = 4;
-			    	cb(auth_error, null)
-			    }
+					//Verifica se o dispositivo existe no registro
+					let result1 = await app.app.controllers.devices.check_device_reg(app, result[0].id_user, client.id);
+
+					//Verifica se é permitida a conexão do dispositivo
+					let result2 = await app.app.controllers.settings.get_server_option(app, 1, result[0].id_user);
+
+					if(result2.length > 0){
+						auth_error.returnCode = 3;
+						cb(auth_error, null)
+					}
+
+					//controller de conexões
+					app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_user, client.id, ip, port);
+
+					//callback de aceitação da conexão do dispositivo
+					cb(null, true);
+				} else {
+					auth_error.returnCode = 4;
+					cb(auth_error, null)
+				}
 			})
 			
 		}else{

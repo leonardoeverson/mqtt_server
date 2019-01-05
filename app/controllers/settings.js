@@ -33,3 +33,23 @@ module.exports.post_server_opts = function(app, request, response){
         }
     })
 };
+
+module.exports.get_server_option = function(app, id_option, id_user){
+    let conn = app.config.dbconn();
+    let serverOPT = new app.app.models.serverDAO(conn);
+    let dados = {};
+    dados.id_user = id_user;
+    dados.id_option = id_option;
+
+
+    return new Promise((resolve, reject)=>{
+        serverOPT.get_server_option_db(dados, function(error, result){
+            if(!error){
+                resolve(result)
+            }else{
+                console.log(error);
+                reject(error);
+            }
+        });
+    })
+};

@@ -75,6 +75,25 @@ module.exports.connected_devices = function(app, request, response){
 	})
 };
 
+module.exports.check_device_reg = function(app, id_user, client_id){
+	let conn = app.config.dbconn();
+	let dadosDispositivos = new app.app.models.devicesDAO(conn);
+	let dados = {};
+	dados.id_user = id_user;
+	dados.client_id = client_id;
+
+	return new Promise((resolve, reject)=>{
+		dadosDispositivos.check_device_reg_db(dados, function(error, result){
+			if(!error){
+				resolve(result)
+			}else{
+				console.log(error);
+				reject(error);
+			}
+		});
+	})
+};
+
 module.exports.delete_device = function(app, request, response){
 	let conn = app.config.dbconn();
 	let dadosDispositivos = new app.app.models.devicesDAO(conn);

@@ -8,11 +8,11 @@
         <h4>Stats</h4>
         <hr/>
 
-        <canvas id="canvas" width="300" height="150">
+        <canvas id="canvas">
 
         </canvas>
     </div>
-    <div class="row col-sm-5" style="margin-top: 30px">
+    <div class="row col-sm-5" style="margin-top: 40px">
         <h4>Clientes</h4>
         <hr/>
         <table class="table table-sm">
@@ -20,27 +20,25 @@
             <tr>
                 <th scope="col">Id do Cliente</th>
                 <th scope="col">Ip do Cliente</th>
-                <th scope="col">Tópico</th>
+                <th scope="col">Publish</th>
+                <th scope="col">Subscribe</th>
             </tr>
             </thead>
             <tbody>
+            <%
+            if(typeof(dados) != 'undefined'){
+                for (var i = 0; i < dados.length; i++) {
+            %>
             <tr>
-                <th scope="row"></th>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <th scope="row"></th>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <th scope="row"></th>
+                <td><%= dados[i].client_id %></td>
+                <td><%= dados[i].client_address %></td>
                 <td></td>
                 <td></td>
             </tr>
+            <%
+                }
+            }
+            %>
             </tbody>
         </table>
     </div>

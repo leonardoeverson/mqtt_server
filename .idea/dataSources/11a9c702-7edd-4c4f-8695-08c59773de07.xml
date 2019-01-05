@@ -1331,7 +1331,7 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="337" parent="329" name="client_name">
+    <column id="337" parent="329" name="client_id">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1371,7 +1371,7 @@
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="344" parent="330" name="client_name">
+    <column id="344" parent="330" name="client_id">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>

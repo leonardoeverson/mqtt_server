@@ -49,6 +49,13 @@ serverDAO.prototype.post_server_user_settings = function (dados, id_user, callba
 
 };
 
+serverDAO.prototype.get_server_option_db = function(dados, callback){
+    let query = "select * from user_options where id_server_option = "+ dados.id_option+" and id_user = "+dados.id_user;
+    conn.query(query, callback);
+
+};
+
+
 module.exports= function(){
     return serverDAO;
 };
