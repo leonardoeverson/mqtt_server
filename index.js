@@ -6,9 +6,6 @@ app.listen(port, function(){
 	console.log('Servidor Iniciado na Porta:',port);
 });
 
-app.config = {};
-app.config.dbconn = require("./config/dbconn.js")()();
-
 //Servidor MQTT e WS
 let aedes = require('./config/aedes_server');
 

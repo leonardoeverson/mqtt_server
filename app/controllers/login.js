@@ -1,5 +1,5 @@
 module.exports.login_usuario = function(app, request, response){
-	var conn = app.config.dbconn;
+	var conn = app.config.dbconn();
 	var loginUsuario = new app.app.models.loginDAO(conn);
 	var body = request.body;
 	var bcrypt = require('bcrypt');
@@ -14,15 +14,14 @@ module.exports.login_usuario = function(app, request, response){
 					response.redirect("/home");
 
 				} else {
-
 					response.render("login/index", {validacao: [{'msg': 'usuário ou senha incorretos'}]})
-
 				}
 			})
 			
 		}else{
 			if(error){
-				response.render("login/index",{validacao : [{'msg':'error'}]});
+				console.log(error);
+				response.render("login/index",{validacao : [{'msg':'erro ao realizar login'}]});
 				return
 			}
 
@@ -38,7 +37,7 @@ module.exports.login_usuario = function(app, request, response){
 
 module.exports.login_dispositivo = function(app, client, username, password, cb){
 
-	var conn = app.config.dbconn;
+	var conn = app.config.dbconn();
 	var loginUsuario = new app.app.models.loginDAO(conn);
 	var bcrypt = require('bcrypt');
 	var auth_error = new Error('Auth error');
@@ -79,14 +78,17 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 					client.conn.id_user = result[0].id_user;
 					app.app.data_perm = {};
 
-					//app.app.device_perm.publish = result[0].publish;
-					//app.app.device_perm.subscribe = result[0].subscribe;
+					let result1, result2;
 
-					//Verifica se o dispositivo existe no registro
-					let result1 = await app.app.controllers.devices.check_device_reg(app, result[0].id_user, client.id);
+					try{
+						//Verifica se o dispositivo existe no registro
+						result1 = await app.app.controllers.devices.check_device_reg(app, result[0].id_user, client.id);
 
-					//Verifica se é permitida a conexão do dispositivo
-					let result2 = await app.app.controllers.settings.get_server_option(app, 1, result[0].id_user);
+						//Verifica se é permitida a conexão do dispositivo
+						result2 = await app.app.controllers.settings.get_server_option(app, 1, result[0].id_user);
+					}catch (e) {
+						console.log(e)
+					}
 
 					if(result2.length > 0){
 						auth_error.returnCode = 3;

@@ -64,6 +64,7 @@ app.use(expressValidator({
 
 consign({cwd: process.cwd()})
   .include('./app/routes')
+  .then('./config/dbconn.js')
   .then('app/models')
   .then('app/controllers')
   .into(app);

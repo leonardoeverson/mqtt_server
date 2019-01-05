@@ -1,5 +1,5 @@
 module.exports.cadastro_usuario = function(app, request, response){
-	var conn = app.config.dbconn;
+	var conn = app.config.dbconn();
 	var cadastroUsuario = new app.app.models.cadastroDAO(conn);
 	var body = request.body;
 	console.log(body);
