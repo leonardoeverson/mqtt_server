@@ -1,10 +1,30 @@
 //Servidor HTTP
 let app = require('./config/server');
-
+//let RED = require('node-red');
 let port = process.env.PORT || 3000;
+
 app.listen(port, function(){
 	console.log('Servidor Iniciado na Porta:',port);
 });
+
+//Node Red
+/*let settings = {
+	httpAdminRoot:"/red",
+	httpNodeRoot: "/api",
+	userDir:".nodered/",
+	functionGlobalContext: { }    // enables global context
+};
+
+RED.init(app,settings);
+
+// Serve the editor UI from /red
+app.use(settings.httpAdminRoot,RED.httpAdmin);
+
+// Serve the http nodes UI from /api
+app.use(settings.httpNodeRoot,RED.httpNode);
+
+RED.start();
+*/
 
 //Servidor MQTT e WS
 let aedes = require('./config/aedes_server');

@@ -3,17 +3,17 @@ function cadastroDAO(conn){
 }
 
 cadastroDAO.prototype.grava_usuario = function(dados, callback) {
-	var bcrypt = require('bcrypt');
-	var saltRounds = 10;
-	var salt = bcrypt.genSaltSync(saltRounds);
+	let bcrypt = require('bcrypt');
+	let saltRounds = 10;
+	let salt = bcrypt.genSaltSync(saltRounds);
 	dados.senha = bcrypt.hashSync(dados.senha, salt);
 
-	var query = "insert into users (nome, email, senha) values('"+dados.nome+"','"+dados.email+"','"+dados.senha+"')";
+	let query = "insert into users (nome, email, senha) values('"+dados.nome+"','"+dados.email+"','"+dados.senha+"')";
 	this.connection.query(query, callback);
 };
 
 cadastroDAO.prototype.verifica_email_existente = function(email, callback) {
-	var query = "select email from users where email = '"+email+"'";
+	let query = "select email from users where email = '"+email+"'";
 	this.connection.query(query, callback);
 };
 
