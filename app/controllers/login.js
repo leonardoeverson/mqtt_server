@@ -91,16 +91,15 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 						console.log(e)
 					}
 
-
-
 					if(result2.length > 0){
 						auth_error.returnCode = 3;
 						cb(auth_error, null);
 						return;
 					}
 
+					let device_id = result1[0] ? result1[0].device_id : 0;
 					//controller de conexões
-					app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_user, client.id, ip, port);
+					app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_user, client.id, ip, port, device_id);
 
 					//callback de aceitação da conexão do dispositivo
 					cb(null, true);

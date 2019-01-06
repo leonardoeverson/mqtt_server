@@ -2,14 +2,14 @@ function connectionsDAO(conn){
 	this.connection = conn
 }
 
-connectionsDAO.prototype.conn_db_insert = function(user_id, client_id, client_address, client_port, callback) {
+connectionsDAO.prototype.conn_db_insert = function(user_id, client_id, client_address, client_port, device_id, callback) {
 
 	conn.beginTransaction(function(err) {
 		if (err) {
 			callback(err, null);
 		}
-		conn.query("insert into conn_clients(id_user, client_id, client_address, client_port) values('"+user_id+"','"+client_id+"','"+client_address+
-			"',"+client_port+")", function(err, result) {
+		conn.query("insert into conn_clients(id_user, client_id, client_address, client_port, device_id) values('"+user_id+"','"+client_id+"','"+client_address+
+			"',"+client_port+","+device_id+")", function(err, result) {
 			if (err) {
 				conn.rollback(function() {
 					callback(err, null);
