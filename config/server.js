@@ -4,7 +4,6 @@ let bodyParser = require('body-parser');
 let helmet = require('helmet');
 let session = require("express-session");
 let morgan = require("morgan");
-let RED = require("node-red");
 
 //Express
 let app = express();

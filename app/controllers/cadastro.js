@@ -82,9 +82,11 @@ TODO:
 
 
 module.exports.dados_cadastro = function(app, request, response){
-
+	let conn = app.config.dbconn();
+	let cadastroUsuario = new app.app.models.cadastroDAO(conn);
 };
 
 module.exports.grava_dados_cadastro = function(app, request, response){
-
+	let conn = app.config.dbconn();
+	let cadastroUsuario = new app.app.models.cadastroDAO(conn);
 };

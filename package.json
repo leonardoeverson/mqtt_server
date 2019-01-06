@@ -19,9 +19,6 @@
     "mqemitter-mongodb": "^4.0.2",
     "mqtt": "^2.18.8",
     "mysql": "^2.16.0",
-    "node-red": "^0.19.5",
-    "node-red-dashboard": "^2.13.0",
-    "node-red-node-swagger": "^0.1.8",
     "npm": "^6.5.0",
     "websocket-stream": "^5.1.2"
   },

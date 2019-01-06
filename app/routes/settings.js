@@ -23,5 +23,6 @@ module.exports =  function(app){
 
     app.get('/dados/connections', async function(request, response){
         let resposta;
-    })
+    });
+
 };
