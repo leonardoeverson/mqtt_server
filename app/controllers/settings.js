@@ -43,7 +43,6 @@ module.exports.get_server_option = function(app, id_option, id_user){
     dados.id_user = id_user;
     dados.id_option = id_option;
 
-
     return new Promise((resolve, reject)=>{
         serverOPT.get_server_option_db(dados, function(error, result){
             if(!error){

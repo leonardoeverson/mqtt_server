@@ -1,0 +1,16 @@
+function topicsDAO(conn){
+    this.connection = conn;
+}
+
+topicsDAO.prototype.topic_subscribe_register_db = function(dados, callback) {
+    let query = "INSERT INTO tp_subscribe(device_id, tp_subscribe, qos) values(?, ?, ?)";
+    this.connection.query(query, dados, callback);
+};
+
+topicsDAO.prototype.publish_metrics_db = function(dados, callback){
+
+};
+
+module.exports = function(){
+    return topicsDAO;
+};
