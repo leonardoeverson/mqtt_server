@@ -1414,133 +1414,138 @@
       <ColNames>id_conn</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="356" parent="334" name="topic">
+    <column id="356" parent="334" name="device_id">
       <Position>1</Position>
-      <DataType>varchar(200)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="357" parent="334" name="length">
-      <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="358" parent="334" name="timestamp">
+    <column id="357" parent="334" name="topic">
+      <Position>2</Position>
+      <DataType>varchar(200)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="358" parent="334" name="length">
       <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="359" parent="334" name="timestamp">
+      <Position>4</Position>
       <DataType>timestamp|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="359" parent="335" name="id_option">
+    <column id="360" parent="335" name="id_option">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="360" parent="335" name="description">
+    <column id="361" parent="335" name="description">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="361" parent="335" name="Index 1">
+    <index id="362" parent="335" name="Index 1">
       <ColNames>id_option</ColNames>
       <Type>btree</Type>
     </index>
-    <column id="362" parent="336" name="device_id">
+    <column id="363" parent="336" name="device_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="363" parent="336" name="tp_publish">
+    <column id="364" parent="336" name="tp_publish">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="364" parent="337" name="tp_subscribe">
+    <column id="365" parent="337" name="tp_subscribe">
       <Position>1</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="365" parent="337" name="device_id">
+    <column id="366" parent="337" name="device_id">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="366" parent="337" name="qos">
+    <column id="367" parent="337" name="qos">
       <Position>3</Position>
       <DataType>int(2)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="367" parent="338" name="id_user">
+    <column id="368" parent="338" name="id_user">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="368" parent="338" name="device_id">
+    <column id="369" parent="338" name="device_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="369" parent="338" name="device_name">
+    <column id="370" parent="338" name="device_name">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="370" parent="338" name="publish">
+    <column id="371" parent="338" name="publish">
       <Position>4</Position>
       <DataType>int(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="371" parent="338" name="subscribe">
+    <column id="372" parent="338" name="subscribe">
       <Position>5</Position>
       <DataType>int(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="372" parent="338" name="PRIMARY">
+    <key id="373" parent="338" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>device_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="373" parent="339" name="id_user">
+    <column id="374" parent="339" name="id_user">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="374" parent="339" name="id_server_option">
+    <column id="375" parent="339" name="id_server_option">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="375" parent="340" name="id_user">
+    <column id="376" parent="340" name="id_user">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="376" parent="340" name="nome">
+    <column id="377" parent="340" name="nome">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="377" parent="340" name="email">
+    <column id="378" parent="340" name="email">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="378" parent="340" name="senha">
+    <column id="379" parent="340" name="senha">
       <Position>4</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="379" parent="340" name="PRIMARY">
+    <key id="380" parent="340" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_user</ColNames>
       <Primary>1</Primary>

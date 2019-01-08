@@ -41,25 +41,23 @@ module.exports.login_usuario = function(app, request, response){
 
 module.exports.login_dispositivo = function(app, client, username, password, cb){
 
-	var conn = app.config.dbconn();
-	var loginUsuario = new app.app.models.loginDAO(conn);
-	var bcrypt = require('bcrypt');
-	var auth_error = new Error('Auth error');
-  	var ip;
-  	var port;
-  	var method;
+	let conn = app.config.dbconn();
+	let loginUsuario = new app.app.models.loginDAO(conn);
+	let bcrypt = require('bcrypt');
+	let auth_error = new Error('Auth error');
+  	let ip, method, port;
 	dados = {};
 	dados.email = username;
 	  
 	try{
   		method = "mqtt_socket";
-  		ip = client.conn.remoteAddress;
+  		ip = client.conn.remoteAddress.replace("::ffff:","");
   		port = client.conn.remotePort;
   	}catch(e){
   		console.log(e)
  	}
 
-  	if(ip == undefined){
+  	if(typeof(ip) == "undefined"){
   		try{
   			method = "websocket";
   			ip = client.conn.socket._socket.remoteAddress;
@@ -69,7 +67,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
   		}
   	}
 
-  	console.log(method, ip);
+  	console.log(method, ip, port);
 
 	loginUsuario.valida_login(dados, function(error, result){
 		if(!error && result.length > 0){
