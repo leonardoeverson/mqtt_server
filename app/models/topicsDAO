@@ -9,7 +9,8 @@ topicsDAO.prototype.topic_subscribe_register_db = function(dados, callback) {
 };
 
 topicsDAO.prototype.publish_metrics_db = function(dados, callback){
-    let query= "INSERT INTO mqtt_metrics(length, timestamp, topic) VALUES()";
+    let query= "INSERT INTO mqtt_metrics(topic, length, timestamp) VALUES ";
+    query += "('"+dados.topic+"',"+dados.length+", NOW())";
     this.connection.query(query, dados, callback);
 };
 

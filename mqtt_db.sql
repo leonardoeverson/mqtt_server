@@ -25,14 +25,13 @@ CREATE TABLE IF NOT EXISTS `conn_clients` (
   `client_port` int(6) NOT NULL,
   `device_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=937 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=970 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.conn_clients: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.conn_clients: ~1 rows (aproximadamente)
 DELETE FROM `conn_clients`;
 /*!40000 ALTER TABLE `conn_clients` DISABLE KEYS */;
 INSERT INTO `conn_clients` (`id_conn`, `id_user`, `client_id`, `client_address`, `client_port`, `device_id`) VALUES
-	(935, 7, 'ESP8266Client-f016', '::ffff:192.168.1.109', 45598, 0),
-	(936, 7, 'ESP8266Client-dbef', '::ffff:192.168.1.109', 48422, 0);
+	(969, 7, 'ESP8266Client-346c', '::ffff:192.168.1.109', 38927, 0);
 /*!40000 ALTER TABLE `conn_clients` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.conn_log
@@ -45,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `conn_log` (
   `id_user` int(11) DEFAULT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=558 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=589 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.conn_log: ~554 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.conn_log: ~585 rows (aproximadamente)
 DELETE FROM `conn_log`;
 /*!40000 ALTER TABLE `conn_log` DISABLE KEYS */;
 INSERT INTO `conn_log` (`id_conn`, `device_id`, `client_id`, `client_address`, `client_port`, `id_user`, `datetime`) VALUES
@@ -604,19 +603,61 @@ INSERT INTO `conn_log` (`id_conn`, `device_id`, `client_id`, `client_address`, `
 	(554, NULL, 'ESP8266Client-50f8', '::ffff:192.168.1.109', 42480, 7, '2019-01-08 13:30:43'),
 	(555, NULL, 'ESP8266Client-e251', '::ffff:192.168.1.109', 44961, 7, '2019-01-08 13:33:19'),
 	(556, NULL, 'ESP8266Client-f016', '::ffff:192.168.1.109', 45598, 7, '2019-01-08 13:34:37'),
-	(557, NULL, 'ESP8266Client-dbef', '::ffff:192.168.1.109', 48422, 7, '2019-01-08 13:34:37');
+	(557, NULL, 'ESP8266Client-dbef', '::ffff:192.168.1.109', 48422, 7, '2019-01-08 13:34:37'),
+	(558, NULL, 'ESP8266Client-5c83', '::ffff:192.168.1.109', 42276, 7, '2019-01-08 13:47:34'),
+	(559, NULL, 'ESP8266Client-fc0a', '::ffff:192.168.1.109', 44028, 7, '2019-01-08 13:47:35'),
+	(560, NULL, 'ESP8266Client-251b', '::ffff:192.168.1.109', 49100, 7, '2019-01-08 13:48:24'),
+	(561, NULL, 'ESP8266Client-63ee', '::ffff:192.168.1.109', 42482, 7, '2019-01-08 13:48:27'),
+	(562, NULL, 'ESP8266Client-dc40', '::ffff:192.168.1.109', 43447, 7, '2019-01-08 13:49:00'),
+	(563, NULL, 'ESP8266Client-52f4', '::ffff:192.168.1.109', 47735, 7, '2019-01-08 13:49:00'),
+	(564, NULL, 'ESP8266Client-36b6', '::ffff:192.168.1.109', 41627, 7, '2019-01-08 13:49:16'),
+	(565, NULL, 'ESP8266Client-aafc', '::ffff:192.168.1.109', 37975, 7, '2019-01-08 13:49:16'),
+	(566, NULL, 'ESP8266Client-8cc0', '::ffff:192.168.1.109', 36990, 7, '2019-01-08 13:51:02'),
+	(567, NULL, 'ESP8266Client-2c86', '::ffff:192.168.1.109', 39886, 7, '2019-01-08 13:51:35'),
+	(568, NULL, 'ESP8266Client-67a2', '::ffff:192.168.1.109', 48028, 7, '2019-01-08 13:51:40'),
+	(569, NULL, 'ESP8266Client-7603', '::ffff:192.168.1.109', 38452, 7, '2019-01-08 13:51:44'),
+	(570, NULL, 'ESP8266Client-6957', '::ffff:192.168.1.109', 43624, 7, '2019-01-08 13:51:49'),
+	(571, NULL, 'ESP8266Client-bd87', '::ffff:192.168.1.109', 38198, 7, '2019-01-08 14:00:34'),
+	(572, NULL, 'ESP8266Client-a3ec', '::ffff:192.168.1.109', 44997, 7, '2019-01-08 14:01:01'),
+	(573, NULL, 'ESP8266Client-a302', '::ffff:192.168.1.109', 48938, 7, '2019-01-08 14:01:40'),
+	(574, NULL, 'ESP8266Client-7bab', '::ffff:192.168.1.109', 33354, 7, '2019-01-08 14:01:59'),
+	(575, NULL, 'ESP8266Client-206d', '::ffff:192.168.1.109', 37557, 7, '2019-01-08 14:05:03'),
+	(576, NULL, 'ESP8266Client-d190', '::ffff:192.168.1.109', 33574, 7, '2019-01-08 14:05:14'),
+	(577, NULL, 'ESP8266Client-ff0', '::ffff:192.168.1.109', 36983, 7, '2019-01-08 14:06:03'),
+	(578, NULL, 'ESP8266Client-f74d', '::ffff:192.168.1.109', 35889, 7, '2019-01-08 14:06:18'),
+	(579, NULL, 'ESP8266Client-e146', '::ffff:192.168.1.109', 41611, 7, '2019-01-08 14:06:40'),
+	(580, NULL, 'ESP8266Client-206a', '::ffff:192.168.1.109', 40704, 7, '2019-01-08 14:07:03'),
+	(581, NULL, 'ESP8266Client-ddff', '::ffff:192.168.1.109', 46144, 7, '2019-01-08 14:07:20'),
+	(582, NULL, 'ESP8266Client-8693', '::ffff:192.168.1.109', 48254, 7, '2019-01-08 14:08:13'),
+	(583, NULL, 'ESP8266Client-6388', '::ffff:192.168.1.109', 44033, 7, '2019-01-08 14:08:29'),
+	(584, NULL, 'ESP8266Client-2a84', '::ffff:192.168.1.109', 36975, 7, '2019-01-08 14:08:42'),
+	(585, NULL, 'ESP8266Client-ed04', '::ffff:192.168.1.109', 48027, 7, '2019-01-08 14:08:55'),
+	(586, NULL, 'ESP8266Client-5de9', '::ffff:192.168.1.109', 45577, 7, '2019-01-08 14:09:36'),
+	(587, NULL, 'ESP8266Client-c53f', '::ffff:192.168.1.109', 44439, 7, '2019-01-08 14:09:52'),
+	(588, NULL, 'ESP8266Client-346c', '::ffff:192.168.1.109', 38927, 7, '2019-01-08 14:15:17');
 /*!40000 ALTER TABLE `conn_log` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.mqtt_metrics
 CREATE TABLE IF NOT EXISTS `mqtt_metrics` (
+  `device_id` int(11) DEFAULT NULL,
+  `topic` varchar(200) DEFAULT NULL,
   `length` int(11) DEFAULT NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
-  `topic` varchar(200) DEFAULT NULL
+  `timestamp` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.mqtt_metrics: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.mqtt_metrics: ~8 rows (aproximadamente)
 DELETE FROM `mqtt_metrics`;
 /*!40000 ALTER TABLE `mqtt_metrics` DISABLE KEYS */;
+INSERT INTO `mqtt_metrics` (`device_id`, `topic`, `length`, `timestamp`) VALUES
+	(NULL, 'sensor/luz', 1, '2019-01-08 14:15:20'),
+	(NULL, 'sensor/luz', 1, '2019-01-08 14:15:20'),
+	(NULL, 'sensor/luz', 1, '2019-01-08 14:15:27'),
+	(NULL, 'sensor/luz', 1, '2019-01-08 14:15:37'),
+	(NULL, 'sensor/luz', 1, '2019-01-08 14:15:47'),
+	(NULL, 'sensor/luz', 1, '2019-01-08 14:15:57'),
+	(NULL, 'sensor/luz', 1, '2019-01-08 14:16:07'),
+	(NULL, 'sensor/luz', 1, '2019-01-08 14:16:17'),
+	(NULL, 'sensor/luz', 1, '2019-01-08 14:16:27');
 /*!40000 ALTER TABLE `mqtt_metrics` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.server_options
@@ -652,7 +693,7 @@ CREATE TABLE IF NOT EXISTS `tp_subscribe` (
   `qos` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.tp_subscribe: ~209 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.tp_subscribe: ~316 rows (aproximadamente)
 DELETE FROM `tp_subscribe`;
 /*!40000 ALTER TABLE `tp_subscribe` DISABLE KEYS */;
 INSERT INTO `tp_subscribe` (`tp_subscribe`, `device_id`, `qos`) VALUES
@@ -864,7 +905,114 @@ INSERT INTO `tp_subscribe` (`tp_subscribe`, `device_id`, `qos`) VALUES
 	('sensor/casa', 'ESP8266Client-dbef', 0),
 	('sensor/cozinha', 'ESP8266Client-dbef', 0),
 	('sensor/gps', 'ESP8266Client-dbef', 0),
-	('sensor/porta', 'ESP8266Client-dbef', 0);
+	('sensor/porta', 'ESP8266Client-dbef', 0),
+	('sensor/casa', 'ESP8266Client-5c83', 0),
+	('sensor/cozinha', 'ESP8266Client-5c83', 0),
+	('sensor/gps', 'ESP8266Client-5c83', 0),
+	('sensor/porta', 'ESP8266Client-5c83', 0),
+	('sensor/casa', 'ESP8266Client-fc0a', 0),
+	('sensor/casa', 'ESP8266Client-251b', 0),
+	('sensor/casa', 'ESP8266Client-63ee', 0),
+	('sensor/gps', 'ESP8266Client-63ee', 0),
+	('sensor/porta', 'ESP8266Client-63ee', 0),
+	('sensor/cozinha', 'ESP8266Client-63ee', 0),
+	('sensor/casa', 'ESP8266Client-e9e0', 0),
+	('sensor/cozinha', 'ESP8266Client-e9e0', 0),
+	('sensor/gps', 'ESP8266Client-e9e0', 0),
+	('sensor/porta', 'ESP8266Client-e9e0', 0),
+	('sensor/casa', 'ESP8266Client-9f84', 0),
+	('sensor/casa', 'ESP8266Client-dc40', 0),
+	('sensor/cozinha', 'ESP8266Client-dc40', 0),
+	('sensor/gps', 'ESP8266Client-dc40', 0),
+	('sensor/porta', 'ESP8266Client-dc40', 0),
+	('sensor/casa', 'ESP8266Client-52f4', 0),
+	('sensor/cozinha', 'ESP8266Client-36b6', 0),
+	('sensor/gps', 'ESP8266Client-36b6', 0),
+	('sensor/casa', 'ESP8266Client-36b6', 0),
+	('sensor/porta', 'ESP8266Client-36b6', 0),
+	('sensor/casa', 'ESP8266Client-aafc', 0),
+	('sensor/casa', 'ESP8266Client-8cc0', 0),
+	('sensor/porta', 'ESP8266Client-8cc0', 0),
+	('sensor/gps', 'ESP8266Client-8cc0', 0),
+	('sensor/cozinha', 'ESP8266Client-8cc0', 0),
+	('sensor/casa', 'ESP8266Client-67a2', 0),
+	('sensor/casa', 'ESP8266Client-7603', 0),
+	('sensor/casa', 'ESP8266Client-6957', 0),
+	('sensor/cozinha', 'ESP8266Client-6957', 0),
+	('sensor/gps', 'ESP8266Client-6957', 0),
+	('sensor/porta', 'ESP8266Client-6957', 0),
+	('sensor/casa', 'ESP8266Client-bd87', 0),
+	('sensor/cozinha', 'ESP8266Client-bd87', 0),
+	('sensor/gps', 'ESP8266Client-bd87', 0),
+	('sensor/porta', 'ESP8266Client-bd87', 0),
+	('sensor/casa', 'ESP8266Client-a3ec', 0),
+	('sensor/cozinha', 'ESP8266Client-a3ec', 0),
+	('sensor/gps', 'ESP8266Client-a3ec', 0),
+	('sensor/porta', 'ESP8266Client-a3ec', 0),
+	('sensor/casa', 'ESP8266Client-a302', 0),
+	('sensor/cozinha', 'ESP8266Client-a302', 0),
+	('sensor/gps', 'ESP8266Client-a302', 0),
+	('sensor/porta', 'ESP8266Client-a302', 0),
+	('sensor/casa', 'ESP8266Client-7bab', 0),
+	('sensor/cozinha', 'ESP8266Client-7bab', 0),
+	('sensor/gps', 'ESP8266Client-7bab', 0),
+	('sensor/porta', 'ESP8266Client-7bab', 0),
+	('sensor/casa', 'ESP8266Client-206d', 0),
+	('sensor/cozinha', 'ESP8266Client-206d', 0),
+	('sensor/gps', 'ESP8266Client-206d', 0),
+	('sensor/porta', 'ESP8266Client-206d', 0),
+	('sensor/casa', 'ESP8266Client-d190', 0),
+	('sensor/cozinha', 'ESP8266Client-d190', 0),
+	('sensor/gps', 'ESP8266Client-d190', 0),
+	('sensor/porta', 'ESP8266Client-d190', 0),
+	('sensor/casa', 'ESP8266Client-ff0', 0),
+	('sensor/cozinha', 'ESP8266Client-ff0', 0),
+	('sensor/gps', 'ESP8266Client-ff0', 0),
+	('sensor/porta', 'ESP8266Client-ff0', 0),
+	('sensor/casa', 'ESP8266Client-f74d', 0),
+	('sensor/cozinha', 'ESP8266Client-f74d', 0),
+	('sensor/porta', 'ESP8266Client-f74d', 0),
+	('sensor/gps', 'ESP8266Client-f74d', 0),
+	('sensor/casa', 'ESP8266Client-e146', 0),
+	('sensor/cozinha', 'ESP8266Client-e146', 0),
+	('sensor/gps', 'ESP8266Client-e146', 0),
+	('sensor/porta', 'ESP8266Client-e146', 0),
+	('sensor/casa', 'ESP8266Client-206a', 0),
+	('sensor/cozinha', 'ESP8266Client-206a', 0),
+	('sensor/gps', 'ESP8266Client-206a', 0),
+	('sensor/porta', 'ESP8266Client-206a', 0),
+	('sensor/casa', 'ESP8266Client-ddff', 0),
+	('sensor/cozinha', 'ESP8266Client-ddff', 0),
+	('sensor/gps', 'ESP8266Client-ddff', 0),
+	('sensor/porta', 'ESP8266Client-ddff', 0),
+	('sensor/casa', 'ESP8266Client-8693', 0),
+	('sensor/cozinha', 'ESP8266Client-8693', 0),
+	('sensor/gps', 'ESP8266Client-8693', 0),
+	('sensor/porta', 'ESP8266Client-8693', 0),
+	('sensor/casa', 'ESP8266Client-6388', 0),
+	('sensor/cozinha', 'ESP8266Client-6388', 0),
+	('sensor/gps', 'ESP8266Client-6388', 0),
+	('sensor/porta', 'ESP8266Client-6388', 0),
+	('sensor/casa', 'ESP8266Client-2a84', 0),
+	('sensor/cozinha', 'ESP8266Client-2a84', 0),
+	('sensor/gps', 'ESP8266Client-2a84', 0),
+	('sensor/porta', 'ESP8266Client-2a84', 0),
+	('sensor/casa', 'ESP8266Client-ed04', 0),
+	('sensor/cozinha', 'ESP8266Client-ed04', 0),
+	('sensor/gps', 'ESP8266Client-ed04', 0),
+	('sensor/porta', 'ESP8266Client-ed04', 0),
+	('sensor/casa', 'ESP8266Client-5de9', 0),
+	('sensor/cozinha', 'ESP8266Client-5de9', 0),
+	('sensor/porta', 'ESP8266Client-5de9', 0),
+	('sensor/gps', 'ESP8266Client-5de9', 0),
+	('sensor/casa', 'ESP8266Client-c53f', 0),
+	('sensor/cozinha', 'ESP8266Client-c53f', 0),
+	('sensor/gps', 'ESP8266Client-c53f', 0),
+	('sensor/porta', 'ESP8266Client-c53f', 0),
+	('sensor/casa', 'ESP8266Client-346c', 0),
+	('sensor/cozinha', 'ESP8266Client-346c', 0),
+	('sensor/gps', 'ESP8266Client-346c', 0),
+	('sensor/porta', 'ESP8266Client-346c', 0);
 /*!40000 ALTER TABLE `tp_subscribe` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.users
