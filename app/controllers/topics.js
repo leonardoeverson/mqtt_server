@@ -8,13 +8,8 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
 
     topicsDAO.topic_subscribe_register_db(dados, (error, result)=>{
         if(!error){
-            try{
-               conn.destroy();
-               console.log("topic_subscribe_register_db");
-            }catch(e){
-                console.log(e);
-            }
-
+            app.app.controllers.connections.db_end_connection(conn);
+            console.log("topic_subscribe_register_db");
         }else{
             console.log(error);
             conn.destroy();
@@ -23,10 +18,13 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
 
 };
 
-module.exports.publish_metrics = function(app, client){
+module.exports.publish_metrics = function(app, packet, client){
     let conn = app.config.dbconn();
     let topicsDAO = new app.app.models.topicsDAO(conn);
 
+    let dados = {};
+    dados.length = packet.payload.byteLength;
+    dados.topic = packet.topic;
     topicsDAO.publish_metrics_db(dados, (error, result)=>{
         if(!error){
             conn.destroy();

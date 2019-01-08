@@ -42,7 +42,7 @@ aedes.on('publish', function (packet, client) {
 	if (client) {
     	//console.log('message from client', client.id);
 		//console.log(Object.keys(packet));
-		//console.log(packet.payload.byteLength);
+		//app.app.controllers.topics.publish_metrics(app, packet, client);
 	}
 });
 

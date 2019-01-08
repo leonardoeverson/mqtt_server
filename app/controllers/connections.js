@@ -6,28 +6,20 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 		if(!err && result.affectedRows > 0){
 			try{
 				console.log("conn_db_insert");
-				conn.end(function(err) {
-					// The connection is terminated now
-					console.log(err);
-				});
+				app.app.controllers.connections.db_end_connection(conn);
 			}catch(e){
 				console.log(e);
 			}
 		}else{
 			if(err){
-				conn.end(function(err) {
-					// The connection is terminated now
-					console.log(err);
-				});
-				console.log(err);
+				console.log("erro",err);
 			}
 
 			if(result){
 				conn.end(function(err) {
 					// The connection is terminated now
-					console.log(err);
 				});
-				console.log(result);
+				console.log("result",result);
 			}
 		}
 	})
@@ -41,27 +33,16 @@ module.exports.conn_mgmt_delete = function(app, user_id, client_id, client_addre
 		if(!err){
 			try{
 				console.log("conn_db_delete");
-				conn.end(function(err) {
-					// The connection is terminated now
-					console.log(err);
-				});
+				app.app.controllers.connections.db_end_connection(conn);
 			}catch(e){
 				console.log(e);
 			}
 		}else{
 			if(err){
-				conn.end(function(err) {
-					// The connection is terminated now
-					console.log(err);
-				});
-				console.log("erro:",err)
+				console.log("err",err)
 			}
 
 			if(result){
-				conn.end(function(err) {
-					// The connection is terminated now
-					console.log(err);
-				});
 				console.log("result",result)
 			}
 		}
@@ -76,11 +57,8 @@ module.exports.conn_mgmt_delete_all = function(app){
 	connMgmt.conn_db_delete_all(null, function(err, result){
 		if(!err){
 			try{
-				conn.end(function(err) {
-					// The connection is terminated now
-					console.log(err);
-				});
 				console.log("conn_db_delete_all");
+				app.app.controllers.connections.db_end_connection(conn);
 			}catch(e){
 				console.log(e);
 			}
@@ -88,19 +66,20 @@ module.exports.conn_mgmt_delete_all = function(app){
 		}else{
 			if(err){
 				console.log("erro:",err);
-				conn.end(function(err) {
-					// The connection is terminated now
-					console.log(err);
-				});
 			}
 
 			if(result){
 				console.log("result",result);
-				conn.end(function(err) {
-					// The connection is terminated now
-					console.log(err);
-				});
 			}
+		}
+	})
+};
+
+module.exports.db_end_connection = function(conn){
+
+	conn.end(function(err){
+		if(err){
+			console.log(err);
 		}
 	})
 };

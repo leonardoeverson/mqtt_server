@@ -83,10 +83,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 					client.conn.id_user = result[0].id_user;
 					app.app.data_perm = {};
 
-					conn.end(function(err) {
-						// The connection is terminated now
-						console.log(err);
-					});
+					app.app.controllers.connections.db_end_connection(conn);
 
 					let result1, result2;
 
