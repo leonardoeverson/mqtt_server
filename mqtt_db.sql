@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           10.3.11-MariaDB - mariadb.org binary distribution
+-- Versão do servidor:           10.2.14-MariaDB - mariadb.org binary distribution
 -- OS do Servidor:               Win32
 -- HeidiSQL Versão:              9.4.0.5125
 -- --------------------------------------------------------
@@ -16,18 +16,6 @@
 CREATE DATABASE IF NOT EXISTS `mqtt` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `mqtt`;
 
--- Copiando estrutura para tabela mqtt.client_pub_sub
-CREATE TABLE IF NOT EXISTS `client_pub_sub` (
-  `id_conn` int(11) DEFAULT NULL,
-  `id_device` int(11) DEFAULT NULL,
-  `pub_topic` int(11) DEFAULT NULL,
-  `sub_topic` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Copiando dados para a tabela mqtt.client_pub_sub: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `client_pub_sub` DISABLE KEYS */;
-/*!40000 ALTER TABLE `client_pub_sub` ENABLE KEYS */;
-
 -- Copiando estrutura para tabela mqtt.conn_clients
 CREATE TABLE IF NOT EXISTS `conn_clients` (
   `id_conn` int(11) NOT NULL AUTO_INCREMENT,
@@ -37,12 +25,14 @@ CREATE TABLE IF NOT EXISTS `conn_clients` (
   `client_port` int(6) NOT NULL,
   `device_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=642 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=937 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.conn_clients: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.conn_clients: ~2 rows (aproximadamente)
+DELETE FROM `conn_clients`;
 /*!40000 ALTER TABLE `conn_clients` DISABLE KEYS */;
-REPLACE INTO `conn_clients` (`id_conn`, `id_user`, `client_id`, `client_address`, `client_port`, `device_id`) VALUES
-	(641, 3, 'NodeRed', '::ffff:192.168.10.105', 56430, 13);
+INSERT INTO `conn_clients` (`id_conn`, `id_user`, `client_id`, `client_address`, `client_port`, `device_id`) VALUES
+	(935, 7, 'ESP8266Client-f016', '::ffff:192.168.1.109', 45598, 0),
+	(936, 7, 'ESP8266Client-dbef', '::ffff:192.168.1.109', 48422, 0);
 /*!40000 ALTER TABLE `conn_clients` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.conn_log
@@ -55,11 +45,12 @@ CREATE TABLE IF NOT EXISTS `conn_log` (
   `id_user` int(11) DEFAULT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=268 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=558 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.conn_log: ~241 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.conn_log: ~554 rows (aproximadamente)
+DELETE FROM `conn_log`;
 /*!40000 ALTER TABLE `conn_log` DISABLE KEYS */;
-REPLACE INTO `conn_log` (`id_conn`, `device_id`, `client_id`, `client_address`, `client_port`, `id_user`, `datetime`) VALUES
+INSERT INTO `conn_log` (`id_conn`, `device_id`, `client_id`, `client_address`, `client_port`, `id_user`, `datetime`) VALUES
 	(1, NULL, 'ESP8266Client-a619', '::ffff:192.168.10.104', 49166, 3, '2018-12-27 19:25:59'),
 	(2, NULL, 'ESP8266Client-af5b', '::ffff:192.168.10.104', 49167, 3, '2018-12-27 19:26:53'),
 	(3, NULL, 'ESP8266Client-227b', '::ffff:192.168.10.104', 49168, 3, '2018-12-27 19:27:07'),
@@ -326,8 +317,307 @@ REPLACE INTO `conn_log` (`id_conn`, `device_id`, `client_id`, `client_address`, 
 	(264, NULL, 'NodeRed', '::ffff:192.168.10.105', 56427, 3, '2019-01-06 15:29:27'),
 	(265, NULL, 'NodeRed', '::ffff:192.168.10.105', 56428, 3, '2019-01-06 15:40:05'),
 	(266, NULL, 'NodeRed', '::ffff:192.168.10.105', 56429, 3, '2019-01-06 15:40:28'),
-	(267, NULL, 'NodeRed', '::ffff:192.168.10.105', 56430, 3, '2019-01-06 15:40:46');
+	(267, NULL, 'NodeRed', '::ffff:192.168.10.105', 56430, 3, '2019-01-06 15:40:46'),
+	(268, NULL, 'ESP8266Client-6000', '::ffff:192.168.1.109', 37103, 7, '2019-01-07 14:20:35'),
+	(269, NULL, 'ESP8266Client-c4d3', '::ffff:192.168.1.109', 46175, 7, '2019-01-07 14:25:58'),
+	(270, NULL, 'ESP8266Client-7a71', '::ffff:192.168.1.109', 37419, 7, '2019-01-07 14:27:08'),
+	(271, NULL, 'ESP8266Client-4842', '::ffff:192.168.1.109', 42084, 3, '2019-01-07 14:31:34'),
+	(272, NULL, 'ESP8266Client-f28b', '::ffff:192.168.1.109', 40244, 7, '2019-01-07 14:32:39'),
+	(273, NULL, 'ESP8266Client-307c', '::ffff:192.168.1.109', 34650, 3, '2019-01-07 14:32:40'),
+	(274, NULL, 'ESP8266Client-f028', '::ffff:192.168.1.109', 36689, 7, '2019-01-07 14:34:09'),
+	(275, NULL, 'ESP8266Client-e5f7', '::ffff:192.168.1.109', 39124, 7, '2019-01-07 14:36:23'),
+	(276, NULL, 'ESP8266Client-704e', '::ffff:192.168.1.109', 42538, 7, '2019-01-07 14:36:32'),
+	(277, NULL, 'ESP8266Client-f5d2', '::ffff:192.168.1.109', 41176, 7, '2019-01-07 14:37:07'),
+	(278, NULL, 'ESP8266Client-d8e8', '::ffff:192.168.1.109', 34721, 7, '2019-01-07 14:37:33'),
+	(279, NULL, 'ESP8266Client-9b1e', '::ffff:192.168.1.109', 46193, 7, '2019-01-07 14:37:34'),
+	(280, NULL, 'ESP8266Client-c574', '::ffff:192.168.1.109', 38634, 7, '2019-01-07 14:38:27'),
+	(281, NULL, 'ESP8266Client-5fbb', '::ffff:192.168.1.109', 47789, 7, '2019-01-07 14:38:28'),
+	(282, NULL, 'ESP8266Client-a6e', '::ffff:192.168.1.109', 37056, 7, '2019-01-07 14:40:18'),
+	(283, NULL, 'ESP8266Client-6d3', '::ffff:192.168.1.109', 37782, 7, '2019-01-07 14:40:58'),
+	(284, NULL, 'ESP8266Client-583e', '::ffff:192.168.1.109', 37636, 7, '2019-01-07 14:41:04'),
+	(285, NULL, 'ESP8266Client-b01d', '::ffff:192.168.1.109', 44248, 7, '2019-01-07 14:44:56'),
+	(286, NULL, 'ESP8266Client-c75c', '::ffff:192.168.1.109', 38612, 7, '2019-01-07 14:46:30'),
+	(287, NULL, 'ESP8266Client-5168', '::ffff:192.168.1.109', 35518, 7, '2019-01-07 14:48:26'),
+	(288, NULL, 'ESP8266Client-cf8a', '::ffff:192.168.1.109', 48879, 7, '2019-01-07 14:49:41'),
+	(289, NULL, 'ESP8266Client-8a62', '::ffff:192.168.1.109', 37685, 7, '2019-01-07 14:49:56'),
+	(290, NULL, 'ESP8266Client-1e7', '::ffff:192.168.1.109', 35869, 7, '2019-01-07 14:50:31'),
+	(291, NULL, 'ESP8266Client-b25e', '::ffff:192.168.1.109', 39486, 7, '2019-01-07 14:50:31'),
+	(292, NULL, 'ESP8266Client-203e', '::ffff:192.168.1.109', 43180, 7, '2019-01-07 14:52:05'),
+	(293, NULL, 'ESP8266Client-54a', '::ffff:192.168.1.109', 37031, 7, '2019-01-07 14:52:05'),
+	(294, NULL, 'ESP8266Client-6ecf', '::ffff:192.168.1.109', 41426, 7, '2019-01-07 14:53:40'),
+	(295, NULL, 'ESP8266Client-1b9e', '::ffff:192.168.1.109', 41901, 7, '2019-01-07 14:53:43'),
+	(296, NULL, 'ESP8266Client-48e', '::ffff:192.168.1.109', 33239, 7, '2019-01-07 14:55:25'),
+	(297, NULL, 'ESP8266Client-ae87', '::ffff:192.168.1.109', 35731, 7, '2019-01-07 14:55:26'),
+	(298, NULL, 'ESP8266Client-f566', '::ffff:192.168.1.109', 40791, 7, '2019-01-07 14:58:13'),
+	(299, NULL, 'ESP8266Client-8c4f', '::ffff:192.168.1.109', 45163, 7, '2019-01-07 14:58:15'),
+	(300, NULL, 'ESP8266Client-7967', '::ffff:192.168.1.109', 38659, 7, '2019-01-07 15:15:55'),
+	(301, NULL, 'ESP8266Client-b689', '::ffff:192.168.1.109', 44552, 7, '2019-01-07 15:15:58'),
+	(302, NULL, 'ESP8266Client-ee60', '::ffff:192.168.1.109', 40884, 7, '2019-01-07 15:32:14'),
+	(303, NULL, 'ESP8266Client-a53', '::ffff:192.168.1.109', 46328, 7, '2019-01-07 15:33:22'),
+	(304, NULL, 'ESP8266Client-9cdb', '::ffff:192.168.1.109', 46412, 7, '2019-01-07 15:36:42'),
+	(305, NULL, 'ESP8266Client-21', '::ffff:192.168.1.109', 33650, 7, '2019-01-07 15:37:39'),
+	(306, NULL, 'ESP8266Client-86fd', '::ffff:192.168.1.109', 46810, 7, '2019-01-07 15:39:18'),
+	(307, NULL, 'ESP8266Client-f4d4', '::ffff:192.168.1.109', 44430, 7, '2019-01-07 15:48:50'),
+	(308, NULL, 'ESP8266Client-65af', '::ffff:192.168.1.109', 45283, 7, '2019-01-07 15:59:46'),
+	(309, NULL, 'ESP8266Client-c398', '::ffff:192.168.1.109', 40311, 7, '2019-01-07 15:59:54'),
+	(310, NULL, 'ESP8266Client-39db', '::ffff:192.168.1.109', 42849, 7, '2019-01-07 16:27:08'),
+	(311, NULL, 'ESP8266Client-16c0', '::ffff:192.168.1.109', 40513, 7, '2019-01-07 16:27:15'),
+	(312, NULL, 'ESP8266Client-eece', '::ffff:192.168.1.109', 33149, 7, '2019-01-07 16:27:53'),
+	(313, NULL, 'ESP8266Client-776c', '::ffff:192.168.1.109', 35537, 7, '2019-01-07 16:28:01'),
+	(314, NULL, 'ESP8266Client-614', '::ffff:192.168.1.109', 37064, 7, '2019-01-07 16:28:04'),
+	(315, NULL, 'ESP8266Client-d90a', '::ffff:192.168.1.109', 36639, 7, '2019-01-07 16:29:45'),
+	(316, NULL, 'ESP8266Client-3b0', '::ffff:192.168.1.109', 38876, 7, '2019-01-07 16:52:27'),
+	(317, NULL, 'ESP8266Client-641d', '::ffff:192.168.1.109', 39009, 7, '2019-01-07 16:52:27'),
+	(318, NULL, 'ESP8266Client-52', '::ffff:192.168.1.109', 32789, 7, '2019-01-07 16:52:47'),
+	(319, NULL, 'ESP8266Client-e6a', '::ffff:192.168.1.109', 35372, 7, '2019-01-07 16:52:47'),
+	(320, NULL, 'ESP8266Client-8a75', '::ffff:192.168.1.109', 38128, 7, '2019-01-07 16:52:58'),
+	(321, NULL, 'ESP8266Client-d56d', '::ffff:192.168.1.109', 47713, 7, '2019-01-07 16:52:58'),
+	(322, NULL, 'ESP8266Client-9971', '::ffff:192.168.1.109', 37786, 7, '2019-01-07 16:53:48'),
+	(323, NULL, 'ESP8266Client-6f71', '::ffff:192.168.1.109', 42970, 7, '2019-01-07 16:53:48'),
+	(324, NULL, 'ESP8266Client-22d5', '::ffff:192.168.1.109', 47114, 7, '2019-01-07 16:53:59'),
+	(325, NULL, 'ESP8266Client-a8da', '::ffff:192.168.1.109', 47814, 7, '2019-01-07 16:53:59'),
+	(326, NULL, 'ESP8266Client-4756', '::ffff:192.168.1.109', 36406, 7, '2019-01-07 16:56:29'),
+	(327, NULL, 'ESP8266Client-2061', '::ffff:192.168.1.109', 33167, 7, '2019-01-07 16:56:29'),
+	(328, NULL, 'ESP8266Client-b1cc', '::ffff:192.168.1.109', 40916, 7, '2019-01-07 16:56:40'),
+	(329, NULL, 'ESP8266Client-a5b3', '::ffff:192.168.1.109', 35234, 7, '2019-01-07 16:56:40'),
+	(330, NULL, 'ESP8266Client-a722', '::ffff:192.168.1.109', 45886, 7, '2019-01-07 16:57:00'),
+	(331, NULL, 'ESP8266Client-7c2a', '::ffff:192.168.1.109', 35507, 7, '2019-01-07 16:57:00'),
+	(332, NULL, 'ESP8266Client-3969', '::ffff:192.168.1.109', 35698, 7, '2019-01-07 16:57:30'),
+	(333, NULL, 'ESP8266Client-ea92', '::ffff:192.168.1.109', 38844, 7, '2019-01-07 16:57:30'),
+	(334, NULL, 'ESP8266Client-5042', '::ffff:192.168.1.109', 36253, 7, '2019-01-07 16:57:41'),
+	(335, NULL, 'ESP8266Client-3ef1', '::ffff:192.168.1.109', 38133, 7, '2019-01-07 16:57:41'),
+	(336, NULL, 'ESP8266Client-a660', '::ffff:192.168.1.109', 48630, 7, '2019-01-07 16:57:44'),
+	(337, NULL, 'ESP8266Client-1e61', '::ffff:192.168.1.109', 48082, 7, '2019-01-07 16:57:44'),
+	(338, NULL, 'ESP8266Client-e5b1', '::ffff:192.168.1.109', 37266, 7, '2019-01-07 16:57:58'),
+	(339, NULL, 'ESP8266Client-9f6b', '::ffff:192.168.1.109', 47063, 7, '2019-01-07 16:57:58'),
+	(340, NULL, 'ESP8266Client-6514', '::ffff:192.168.1.109', 37075, 7, '2019-01-07 16:59:48'),
+	(341, NULL, 'ESP8266Client-1e2c', '::ffff:192.168.1.109', 47548, 7, '2019-01-07 16:59:48'),
+	(342, NULL, 'ESP8266Client-945', '::ffff:192.168.1.109', 35973, 7, '2019-01-07 17:00:01'),
+	(343, NULL, 'ESP8266Client-a090', '::ffff:192.168.1.109', 33276, 7, '2019-01-07 17:08:56'),
+	(344, NULL, 'ESP8266Client-5545', '::ffff:192.168.1.109', 34687, 7, '2019-01-07 17:08:59'),
+	(345, NULL, 'ESP8266Client-3a22', '::ffff:192.168.1.109', 34133, 7, '2019-01-07 17:10:13'),
+	(346, NULL, 'ESP8266Client-fb47', '::ffff:192.168.1.109', 44277, 7, '2019-01-07 17:10:13'),
+	(347, NULL, 'ESP8266Client-5412', '::ffff:192.168.1.109', 37722, 7, '2019-01-07 17:10:38'),
+	(348, NULL, 'ESP8266Client-10bd', '::ffff:192.168.1.109', 46896, 7, '2019-01-07 17:10:38'),
+	(349, NULL, 'ESP8266Client-d532', '::ffff:192.168.1.109', 38018, 7, '2019-01-07 17:10:51'),
+	(350, NULL, 'ESP8266Client-4b21', '::ffff:192.168.1.109', 40318, 7, '2019-01-07 17:11:02'),
+	(351, NULL, 'ESP8266Client-8b7d', '::ffff:192.168.1.109', 42630, 7, '2019-01-07 17:11:02'),
+	(352, NULL, 'ESP8266Client-ea1e', '::ffff:192.168.1.109', 43146, 7, '2019-01-07 17:11:53'),
+	(353, NULL, 'ESP8266Client-c5c0', '::ffff:192.168.1.109', 38542, 7, '2019-01-07 17:11:53'),
+	(354, NULL, 'ESP8266Client-c985', '::ffff:192.168.1.109', 45229, 7, '2019-01-07 17:12:13'),
+	(355, NULL, 'ESP8266Client-b40d', '::ffff:192.168.1.109', 33656, 7, '2019-01-07 17:12:13'),
+	(356, NULL, 'ESP8266Client-5d6e', '::ffff:192.168.1.109', 47941, 7, '2019-01-07 17:12:26'),
+	(357, NULL, 'ESP8266Client-e000', '::ffff:192.168.1.109', 41053, 7, '2019-01-07 17:12:26'),
+	(358, NULL, 'ESP8266Client-c8aa', '::ffff:192.168.1.109', 43124, 7, '2019-01-07 17:12:39'),
+	(359, NULL, 'ESP8266Client-70a7', '::ffff:192.168.1.109', 33937, 7, '2019-01-07 17:12:39'),
+	(360, NULL, 'ESP8266Client-631e', '::ffff:192.168.1.109', 33808, 7, '2019-01-07 17:13:03'),
+	(361, NULL, 'ESP8266Client-d5ee', '::ffff:192.168.1.109', 33164, 7, '2019-01-07 17:13:35'),
+	(362, NULL, 'ESP8266Client-f1af', '::ffff:192.168.1.109', 47388, 7, '2019-01-07 17:13:35'),
+	(363, NULL, 'ESP8266Client-e62a', '::ffff:192.168.1.109', 43597, 7, '2019-01-07 17:13:50'),
+	(364, NULL, 'ESP8266Client-720f', '::ffff:192.168.1.109', 47520, 7, '2019-01-07 17:14:04'),
+	(365, NULL, 'ESP8266Client-f6e4', '::ffff:192.168.1.109', 43389, 7, '2019-01-07 17:14:04'),
+	(366, NULL, 'ESP8266Client-c1c7', '::ffff:192.168.1.109', 37118, 7, '2019-01-07 17:14:15'),
+	(367, NULL, 'ESP8266Client-392c', '::ffff:192.168.1.109', 38502, 7, '2019-01-07 17:14:15'),
+	(368, NULL, 'ESP8266Client-bb91', '::ffff:192.168.1.109', 37057, 7, '2019-01-07 17:15:25'),
+	(369, NULL, 'ESP8266Client-3095', '::ffff:192.168.1.109', 33041, 7, '2019-01-07 17:15:25'),
+	(370, NULL, 'ESP8266Client-5b1f', '::ffff:192.168.1.109', 33790, 7, '2019-01-07 17:15:55'),
+	(371, NULL, 'ESP8266Client-3991', '::ffff:192.168.1.109', 32836, 7, '2019-01-07 17:15:55'),
+	(372, NULL, 'ESP8266Client-1339', '::ffff:192.168.1.109', 42780, 7, '2019-01-07 17:17:16'),
+	(373, NULL, 'ESP8266Client-e33d', '::ffff:192.168.1.109', 48632, 7, '2019-01-07 17:17:16'),
+	(374, NULL, 'ESP8266Client-d8aa', '::ffff:192.168.1.109', 34549, 7, '2019-01-07 17:17:39'),
+	(375, NULL, 'ESP8266Client-bfa7', '::ffff:192.168.1.109', 46915, 7, '2019-01-07 17:17:39'),
+	(376, NULL, 'ESP8266Client-d8ae', '::ffff:192.168.1.109', 39791, 7, '2019-01-07 17:17:50'),
+	(377, NULL, 'ESP8266Client-5b20', '::ffff:192.168.1.109', 43926, 7, '2019-01-07 17:17:50'),
+	(378, NULL, 'ESP8266Client-45ab', '::ffff:192.168.1.109', 43776, 7, '2019-01-07 17:18:43'),
+	(379, NULL, 'ESP8266Client-320', '::ffff:192.168.1.109', 35793, 7, '2019-01-07 17:18:50'),
+	(380, NULL, 'ESP8266Client-a737', '::ffff:192.168.1.109', 41001, 7, '2019-01-07 17:20:04'),
+	(381, NULL, 'ESP8266Client-32fd', '::ffff:192.168.1.109', 43839, 7, '2019-01-07 17:20:04'),
+	(382, NULL, 'ESP8266Client-9cff', '::ffff:192.168.1.109', 39491, 7, '2019-01-07 17:20:37'),
+	(383, NULL, 'ESP8266Client-2138', '::ffff:192.168.1.109', 36535, 7, '2019-01-07 17:20:37'),
+	(384, NULL, 'ESP8266Client-f121', '::ffff:192.168.1.109', 40080, 7, '2019-01-07 17:21:23'),
+	(385, NULL, 'ESP8266Client-de83', '::ffff:192.168.1.109', 32976, 7, '2019-01-07 17:21:23'),
+	(386, NULL, 'ESP8266Client-60b6', '::ffff:192.168.1.109', 45815, 7, '2019-01-07 17:22:00'),
+	(387, NULL, 'ESP8266Client-c502', '::ffff:192.168.1.109', 48323, 7, '2019-01-07 17:22:00'),
+	(388, NULL, 'ESP8266Client-7d97', '::ffff:192.168.1.109', 46258, 7, '2019-01-07 17:25:26'),
+	(389, NULL, 'ESP8266Client-55b8', '::ffff:192.168.1.109', 48862, 7, '2019-01-07 17:25:26'),
+	(390, NULL, 'ESP8266Client-3357', '::ffff:192.168.1.109', 38395, 7, '2019-01-07 17:25:32'),
+	(391, NULL, 'ESP8266Client-fade', '::ffff:192.168.1.109', 38154, 7, '2019-01-07 17:25:32'),
+	(392, NULL, 'ESP8266Client-f415', '::ffff:192.168.1.109', 47112, 7, '2019-01-07 17:27:24'),
+	(393, NULL, 'ESP8266Client-45d7', '::ffff:192.168.1.109', 46126, 7, '2019-01-07 17:27:28'),
+	(394, NULL, 'ESP8266Client-4430', '::ffff:192.168.1.109', 33865, 7, '2019-01-07 17:28:32'),
+	(395, NULL, 'ESP8266Client-245f', '::ffff:192.168.1.109', 40347, 7, '2019-01-07 17:28:38'),
+	(396, NULL, 'ESP8266Client-aaa0', '::ffff:192.168.1.109', 35171, 7, '2019-01-07 17:28:38'),
+	(397, NULL, 'ESP8266Client-7a58', '::ffff:192.168.1.109', 47913, 7, '2019-01-07 17:28:59'),
+	(398, NULL, 'ESP8266Client-1b4c', '::ffff:192.168.1.109', 34241, 7, '2019-01-07 17:29:04'),
+	(399, NULL, 'ESP8266Client-7265', '::ffff:192.168.1.109', 40025, 7, '2019-01-07 17:29:14'),
+	(400, NULL, 'ESP8266Client-645c', '::ffff:192.168.1.109', 35943, 7, '2019-01-07 17:29:16'),
+	(401, NULL, 'ESP8266Client-3341', '::ffff:192.168.1.109', 35522, 7, '2019-01-07 17:30:34'),
+	(402, NULL, 'ESP8266Client-1559', '::ffff:192.168.1.109', 38388, 7, '2019-01-07 17:30:39'),
+	(403, NULL, 'ESP8266Client-c066', '::ffff:192.168.1.109', 48593, 7, '2019-01-07 17:30:41'),
+	(404, NULL, 'ESP8266Client-f9e7', '::ffff:192.168.1.109', 36184, 7, '2019-01-08 09:59:19'),
+	(405, NULL, 'ESP8266Client-e7f3', '::ffff:192.168.1.109', 45137, 7, '2019-01-08 09:59:19'),
+	(406, NULL, 'ESP8266Client-f197', '::ffff:192.168.1.109', 38968, 7, '2019-01-08 09:59:30'),
+	(407, NULL, 'ESP8266Client-e465', '::ffff:192.168.1.109', 43445, 7, '2019-01-08 10:00:01'),
+	(408, NULL, 'ESP8266Client-1b0d', '::ffff:192.168.1.109', 35540, 7, '2019-01-08 10:00:38'),
+	(409, NULL, 'ESP8266Client-73da', '::ffff:192.168.1.109', 43074, 7, '2019-01-08 10:02:52'),
+	(410, NULL, 'ESP8266Client-7f25', '::ffff:192.168.1.109', 33589, 7, '2019-01-08 10:05:17'),
+	(411, NULL, 'ESP8266Client-dba8', '::ffff:192.168.1.109', 34572, 7, '2019-01-08 10:05:40'),
+	(412, NULL, 'ESP8266Client-bfb1', '::ffff:192.168.1.109', 43877, 7, '2019-01-08 10:24:38'),
+	(415, NULL, 'ESP8266Client-14d6', '::ffff:192.168.1.109', 43740, 7, '2019-01-08 11:46:44'),
+	(416, NULL, 'ESP8266Client-716f', '::ffff:192.168.1.109', 38303, 7, '2019-01-08 11:46:44'),
+	(417, NULL, 'ESP8266Client-237f', '::ffff:192.168.1.109', 37475, 7, '2019-01-08 11:47:13'),
+	(418, NULL, 'ESP8266Client-c43b', '::ffff:192.168.1.109', 35109, 7, '2019-01-08 11:47:13'),
+	(419, NULL, 'ESP8266Client-f247', '::ffff:192.168.1.109', 48980, 7, '2019-01-08 11:48:03'),
+	(420, NULL, 'ESP8266Client-1c37', '::ffff:192.168.1.109', 38499, 7, '2019-01-08 11:48:03'),
+	(421, NULL, 'ESP8266Client-8863', '::ffff:192.168.1.109', 47751, 7, '2019-01-08 11:50:36'),
+	(422, NULL, 'ESP8266Client-c2be', '::ffff:192.168.1.109', 42113, 7, '2019-01-08 11:50:36'),
+	(423, NULL, 'ESP8266Client-f839', '::ffff:192.168.1.109', 35192, 7, '2019-01-08 11:50:59'),
+	(424, NULL, 'ESP8266Client-bfd8', '::ffff:192.168.1.109', 47406, 7, '2019-01-08 11:51:21'),
+	(425, NULL, 'ESP8266Client-d78f', '::ffff:192.168.1.109', 38003, 7, '2019-01-08 11:51:21'),
+	(426, NULL, 'ESP8266Client-a056', '::ffff:192.168.1.109', 43644, 7, '2019-01-08 11:51:32'),
+	(427, NULL, 'ESP8266Client-3e01', '::ffff:192.168.1.109', 43407, 7, '2019-01-08 11:51:45'),
+	(428, NULL, 'ESP8266Client-25ad', '::ffff:192.168.1.109', 46247, 7, '2019-01-08 11:51:45'),
+	(429, NULL, 'ESP8266Client-d4d0', '::ffff:192.168.1.109', 41379, 7, '2019-01-08 11:52:16'),
+	(430, NULL, 'ESP8266Client-18c5', '::ffff:192.168.1.109', 43444, 7, '2019-01-08 11:52:16'),
+	(431, NULL, 'ESP8266Client-30b4', '::ffff:192.168.1.109', 41897, 7, '2019-01-08 11:52:57'),
+	(432, NULL, 'ESP8266Client-9cec', '::ffff:192.168.1.109', 45599, 7, '2019-01-08 11:52:57'),
+	(433, NULL, 'ESP8266Client-2e66', '::ffff:192.168.1.109', 35152, 7, '2019-01-08 11:53:40'),
+	(434, NULL, 'ESP8266Client-6de3', '::ffff:192.168.1.109', 39491, 7, '2019-01-08 11:53:40'),
+	(435, NULL, 'ESP8266Client-faf', '::ffff:192.168.1.109', 33956, 7, '2019-01-08 11:54:19'),
+	(436, NULL, 'ESP8266Client-b503', '::ffff:192.168.1.109', 40426, 7, '2019-01-08 11:54:19'),
+	(437, NULL, 'ESP8266Client-1699', '::ffff:192.168.1.109', 42475, 7, '2019-01-08 11:54:51'),
+	(438, NULL, 'ESP8266Client-8ffb', '::ffff:192.168.1.109', 39519, 7, '2019-01-08 11:55:52'),
+	(439, NULL, 'ESP8266Client-ecbd', '::ffff:192.168.1.109', 37702, 7, '2019-01-08 11:55:52'),
+	(440, NULL, 'ESP8266Client-2090', '::ffff:192.168.1.109', 45070, 7, '2019-01-08 11:56:29'),
+	(441, NULL, 'ESP8266Client-68de', '::ffff:192.168.1.109', 33808, 7, '2019-01-08 11:56:29'),
+	(442, NULL, 'ESP8266Client-a375', '::ffff:192.168.1.109', 45316, 7, '2019-01-08 11:57:15'),
+	(443, NULL, 'ESP8266Client-809a', '::ffff:192.168.1.109', 34701, 7, '2019-01-08 11:57:15'),
+	(444, NULL, 'ESP8266Client-3a0c', '::ffff:192.168.1.109', 39872, 7, '2019-01-08 11:59:12'),
+	(445, NULL, 'ESP8266Client-faad', '::ffff:192.168.1.109', 40424, 7, '2019-01-08 11:59:12'),
+	(446, NULL, 'ESP8266Client-1dc6', '::ffff:192.168.1.109', 34298, 7, '2019-01-08 11:59:56'),
+	(447, NULL, 'ESP8266Client-513d', '::ffff:192.168.1.109', 46927, 7, '2019-01-08 11:59:56'),
+	(448, NULL, 'ESP8266Client-bf77', '::ffff:192.168.1.109', 48359, 7, '2019-01-08 12:00:56'),
+	(449, NULL, 'ESP8266Client-5b05', '::ffff:192.168.1.109', 42806, 7, '2019-01-08 12:00:56'),
+	(450, NULL, 'ESP8266Client-ecdc', '::ffff:192.168.1.109', 43997, 7, '2019-01-08 12:01:21'),
+	(451, NULL, 'ESP8266Client-5b42', '::ffff:192.168.1.109', 33718, 7, '2019-01-08 12:01:21'),
+	(452, NULL, 'ESP8266Client-270f', '::ffff:192.168.1.109', 34982, 7, '2019-01-08 12:07:56'),
+	(453, NULL, 'ESP8266Client-df1e', '::ffff:192.168.1.109', 48503, 7, '2019-01-08 12:07:56'),
+	(454, NULL, 'ESP8266Client-457b', '::ffff:192.168.1.109', 39313, 7, '2019-01-08 12:12:22'),
+	(455, NULL, 'ESP8266Client-2b94', '::ffff:192.168.1.109', 44009, 7, '2019-01-08 12:12:22'),
+	(456, NULL, 'ESP8266Client-eee4', '::ffff:192.168.1.109', 38895, 7, '2019-01-08 12:12:50'),
+	(457, NULL, 'ESP8266Client-b21', '::ffff:192.168.1.109', 43704, 7, '2019-01-08 12:12:50'),
+	(458, NULL, 'ESP8266Client-5e29', '::ffff:192.168.1.109', 38923, 7, '2019-01-08 12:13:03'),
+	(459, NULL, 'ESP8266Client-bc2c', '::ffff:192.168.1.109', 43950, 7, '2019-01-08 12:13:03'),
+	(460, NULL, 'ESP8266Client-3b01', '::ffff:192.168.1.109', 45221, 7, '2019-01-08 12:14:05'),
+	(461, NULL, 'ESP8266Client-b3b0', '::ffff:192.168.1.109', 33943, 7, '2019-01-08 12:14:05'),
+	(462, NULL, 'ESP8266Client-bdae', '::ffff:192.168.1.109', 44739, 7, '2019-01-08 12:15:20'),
+	(463, NULL, 'ESP8266Client-e6c7', '::ffff:192.168.1.109', 35958, 7, '2019-01-08 12:15:20'),
+	(464, NULL, 'ESP8266Client-22d2', '::ffff:192.168.1.109', 34881, 7, '2019-01-08 12:16:25'),
+	(465, NULL, 'ESP8266Client-426a', '::ffff:192.168.1.109', 44735, 7, '2019-01-08 12:16:25'),
+	(466, NULL, 'ESP8266Client-178f', '::ffff:192.168.1.109', 38472, 7, '2019-01-08 12:16:44'),
+	(467, NULL, 'ESP8266Client-6200', '::ffff:192.168.1.109', 45173, 7, '2019-01-08 12:16:44'),
+	(468, NULL, 'ESP8266Client-9834', '::ffff:192.168.1.109', 41662, 7, '2019-01-08 12:18:20'),
+	(469, NULL, 'ESP8266Client-689b', '::ffff:192.168.1.109', 40442, 7, '2019-01-08 12:18:20'),
+	(470, NULL, 'ESP8266Client-cbf1', '::ffff:192.168.1.109', 42554, 7, '2019-01-08 12:18:50'),
+	(471, NULL, 'ESP8266Client-55f9', '::ffff:192.168.1.109', 35592, 7, '2019-01-08 12:19:28'),
+	(472, NULL, 'ESP8266Client-5002', '::ffff:192.168.1.109', 33174, 7, '2019-01-08 12:19:44'),
+	(473, NULL, 'ESP8266Client-eac8', '::ffff:192.168.1.109', 37515, 7, '2019-01-08 12:20:04'),
+	(474, NULL, 'ESP8266Client-124', '::ffff:192.168.1.109', 40887, 7, '2019-01-08 12:20:14'),
+	(475, NULL, 'ESP8266Client-f6ec', '::ffff:192.168.1.109', 33214, 7, '2019-01-08 12:20:57'),
+	(476, NULL, 'ESP8266Client-e4ba', '::ffff:192.168.1.109', 33383, 7, '2019-01-08 12:20:59'),
+	(477, NULL, 'ESP8266Client-773f', '::ffff:192.168.1.109', 35348, 7, '2019-01-08 12:22:18'),
+	(478, NULL, 'ESP8266Client-fe8e', '::ffff:192.168.1.109', 34139, 7, '2019-01-08 12:22:18'),
+	(479, NULL, 'ESP8266Client-62b1', '::ffff:192.168.1.109', 37798, 7, '2019-01-08 12:22:45'),
+	(480, NULL, 'ESP8266Client-637', '::ffff:192.168.1.109', 42305, 7, '2019-01-08 12:22:45'),
+	(481, NULL, 'ESP8266Client-e85e', '::ffff:192.168.1.109', 46218, 7, '2019-01-08 12:26:40'),
+	(482, NULL, 'ESP8266Client-3da0', '::ffff:192.168.1.109', 44069, 7, '2019-01-08 12:26:40'),
+	(483, NULL, 'ESP8266Client-756b', '::ffff:192.168.1.109', 44019, 7, '2019-01-08 12:27:01'),
+	(484, NULL, 'ESP8266Client-1fc0', '::ffff:192.168.1.109', 44413, 7, '2019-01-08 12:27:01'),
+	(485, NULL, 'ESP8266Client-c8f7', '::ffff:192.168.1.109', 34405, 7, '2019-01-08 12:28:17'),
+	(486, NULL, 'ESP8266Client-a8d9', '::ffff:192.168.1.109', 43259, 7, '2019-01-08 12:28:17'),
+	(487, NULL, 'ESP8266Client-642b', '::ffff:192.168.1.109', 46963, 7, '2019-01-08 12:29:23'),
+	(488, NULL, 'ESP8266Client-4cc5', '::ffff:192.168.1.109', 36255, 7, '2019-01-08 12:30:17'),
+	(489, NULL, 'ESP8266Client-5d29', '::ffff:192.168.1.109', 44014, 7, '2019-01-08 12:30:26'),
+	(490, NULL, 'ESP8266Client-c115', '::ffff:192.168.1.109', 37942, 7, '2019-01-08 12:33:51'),
+	(491, NULL, 'ESP8266Client-ca4b', '::ffff:192.168.1.109', 38830, 7, '2019-01-08 12:34:52'),
+	(493, NULL, 'ESP8266Client-2c7c', '::ffff:192.168.1.109', 39360, 7, '2019-01-08 12:35:24'),
+	(494, NULL, 'ESP8266Client-c3c6', '::ffff:192.168.1.109', 43915, 7, '2019-01-08 12:35:44'),
+	(495, NULL, 'ESP8266Client-177a', '::ffff:192.168.1.109', 33578, 7, '2019-01-08 12:35:49'),
+	(496, NULL, 'ESP8266Client-5f05', '::ffff:192.168.1.109', 40619, 7, '2019-01-08 12:35:54'),
+	(497, NULL, 'ESP8266Client-e813', '::ffff:192.168.1.109', 44439, 7, '2019-01-08 12:45:04'),
+	(498, NULL, 'ESP8266Client-f72b', '::ffff:192.168.1.109', 39650, 7, '2019-01-08 12:47:37'),
+	(499, NULL, 'ESP8266Client-bb4f', '::ffff:192.168.1.109', 33798, 7, '2019-01-08 12:47:43'),
+	(500, NULL, 'ESP8266Client-dc90', '::ffff:192.168.1.109', 37668, 7, '2019-01-08 12:48:04'),
+	(501, NULL, 'ESP8266Client-4339', '::ffff:192.168.1.109', 43811, 7, '2019-01-08 12:48:04'),
+	(502, NULL, 'ESP8266Client-15ed', '::ffff:192.168.1.109', 48610, 7, '2019-01-08 12:48:11'),
+	(503, NULL, 'ESP8266Client-122', '::ffff:192.168.1.109', 43465, 7, '2019-01-08 12:48:11'),
+	(504, NULL, 'ESP8266Client-a6ea', '::ffff:192.168.1.109', 43878, 7, '2019-01-08 12:48:43'),
+	(505, NULL, 'ESP8266Client-aca1', '::ffff:192.168.1.109', 47263, 7, '2019-01-08 12:48:43'),
+	(506, NULL, 'ESP8266Client-bc66', '::ffff:192.168.1.109', 32796, 7, '2019-01-08 12:49:46'),
+	(507, NULL, 'ESP8266Client-9f61', '::ffff:192.168.1.109', 49005, 7, '2019-01-08 12:49:46'),
+	(508, NULL, 'ESP8266Client-df9f', '::ffff:192.168.1.109', 33564, 7, '2019-01-08 12:49:52'),
+	(509, NULL, 'ESP8266Client-e04f', '::ffff:192.168.1.109', 47479, 7, '2019-01-08 12:49:52'),
+	(510, NULL, 'ESP8266Client-cb13', '::ffff:192.168.1.109', 42375, 7, '2019-01-08 12:50:19'),
+	(511, NULL, 'ESP8266Client-95a6', '::ffff:192.168.1.109', 48411, 7, '2019-01-08 12:50:19'),
+	(512, NULL, 'ESP8266Client-b09e', '::ffff:192.168.1.109', 34450, 7, '2019-01-08 12:50:22'),
+	(513, NULL, 'ESP8266Client-5019', '::ffff:192.168.1.109', 42339, 7, '2019-01-08 12:50:40'),
+	(514, NULL, 'ESP8266Client-29d', '::ffff:192.168.1.109', 34366, 7, '2019-01-08 12:50:40'),
+	(515, NULL, 'ESP8266Client-dd66', '::ffff:192.168.1.109', 35363, 7, '2019-01-08 12:51:02'),
+	(516, NULL, 'ESP8266Client-c7fd', '::ffff:192.168.1.109', 42330, 7, '2019-01-08 12:51:02'),
+	(517, NULL, 'ESP8266Client-db32', '::ffff:192.168.1.109', 33533, 7, '2019-01-08 12:51:35'),
+	(518, NULL, 'ESP8266Client-c40a', '::ffff:192.168.1.109', 41036, 7, '2019-01-08 12:51:35'),
+	(519, NULL, 'ESP8266Client-e329', '::ffff:192.168.1.109', 43354, 7, '2019-01-08 12:52:21'),
+	(520, NULL, 'ESP8266Client-ff39', '::ffff:192.168.1.109', 38731, 7, '2019-01-08 12:52:21'),
+	(521, NULL, 'ESP8266Client-a5c6', '::ffff:192.168.1.109', 36633, 7, '2019-01-08 12:52:42'),
+	(522, NULL, 'ESP8266Client-215f', '::ffff:192.168.1.109', 41553, 7, '2019-01-08 12:52:42'),
+	(523, NULL, 'ESP8266Client-3d8d', '::ffff:192.168.1.109', 36637, 7, '2019-01-08 12:52:56'),
+	(524, NULL, 'ESP8266Client-43f4', '::ffff:192.168.1.109', 35911, 7, '2019-01-08 12:53:00'),
+	(525, NULL, 'ESP8266Client-1239', '::ffff:192.168.1.109', 36154, 7, '2019-01-08 12:53:52'),
+	(526, NULL, 'ESP8266Client-a219', '::ffff:192.168.1.109', 36845, 7, '2019-01-08 12:53:52'),
+	(527, NULL, 'ESP8266Client-433', '::ffff:192.168.1.109', 35447, 7, '2019-01-08 12:54:26'),
+	(528, NULL, 'ESP8266Client-8602', '::ffff:192.168.1.109', 34005, 7, '2019-01-08 12:54:26'),
+	(529, NULL, 'ESP8266Client-74fb', '::ffff:192.168.1.109', 48046, 7, '2019-01-08 12:54:43'),
+	(530, NULL, 'ESP8266Client-b099', '::ffff:192.168.1.109', 42187, 7, '2019-01-08 12:54:43'),
+	(531, NULL, 'ESP8266Client-c9dd', '::ffff:192.168.1.109', 33931, 7, '2019-01-08 12:55:06'),
+	(532, NULL, 'ESP8266Client-d1dd', '::ffff:192.168.1.109', 38629, 7, '2019-01-08 12:55:06'),
+	(533, NULL, 'ESP8266Client-e531', '::ffff:192.168.1.109', 36790, 7, '2019-01-08 12:57:55'),
+	(534, NULL, 'ESP8266Client-21bf', '::ffff:192.168.1.109', 37605, 7, '2019-01-08 12:57:55'),
+	(535, NULL, 'ESP8266Client-f99e', '::ffff:192.168.1.109', 37716, 7, '2019-01-08 12:58:06'),
+	(536, NULL, 'ESP8266Client-666f', '::ffff:192.168.1.109', 47573, 7, '2019-01-08 12:58:06'),
+	(537, NULL, 'ESP8266Client-445c', '::ffff:192.168.1.109', 41881, 7, '2019-01-08 12:58:20'),
+	(538, NULL, 'ESP8266Client-f819', '::ffff:192.168.1.109', 42051, 7, '2019-01-08 12:58:20'),
+	(539, NULL, 'ESP8266Client-8904', '::ffff:192.168.1.109', 34763, 7, '2019-01-08 12:59:37'),
+	(540, NULL, 'ESP8266Client-f1da', '::ffff:192.168.1.109', 43028, 7, '2019-01-08 12:59:37'),
+	(541, NULL, 'ESP8266Client-5da9', '::ffff:192.168.1.109', 41151, 7, '2019-01-08 12:59:45'),
+	(542, NULL, 'ESP8266Client-cba1', '::ffff:192.168.1.109', 39736, 7, '2019-01-08 12:59:45'),
+	(543, NULL, 'ESP8266Client-71d6', '::ffff:192.168.1.109', 36412, 7, '2019-01-08 13:18:19'),
+	(544, NULL, 'ESP8266Client-79e9', '::ffff:192.168.1.109', 37197, 7, '2019-01-08 13:18:22'),
+	(545, NULL, 'ESP8266Client-9ab2', '::ffff:192.168.1.109', 34594, 7, '2019-01-08 13:19:23'),
+	(546, NULL, 'ESP8266Client-5a14', '::ffff:192.168.1.109', 36003, 7, '2019-01-08 13:19:23'),
+	(547, NULL, 'ESP8266Client-498a', '::ffff:192.168.1.109', 45150, 7, '2019-01-08 13:21:48'),
+	(548, NULL, 'ESP8266Client-375e', '::ffff:192.168.1.109', 36790, 7, '2019-01-08 13:21:48'),
+	(549, NULL, 'ESP8266Client-f3db', '::ffff:192.168.1.109', 41403, 7, '2019-01-08 13:29:56'),
+	(550, NULL, 'ESP8266Client-55ab', '::ffff:192.168.1.109', 41226, 7, '2019-01-08 13:29:57'),
+	(551, NULL, 'ESP8266Client-701c', '::ffff:192.168.1.109', 33714, 7, '2019-01-08 13:30:21'),
+	(552, NULL, 'ESP8266Client-27ba', '::ffff:192.168.1.109', 42218, 7, '2019-01-08 13:30:21'),
+	(553, NULL, 'ESP8266Client-2b89', '::ffff:192.168.1.109', 37150, 7, '2019-01-08 13:30:43'),
+	(554, NULL, 'ESP8266Client-50f8', '::ffff:192.168.1.109', 42480, 7, '2019-01-08 13:30:43'),
+	(555, NULL, 'ESP8266Client-e251', '::ffff:192.168.1.109', 44961, 7, '2019-01-08 13:33:19'),
+	(556, NULL, 'ESP8266Client-f016', '::ffff:192.168.1.109', 45598, 7, '2019-01-08 13:34:37'),
+	(557, NULL, 'ESP8266Client-dbef', '::ffff:192.168.1.109', 48422, 7, '2019-01-08 13:34:37');
 /*!40000 ALTER TABLE `conn_log` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela mqtt.mqtt_metrics
+CREATE TABLE IF NOT EXISTS `mqtt_metrics` (
+  `length` int(11) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT NULL,
+  `topic` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela mqtt.mqtt_metrics: ~0 rows (aproximadamente)
+DELETE FROM `mqtt_metrics`;
+/*!40000 ALTER TABLE `mqtt_metrics` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mqtt_metrics` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.server_options
 CREATE TABLE IF NOT EXISTS `server_options` (
@@ -337,8 +627,9 @@ CREATE TABLE IF NOT EXISTS `server_options` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.server_options: ~2 rows (aproximadamente)
+DELETE FROM `server_options`;
 /*!40000 ALTER TABLE `server_options` DISABLE KEYS */;
-REPLACE INTO `server_options` (`id_option`, `description`) VALUES
+INSERT INTO `server_options` (`id_option`, `description`) VALUES
 	(1, 'Não permitir conexões de itens que não estão cadastrados'),
 	(2, 'Permitir somente conexões seguras');
 /*!40000 ALTER TABLE `server_options` ENABLE KEYS */;
@@ -350,17 +641,230 @@ CREATE TABLE IF NOT EXISTS `tp_publish` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.tp_publish: ~0 rows (aproximadamente)
+DELETE FROM `tp_publish`;
 /*!40000 ALTER TABLE `tp_publish` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tp_publish` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.tp_subscribe
 CREATE TABLE IF NOT EXISTS `tp_subscribe` (
-  `device_id` int(11) DEFAULT NULL,
-  `tp_subscribe` varchar(200) DEFAULT NULL
+  `tp_subscribe` varchar(200) DEFAULT NULL,
+  `device_id` varchar(200) DEFAULT NULL,
+  `qos` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.tp_subscribe: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.tp_subscribe: ~209 rows (aproximadamente)
+DELETE FROM `tp_subscribe`;
 /*!40000 ALTER TABLE `tp_subscribe` DISABLE KEYS */;
+INSERT INTO `tp_subscribe` (`tp_subscribe`, `device_id`, `qos`) VALUES
+	('sensor/casa', 'ESP8266Client-55f9', 0),
+	('sensor/casa', 'ESP8266Client-5002', 0),
+	('sensor/casa', 'ESP8266Client-124', 0),
+	('sensor/casa', 'ESP8266Client-f6ec', 0),
+	('sensor/cozinha', 'ESP8266Client-e4ba', 0),
+	('sensor/casa', 'ESP8266Client-e4ba', 0),
+	('sensor/gps', 'ESP8266Client-e4ba', 0),
+	('sensor/porta', 'ESP8266Client-e4ba', 0),
+	('sensor/casa', 'ESP8266Client-fe8e', 0),
+	('sensor/cozinha', 'ESP8266Client-fe8e', 0),
+	('sensor/gps', 'ESP8266Client-fe8e', 0),
+	('sensor/porta', 'ESP8266Client-fe8e', 0),
+	('sensor/casa', 'ESP8266Client-773f', 0),
+	('sensor/casa', 'ESP8266Client-637', 0),
+	('sensor/cozinha', 'ESP8266Client-637', 0),
+	('sensor/gps', 'ESP8266Client-637', 0),
+	('sensor/porta', 'ESP8266Client-637', 0),
+	('sensor/casa', 'ESP8266Client-62b1', 0),
+	('sensor/casa', 'ESP8266Client-3da0', 0),
+	('sensor/cozinha', 'ESP8266Client-3da0', 0),
+	('sensor/gps', 'ESP8266Client-3da0', 0),
+	('sensor/porta', 'ESP8266Client-3da0', 0),
+	('sensor/casa', 'ESP8266Client-e85e', 0),
+	('sensor/casa', 'ESP8266Client-1fc0', 0),
+	('sensor/cozinha', 'ESP8266Client-1fc0', 0),
+	('sensor/gps', 'ESP8266Client-1fc0', 0),
+	('sensor/porta', 'ESP8266Client-1fc0', 0),
+	('sensor/casa', 'ESP8266Client-756b', 0),
+	('sensor/casa', 'ESP8266Client-c8f7', 0),
+	('sensor/cozinha', 'ESP8266Client-c8f7', 0),
+	('sensor/gps', 'ESP8266Client-c8f7', 0),
+	('sensor/porta', 'ESP8266Client-c8f7', 0),
+	('sensor/casa', 'ESP8266Client-a8d9', 0),
+	('sensor/casa', 'ESP8266Client-642b', 0),
+	('sensor/casa', 'ESP8266Client-4cc5', 0),
+	('sensor/casa', 'ESP8266Client-5d29', 0),
+	('sensor/casa', 'ESP8266Client-c115', 0),
+	('sensor/casa', 'ESP8266Client-ca4b', 0),
+	('sensor/casa', 'ESP8266Client-2c7c', 0),
+	('sensor/casa', 'ESP8266Client-c3c6', 0),
+	('sensor/casa', 'ESP8266Client-177a', 0),
+	('sensor/cozinha', 'ESP8266Client-177a', 0),
+	('sensor/gps', 'ESP8266Client-177a', 0),
+	('sensor/porta', 'ESP8266Client-177a', 0),
+	('sensor/casa', 'ESP8266Client-5f05', 0),
+	('sensor/casa', 'ESP8266Client-c480', 0),
+	('sensor/cozinha', 'ESP8266Client-c480', 0),
+	('sensor/gps', 'ESP8266Client-c480', 0),
+	('sensor/porta', 'ESP8266Client-c480', 0),
+	('sensor/casa', 'ESP8266Client-e813', 0),
+	('sensor/casa', 'ESP8266Client-f72b', 0),
+	('sensor/cozinha', 'ESP8266Client-f72b', 0),
+	('sensor/gps', 'ESP8266Client-f72b', 0),
+	('sensor/porta', 'ESP8266Client-f72b', 0),
+	('sensor/casa', 'ESP8266Client-bb4f', 0),
+	('sensor/casa', 'ESP8266Client-dc90', 0),
+	('sensor/cozinha', 'ESP8266Client-dc90', 0),
+	('sensor/gps', 'ESP8266Client-dc90', 0),
+	('sensor/porta', 'ESP8266Client-dc90', 0),
+	('sensor/casa', 'ESP8266Client-4339', 0),
+	('sensor/casa', 'ESP8266Client-15ed', 0),
+	('sensor/cozinha', 'ESP8266Client-15ed', 0),
+	('sensor/gps', 'ESP8266Client-15ed', 0),
+	('sensor/porta', 'ESP8266Client-15ed', 0),
+	('sensor/casa', 'ESP8266Client-122', 0),
+	('sensor/casa', 'ESP8266Client-aca1', 0),
+	('sensor/cozinha', 'ESP8266Client-aca1', 0),
+	('sensor/gps', 'ESP8266Client-aca1', 0),
+	('sensor/porta', 'ESP8266Client-aca1', 0),
+	('sensor/casa', 'ESP8266Client-a6ea', 0),
+	('sensor/casa', 'ESP8266Client-c4e7', 0),
+	('sensor/cozinha', 'ESP8266Client-c4e7', 0),
+	('sensor/gps', 'ESP8266Client-c4e7', 0),
+	('sensor/porta', 'ESP8266Client-c4e7', 0),
+	('sensor/casa', 'ESP8266Client-6bc9', 0),
+	('sensor/casa', 'ESP8266Client-9f61', 0),
+	('sensor/cozinha', 'ESP8266Client-9f61', 0),
+	('sensor/gps', 'ESP8266Client-9f61', 0),
+	('sensor/porta', 'ESP8266Client-9f61', 0),
+	('sensor/casa', 'ESP8266Client-bc66', 0),
+	('sensor/casa', 'ESP8266Client-df9f', 0),
+	('sensor/cozinha', 'ESP8266Client-df9f', 0),
+	('sensor/gps', 'ESP8266Client-df9f', 0),
+	('sensor/porta', 'ESP8266Client-df9f', 0),
+	('sensor/casa', 'ESP8266Client-e04f', 0),
+	('sensor/casa', 'ESP8266Client-cb13', 0),
+	('sensor/cozinha', 'ESP8266Client-cb13', 0),
+	('sensor/gps', 'ESP8266Client-cb13', 0),
+	('sensor/porta', 'ESP8266Client-cb13', 0),
+	('sensor/casa', 'ESP8266Client-95a6', 0),
+	('sensor/casa', 'ESP8266Client-f395', 0),
+	('sensor/cozinha', 'ESP8266Client-f395', 0),
+	('sensor/gps', 'ESP8266Client-f395', 0),
+	('sensor/porta', 'ESP8266Client-f395', 0),
+	('sensor/casa', 'ESP8266Client-b09e', 0),
+	('sensor/casa', 'ESP8266Client-29d', 0),
+	('sensor/porta', 'ESP8266Client-29d', 0),
+	('sensor/casa', 'ESP8266Client-5019', 0),
+	('sensor/gps', 'ESP8266Client-29d', 0),
+	('sensor/cozinha', 'ESP8266Client-29d', 0),
+	('sensor/casa', 'ESP8266Client-dd66', 0),
+	('sensor/cozinha', 'ESP8266Client-dd66', 0),
+	('sensor/gps', 'ESP8266Client-dd66', 0),
+	('sensor/porta', 'ESP8266Client-dd66', 0),
+	('sensor/casa', 'ESP8266Client-c7fd', 0),
+	('sensor/casa', 'ESP8266Client-db32', 0),
+	('sensor/cozinha', 'ESP8266Client-db32', 0),
+	('sensor/gps', 'ESP8266Client-db32', 0),
+	('sensor/porta', 'ESP8266Client-db32', 0),
+	('sensor/casa', 'ESP8266Client-c40a', 0),
+	('sensor/casa', 'ESP8266Client-e329', 0),
+	('sensor/cozinha', 'ESP8266Client-e329', 0),
+	('sensor/gps', 'ESP8266Client-e329', 0),
+	('sensor/porta', 'ESP8266Client-e329', 0),
+	('sensor/casa', 'ESP8266Client-ff39', 0),
+	('sensor/casa', 'ESP8266Client-a5c6', 0),
+	('sensor/cozinha', 'ESP8266Client-a5c6', 0),
+	('sensor/gps', 'ESP8266Client-a5c6', 0),
+	('sensor/porta', 'ESP8266Client-a5c6', 0),
+	('sensor/casa', 'ESP8266Client-215f', 0),
+	('sensor/casa', 'ESP8266Client-3d8d', 0),
+	('sensor/casa', 'ESP8266Client-43f4', 0),
+	('sensor/cozinha', 'ESP8266Client-43f4', 0),
+	('sensor/gps', 'ESP8266Client-43f4', 0),
+	('sensor/porta', 'ESP8266Client-43f4', 0),
+	('sensor/casa', 'ESP8266Client-1239', 0),
+	('sensor/cozinha', 'ESP8266Client-1239', 0),
+	('sensor/gps', 'ESP8266Client-1239', 0),
+	('sensor/porta', 'ESP8266Client-1239', 0),
+	('sensor/casa', 'ESP8266Client-a219', 0),
+	('sensor/porta', 'ESP8266Client-8602', 0),
+	('sensor/casa', 'ESP8266Client-8602', 0),
+	('sensor/cozinha', 'ESP8266Client-8602', 0),
+	('sensor/gps', 'ESP8266Client-8602', 0),
+	('sensor/casa', 'ESP8266Client-433', 0),
+	('sensor/casa', 'ESP8266Client-b099', 0),
+	('sensor/cozinha', 'ESP8266Client-b099', 0),
+	('sensor/gps', 'ESP8266Client-b099', 0),
+	('sensor/porta', 'ESP8266Client-b099', 0),
+	('sensor/casa', 'ESP8266Client-74fb', 0),
+	('sensor/casa', 'ESP8266Client-d1dd', 0),
+	('sensor/cozinha', 'ESP8266Client-d1dd', 0),
+	('sensor/gps', 'ESP8266Client-d1dd', 0),
+	('sensor/porta', 'ESP8266Client-d1dd', 0),
+	('sensor/casa', 'ESP8266Client-c9dd', 0),
+	('sensor/casa', 'ESP8266Client-21bf', 0),
+	('sensor/cozinha', 'ESP8266Client-21bf', 0),
+	('sensor/gps', 'ESP8266Client-21bf', 0),
+	('sensor/porta', 'ESP8266Client-21bf', 0),
+	('sensor/casa', 'ESP8266Client-e531', 0),
+	('sensor/casa', 'ESP8266Client-666f', 0),
+	('sensor/cozinha', 'ESP8266Client-666f', 0),
+	('sensor/gps', 'ESP8266Client-666f', 0),
+	('sensor/porta', 'ESP8266Client-666f', 0),
+	('sensor/casa', 'ESP8266Client-f99e', 0),
+	('sensor/casa', 'ESP8266Client-445c', 0),
+	('sensor/cozinha', 'ESP8266Client-445c', 0),
+	('sensor/gps', 'ESP8266Client-445c', 0),
+	('sensor/porta', 'ESP8266Client-445c', 0),
+	('sensor/casa', 'ESP8266Client-f819', 0),
+	('sensor/casa', 'ESP8266Client-f1da', 0),
+	('sensor/cozinha', 'ESP8266Client-f1da', 0),
+	('sensor/gps', 'ESP8266Client-f1da', 0),
+	('sensor/porta', 'ESP8266Client-f1da', 0),
+	('sensor/casa', 'ESP8266Client-8904', 0),
+	('sensor/casa', 'ESP8266Client-5da9', 0),
+	('sensor/cozinha', 'ESP8266Client-5da9', 0),
+	('sensor/gps', 'ESP8266Client-5da9', 0),
+	('sensor/porta', 'ESP8266Client-5da9', 0),
+	('sensor/casa', 'ESP8266Client-cba1', 0),
+	('sensor/casa', 'ESP8266Client-71d6', 0),
+	('sensor/cozinha', 'ESP8266Client-71d6', 0),
+	('sensor/gps', 'ESP8266Client-71d6', 0),
+	('sensor/porta', 'ESP8266Client-71d6', 0),
+	('sensor/casa', 'ESP8266Client-79e9', 0),
+	('sensor/casa', 'ESP8266Client-5a14', 0),
+	('sensor/porta', 'ESP8266Client-9ab2', 0),
+	('sensor/gps', 'ESP8266Client-9ab2', 0),
+	('sensor/cozinha', 'ESP8266Client-9ab2', 0),
+	('sensor/casa', 'ESP8266Client-9ab2', 0),
+	('sensor/casa', 'ESP8266Client-498a', 0),
+	('sensor/cozinha', 'ESP8266Client-498a', 0),
+	('sensor/gps', 'ESP8266Client-498a', 0),
+	('sensor/porta', 'ESP8266Client-498a', 0),
+	('sensor/casa', 'ESP8266Client-375e', 0),
+	('sensor/casa', 'ESP8266Client-f3db', 0),
+	('sensor/cozinha', 'ESP8266Client-f3db', 0),
+	('sensor/gps', 'ESP8266Client-f3db', 0),
+	('sensor/porta', 'ESP8266Client-f3db', 0),
+	('sensor/casa', 'ESP8266Client-55ab', 0),
+	('sensor/cozinha', 'ESP8266Client-701c', 0),
+	('sensor/casa', 'ESP8266Client-701c', 0),
+	('sensor/porta', 'ESP8266Client-701c', 0),
+	('sensor/gps', 'ESP8266Client-701c', 0),
+	('sensor/casa', 'ESP8266Client-27ba', 0),
+	('sensor/casa', 'ESP8266Client-50f8', 0),
+	('sensor/cozinha', 'ESP8266Client-50f8', 0),
+	('sensor/gps', 'ESP8266Client-50f8', 0),
+	('sensor/porta', 'ESP8266Client-50f8', 0),
+	('sensor/casa', 'ESP8266Client-2b89', 0),
+	('sensor/casa', 'ESP8266Client-e251', 0),
+	('sensor/cozinha', 'ESP8266Client-e251', 0),
+	('sensor/gps', 'ESP8266Client-e251', 0),
+	('sensor/porta', 'ESP8266Client-e251', 0),
+	('sensor/casa', 'ESP8266Client-f016', 0),
+	('sensor/casa', 'ESP8266Client-dbef', 0),
+	('sensor/cozinha', 'ESP8266Client-dbef', 0),
+	('sensor/gps', 'ESP8266Client-dbef', 0),
+	('sensor/porta', 'ESP8266Client-dbef', 0);
 /*!40000 ALTER TABLE `tp_subscribe` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.users
@@ -372,9 +876,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.users: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.users: ~2 rows (aproximadamente)
+DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`id_user`, `nome`, `email`, `senha`) VALUES
+INSERT INTO `users` (`id_user`, `nome`, `email`, `senha`) VALUES
 	(3, 'Leonardo Everson', 'leonardo@batista.g12.br', '$2b$10$6Vm9DldTJTs5FNSNgHl9h.pZBNs5uQcaWyGWUV9Nv9UcRfZwHhr2.'),
 	(7, 'Leonardo Everson', 'llinharespinheiro@gmail.com', '$2b$10$.YsW//S0gpyf2.NeC/v4VOZJHTCL83UXD4RkQF6slsjuROF.YATbu');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
@@ -390,8 +895,9 @@ CREATE TABLE IF NOT EXISTS `user_devices` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.user_devices: ~3 rows (aproximadamente)
+DELETE FROM `user_devices`;
 /*!40000 ALTER TABLE `user_devices` DISABLE KEYS */;
-REPLACE INTO `user_devices` (`id_user`, `device_id`, `device_name`, `publish`, `subscribe`) VALUES
+INSERT INTO `user_devices` (`id_user`, `device_id`, `device_name`, `publish`, `subscribe`) VALUES
 	(3, 13, 'NodeRed', 2, 2),
 	(3, 14, 'NodeRed2', 2, 2),
 	(3, 15, 'NodeRed1', 1, 2);
@@ -403,8 +909,11 @@ CREATE TABLE IF NOT EXISTS `user_options` (
   `id_server_option` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.user_options: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.user_options: ~1 rows (aproximadamente)
+DELETE FROM `user_options`;
 /*!40000 ALTER TABLE `user_options` DISABLE KEYS */;
+INSERT INTO `user_options` (`id_user`, `id_server_option`) VALUES
+	(3, 1);
 /*!40000 ALTER TABLE `user_options` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

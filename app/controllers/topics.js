@@ -1,7 +1,6 @@
 module.exports.topic_subscribe_register = function(app, subscriptions, client){
     let conn = app.config.dbconn();
     let topicsDAO = new app.app.models.topicsDAO(conn);
-
     let dados = {};
     dados.tp_subscribe = subscriptions[0].topic;
     dados.device_id = client;

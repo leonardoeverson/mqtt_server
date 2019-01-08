@@ -3,13 +3,13 @@ function topicsDAO(conn){
 }
 
 topicsDAO.prototype.topic_subscribe_register_db = function(dados, callback) {
-    let query = "INSERT INTO tp_subscribe(device_id, tp_subscribe, qos) values(";
+    let query = "INSERT INTO tp_subscribe(device_id, tp_subscribe, qos) VALUES(";
     query += "'"+dados.device_id+"','"+dados.tp_subscribe+"',"+dados.qos+")";
     this.connection.query(query, callback);
 };
 
 topicsDAO.prototype.publish_metrics_db = function(dados, callback){
-    let query;
+    let query= "INSERT INTO mqtt_metrics(length, timestamp, topic) VALUES()";
     this.connection.query(query, dados, callback);
 };
 
