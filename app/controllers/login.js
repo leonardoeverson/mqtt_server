@@ -11,7 +11,10 @@ module.exports.login_usuario = function(app, request, response){
 
 					request.session.id_user = result[0].id_user;
 					request.session.logged = true;
-					conn.destroy();
+					conn.end(function(err) {
+						// The connection is terminated now
+						console.log(err);
+					});
 					response.redirect("/home");
 
 				} else {
@@ -72,13 +75,19 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 		if(!error && result.length > 0){
 			bcrypt.compare(password.toString(), result[0].senha, async function (err, res) {
 				if (res == true) {
+
 					//informações de conexão do cliente conectado
 					client.conn.remoteIp = ip;
 					client.conn.remotePort = port;
 					client.conn.method_ = method;
 					client.conn.id_user = result[0].id_user;
 					app.app.data_perm = {};
-					conn.destroy();
+
+					conn.end(function(err) {
+						// The connection is terminated now
+						console.log(err);
+					});
+
 					let result1, result2;
 
 					try{

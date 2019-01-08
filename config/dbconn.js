@@ -1,6 +1,5 @@
 let mysql = require('mysql');
 
-
 function dbconn(){
 
 	return conn = mysql.createConnection({

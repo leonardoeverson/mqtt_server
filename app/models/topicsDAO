@@ -3,7 +3,6 @@ function topicsDAO(conn){
 }
 
 topicsDAO.prototype.topic_subscribe_register_db = function(dados, callback) {
-    console.log(dados);
     let query = "INSERT INTO tp_subscribe(device_id, tp_subscribe, qos) values(";
     query += "'"+dados.device_id+"','"+dados.tp_subscribe+"',"+dados.qos+")";
     this.connection.query(query, callback);

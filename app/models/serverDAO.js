@@ -35,8 +35,6 @@ serverDAO.prototype.post_server_user_settings = function (dados, id_user, callba
                         }
 
                         console.log('Transaction Complete.');
-                        conn.end();
-
                         callback(null, 'Transaction Complete.');
 
                     });

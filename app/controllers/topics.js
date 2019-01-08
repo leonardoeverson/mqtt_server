@@ -9,7 +9,13 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
 
     topicsDAO.topic_subscribe_register_db(dados, (error, result)=>{
         if(!error){
-            conn.destroy();
+            try{
+               conn.destroy();
+               console.log("topic_subscribe_register_db");
+            }catch(e){
+                console.log(e);
+            }
+
         }else{
             console.log(error);
             conn.destroy();

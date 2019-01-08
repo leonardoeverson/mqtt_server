@@ -7,7 +7,10 @@ module.exports.list_devices = function(app, request, response){
 
 	dadosDispositivos.list_devices_db(dados, function(error, result){
 		if(!error){
-			conn.destroy();
+			conn.end(function(err) {
+				// The connection is terminated now
+				console.log(err);
+			});
 			response.render("devices/list",{validacao : result});
 		}else{
 			console.log(error);
@@ -30,7 +33,10 @@ module.exports.register_devices = function(app, request, response){
 
     dadosDispositivos.register_devices_db(dados, function(error, result){
     	if(!error){
-			conn.destroy();
+			conn.end(function(err) {
+				// The connection is terminated now
+				console.log(err);
+			});
     		response.render("devices/register",{validacao:[{'mensagem':'dados gravados com sucesso', 'status': 0}]});
     	}else{
     		console.log(error);
@@ -50,7 +56,10 @@ module.exports.count_devices_db = function(app, request, response){
 
 		dadosDispositivos.list_devices_db(dados, function(error, result){
 			if(!error){
-				conn.destroy();
+				conn.end(function(err) {
+					// The connection is terminated now
+					console.log(err);
+				});
 				resolve(result)
 			}else{
 				console.log(error);
@@ -69,7 +78,10 @@ module.exports.connected_devices = function(app, request, response){
 	return new Promise((resolve, reject)=>{
 		dadosDispositivos.connected_device_db(dados, function(error, result){
 			if(!error){
-				conn.destroy();
+				conn.end(function(err) {
+					// The connection is terminated now
+					console.log(err);
+				});
 				resolve(result)
 			}else{
 				console.log(error);
@@ -89,7 +101,10 @@ module.exports.check_device_reg = function(app, id_user, client_id){
 	return new Promise((resolve, reject)=>{
 		dadosDispositivos.check_device_reg_db(dados, function(error, result){
 			if(!error){
-				conn.destroy();
+				conn.end(function(err) {
+					// The connection is terminated now
+					console.log(err);
+				});
 				resolve(result);
 			}else{
 				console.log(error);
@@ -106,7 +121,10 @@ module.exports.delete_device = function(app, request, response){
 
 	dadosDispositivos.delete_device_db(dados.device_id, (error, result) =>{
         if(!error){
-			conn.destroy();
+			conn.end(function(err) {
+				// The connection is terminated now
+				console.log(err);
+			});
             response.send(JSON.stringify('ok')).end();
         }else{
             response.sendStatus(200).end();

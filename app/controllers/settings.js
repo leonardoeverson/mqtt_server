@@ -10,8 +10,7 @@ module.exports.get_server_opts = function(app, request, response){
             response.render("settings",{flag: false, opts:result});
         }
     })
-}
-
+};
 
 module.exports.post_server_opts = function(app, request, response){
 
@@ -27,7 +26,12 @@ module.exports.post_server_opts = function(app, request, response){
     console.log(result);
     serverDAO.post_server_user_settings(result, request.session.id_user, (error, result) =>{
         if(!error){
-            conn.destroy();
+            try{
+                console.log("post_server_user_settings");
+                conn.destroy();
+            }catch(e){
+                console.log(e);
+            }
             response.send(JSON.stringify('OK')).end();
         }else{
             console.log(error);
@@ -46,7 +50,13 @@ module.exports.get_server_option = function(app, id_option, id_user){
     return new Promise((resolve, reject)=>{
         serverOPT.get_server_option_db(dados, function(error, result){
             if(!error){
-                conn.destroy();
+                try{
+                    console.log("get_server_option_db");
+                    conn.destroy();
+                }catch(e){
+                    console.log(e);
+                }
+                //conn.destroy();
                 resolve(result)
             }else{
                 console.log(error);
