@@ -48,8 +48,8 @@ aedes.on('publish', function (packet, client) {
 
 aedes.on('subscribe', function (subscriptions, client) {
 	if (client) {
-		//app.app.controllers.topics.topic_subscribe_register(app, subscriptions, client);
-    	console.log('subscribe from client', subscriptions, client.id);
+		app.app.controllers.topics.topic_subscribe_register(app, subscriptions, client.id);
+    	//console.log('subscribe from client', subscriptions, client.id);
 	}
 });
 

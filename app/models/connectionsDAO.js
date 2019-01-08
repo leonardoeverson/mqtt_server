@@ -29,7 +29,6 @@ connectionsDAO.prototype.conn_db_insert = function(user_id, client_id, client_ad
 						});
 					}
 
-					conn.destroy();
 					callback(null, 'Transaction Complete.');
 
 				});
