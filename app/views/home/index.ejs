@@ -1,6 +1,8 @@
 <!-- Navigation -->
 <%- include('../header'); %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment-with-locales.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="chartjs-plugin-streaming.min.js"></script>
 <div class="col-sm-8">
     <h3>Dashboard</h3>
     <hr/>
@@ -69,8 +71,8 @@
 </div>
 
 <script>
-    var ctx = document.getElementById("canvas");
-    var myChart = new Chart(ctx, {
+    let ctx = document.getElementById("canvas");
+    let myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -90,6 +92,8 @@
             }
         }
     });
+
+
 </script>
 
 </div>

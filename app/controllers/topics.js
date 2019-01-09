@@ -18,19 +18,54 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
 
 };
 
-module.exports.publish_metrics = function(app, packet, client){
-    let conn = app.config.dbconn();
-    let topicsDAO = new app.app.models.topicsDAO(conn);
+module.exports.publish_metrics_insert = function(app, packet, client){
+    //let conn = app.config.dbconn();
+    //let topicsDAO = new app.app.models.topicsDAO(conn);
+    //let dados = {};
+    //dados.length = packet.payload.byteLength;
+    //dados.topic = packet.topic;
+    // topicsDAO.publish_metrics_db(dados, (error, result)=>{
+    //     if(!error){
+    //         conn.destroy();
+    //     }else{
+    //         console.log(error);
+    //         conn.destroy();
+    //     }
+    // })
 
-    let dados = {};
-    dados.length = packet.payload.byteLength;
-    dados.topic = packet.topic;
-    topicsDAO.publish_metrics_db(dados, (error, result)=>{
-        if(!error){
-            conn.destroy();
-        }else{
-            console.log(error);
-            conn.destroy();
-        }
-    })
+    let conn_mongogb = mongodb_conn({length: Number, topic : String });
+    let data_mqtt_metrics = new conn_mongogb({length: packet.payload.byteLength, topic : packet.topic});
+    data_mqtt_metrics.save().then();
+
 };
+
+module.exports.message_metric = function(app, client){
+    let conn = app.config.dbconn();
+};
+
+module.exports.traffic_metric = function(app){
+    let conn = app.config.dbconn();
+};
+
+module.exports.conn_metrics = function(app){
+    let conn = app.config.dbconn();
+};
+
+function mongodb_conn(schema){
+    const mongoose = require('mongoose');
+    mongoose.connect('mongodb://localhost:27017/mqtt_metric', {useNewUrlParser: true});
+    let Metric;
+    try{
+        if(mongoose.model('Metric')){
+            return mongoose.model('Metric')
+        }
+
+    }catch (e) {
+        if (e.name === 'MissingSchemaError') {
+            schema = new mongoose.Schema(schema);
+            Metric = mongoose.model('Metric', schema);
+            return Metric;
+        }
+        console.log(e);
+    }
+}
