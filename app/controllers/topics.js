@@ -44,14 +44,29 @@ module.exports.publish_metrics_insert = function(app, packet, client){
 
 module.exports.message_metric = function(app, client){
     let conn = app.config.dbconn();
+    let topicsDAO = new app.app.models.topicsDAO(conn);
+    let dados = {};
+    topicsDAO.message_metric_db(dados, (error, result)=>{
+
+    })
 };
 
 module.exports.traffic_metric = function(app){
     let conn = app.config.dbconn();
+    let topicsDAO = new app.app.models.topicsDAO(conn);
+    let dados = {};
+    topicsDAO.traffic_metric_db(dados, (error, result)=>{
+
+    })
 };
 
 module.exports.conn_metrics = function(app){
     let conn = app.config.dbconn();
+    let topicsDAO = new app.app.models.topicsDAO(conn);
+    let dados = {};
+    topicsDAO.conn_metrics_db(dados, (error, result)=>{
+
+    })
 };
 
 function mongodb_conn(schema){

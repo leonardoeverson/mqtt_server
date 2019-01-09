@@ -7,14 +7,11 @@ module.exports.login_usuario = function(app, request, response){
 	loginUsuario.valida_login(body, function(error, result){
 		if(!error && result.length > 0){
 			bcrypt.compare(body.senha, result[0].senha,  function (err, res) {
-				if (res == true) {
+				if (res === true) {
 
 					request.session.id_user = result[0].id_user;
 					request.session.logged = true;
-					conn.end(function(err) {
-						// The connection is terminated now
-						console.log(err);
-					});
+					app.app.controllers.connections.db_end_connection(conn);
 					response.redirect("/home");
 
 				} else {
@@ -29,7 +26,7 @@ module.exports.login_usuario = function(app, request, response){
 				return
 			}
 
-			if(result.length == 0){
+			if(result.length === 0){
 				response.render("login/index",{validacao : [{'msg':'usuário não encontrado'}]});
 
 			}
@@ -72,7 +69,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 	loginUsuario.valida_login(dados, function(error, result){
 		if(!error && result.length > 0){
 			bcrypt.compare(password.toString(), result[0].senha, async function (err, res) {
-				if (res == true) {
+				if (res === true) {
 
 					//informações de conexão do cliente conectado
 					client.conn.remoteIp = ip;
@@ -129,7 +126,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 
 			}
 
-			if(result.length == 0){
+			if(result.length === 0){
 				auth_error.returnCode = 4;
 			    cb(auth_error, null)
 			}
