@@ -79,7 +79,6 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 					client.conn.remotePort = port;
 					client.conn.method_ = method;
 					client.conn.id_user = result[0].id_user;
-					app.app.data_perm = {};
 
 					app.app.controllers.connections.db_end_connection(conn);
 
@@ -102,8 +101,18 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 					}
 
 					let device_id = result1[0] ? result1[0].device_id : 0;
-					//controller de conexões
-					app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_user, client.id, ip, port, device_id);
+					if(typeof (device_id) != "undefined"){
+						client.conn.device_id = device_id;
+					}
+
+					try{
+						//controller de conexões
+						let resposta  = await app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_user, client.id, ip, port, device_id);
+						client.conn.conn_id = resposta.insertId;
+					}catch (e) {
+						console.log(e)
+					}
+
 
 					//callback de aceitação da conexão do dispositivo
 					cb(null, true);
