@@ -49,8 +49,10 @@ module.exports.message_metric = function(app, request, response){
     dados.user_id = request.session.id_user;
     topicsDAO.message_metric_db(dados, (error, result)=>{
         if(!error){
+            conn.destroy();
             response.send(result).end();
         }else{
+            conn.destroy();
             console.log(error);
         }
     })
@@ -77,8 +79,10 @@ module.exports.conn_metrics = function(app, request, response){
     dados.user_id = request.session.id_user;
     topicsDAO.conn_metrics_db(dados, (error, result)=>{
         if(!error){
+            conn.destroy();
             response.send(result).end();
         }else{
+            conn.destroy();
             console.log(error);
         }
     })

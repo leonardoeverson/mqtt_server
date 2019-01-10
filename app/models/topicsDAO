@@ -22,7 +22,9 @@ topicsDAO.prototype.message_metric_db = function(dados, callback){
 };
 
 topicsDAO.prototype.traffic_metric_db = function(dados, callback){
-
+    let query = "select sum(length) as quantidade, timestamp as marca from mqtt_metrics where DAY(timestamp) = DAY(CURDATE())";
+    query += "and user_id ="+dados.user_id+" group by(hour(timestamp))";
+    this.connection.query(query, dados, callback);
 };
 
 topicsDAO.prototype.conn_metrics_db = function(dados, callback){

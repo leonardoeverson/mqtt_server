@@ -103,22 +103,34 @@
 
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                let resposta = JSON.parse(this.responseText);
+                let resposta;
 
-                dados = [];
-                data_label = [];
+                try {
+                    resposta = JSON.parse(this.responseText);
+                }catch (e) {
+                    console.log(e)
+                }
+
+                dados.length = 0;
+                data_label.length = 0;
 
                 for(let i = 0; i < resposta.length; i++){
                     dados.push(resposta[i].quantidade);
                     data_label.push(resposta[i].marca);
                 }
-                
+
+
                 chart.update();
+                console.log(dados);
+                setTimeout(carrega_dados_grafico, 10000);
             }
         };
+
         xhttp.open("GET", "/server/metrics?periodo="+periodo_+"&filtro="+filtro_, true);
         xhttp.send();
     }
+
+    //carrega_dados_grafico();
 </script>
 
 </div>

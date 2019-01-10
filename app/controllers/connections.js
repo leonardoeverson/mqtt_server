@@ -16,7 +16,7 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 				}
 			}else{
 				if(err){
-					reject(e);
+					reject(err);
 				}
 
 				if(result){
