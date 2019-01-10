@@ -65,8 +65,10 @@ module.exports.traffic_metric = function(app, request, response){
     dados.user_id = request.session.id_user;
     topicsDAO.traffic_metric_db(dados, (error, result)=>{
         if(!error){
+            conn.destroy();
             response.send(result).end();
         }else{
+            conn.destroy();
             console.log(error);
         }
     })

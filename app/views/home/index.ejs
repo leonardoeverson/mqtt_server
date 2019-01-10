@@ -118,8 +118,7 @@
                     dados.push(resposta[i].quantidade);
                     data_label.push(resposta[i].marca);
                 }
-
-
+                chart.data.datasets[0].label = "kb"
                 chart.update();
                 console.log(dados);
                 setTimeout(carrega_dados_grafico, 10000);
