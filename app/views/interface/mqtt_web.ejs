@@ -3,8 +3,7 @@
 <head>
     <title>Websocket</title>
 </head>
-
-
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 <div class="col-sm-3">
     <form>
         <div class="form-group">
@@ -35,4 +34,21 @@
         </tbody>
     </table>
 </div>
+<script>
+    function conn_request(){
+        let periodo_ = periodo.value;
+        let filtro_ = filtro.value;
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("demo").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "/server/conn/mqtt", true);
+        xhttp.send();
+    }
+
+    let conn;
+</script>
 <%- include('../footer'); %>

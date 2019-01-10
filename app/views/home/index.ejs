@@ -72,13 +72,15 @@
 
 <script>
     let ctx = document.getElementById("canvas");
-    let myChart = new Chart(ctx, {
+    let dados = [];
+    let data_label = [];
+    let chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: data_label,
             datasets: [{
                 label: '#',
-                data: [0, 0, 0, 0, 0, 0],
+                data: dados,
                 borderWidth: 1
             }]
         },
@@ -101,7 +103,17 @@
 
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                //document.getElementById("demo").innerHTML = this.responseText;
+                let resposta = JSON.parse(this.responseText);
+
+                dados = [];
+                data_label = [];
+
+                for(let i = 0; i < resposta.length; i++){
+                    dados.push(resposta[i].quantidade);
+                    data_label.push(resposta[i].marca);
+                }
+                
+                chart.update();
             }
         };
         xhttp.open("GET", "/server/metrics?periodo="+periodo_+"&filtro="+filtro_, true);
