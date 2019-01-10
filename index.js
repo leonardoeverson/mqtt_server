@@ -41,7 +41,6 @@ aedes.on('connectionError', function (client, err) {
 aedes.on('publish', function (packet, client) {
 	if (client) {
     	//console.log('message from client', client.id);
-		//console.log(Object.keys(packet));
 		app.app.controllers.topics.publish_metrics_insert(app, packet, client);
 	}
 });

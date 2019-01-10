@@ -92,7 +92,7 @@ void reconnect() {
     if (client.connect(clientId.c_str(), "llinharespinheiro@gmail.com", "12345678")) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish(ptopic, "0");
+      client.publish(ptopic, "topic_teste_cbsd_teste");
       // ... and resubscribe
       client.subscribe(stopic);
       client.subscribe("sensor/cozinha");
@@ -127,7 +127,7 @@ void loop() {
   if (now - lastMsg > 10000) {
     lastMsg = now;
     ++value;
-    snprintf (msg, 50, "0", value);
+    snprintf (msg, 50, "topic_teste_cbsd_teste", value);
     Serial.print("Publish message: ");
     Serial.println(msg);
     client.publish(ptopic, msg);
