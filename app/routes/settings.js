@@ -25,4 +25,21 @@ module.exports =  function(app){
         let resposta;
     });
 
+    app.get('/server/metrics', function(request, response){
+        let body = request.query;
+
+        /*
+        1 - Tráfego
+        2 - Mensagens
+        3 - Conexões
+        */
+
+        if(body.filtro == 1){
+            app.app.controllers.topics.traffic_metric(app, request, response);
+        }else if(body.filtro == 2){
+            app.app.controllers.topics.message_metric(app, request, response);
+        }else{
+            app.app.controllers.topics.conn_metrics(app, request, response);
+        }
+    });
 };

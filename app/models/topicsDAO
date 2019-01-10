@@ -16,7 +16,7 @@ topicsDAO.prototype.publish_metrics_db = function(dados, callback){
 };
 
 topicsDAO.prototype.message_metric_db = function(dados, callback){
-    let query = "select count(*) as quantidade, timestamp from mqtt_metrics where DAY(timestamp) = DAY(CURDATE())";
+    let query = "select count(*) as quantidade, timestamp as marca from mqtt_metrics where DAY(timestamp) = DAY(CURDATE())";
     query += "and user_id ="+dados.user_id+" group by(hour(timestamp))";
     this.connection.query(query, dados, callback);
 };

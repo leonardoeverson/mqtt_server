@@ -42,30 +42,45 @@ module.exports.publish_metrics_insert = function(app, packet, client){
 
 };
 
-module.exports.message_metric = function(app, client){
+module.exports.message_metric = function(app, request, response){
     let conn = app.config.dbconn();
     let topicsDAO = new app.app.models.topicsDAO(conn);
     let dados = {};
+    dados.user_id = request.session.id_user;
     topicsDAO.message_metric_db(dados, (error, result)=>{
-
+        if(!error){
+            response.send(result).end();
+        }else{
+            console.log(error);
+        }
     })
 };
 
-module.exports.traffic_metric = function(app){
+module.exports.traffic_metric = function(app, request, response){
     let conn = app.config.dbconn();
     let topicsDAO = new app.app.models.topicsDAO(conn);
     let dados = {};
+    dados.user_id = request.session.id_user;
     topicsDAO.traffic_metric_db(dados, (error, result)=>{
-
+        if(!error){
+            response.send(result).end();
+        }else{
+            console.log(error);
+        }
     })
 };
 
-module.exports.conn_metrics = function(app){
+module.exports.conn_metrics = function(app, request, response){
     let conn = app.config.dbconn();
     let topicsDAO = new app.app.models.topicsDAO(conn);
     let dados = {};
+    dados.user_id = request.session.id_user;
     topicsDAO.conn_metrics_db(dados, (error, result)=>{
-
+        if(!error){
+            response.send(result).end();
+        }else{
+            console.log(error);
+        }
     })
 };
 

@@ -6,7 +6,8 @@ function dbconn(){
 		host: 'localhost',
 		user: 'root',
 		password : 'db_node_01#',
-		database: 'mqtt'
+		database: 'mqtt',
+		dateStrings : true
 	});
 
 }
