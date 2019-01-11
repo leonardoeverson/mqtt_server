@@ -22,6 +22,7 @@ module.exports.publish_metrics_insert = function(app, packet, client){
     let conn = app.config.dbconn();
     let topicsDAO = new app.app.models.topicsDAO(conn);
     let dados = {};
+
     dados.length = packet.payload.byteLength;
     dados.topic = packet.topic;
     dados.device_id = client.conn.device_id;
@@ -89,22 +90,3 @@ module.exports.conn_metrics = function(app, request, response){
         }
     })
 };
-
-function mongodb_conn(schema){
-    const mongoose = require('mongoose');
-    mongoose.connect('mongodb://localhost:27017/mqtt_metric', {useNewUrlParser: true});
-    let Metric;
-    try{
-        if(mongoose.model('Metric')){
-            return mongoose.model('Metric')
-        }
-
-    }catch (e) {
-        if (e.name === 'MissingSchemaError') {
-            schema = new mongoose.Schema(schema);
-            Metric = mongoose.model('Metric', schema);
-            return Metric;
-        }
-        console.log(e);
-    }
-}

@@ -75,6 +75,7 @@
     let ctx = document.getElementById("canvas");
     let dados = [];
     let data_label = [];
+    let colors = [];
     let chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -82,10 +83,17 @@
             datasets: [{
                 label: '#',
                 data: dados,
-                borderWidth: 1
+                backgroundColor:colors,
+                borderColor: colors,
+                hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                fill: false
             }]
         },
         options: {
+            responsive:true,
+            legend: {
+                position: 'top',
+            },
             scales: {
                 yAxes: [{
                     ticks: {
@@ -119,6 +127,7 @@
                     dados.push(resposta[i].quantidade);
                     data_label.push(resposta[i].marca);
                 }
+
                 chart.data.datasets[0].label = "bytes"
                 chart.update();
                 console.log(dados);
@@ -130,6 +139,14 @@
         xhttp.send();
     }
 
+    function dynamicColors() {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+
+    colors.push(dynamicColors());
     carrega_dados_grafico();
 </script>
 
