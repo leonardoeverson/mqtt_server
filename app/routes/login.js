@@ -5,7 +5,11 @@ module.exports = function(app){
 	});
 
 	app.get('/',function(request, response){
-		response.render('login/index')
+	    if(request.session.logged){
+	        response.redirect("/home");
+        }else{
+            response.render('login/index');
+        }
 	});
 
 	app.post('/login',function(request, response){
@@ -14,7 +18,7 @@ module.exports = function(app){
 
 	app.get('/logout',function(request, response){
 		request.session.destroy(function(err){
-			response.redirect("/")
+			response.redirect("/");
 		});
 	})
 

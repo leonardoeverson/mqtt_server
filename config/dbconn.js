@@ -7,7 +7,8 @@ function dbconn(){
 		user: 'root',
 		password : 'db_node_01#',
 		database: 'mqtt',
-		dateStrings : true
+		dateStrings : true,
+		multipleStatements: true
 	});
 
 }

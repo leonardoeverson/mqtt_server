@@ -15,8 +15,7 @@
             <label for="staticEmail" class="col-sm-2 col-form-label">Filtro</label>
             <div class="col-sm-3">
                 <select id="filtro" class="form-control form-control-sm" style="width: 150px">
-                    <option value="1">Tráfego</option>
-                    <option value="2">Mensagens</option>
+                    <option value="1">Tráfego/Mensagens</option>
                     <option value="3">Conexões</option>
                 </select>
             </div>
@@ -72,22 +71,16 @@
 </div>
 
 <script>
-    let ctx = document.getElementById("canvas");
+    let ctx = document.getElementById("canvas").getContext('2d');
     let dados = [];
     let data_label = [];
     let colors = [];
+    let datasets_ = [];
+    let timer;
     let chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: data_label,
-            datasets: [{
-                label: '#',
-                data: dados,
-                backgroundColor:colors,
-                borderColor: colors,
-                hoverBorderColor: 'rgba(200, 200, 200, 1)',
-                fill: false
-            }]
+            datasets: datasets_
         },
         options: {
             responsive:true,
@@ -99,6 +92,11 @@
                     ticks: {
                         beginAtZero:true
                     }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        offsetGridLines: true
+                    }
                 }]
             }
         }
@@ -106,6 +104,7 @@
 
     function carrega_dados_grafico() {
 
+        clearInterval(timer);
         let periodo_ = periodo.value;
         let filtro_ = filtro.value;
         let xhttp = new XMLHttpRequest();
@@ -124,14 +123,33 @@
                 data_label.length = 0;
 
                 for(let i = 0; i < resposta.length; i++){
-                    dados.push(resposta[i].quantidade);
-                    data_label.push(resposta[i].marca);
+                    dados[i] = [];
+                    data_label[i] = [];
+                    for(let j = 0; j < resposta[i].length; j++){
+                        dados[i].push(resposta[i][j].quantidade);
+                        data_label[i].push(resposta[i][j].marca);
+                    }
+
+                    datasets_[i] = {};
+                    if(i === 0){
+                        datasets_[i].label = "Mensagens";
+                    }else{
+                        datasets_[i].label = "Tráfego";
+                    }
+
+                    datasets_[i].data = dados[i];
+                    datasets_[i].backgroundColor = colors[i];
+                    datasets_[i].borderColor = colors[i];
+                    datasets_[i].hoverBorderColor = 'rgba(200, 200, 200, 1)';
+                    datasets_[i].fill = false
+
                 }
 
-                chart.data.datasets[0].label = "bytes"
-                chart.update();
+                chart.data.labels = data_label[0];
                 console.log(dados);
-                setTimeout(carrega_dados_grafico, 10000);
+                chart.update();
+                timer = setTimeout(carrega_dados_grafico, 10000);
+
             }
         };
 
@@ -147,7 +165,13 @@
     }
 
     colors.push(dynamicColors());
+    colors.push(dynamicColors());
     carrega_dados_grafico();
+
+    periodo.addEventListener('change',function(){
+        console.log('change');
+        carrega_dados_grafico();
+    })
 </script>
 
 </div>
