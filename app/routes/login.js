@@ -23,6 +23,10 @@ module.exports = function(app){
 	})
 
 	app.get('/password/change',function(request, response){
-
+		if(request.session.logged){
+			response.redirect("/home");
+		}else{
+			response.render('login/index');
+		}
 	})
 };

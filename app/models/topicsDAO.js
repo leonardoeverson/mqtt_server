@@ -17,7 +17,6 @@ topicsDAO.prototype.publish_metrics_db = function(dados, callback){
 
 topicsDAO.prototype.traffic_message_metric_db = function(dados, callback){
 
-
     let query;
     if(dados.periodo == 1){
         query = "select count(*) as quantidade, timestamp as marca from mqtt_metrics where DAY(timestamp) = DAY(CURDATE())";
@@ -27,7 +26,6 @@ topicsDAO.prototype.traffic_message_metric_db = function(dados, callback){
         query += "and user_id ="+dados.user_id;
         query += " group by(hour(timestamp)) asc;";
     }else{
-
         query = "SELECT * FROM(select count(MINUTE(timestamp)) as quantidade, timestamp as tempo, DATE_FORMAT(timestamp, '%T') as marca ";
         query += "from mqtt_metrics where DAY(timestamp) = DAY(CURDATE()) and user_id =" +dados.user_id;
         query += " group by hour(tempo), minute(tempo) order by tempo desc limit 30) s1 order by tempo asc;";
@@ -36,8 +34,6 @@ topicsDAO.prototype.traffic_message_metric_db = function(dados, callback){
         query += " group by hour(tempo), minute(tempo) order by tempo desc limit 30) s2 order by tempo asc;";
     }
 
-
-    console.log(query);
     this.connection.query(query, dados, callback);
 };
 

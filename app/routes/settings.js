@@ -26,12 +26,14 @@ module.exports =  function(app){
     });
 
     app.get('/server/metrics', function(request, response){
-        let body = request.query;
+        if(request.session.logged){
+            let body = request.query;
 
-        if(body.filtro == 1 || body.filtro == 2 ){
-            app.app.controllers.topics.message_metric(app, request, response);
-        }else{
-            app.app.controllers.topics.conn_metrics(app, request, response);
+            if(body.filtro == 1 || body.filtro == 2 ){
+                app.app.controllers.topics.message_metric(app, request, response);
+            }else{
+                app.app.controllers.topics.conn_metrics(app, request, response);
+            }
         }
     });
 };
