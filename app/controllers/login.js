@@ -6,12 +6,14 @@ module.exports.login_usuario = function(app, request, response){
 
 	loginUsuario.valida_login(body, function(error, result){
 		if(!error && result.length > 0){
-			bcrypt.compare(body.senha, result[0].senha,  function (err, res) {
+			bcrypt.compare(body.senha, result[0].senha,  async function (err, res) {
 				if (res === true) {
 
 					request.session.id_user = result[0].id_user;
 					request.session.logged = true;
 					app.app.controllers.connections.db_end_connection(conn);
+					app.app.controllers.tokens.token_check(app, request);
+
 					response.redirect("/home");
 
 				} else {
