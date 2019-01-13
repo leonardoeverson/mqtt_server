@@ -8,10 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/tokens.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/tokens.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/tokensDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/tokensDAO.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,8 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/tokens.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="654">
-              <caret line="60" column="47" selection-start-line="60" selection-start-column="47" selection-end-line="60" selection-end-column="47" />
+            <state relative-caret-position="510">
+              <caret line="41" column="19" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -413,13 +410,13 @@
       <workItem from="1547252552221" duration="2701000" />
       <workItem from="1547294383457" duration="41000" />
       <workItem from="1547294466980" duration="16657000" />
-      <workItem from="1547400153173" duration="4849000" />
+      <workItem from="1547400153173" duration="5162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="192303000" />
+    <option name="totallyTimeSpent" value="192616000" />
     <option name="showClosedTasks" value="false" />
   </component>
   <component name="TodoView">
@@ -790,8 +787,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/tokens.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="60" column="47" selection-start-line="60" selection-start-column="47" selection-end-line="60" selection-end-column="47" />
+        <state relative-caret-position="510">
+          <caret line="41" column="19" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
         </state>
       </provider>
     </entry>

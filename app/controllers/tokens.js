@@ -1,10 +1,6 @@
 let token_user_insert = function(app, request, dados){
     let conn = app.config.dbconn();
     let tokensDAO = new app.app.models.tokensDAO(conn);
-    let dados = [];
-
-    dados.uuid = require('uuid/v4')();
-    dados.user_id = request.session.id_user;
 
     return new Promise((resolve, reject)=>{
         tokensDAO.user_token_insert(dados, (error, result)=>{
@@ -25,7 +21,6 @@ let token_user_get = function(app, request, dados){
     let conn = app.config.dbconn();
     let tokensDAO = new app.app.models.tokensDAO(conn);
 
-
     return new Promise((resolve, reject)=>{
         tokensDAO.user_token_get(dados, (error, result)=>{
             if(!error){
@@ -45,8 +40,6 @@ let token_user_get = function(app, request, dados){
 module.exports.token_check = async function (app, request) {
 
     let dados = [];
-
-    dados.uuid = require('uuid/v4')();
     dados.user_id = request.session.id_user;
 
     try {
@@ -54,11 +47,12 @@ module.exports.token_check = async function (app, request) {
 
         if (check1.length > 0) {
             console.log('ch1', check1);
-            request.session.user_token = check1;
+            request.session.user_token = check1.token_value;
         } else {
+            dados.uuid = require('uuid/v4')();
             let check2 = await token_user_insert(app, request, dados);
             console.log('ch2', check2);
-            request.session.user_token = check2;
+            request.session.user_token = check2.dados.uuid;
         }
 
     } catch (e) {
