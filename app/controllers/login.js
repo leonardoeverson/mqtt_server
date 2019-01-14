@@ -82,7 +82,6 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 					client.conn.remotePort = port;
 					client.conn.method_ = method;
 					client.conn.id_user = result[0].id_user;
-					request.session.id_user = result[0].id_user;
 
 					//Finalização de conexão
 					app.app.controllers.connections.db_end_connection(conn);
