@@ -1,6 +1,6 @@
 module.exports.mqtt_conn = function (app, request, response) {
     let mqtt = require("mqtt");
-
+    let host = "ws://localhost:8888";
     let options = {
         keepalive: 10,
         clientId: clientId,

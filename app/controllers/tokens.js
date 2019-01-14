@@ -49,6 +49,7 @@ module.exports.token_check = async function (app, request) {
             console.log('ch1', check1);
             request.session.user_token = check1.token_value;
         } else {
+            //const namespace = '1b771b54-50e5-991e-68b3-da34ef1f79341';
             dados.uuid = require('uuid/v4')();
             let check2 = await token_user_insert(app, request, dados);
             console.log('ch2', check2);

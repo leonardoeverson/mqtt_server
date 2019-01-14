@@ -11,7 +11,11 @@ module.exports.login_usuario = function(app, request, response){
 
 					request.session.id_user = result[0].id_user;
 					request.session.logged = true;
+
+					//Finalização de conexão
 					app.app.controllers.connections.db_end_connection(conn);
+
+					//Recuperação de Token
 					app.app.controllers.tokens.token_check(app, request);
 
 					response.redirect("/home");
@@ -80,6 +84,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 					client.conn.id_user = result[0].id_user;
 					request.session.id_user = result[0].id_user;
 
+					//Finalização de conexão
 					app.app.controllers.connections.db_end_connection(conn);
 
 					let result1, result2;
@@ -108,6 +113,10 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 					try{
 						//controller de conexões
 						let resposta  = await app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_user, client.id, ip, port, device_id);
+
+						//Recuperação de token
+						//app.app.controllers.tokens.token_check(app, request);
+
 						client.conn.conn_id = resposta.insertId;
 					}catch (e) {
 						console.log(e)

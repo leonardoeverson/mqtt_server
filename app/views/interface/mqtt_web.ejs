@@ -36,8 +36,6 @@
 </div>
 <script>
     function conn_request(){
-        let periodo_ = periodo.value;
-        let filtro_ = filtro.value;
         let xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function () {
@@ -49,6 +47,5 @@
         xhttp.send();
     }
 
-    let conn;
 </script>
 <%- include('../footer'); %>
