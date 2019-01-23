@@ -6,16 +6,45 @@
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 <div class="col-sm-3">
     <form>
+        <h4>Publish</h4>
         <div class="form-group">
             <label for="exampleInputEmail1">Tópico</label>
             <input type="text" class="form-control">
+            <label for="qos_1">QoS</label>
+            <select class="form-control" id="qos_1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+            <div class="form-check" style="margin-top: 20px; margin-bottom: 20px">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Reter
+                </label>
+            </div>
             <label for="exampleInputEmail1">Mensagem</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" id="mensagem">
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 </div>
-<div class="col-sm-5">
+<div class="col-sm-3">
+    <form>
+        <h4>Subscribe</h4>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Tópico</label>
+            <input type="text" class="form-control">
+            <label for="qos_2">QoS</label>
+            <select class="form-control" id="qos_2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+<div class="col-sm-8" style="margin-top: 30px; margin-left: 15%">
     <table class="table">
         <thead>
         <tr>
