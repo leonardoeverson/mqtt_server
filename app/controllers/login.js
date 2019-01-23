@@ -108,8 +108,20 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
                 }
             }
         })
-    }else{
-        console.log("token");
+    } else if (username.search("token") > -1) {
+
+        //Id do usuário
+
+        //checa se o token é válido
+
+        //aceita conexão do usuário
+
+        //callback de aceitação da conexão do dispositivo
+        cb(null, true);
+
+    } else {
+        auth_error.returnCode = 4;
+        cb(auth_error, null);
     }
 
 };
@@ -147,6 +159,7 @@ async function conn_control(app, client, cb, auth_error, result, ip, port){
 
         client.conn.conn_id = resposta.insertId;
     }catch (e) {
+
         console.log(e)
     }
 

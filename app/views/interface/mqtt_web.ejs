@@ -65,20 +65,10 @@
 </div>
 <script>
 
-    <%
-        console.log(token)
-    %>
-    function conn_request(){
-        let xhttp = new XMLHttpRequest();
-
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                //document.getElementById("demo").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", "/server/conn/mqtt", true);
-        xhttp.send();
-    }
+    let options = {}
+    options.username = '<%= token %>';
+    options.clientId = "Mqtt WebClient"
+    let host = "ws://localhost:8888";
 
 </script>
 <%- include('../footer'); %>
