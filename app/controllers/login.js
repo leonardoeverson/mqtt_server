@@ -16,7 +16,7 @@ module.exports.login_usuario = function(app, request, response){
 					app.app.controllers.connections.db_end_connection(conn);
 
 					//Recuperação de Token
-                    app.app.controllers.tokens.token_check(app, request);
+                    request.session.user_token = await app.app.controllers.tokens.token_check(app, request);
 
 					response.redirect("/home");
 
