@@ -10,7 +10,6 @@ let persistence = aedesPersistenceMongoDB({url: 'mongodb://127.0.0.1:27017/aedes
 //Emitter
 let mqmongo = require('mqemitter-mongodb');
 
-
 let emitter = mqmongo({
     url: 'mongodb://localhost:27017/aedes_mq'
 });
@@ -36,7 +35,6 @@ server.on('connection', function(client) {
 ws.createServer({
   server: httpServer
 }, aedes.handle);
-
 
 httpServer.listen(wsPort, function () {
   console.log('Servidor websocket escutando na porta:', wsPort)

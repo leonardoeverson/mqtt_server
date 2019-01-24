@@ -1,8 +1,8 @@
 module.exports.login_usuario = function(app, request, response){
-	var conn = app.config.dbconn();
-	var loginUsuario = new app.app.models.loginDAO(conn);
-	var body = request.body;
-	var bcrypt = require('bcrypt');
+	let conn = app.config.dbconn();
+	let loginUsuario = new app.app.models.loginDAO(conn);
+	let body = request.body;
+	let bcrypt = require('bcrypt');
 
 	loginUsuario.valida_login(body, function(error, result){
 		if(!error && result.length > 0){
@@ -34,7 +34,6 @@ module.exports.login_usuario = function(app, request, response){
 
 			if(result.length === 0){
 				response.render("login/index",{validacao : [{'msg':'usuário não encontrado'}]});
-
 			}
 		}
 	})
@@ -42,39 +41,39 @@ module.exports.login_usuario = function(app, request, response){
 };
 
 
-module.exports.login_dispositivo = function(app, client, username, password, cb){
+module.exports.login_dispositivo = async function (app, client, username, password, cb) {
 
-	let conn = app.config.dbconn();
-	let loginUsuario = new app.app.models.loginDAO(conn);
-	let bcrypt = require('bcrypt');
-	let auth_error = new Error('Auth error');
-  	let ip, method, port;
-	dados = {};
-	dados.email = username;
-	  
-	try{
-  		method = "mqtt_socket";
-  		ip = client.conn.remoteAddress.replace("::ffff:","");
-  		port = client.conn.remotePort;
-  	}catch(e){
-  		console.log(e)
- 	}
+    let conn = app.config.dbconn();
+    let loginUsuario = new app.app.models.loginDAO(conn);
+    let bcrypt = require('bcrypt');
+    let auth_error = new Error('Auth error');
+    let ip, method, port;
+    dados = {};
+    dados.email = username;
 
-  	if(typeof(ip) == "undefined"){
-  		try{
-  			method = "websocket";
-  			ip = client.conn.socket._socket.remoteAddress.replace("::ffff:","");
-  			port = client.conn.socket._socket.remotePort;
-  		}catch(e){
-  			console.log(e)
-  		}
-  	}
+    try {
+        method = "mqtt_socket";
+        ip = client.conn.remoteAddress.replace("::ffff:", "");
+        port = client.conn.remotePort;
+    } catch (e) {
+        console.log(e)
+    }
 
-  	console.log(method, ip, port);
+    if (typeof (ip) == "undefined") {
+        try {
+            method = "websocket";
+            ip = client.conn.socket._socket.remoteAddress.replace("::ffff:", "");
+            port = client.conn.socket._socket.remotePort;
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
-  	if(username.search("token") === (-1)){
-        loginUsuario.valida_login(dados, function(error, result){
-            if(!error && result.length > 0){
+    console.log(method, ip, port);
+
+    if (username.search("token") === (-1)) {
+        loginUsuario.valida_login(dados, function (error, result) {
+            if (!error && result.length > 0) {
                 bcrypt.compare(password.toString(), result[0].senha, async function (err, res) {
                     if (res === true) {
 
@@ -95,14 +94,13 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
                     }
                 })
 
-            }else{
-                if(error){
+            } else {
+                if (error) {
                     auth_error.returnCode = 3;
                     cb(auth_error, null)
-
                 }
 
-                if(result.length === 0){
+                if (result.length === 0) {
                     auth_error.returnCode = 4;
                     cb(auth_error, null)
                 }
@@ -110,9 +108,11 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
         })
     } else if (username.search("token") > -1) {
 
+        //checa se o token é válido
+        let resposta = await app.app.controllers.tokens.token_user_compare(app, username.replace("token:",""));
+        console.log(resposta);
         //Id do usuário
         //conn_control(app, client, cb, auth_error, client.conn.id_user, client.conn.remoteIp, client.conn.remotePort);
-        //checa se o token é válido
 
         //aceita conexão do usuário
 
@@ -162,7 +162,6 @@ async function conn_control(app, client, cb, auth_error, id_user, ip, port){
 
         console.log(e)
     }
-
 
     //callback de aceitação da conexão do dispositivo
     cb(null, true);

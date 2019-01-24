@@ -12,6 +12,11 @@ tokensDAO.prototype.user_token_get = function(dados, callback){
     this.connection.query(query, callback);
 };
 
+tokensDAO.prototype.user_token_compare = function(dados, callback){
+    let query = 'select * from tokens where token_value="'+dados+'"';
+    this.connection.query(query, callback);
+};
+
 module.exports = function(){
     return tokensDAO;
-}
+};
