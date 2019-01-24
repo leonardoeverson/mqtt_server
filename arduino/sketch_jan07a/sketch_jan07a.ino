@@ -34,7 +34,7 @@ long lastMsg = 0;
 char msg[50];
 int value = 0;
 char* ptopic = "sensor/luz";
-char* stopic = "sensor/casa";
+char* stopic = "sensor/temp";
 
 void setup_wifi() {
 
@@ -128,7 +128,6 @@ void loop() {
     lastMsg = now;
     ++value;
     snprintf (msg, 50, "topic_teste_cbsd_teste", value);
-    Serial.print("Publish message: ");
     Serial.println(msg);
     client.publish(ptopic, msg);
   }

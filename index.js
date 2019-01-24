@@ -19,8 +19,13 @@ aedes.authenticate = function (client, username, password, callback) {
 };
 
 //Autorização de publish
-aedes.authorizePublish = function (client, packet, callback) {
-	callback(null)
+// aedes.authorizePublish = function (client, packet, callback) {
+// 	callback(null)
+// };
+
+aedes.authorizeForward = function (client, packet) {
+	//console.log(client);
+	return packet;
 };
 
 //Aedes Events
