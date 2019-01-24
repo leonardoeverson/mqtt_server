@@ -9,13 +9,13 @@
     <form>
         <h4>Publish</h4>
         <div class="form-group">
-            <label for="exampleInputEmail1">Tópico</label>
-            <input type="text" class="form-control">
+            <label for="topic_pub">Tópico</label>
+            <input type="text" class="form-control" id="topic_pub" required>
             <label for="qos_1">QoS</label>
             <select class="form-control" id="qos_1">
+                <option>0</option>
                 <option>1</option>
                 <option>2</option>
-                <option>3</option>
             </select>
             <div class="form-check" style="margin-top: 20px; margin-bottom: 20px">
                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
@@ -23,26 +23,26 @@
                     Reter
                 </label>
             </div>
-            <label for="exampleInputEmail1">Mensagem</label>
-            <input type="text" class="form-control" id="mensagem">
+            <label for="mensagem">Mensagem</label>
+            <input type="text" class="form-control" id="mensagem" required>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" id="pub_btn" class="btn btn-primary">Enviar</button>
     </form>
 </div>
 <div class="col-sm-3">
     <form>
         <h4>Subscribe</h4>
         <div class="form-group">
-            <label for="exampleInputEmail1">Tópico</label>
-            <input type="text" class="form-control">
+            <label for="topic_sub">Tópico</label>
+            <input type="text" class="form-control" id="topic_sub">
             <label for="qos_2">QoS</label>
             <select class="form-control" id="qos_2">
+                <option>0</option>
                 <option>1</option>
                 <option>2</option>
-                <option>3</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" id="subs_btn" class="btn btn-primary">Enviar</button>
     </form>
 </div>
 <div class="col-sm-8" style="margin-top: 30px; margin-left: 15%">
@@ -66,10 +66,10 @@
 </div>
 <script>
     let client = null;
-
+    let clientid = "mqtt_webclient_" + makeid();
     function server_connect(){
         let options = {
-            clientId: "mqtt_webclient_" + makeid(),
+            clientId: clientid,
             username: '<%= token %>',
             protocolId: 'MQTT',
             protocolVersion: 4,
@@ -115,15 +115,26 @@
 
     }
 
-    function publish(topic, message){
+    function publish(topic, message, qos){
+        console.log(topic);
+        console.log(message);
         if(client != null){
-            client.publish(topic, message,{qos: 0, retain: false});
+            try{
+                client.publish(topic, message,{qos: qos, retain: false});
+            }catch(e){
+                console.log(e);
+            }
+
+        }else{
+            alert("null connection!");
         }
     }
 
-    function subscribe(topic){
+    function subscribe(topic, qos){
         if(client != null){
             client.subscribe(topic, {qos: 0});
+        }else{
+            alert("null connection!");
         }
     }
 
@@ -138,5 +149,36 @@
     }
 
 
+    $('#pub_btn').on('click', function(event){
+        event.preventDefault();
+
+        if(topic_pub.value.trim().length === 0|| mensagem.value.trim().length === ""){
+            alert("valores vazios");
+            return;
+        }
+
+        let topic = topic_pub.value;
+        let qos = qos_1.value;
+        let mensagem_ = mensagem.value;
+
+        publish(topic, mensagem_, qos);
+
+    })
+
+
+    $('#subs_btn').on('click', function(event){
+        event.preventDefault();
+
+        if(topic_sub.value.trim().length === 0){
+            alert("tópico vazio");
+            return;
+        }
+
+        let topic = topic_sub.value;
+        let qos = qos_2.value;
+
+        subscribe(topic, qos);
+
+    })
 </script>
 <%- include('../footer'); %>

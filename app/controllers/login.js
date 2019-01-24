@@ -70,6 +70,11 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
     }
 
     console.log(method, ip, port);
+    //informações de conexão do cliente conectado
+
+    client.conn.remoteIp = ip;
+    client.conn.remotePort = port;
+    client.conn.method_ = method;
 
     if (username.search("token") === (-1)) {
         loginUsuario.valida_login(dados, function (error, result) {
@@ -77,10 +82,6 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
                 bcrypt.compare(password.toString(), result[0].senha, async function (err, res) {
                     if (res === true) {
 
-                        //informações de conexão do cliente conectado
-                        client.conn.remoteIp = ip;
-                        client.conn.remotePort = port;
-                        client.conn.method_ = method;
                         client.conn.id_user = result[0].id_user;
 
                         //Finalização de conexão
@@ -111,13 +112,11 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
         //checa se o token é válido
         let resposta = await app.app.controllers.tokens.token_user_compare(app, username.replace("token:",""));
         console.log(resposta);
+
         //Id do usuário
+        client.conn.id_user = resposta[0].user_id;
         conn_control(app, client, cb, auth_error, resposta[0].user_id, ip, port);
 
-        //aceita conexão do usuário
-
-        //callback de aceitação da conexão do dispositivo
-        //cb(null, true);
 
     } else {
         auth_error.returnCode = 4;
