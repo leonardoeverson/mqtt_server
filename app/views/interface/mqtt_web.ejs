@@ -69,7 +69,7 @@
 
     function server_connect(){
         let options = {
-            clientId: "Mqtt WebClient",
+            clientId: "mqtt_webclient_" + makeid(),
             username: '<%= token %>',
             protocolId: 'MQTT',
             protocolVersion: 4,
@@ -104,7 +104,7 @@
             });
 
             client.on('close', function () {
-                console.log(clientId + ' disconnected')
+                console.log(options.clientId + ' disconnected')
             })
 
             return true;
@@ -125,6 +125,16 @@
         if(client != null){
             client.subscribe(topic, {qos: 0});
         }
+    }
+
+    function makeid() {
+        let text = "";
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (let i = 0; i < 10; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
     }
 
 
