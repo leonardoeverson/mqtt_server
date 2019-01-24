@@ -112,12 +112,12 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
         let resposta = await app.app.controllers.tokens.token_user_compare(app, username.replace("token:",""));
         console.log(resposta);
         //Id do usuário
-        //conn_control(app, client, cb, auth_error, client.conn.id_user, client.conn.remoteIp, client.conn.remotePort);
+        conn_control(app, client, cb, auth_error, resposta[0].user_id, ip, port);
 
         //aceita conexão do usuário
 
         //callback de aceitação da conexão do dispositivo
-        cb(null, true);
+        //cb(null, true);
 
     } else {
         auth_error.returnCode = 4;
