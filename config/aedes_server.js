@@ -1,9 +1,8 @@
-
-var httpServer = require('http').createServer();
-var ws = require('websocket-stream');
-var port = 1883;
-var wsPort = 8888;
-var aedesPersistenceMongoDB = require('aedes-persistence-mongodb')
+let httpServer = require('http').createServer();
+let ws = require('websocket-stream');
+let port = 1883;
+let wsPort = 8888;
+let aedesPersistenceMongoDB = require('aedes-persistence-mongodb');
 
 //Aedes Persistence
 let persistence = aedesPersistenceMongoDB({url: 'mongodb://127.0.0.1:27017/aedes_persistence'});
@@ -16,14 +15,11 @@ let emitter = mqmongo({
     url: 'mongodb://localhost:27017/aedes_mq'
 });
 
-
 //Aedes Server
 let aedes = require("aedes")({
     mq: emitter,
     persistence: persistence
 });
-
-//var aedes = require("aedes")();
 
 let server = require('net').createServer(aedes.handle);
 

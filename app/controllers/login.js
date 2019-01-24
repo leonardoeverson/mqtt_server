@@ -87,7 +87,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
                         //Finalização de conexão
                         app.app.controllers.connections.db_end_connection(conn);
 
-                        conn_control(app, client, cb, auth_error, result, ip, port);
+                        conn_control(app, client, cb, auth_error, result[0].id_user, ip, port);
 
                     } else {
                         auth_error.returnCode = 4;
@@ -111,7 +111,7 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
     } else if (username.search("token") > -1) {
 
         //Id do usuário
-
+        //conn_control(app, client, cb, auth_error, client.conn.id_user, client.conn.remoteIp, client.conn.remotePort);
         //checa se o token é válido
 
         //aceita conexão do usuário
@@ -126,15 +126,15 @@ module.exports.login_dispositivo = function(app, client, username, password, cb)
 
 };
 
-async function conn_control(app, client, cb, auth_error, result, ip, port){
+async function conn_control(app, client, cb, auth_error, id_user, ip, port){
     let result1, result2;
 
     try{
         //Verifica se o dispositivo existe no registro
-        result1 = await app.app.controllers.devices.check_device_reg(app, result[0].id_user, client.id);
+        result1 = await app.app.controllers.devices.check_device_reg(app, id_user, client.id);
 
         //Verifica se é permitida a conexão do dispositivo
-        result2 = await app.app.controllers.settings.get_server_option(app, 1, result[0].id_user);
+        result2 = await app.app.controllers.settings.get_server_option(app, 1, id_user);
     }catch (e) {
         console.log(e)
     }
@@ -152,7 +152,7 @@ async function conn_control(app, client, cb, auth_error, result, ip, port){
 
     try{
         //controller de conexões
-        let resposta  = await app.app.controllers.connections.conn_mgmt_insert(app, result[0].id_user, client.id, ip, port, device_id);
+        let resposta  = await app.app.controllers.connections.conn_mgmt_insert(app, id_user, client.id, ip, port, device_id);
 
         //Recuperação de token
         //app.app.controllers.tokens.token_check(app, request);

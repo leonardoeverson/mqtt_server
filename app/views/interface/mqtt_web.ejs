@@ -4,6 +4,7 @@
     <title>WebClient</title>
 </head>
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 <div class="col-sm-3">
     <form>
         <h4>Publish</h4>
@@ -64,11 +65,68 @@
     </table>
 </div>
 <script>
+    let client = null;
 
-    let options = {}
-    options.username = '<%= token %>';
-    options.clientId = "Mqtt WebClient"
-    let host = "ws://localhost:8888";
+    function server_connect(){
+        let options = {
+            clientId: "Mqtt WebClient",
+            username: '<%= token %>',
+            protocolId: 'MQTT',
+            protocolVersion: 4,
+            clean: true,
+            reconnectPeriod: 1000,
+            connectTimeout: 30 * 1000,
+            will: {
+                topic: 'WillMsg',
+                payload: 'Connection Closed abnormally..!',
+                qos: 0,
+                retain: false
+            },
+            rejectUnauthorized: false
+        }
+
+        let host = "ws://localhost:8888";
+
+        try{
+            client = mqtt.connect(host, options);
+
+            client.on('error', function (err) {
+                console.log(err);
+                client.end()
+            });
+
+            client.on('connect', function () {
+                console.log('client connected:' + options.clientId)
+            });
+
+            client.on('message', function (topic, message, packet) {
+                console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)
+            });
+
+            client.on('close', function () {
+                console.log(clientId + ' disconnected')
+            })
+
+            return true;
+        }catch (e) {
+            console.log(e)
+            return false;
+        }
+
+    }
+
+    function publish(topic, message){
+        if(client != null){
+            client.publish(topic, message,{qos: 0, retain: false});
+        }
+    }
+
+    function subscribe(topic){
+        if(client != null){
+            client.subscribe(topic, {qos: 0});
+        }
+    }
+
 
 </script>
 <%- include('../footer'); %>
