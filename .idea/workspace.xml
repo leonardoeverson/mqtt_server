@@ -8,12 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/controllers/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/utilsDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/connections.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/connections.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/topics.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/topics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mqtt_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/mqtt_db.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,35 +56,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/aedes_server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="42" column="23" lean-forward="true" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/login.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/utils.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="289">
+              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/topics.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="96" column="19" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/utilsDAO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="2" lean-forward="true" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+            <state relative-caret-position="68">
+              <caret line="4" column="63" lean-forward="true" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -160,7 +148,6 @@
         <option value="$PROJECT_DIR$/app/models/mongodbDAO.js" />
         <option value="$PROJECT_DIR$/app/views/login/index.ejs" />
         <option value="$PROJECT_DIR$/config/dbconn.js" />
-        <option value="$PROJECT_DIR$/app/controllers/topics.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/models/topicsDAO.js" />
         <option value="$PROJECT_DIR$/app/routes/settings.js" />
@@ -182,15 +169,16 @@
         <option value="$PROJECT_DIR$/node_modules/mqemitter-mongodb/mqemitter-mongodb.js" />
         <option value="$PROJECT_DIR$/config/aedes_server.js" />
         <option value="$PROJECT_DIR$/app/controllers/connections.js" />
-        <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/node_modules/mqemitter/mqemitter.js" />
-        <option value="$PROJECT_DIR$/app/controllers/utils.js" />
         <option value="$PROJECT_DIR$/app/models/utilsDAO.js" />
+        <option value="$PROJECT_DIR$/app/controllers/utils.js" />
+        <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/app/controllers/topics.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="83" />
+    <option name="x" value="97" />
     <option name="y" value="-8" />
     <option name="width" value="1040" />
     <option name="height" value="742" />
@@ -417,13 +405,13 @@
       <workItem from="1548251765273" duration="13494000" />
       <workItem from="1548344854207" duration="13189000" />
       <workItem from="1548374409906" duration="6986000" />
-      <workItem from="1548417987049" duration="6518000" />
+      <workItem from="1548417987049" duration="14232000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="243100000" />
+    <option name="totallyTimeSpent" value="250814000" />
     <option name="showClosedTasks" value="false" />
   </component>
   <component name="TodoView">
@@ -439,7 +427,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4951246" visible="true" weight="0.16641453" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4951246" visible="true" weight="0.16641453" />
       <window_info id="Structure" order="1" sideWeight="0.503792" side_tool="true" weight="0.21428572" />
       <window_info active="true" id="npm" order="2" sideWeight="0.5048754" side_tool="true" visible="true" weight="0.1641791" />
       <window_info id="Favorites" order="3" sideWeight="0.5016251" side_tool="true" weight="0.20895523" />
@@ -461,8 +449,8 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" x="540" y="47" width="286" height="633" id="Database" order="3" visible="true" weight="0.15204236" />
-      <window_info anchor="right" x="1160" y="139" width="206" height="589" id="Time Tracking" order="4" weight="0.18986385" />
+      <window_info anchor="right" x="540" y="47" width="286" height="633" id="Database" order="3" weight="0.15204236" />
+      <window_info anchor="right" x="1160" y="139" width="206" height="589" id="Time Tracking" order="4" visible="true" weight="0.18986385" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,13 +559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="39" column="11" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/topics.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>
@@ -740,50 +721,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="37" column="15" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/aedes/types/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="71" column="2" selection-start-line="71" selection-start-column="2" selection-end-line="71" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/fastparallel/parallel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2945" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/mqemitter/mqemitter.js">
+    <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1339">
-          <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/aedes/aedes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/aedes_server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="42" column="23" lean-forward="true" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
+        <state relative-caret-position="357">
+          <caret line="21" column="62" lean-forward="true" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="43" />
+        <state relative-caret-position="714">
+          <caret line="87" column="24" selection-start-line="87" selection-start-column="24" selection-end-line="87" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/aedes_server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="31" column="26" lean-forward="true" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/mqemitter/mqemitter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1462">
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/aedes/aedes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-84">
+          <caret line="41" column="29" lean-forward="true" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/aedes/types/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="71" column="2" selection-start-line="71" selection-start-column="2" selection-end-line="71" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -808,17 +796,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/utils.js">
+    <entry file="file://$PROJECT_DIR$/app/models/utilsDAO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="68">
+          <caret line="4" column="63" lean-forward="true" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/utilsDAO.js">
+    <entry file="file://$PROJECT_DIR$/app/controllers/topics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="2" lean-forward="true" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+        <state relative-caret-position="441">
+          <caret line="96" column="19" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
         </state>
       </provider>
     </entry>

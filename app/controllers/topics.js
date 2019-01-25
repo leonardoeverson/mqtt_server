@@ -77,3 +77,24 @@ module.exports.conn_metrics = function(app, request, response){
         }
     })
 };
+
+module.exports.topic_validation = function(app, topic, prefix, callback){
+    /*
+    let Qlobber = require('qlobber').Qlobber;
+    let opts = {};
+    let assert = require('assert');
+
+    opts.wildcardOne = '+';
+    opts.wildcardSome = '#';
+    opts.separator = '/';
+
+    let matcher = new Qlobber(opts);
+    matcher.add(topic, "Valor");
+    assert.deepEqual(matcher.match(prefix), ['it matched!']);
+    */
+
+    if(topic.search(prefix)){
+        callback();
+    }
+
+};
