@@ -23,18 +23,6 @@ aedes.authenticate = function (client, username, password, callback) {
 // 	callback(null)
 // };
 
-aedes.authorizeForward = function (client, packet, id_user, numbr) {
-
-	//console.log(client.broker);
-	//client.broker;
-	if (client.conn.id_user === id_user) {
-		return packet;
-	} else {
-		return undefined;
-	}
-
-};
-
 //Aedes Events
 aedes.on("clientDisconnect",function(client){
 	console.log('cliente de id:', client.id, 'desconectou');

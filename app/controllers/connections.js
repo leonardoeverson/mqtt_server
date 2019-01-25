@@ -4,7 +4,7 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 
 	return new Promise((resolve, reject)=>{
 		connMgmt.conn_db_insert(user_id, client_id, client_address, client_port, db_device_id, function(err, result){
-			if(!err && result.affectedRows > 0){
+			if(!err){
 				console.log("conn_db_insert");
 				app.app.controllers.connections.db_end_connection(conn);
 				resolve(result);
