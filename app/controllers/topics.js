@@ -105,7 +105,7 @@ module.exports.topic_validation = function(app, prefix, topic, callback, type){
     else if(type === 2){
         let sub = topic.topic;
         if(sub.search(prefix) > -1){
-            callback(null, sub);
+            callback(null, topic);
         }else{
             console.log("não é possível subscrever neste tópico");
             return callback(new Error('tópico não permitido'));

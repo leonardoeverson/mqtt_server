@@ -57,7 +57,7 @@ module.exports.token_user_compare = function(app, dados){
 
 module.exports.token_check = function (app, request) {
 
-    let dados = [];
+    let dados = {};
     dados.user_id = request.session.id_user;
 
     return new Promise(async (resolve, reject)=>{
@@ -67,10 +67,10 @@ module.exports.token_check = function (app, request) {
             if (check1.length > 0) {
                 resolve("token:"+check1[0].token_value);
             } else {
-                dados.uuid = require('uuid/v4')();
+                dados.token_value = require('uuid/v4')();
                 let check2 = await token_user_insert(app, dados);
                 console.log('ch2', check2[0]);
-                resolve("token:"+check2[0].dados.uuid);
+                resolve("token:"+dados.token_value);
             }
 
         } catch (e) {
