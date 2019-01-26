@@ -82,9 +82,10 @@ module.exports.connected_devices = function(app, request, response){
 module.exports.check_device_reg = function(app, user_id, client_id){
 	let conn = app.config.dbconn();
 	let dadosDispositivos = new app.app.models.devicesDAO(conn);
+
 	let dados = {};
 	dados.user_id = user_id;
-	dados.client_id = client_id;
+	dados.device_name = client_id;
 
 	return new Promise((resolve, reject)=>{
 		dadosDispositivos.check_device_reg_db(dados, function(error, result){

@@ -8,13 +8,13 @@ cadastroDAO.prototype.grava_usuario = function(dados, callback) {
 	let salt = bcrypt.genSaltSync(saltRounds);
 	dados.senha = bcrypt.hashSync(dados.senha, salt);
 
-	let query = "insert into users (nome, email, senha) values('"+dados.nome+"','"+dados.email+"','"+dados.senha+"')";
-	this.connection.query(query, callback);
+	let query = "insert into users (nome, email, senha) values(?)";
+	this.connection.query(query, [dados], callback);
 };
 
 cadastroDAO.prototype.verifica_email_existente = function(email, callback) {
-	let query = "select email from users where email = '"+email+"'";
-	this.connection.query(query, callback);
+	let query = "select email from users where email = ?";
+	this.connection.query(query, [email], callback);
 };
 
 module.exports = function() {

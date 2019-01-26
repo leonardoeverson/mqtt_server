@@ -20,21 +20,22 @@ topicsDAO.prototype.traffic_message_metric_db = function(dados, callback){
     let query;
     if(dados.periodo == 1){
         query = "select count(*) as quantidade, timestamp as marca from mqtt_metrics where DAY(timestamp) = DAY(CURDATE())";
-        query += "and user_id ="+dados.user_id;
+        query += "and user_id = ?";
         query += " group by(hour(timestamp)) asc;";
         query += "select sum(length) as quantidade, timestamp as marca from mqtt_metrics where DAY(timestamp) = DAY(CURDATE())";
-        query += "and user_id ="+dados.user_id;
+        query += "and user_id = ?";
         query += " group by(hour(timestamp)) asc;";
     }else{
         query = "SELECT * FROM(select count(MINUTE(timestamp)) as quantidade, timestamp as tempo, DATE_FORMAT(timestamp, '%T') as marca ";
-        query += "from mqtt_metrics where DAY(timestamp) = DAY(CURDATE()) and user_id =" +dados.user_id;
+        query += "from mqtt_metrics where DAY(timestamp) = DAY(CURDATE()) and user_id = ?" ;
         query += " group by hour(tempo), minute(tempo) order by tempo desc limit 30) s1 order by tempo asc;";
         query += "SELECT * FROM(select count(MINUTE(timestamp)), sum(length) as quantidade, timestamp as tempo, DATE_FORMAT(timestamp, '%T') as marca ";
-        query += "from mqtt_metrics where DAY(timestamp) = DAY(CURDATE()) and user_id =" +dados.user_id;
+        query += "from mqtt_metrics where DAY(timestamp) = DAY(CURDATE()) and user_id = ?" ;
         query += " group by hour(tempo), minute(tempo) order by tempo desc limit 30) s2 order by tempo asc;";
     }
 
-    this.connection.query(query, dados, callback);
+    this.connection.query(query, [dados.user_id, dados.user_id], callback);
+    this.connection.query(query, [dados.user_id, dados.user_id], callback);
 };
 
 

@@ -4,8 +4,8 @@ function serverDAO(conn){
 
 serverDAO.prototype.get_server_user_settings = function (user_id, callback){
     let query = "select * from server_options left join user_options on server_options.id_option = user_options.id_server_option";
-    query += " and user_options.user_id = " + user_id + " order by server_options.id_option";
-    conn.query(query, callback);
+    query += " and user_options.user_id = ? order by server_options.id_option";
+    conn.query(query, [user_id], callback);
 };
 
 serverDAO.prototype.post_server_user_settings = function (dados, user_id, callback){
@@ -15,7 +15,7 @@ serverDAO.prototype.post_server_user_settings = function (dados, user_id, callba
             if (err) {
                 callback(err, null);
             }
-            conn.query('DELETE FROM user_options where user_id = '+ user_id, function(err, result) {
+            conn.query('DELETE FROM user_options where user_id = ?',[user_id], function(err, result) {
                 if (err) {
                     conn.rollback(function() {
                         callback(err, null);
@@ -42,7 +42,7 @@ serverDAO.prototype.post_server_user_settings = function (dados, user_id, callba
             });
         });
     }else{
-        conn.query('DELETE FROM user_options where user_id = '+ user_id, callback);
+        conn.query('DELETE FROM user_options where user_id = ?', [user_id], callback);
     }
 
 };
