@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           10.2.14-MariaDB - mariadb.org binary distribution
+-- Versão do servidor:           10.3.11-MariaDB - mariadb.org binary distribution
 -- OS do Servidor:               Win32
 -- HeidiSQL Versão:              9.4.0.5125
 -- --------------------------------------------------------
@@ -19,17 +19,19 @@ USE `mqtt`;
 -- Copiando estrutura para tabela mqtt.conn_clients
 CREATE TABLE IF NOT EXISTS `conn_clients` (
   `id_conn` int(11) NOT NULL AUTO_INCREMENT,
-  `id_user` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `client_id` varchar(200) NOT NULL,
   `client_address` varchar(100) NOT NULL,
   `client_port` int(6) NOT NULL,
   `device_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=1333 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1509 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.conn_clients: ~0 rows (aproximadamente)
-DELETE FROM `conn_clients`;
+-- Copiando dados para a tabela mqtt.conn_clients: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `conn_clients` DISABLE KEYS */;
+REPLACE INTO `conn_clients` (`id_conn`, `user_id`, `client_id`, `client_address`, `client_port`, `device_id`) VALUES
+	(1507, 3, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 49338, 0),
+	(1508, 7, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 49337, 0);
 /*!40000 ALTER TABLE `conn_clients` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.conn_log
@@ -39,15 +41,14 @@ CREATE TABLE IF NOT EXISTS `conn_log` (
   `client_id` varchar(100) DEFAULT NULL,
   `client_address` varchar(100) DEFAULT NULL,
   `client_port` int(11) DEFAULT NULL,
-  `id_user` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=952 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1122 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.conn_log: ~932 rows (aproximadamente)
-DELETE FROM `conn_log`;
+-- Copiando dados para a tabela mqtt.conn_log: ~1.055 rows (aproximadamente)
 /*!40000 ALTER TABLE `conn_log` DISABLE KEYS */;
-INSERT INTO `conn_log` (`id_conn`, `device_id`, `client_id`, `client_address`, `client_port`, `id_user`, `datetime`) VALUES
+REPLACE INTO `conn_log` (`id_conn`, `device_id`, `client_id`, `client_address`, `client_port`, `user_id`, `datetime`) VALUES
 	(1, NULL, 'ESP8266Client-a619', '::ffff:192.168.10.104', 49166, 3, '2018-12-27 19:25:59'),
 	(2, NULL, 'ESP8266Client-af5b', '::ffff:192.168.10.104', 49167, 3, '2018-12-27 19:26:53'),
 	(3, NULL, 'ESP8266Client-227b', '::ffff:192.168.10.104', 49168, 3, '2018-12-27 19:27:07'),
@@ -995,7 +996,177 @@ INSERT INTO `conn_log` (`id_conn`, `device_id`, `client_id`, `client_address`, `
 	(948, NULL, '0254af89-ce82-4dbb-8e44-c11029325ef51548420092684', '127.0.0.1', 40613, 7, '2019-01-25 11:36:01'),
 	(949, NULL, '4c7067d7-c59f-43dd-9bd7-df53b94a66c11548420092651', '127.0.0.1', 40612, 3, '2019-01-25 11:36:01'),
 	(950, NULL, '0254af89-ce82-4dbb-8e44-c11029325ef51548420092684', '127.0.0.1', 40647, 7, '2019-01-25 11:38:14'),
-	(951, NULL, '4c7067d7-c59f-43dd-9bd7-df53b94a66c11548420092651', '127.0.0.1', 40648, 3, '2019-01-25 11:38:14');
+	(951, NULL, '4c7067d7-c59f-43dd-9bd7-df53b94a66c11548420092651', '127.0.0.1', 40648, 3, '2019-01-25 11:38:14'),
+	(952, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548522898379', '127.0.0.1', 62137, 3, '2019-01-26 14:14:58'),
+	(953, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62139, 7, '2019-01-26 14:14:58'),
+	(954, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62148, 7, '2019-01-26 14:15:31'),
+	(955, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62246, 7, '2019-01-26 14:18:52'),
+	(956, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548522898379', '127.0.0.1', 62247, 3, '2019-01-26 14:18:52'),
+	(957, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62314, 7, '2019-01-26 14:19:27'),
+	(958, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548522898379', '127.0.0.1', 62315, 3, '2019-01-26 14:19:27'),
+	(959, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548522898379', '127.0.0.1', 62333, 3, '2019-01-26 14:19:45'),
+	(960, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62332, 7, '2019-01-26 14:19:45'),
+	(961, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62351, 7, '2019-01-26 14:19:55'),
+	(962, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548522898379', '127.0.0.1', 62352, 3, '2019-01-26 14:19:55'),
+	(963, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62373, 7, '2019-01-26 14:20:02'),
+	(964, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548522898379', '127.0.0.1', 62372, 3, '2019-01-26 14:20:02'),
+	(965, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 62403, 3, '2019-01-26 14:21:10'),
+	(966, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62410, 7, '2019-01-26 14:21:16'),
+	(967, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62417, 7, '2019-01-26 14:21:30'),
+	(968, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62424, 7, '2019-01-26 14:21:31'),
+	(969, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62431, 7, '2019-01-26 14:21:47'),
+	(970, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 62432, 3, '2019-01-26 14:21:47'),
+	(971, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 62451, 3, '2019-01-26 14:22:22'),
+	(972, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62452, 7, '2019-01-26 14:22:22'),
+	(973, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 62473, 3, '2019-01-26 14:23:00'),
+	(974, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62472, 7, '2019-01-26 14:23:00'),
+	(975, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62494, 7, '2019-01-26 14:23:09'),
+	(976, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62705, 7, '2019-01-26 14:26:06'),
+	(977, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 62711, 3, '2019-01-26 14:26:06'),
+	(978, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62733, 7, '2019-01-26 14:26:23'),
+	(979, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62740, 7, '2019-01-26 14:26:29'),
+	(980, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62747, 7, '2019-01-26 14:26:31'),
+	(981, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62754, 7, '2019-01-26 14:27:05'),
+	(982, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62763, 7, '2019-01-26 14:27:11'),
+	(983, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62772, 7, '2019-01-26 14:27:22'),
+	(984, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62784, 7, '2019-01-26 14:28:52'),
+	(985, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62803, 7, '2019-01-26 14:29:21'),
+	(986, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62815, 7, '2019-01-26 14:29:46'),
+	(987, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62830, 7, '2019-01-26 14:30:40'),
+	(988, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 62829, 3, '2019-01-26 14:30:40'),
+	(989, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 62857, 3, '2019-01-26 14:31:41'),
+	(990, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62858, 7, '2019-01-26 14:31:41'),
+	(991, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62877, 7, '2019-01-26 14:31:56'),
+	(992, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62884, 7, '2019-01-26 14:32:17'),
+	(993, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62894, 7, '2019-01-26 14:32:33'),
+	(994, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548522898414', '127.0.0.1', 62905, 7, '2019-01-26 14:33:25'),
+	(995, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 62906, 3, '2019-01-26 14:33:25'),
+	(996, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 62925, 7, '2019-01-26 14:33:30'),
+	(997, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 62944, 7, '2019-01-26 14:33:41'),
+	(998, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 62958, 7, '2019-01-26 14:33:49'),
+	(999, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 62970, 7, '2019-01-26 14:34:38'),
+	(1000, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 62969, 3, '2019-01-26 14:34:38'),
+	(1001, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 62993, 7, '2019-01-26 14:34:44'),
+	(1002, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 63010, 7, '2019-01-26 14:34:48'),
+	(1003, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 63017, 7, '2019-01-26 14:35:05'),
+	(1004, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63018, 3, '2019-01-26 14:35:05'),
+	(1005, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 63039, 7, '2019-01-26 14:35:15'),
+	(1006, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63082, 3, '2019-01-26 14:36:39'),
+	(1007, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 63083, 7, '2019-01-26 14:36:39'),
+	(1008, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 63102, 7, '2019-01-26 14:36:46'),
+	(1009, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63108, 3, '2019-01-26 14:36:54'),
+	(1010, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 63109, 7, '2019-01-26 14:36:54'),
+	(1011, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 63128, 7, '2019-01-26 14:37:00'),
+	(1012, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 63136, 7, '2019-01-26 14:37:37'),
+	(1013, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63194, 3, '2019-01-26 14:38:27'),
+	(1014, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524010817', '127.0.0.1', 63195, 7, '2019-01-26 14:38:27'),
+	(1015, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63214, 7, '2019-01-26 14:38:32'),
+	(1016, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63368, 7, '2019-01-26 14:40:11'),
+	(1017, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63401, 3, '2019-01-26 14:40:31'),
+	(1018, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63402, 7, '2019-01-26 14:40:31'),
+	(1019, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63470, 7, '2019-01-26 14:41:18'),
+	(1020, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63471, 3, '2019-01-26 14:41:18'),
+	(1021, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63497, 7, '2019-01-26 14:41:36'),
+	(1022, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63498, 3, '2019-01-26 14:41:36'),
+	(1023, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63527, 7, '2019-01-26 14:41:44'),
+	(1024, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63528, 3, '2019-01-26 14:41:44'),
+	(1025, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63544, 7, '2019-01-26 14:41:54'),
+	(1026, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63545, 3, '2019-01-26 14:41:54'),
+	(1027, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63588, 3, '2019-01-26 14:42:57'),
+	(1028, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63653, 7, '2019-01-26 14:43:49'),
+	(1029, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63654, 3, '2019-01-26 14:43:49'),
+	(1030, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63697, 3, '2019-01-26 14:44:18'),
+	(1031, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63698, 7, '2019-01-26 14:44:18'),
+	(1032, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63821, 3, '2019-01-26 14:45:57'),
+	(1033, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63820, 7, '2019-01-26 14:45:57'),
+	(1034, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63931, 7, '2019-01-26 14:47:19'),
+	(1035, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63930, 3, '2019-01-26 14:47:19'),
+	(1036, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 63958, 7, '2019-01-26 14:48:07'),
+	(1037, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 63957, 3, '2019-01-26 14:48:07'),
+	(1038, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64051, 3, '2019-01-26 14:50:25'),
+	(1039, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64058, 3, '2019-01-26 14:50:31'),
+	(1040, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64071, 7, '2019-01-26 14:51:41'),
+	(1041, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64088, 3, '2019-01-26 14:51:48'),
+	(1042, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64087, 7, '2019-01-26 14:51:48'),
+	(1043, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64110, 7, '2019-01-26 14:51:52'),
+	(1044, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64111, 3, '2019-01-26 14:51:52'),
+	(1045, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64132, 3, '2019-01-26 14:53:46'),
+	(1046, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64131, 7, '2019-01-26 14:53:46'),
+	(1047, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64151, 3, '2019-01-26 14:53:53'),
+	(1048, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64177, 3, '2019-01-26 14:55:10'),
+	(1049, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64196, 7, '2019-01-26 14:56:04'),
+	(1050, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64195, 3, '2019-01-26 14:56:04'),
+	(1051, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64219, 7, '2019-01-26 14:56:57'),
+	(1052, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64218, 3, '2019-01-26 14:56:57'),
+	(1053, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64237, 3, '2019-01-26 14:57:01'),
+	(1054, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64238, 7, '2019-01-26 14:57:01'),
+	(1055, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64269, 7, '2019-01-26 14:57:44'),
+	(1056, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64268, 3, '2019-01-26 14:57:44'),
+	(1057, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64286, 3, '2019-01-26 14:57:47'),
+	(1058, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64287, 7, '2019-01-26 14:57:47'),
+	(1059, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64315, 3, '2019-01-26 14:58:59'),
+	(1060, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64316, 7, '2019-01-26 14:58:59'),
+	(1061, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64340, 7, '2019-01-26 14:59:03'),
+	(1062, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64339, 3, '2019-01-26 14:59:03'),
+	(1063, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64370, 3, '2019-01-26 15:01:01'),
+	(1064, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64371, 7, '2019-01-26 15:01:01'),
+	(1065, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64413, 7, '2019-01-26 15:01:39'),
+	(1066, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64414, 3, '2019-01-26 15:01:39'),
+	(1067, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64441, 3, '2019-01-26 15:01:56'),
+	(1068, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64440, 7, '2019-01-26 15:01:56'),
+	(1069, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64462, 7, '2019-01-26 15:02:29'),
+	(1070, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64463, 3, '2019-01-26 15:02:29'),
+	(1071, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64481, 3, '2019-01-26 15:02:37'),
+	(1072, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64482, 7, '2019-01-26 15:02:37'),
+	(1073, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64521, 3, '2019-01-26 15:03:45'),
+	(1074, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64520, 7, '2019-01-26 15:03:45'),
+	(1075, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64556, 7, '2019-01-26 15:05:44'),
+	(1076, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64588, 3, '2019-01-26 15:06:07'),
+	(1077, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64589, 7, '2019-01-26 15:06:07'),
+	(1078, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64625, 7, '2019-01-26 15:07:25'),
+	(1079, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64624, 3, '2019-01-26 15:07:25'),
+	(1080, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64703, 7, '2019-01-26 15:10:51'),
+	(1081, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64738, 7, '2019-01-26 15:10:56'),
+	(1082, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64739, 3, '2019-01-26 15:10:56'),
+	(1083, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64761, 3, '2019-01-26 15:11:14'),
+	(1084, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64762, 7, '2019-01-26 15:11:14'),
+	(1085, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64797, 3, '2019-01-26 15:11:49'),
+	(1086, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64796, 7, '2019-01-26 15:11:49'),
+	(1087, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64816, 3, '2019-01-26 15:11:57'),
+	(1088, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64815, 7, '2019-01-26 15:11:57'),
+	(1089, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64874, 7, '2019-01-26 15:14:18'),
+	(1090, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64873, 3, '2019-01-26 15:14:18'),
+	(1091, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64909, 7, '2019-01-26 15:15:10'),
+	(1092, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64910, 3, '2019-01-26 15:15:10'),
+	(1093, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64943, 3, '2019-01-26 15:15:33'),
+	(1094, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64944, 7, '2019-01-26 15:15:33'),
+	(1095, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64976, 7, '2019-01-26 15:15:55'),
+	(1096, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64975, 3, '2019-01-26 15:15:55'),
+	(1097, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 64999, 7, '2019-01-26 15:16:03'),
+	(1098, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 64998, 3, '2019-01-26 15:16:03'),
+	(1099, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 65018, 7, '2019-01-26 15:16:15'),
+	(1100, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 65017, 3, '2019-01-26 15:16:15'),
+	(1101, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 65151, 3, '2019-01-26 15:17:27'),
+	(1102, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 65341, 3, '2019-01-26 15:20:18'),
+	(1103, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 65337, 7, '2019-01-26 15:20:18'),
+	(1104, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 65359, 7, '2019-01-26 15:20:45'),
+	(1105, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 65360, 3, '2019-01-26 15:20:45'),
+	(1106, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 65393, 7, '2019-01-26 15:21:50'),
+	(1107, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 65392, 3, '2019-01-26 15:21:50'),
+	(1108, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 65434, 3, '2019-01-26 15:24:08'),
+	(1109, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 65435, 7, '2019-01-26 15:24:08'),
+	(1110, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 65473, 3, '2019-01-26 15:24:37'),
+	(1111, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 65472, 7, '2019-01-26 15:24:37'),
+	(1112, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 49172, 3, '2019-01-26 15:26:06'),
+	(1113, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 49171, 7, '2019-01-26 15:26:06'),
+	(1114, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 49203, 3, '2019-01-26 15:26:21'),
+	(1115, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 49204, 7, '2019-01-26 15:26:21'),
+	(1116, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 49244, 3, '2019-01-26 15:29:04'),
+	(1117, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 49245, 7, '2019-01-26 15:29:04'),
+	(1118, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 49312, 3, '2019-01-26 15:29:57'),
+	(1119, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 49311, 7, '2019-01-26 15:29:57'),
+	(1120, NULL, '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', '127.0.0.1', 49338, 3, '2019-01-26 15:30:10'),
+	(1121, NULL, '446137de-3379-43fc-a694-cbbb62b02ee71548524312789', '127.0.0.1', 49337, 7, '2019-01-26 15:30:10');
 /*!40000 ALTER TABLE `conn_log` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.mqtt_metrics
@@ -1008,10 +1179,9 @@ CREATE TABLE IF NOT EXISTS `mqtt_metrics` (
   `conn_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.mqtt_metrics: ~9.258 rows (aproximadamente)
-DELETE FROM `mqtt_metrics`;
+-- Copiando dados para a tabela mqtt.mqtt_metrics: ~9.287 rows (aproximadamente)
 /*!40000 ALTER TABLE `mqtt_metrics` DISABLE KEYS */;
-INSERT INTO `mqtt_metrics` (`device_id`, `topic`, `length`, `timestamp`, `user_id`, `conn_id`) VALUES
+REPLACE INTO `mqtt_metrics` (`device_id`, `topic`, `length`, `timestamp`, `user_id`, `conn_id`) VALUES
 	(0, 'sensor/luz', 1, '2019-01-09 15:35:33', 7, 676),
 	(0, 'sensor/luz', 1, '2019-01-09 15:35:33', 7, 676),
 	(0, 'sensor/luz', 1, '2019-01-09 15:35:40', 7, 676),
@@ -10287,7 +10457,36 @@ INSERT INTO `mqtt_metrics` (`device_id`, `topic`, `length`, `timestamp`, `user_i
 	(0, 'sensor/luz', 13, '2019-01-25 10:04:10', 3, 939),
 	(0, 'sensor/luz', 13, '2019-01-25 10:04:10', 3, 939),
 	(0, 'sensor/luz', 13, '2019-01-25 10:04:10', 3, 939),
-	(0, 'sensor/luz', 13, '2019-01-25 10:04:10', 3, 939);
+	(0, 'sensor/luz', 13, '2019-01-25 10:04:10', 3, 939),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:41:57', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:41:58', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:41:58', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:41:59', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:41:59', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:41:59', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:41:59', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:41:59', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:42:00', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:42:00', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:42:00', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:42:00', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:42:00', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:42:00', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:42:01', 7, 1025),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:46:00', 7, 1033),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:54:54', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:54:55', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:22', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:23', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:23', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:23', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:23', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:25', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:26', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:26', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:26', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:26', 7, 1046),
+	(0, 'xgnyRB/sensor/luz', 2, '2019-01-26 14:55:26', 7, 1046);
 /*!40000 ALTER TABLE `mqtt_metrics` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.server_options
@@ -10298,9 +10497,8 @@ CREATE TABLE IF NOT EXISTS `server_options` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.server_options: ~2 rows (aproximadamente)
-DELETE FROM `server_options`;
 /*!40000 ALTER TABLE `server_options` DISABLE KEYS */;
-INSERT INTO `server_options` (`id_option`, `description`) VALUES
+REPLACE INTO `server_options` (`id_option`, `description`) VALUES
 	(1, 'Não permitir conexões de itens que não estão cadastrados'),
 	(2, 'Permitir somente conexões seguras');
 /*!40000 ALTER TABLE `server_options` ENABLE KEYS */;
@@ -10312,14 +10510,23 @@ CREATE TABLE IF NOT EXISTS `tokens` (
   `token_value` varchar(200) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`token_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.tokens: ~0 rows (aproximadamente)
-DELETE FROM `tokens`;
+-- Copiando dados para a tabela mqtt.tokens: ~12 rows (aproximadamente)
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` (`token_id`, `user_id`, `token_value`, `timestamp`) VALUES
+REPLACE INTO `tokens` (`token_id`, `user_id`, `token_value`, `timestamp`) VALUES
 	(8, 7, '8119a9ec-8c8b-480d-a54c-98cabc40532e', '2019-01-13 15:54:51'),
-	(9, 3, '4cac8f3b-77f0-40e9-8b7e-4bbb623291bd', '2019-01-23 14:03:55');
+	(9, 3, '4cac8f3b-77f0-40e9-8b7e-4bbb623291bd', '2019-01-23 14:03:55'),
+	(10, NULL, NULL, '2019-01-26 14:58:58'),
+	(11, NULL, NULL, '2019-01-26 14:59:06'),
+	(12, NULL, '4956f62c-5ce7-424e-9af8-3c56bc4bcda0', '2019-01-26 15:01:01'),
+	(13, NULL, '1dacbc6a-b2bd-47fc-9b36-738a77bcf012', '2019-01-26 15:01:05'),
+	(14, NULL, 'ea1ca618-b24e-46e2-a3be-93d7c720b263', '2019-01-26 15:01:11'),
+	(15, NULL, 'c646ae1c-f582-4940-8de7-d5d1ab48b64c', '2019-01-26 15:01:39'),
+	(16, NULL, NULL, '2019-01-26 15:23:13'),
+	(17, NULL, NULL, '2019-01-26 15:26:10'),
+	(18, NULL, NULL, '2019-01-26 15:26:25'),
+	(19, NULL, NULL, '2019-01-26 15:29:10');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.tp_publish
@@ -10330,7 +10537,6 @@ CREATE TABLE IF NOT EXISTS `tp_publish` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.tp_publish: ~0 rows (aproximadamente)
-DELETE FROM `tp_publish`;
 /*!40000 ALTER TABLE `tp_publish` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tp_publish` ENABLE KEYS */;
 
@@ -10342,10 +10548,9 @@ CREATE TABLE IF NOT EXISTS `tp_subscribe` (
   `client_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.tp_subscribe: ~830 rows (aproximadamente)
-DELETE FROM `tp_subscribe`;
+-- Copiando dados para a tabela mqtt.tp_subscribe: ~868 rows (aproximadamente)
 /*!40000 ALTER TABLE `tp_subscribe` DISABLE KEYS */;
-INSERT INTO `tp_subscribe` (`tp_subscribe`, `device_id`, `qos`, `client_id`) VALUES
+REPLACE INTO `tp_subscribe` (`tp_subscribe`, `device_id`, `qos`, `client_id`) VALUES
 	('sensor/casa', 'ESP8266Client-55f9', 0, NULL),
 	('sensor/casa', 'ESP8266Client-5002', 0, NULL),
 	('sensor/casa', 'ESP8266Client-124', 0, NULL),
@@ -11210,29 +11415,31 @@ INSERT INTO `tp_subscribe` (`tp_subscribe`, `device_id`, `qos`, `client_id`) VAL
 	('sensor/luz', '0254af89-ce82-4dbb-8e44-c11029325ef51548420092684', 0, NULL),
 	('sensor/luz', '4c7067d7-c59f-43dd-9bd7-df53b94a66c11548420092651', 0, NULL),
 	('sensor/luz', '0254af89-ce82-4dbb-8e44-c11029325ef51548420092684', 0, NULL),
-	('sensor/luz', '4c7067d7-c59f-43dd-9bd7-df53b94a66c11548420092651', 0, NULL);
+	('sensor/luz', '4c7067d7-c59f-43dd-9bd7-df53b94a66c11548420092651', 0, NULL),
+	('sensor/luz', '2aaa557b-737f-47c7-840b-6a9c040bf4811548522898379', 0, NULL),
+	('sensor/luz', '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', 0, NULL),
+	('sensor/luz', '2aaa557b-737f-47c7-840b-6a9c040bf4811548523270854', 0, NULL);
 /*!40000 ALTER TABLE `tp_subscribe` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.users
 CREATE TABLE IF NOT EXISTS `users` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `senha` varchar(200) NOT NULL,
-  PRIMARY KEY (`id_user`)
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.users: ~2 rows (aproximadamente)
-DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id_user`, `nome`, `email`, `senha`) VALUES
+REPLACE INTO `users` (`user_id`, `nome`, `email`, `senha`) VALUES
 	(3, 'Leonardo Everson', 'leonardo@batista.g12.br', '$2b$10$6Vm9DldTJTs5FNSNgHl9h.pZBNs5uQcaWyGWUV9Nv9UcRfZwHhr2.'),
 	(7, 'Leonardo Everson', 'llinharespinheiro@gmail.com', '$2b$10$.YsW//S0gpyf2.NeC/v4VOZJHTCL83UXD4RkQF6slsjuROF.YATbu');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.user_devices
 CREATE TABLE IF NOT EXISTS `user_devices` (
-  `id_user` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `device_id` int(11) NOT NULL AUTO_INCREMENT,
   `device_name` varchar(200) NOT NULL DEFAULT '0',
   `publish` int(1) DEFAULT NULL,
@@ -11241,9 +11448,8 @@ CREATE TABLE IF NOT EXISTS `user_devices` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.user_devices: ~3 rows (aproximadamente)
-DELETE FROM `user_devices`;
 /*!40000 ALTER TABLE `user_devices` DISABLE KEYS */;
-INSERT INTO `user_devices` (`id_user`, `device_id`, `device_name`, `publish`, `subscribe`) VALUES
+REPLACE INTO `user_devices` (`user_id`, `device_id`, `device_name`, `publish`, `subscribe`) VALUES
 	(3, 13, 'NodeRed', 2, 2),
 	(3, 14, 'NodeRed2', 2, 2),
 	(3, 15, 'NodeRed1', 1, 2);
@@ -11251,25 +11457,23 @@ INSERT INTO `user_devices` (`id_user`, `device_id`, `device_name`, `publish`, `s
 
 -- Copiando estrutura para tabela mqtt.user_options
 CREATE TABLE IF NOT EXISTS `user_options` (
-  `id_user` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `id_server_option` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.user_options: ~0 rows (aproximadamente)
-DELETE FROM `user_options`;
 /*!40000 ALTER TABLE `user_options` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user_options` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.user_prefix
 CREATE TABLE IF NOT EXISTS `user_prefix` (
-  `id_user` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `prefix_value` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.user_prefix: ~2 rows (aproximadamente)
-DELETE FROM `user_prefix`;
 /*!40000 ALTER TABLE `user_prefix` DISABLE KEYS */;
-INSERT INTO `user_prefix` (`id_user`, `prefix_value`) VALUES
+REPLACE INTO `user_prefix` (`user_id`, `prefix_value`) VALUES
 	(3, '77iNRy'),
 	(7, 'xgnyRB');
 /*!40000 ALTER TABLE `user_prefix` ENABLE KEYS */;

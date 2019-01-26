@@ -10,7 +10,7 @@ tokensDAO.prototype.user_token_insert = function(dados, callback){
 
 tokensDAO.prototype.user_token_get = function(dados, callback){
     let query = 'select * from tokens where user_id = ?';
-    this.connection.query(query, [dados.id_user], callback);
+    this.connection.query(query, [dados.user_id], callback);
 };
 
 tokensDAO.prototype.user_token_compare = function(dados, callback){

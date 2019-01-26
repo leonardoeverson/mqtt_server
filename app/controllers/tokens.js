@@ -58,7 +58,7 @@ module.exports.token_user_compare = function(app, dados){
 module.exports.token_check = function (app, request) {
 
     let dados = {};
-    dados.user_id = request.session.id_user;
+    dados.user_id = request.session.user_id;
 
     return new Promise(async (resolve, reject)=>{
         try {

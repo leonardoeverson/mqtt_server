@@ -31,12 +31,12 @@ aedes.authorizeSubscribe = function (client, sub, callback) {
 //Aedes Events
 aedes.on("clientDisconnect",function(client){
 	console.log('cliente de id:', client.id, 'desconectou');
-	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.id_user, client.id, client.conn.remoteIp, client.conn.remotePort);
+	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
 });
 
 aedes.on('clientError', function (client, err) {
 	console.log('client error', client.id, err.message, err.stack);
-	//app.app.controllers.connections.conn_mgmt_delete(app, client.conn.id_user, client.id, client.conn.remoteIp, client.conn.remotePort);
+	//app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
 });
 
 aedes.on('connectionError', function (client, err) {

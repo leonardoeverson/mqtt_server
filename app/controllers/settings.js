@@ -2,11 +2,11 @@ module.exports.get_server_opts = function(app, request, response){
     let conn = app.config.dbconn();
     let serverDAO = new app.app.models.serverDAO(conn);
 
-    serverDAO.get_server_user_settings(request.session.id_user,(error, result) =>{
+    serverDAO.get_server_user_settings(request.session.user_id,(error, result) =>{
         if(!error){
             conn.destroy();
             console.log("get_server_user_settings");
-            response.render("settings",{flag: true,  opts:result, id_user: request.session.id_user});
+            response.render("settings",{flag: true,  opts:result, user_id: request.session.user_id});
         }else{
             response.render("settings",{flag: false, opts:result});
         }
@@ -21,11 +21,11 @@ module.exports.post_server_opts = function(app, request, response){
     let result = [];
     
     for(let i = 0; i < Object.keys(dados).length; i++){
-        result.push([Number(dados[i]["id_user"]), Number(dados[i]["id_server_option"])]);
+        result.push([Number(dados[i]["user_id"]), Number(dados[i]["id_server_option"])]);
     }
 
     console.log(result);
-    serverDAO.post_server_user_settings(result, request.session.id_user, (error, result) =>{
+    serverDAO.post_server_user_settings(result, request.session.user_id, (error, result) =>{
         if(!error){
             try{
                 console.log("post_server_user_settings");
@@ -41,11 +41,11 @@ module.exports.post_server_opts = function(app, request, response){
     })
 };
 
-module.exports.get_server_option = function(app, id_option, id_user){
+module.exports.get_server_option = function(app, id_option, user_id){
     let conn = app.config.dbconn();
     let serverOPT = new app.app.models.serverDAO(conn);
     let dados = {};
-    dados.id_user = id_user;
+    dados.user_id = user_id;
     dados.id_option = id_option;
 
     return new Promise((resolve, reject)=>{

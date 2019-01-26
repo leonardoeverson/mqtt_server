@@ -9,14 +9,14 @@ module.exports.login_usuario = function(app, request, response){
 			bcrypt.compare(body.senha, result[0].senha,  async function (err, res) {
 				if (res === true) {
 
-					request.session.id_user = result[0].id_user;
+					request.session.user_id = result[0].user_id;
 					request.session.logged = true;
 
 					//Finalização de conexão
 					app.app.controllers.connections.db_end_connection(conn);
 
 					//Prefixo do usuário
-                    request.session.prefix_user = await app.app.controllers.prefix.prefix_db_get(app, request.session.id_user);
+                    request.session.prefix_user = await app.app.controllers.prefix.prefix_db_get(app, request.session.user_id);
 
 					//Recuperação de Token
                     request.session.user_token = await app.app.controllers.tokens.token_check(app, request);
@@ -85,12 +85,12 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
                 bcrypt.compare(password.toString(), result[0].senha, async function (err, res) {
                     if (res === true) {
 
-                        client.conn.id_user = result[0].id_user;
+                        client.conn.user_id = result[0].user_id;
 
                         //Finalização de conexão
                         app.app.controllers.connections.db_end_connection(conn);
 
-                        conn_control(app, client, cb, auth_error, result[0].id_user, ip, port);
+                        conn_control(app, client, cb, auth_error, result[0].user_id, ip, port);
 
                     } else {
                         auth_error.returnCode = 4;
@@ -111,13 +111,18 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
             }
         })
     } else if (username.search("token") > -1) {
-
+        let resposta;
         //checa se o token é válido
-        let resposta = await app.app.controllers.tokens.token_user_compare(app, username.replace("token:",""));
+        try{
+            resposta = await app.app.controllers.tokens.token_user_compare(app, username.replace("token:",""));
+        }catch (e) {
+            console.log(e);
+        }
+
         console.log(resposta);
 
         //Id do usuário
-        client.conn.id_user = resposta[0].user_id;
+        client.conn.user_id = resposta[0].user_id;
         conn_control(app, client, cb, auth_error, resposta[0].user_id, ip, port);
 
 
@@ -128,15 +133,15 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
 
 };
 
-async function conn_control(app, client, cb, auth_error, id_user, ip, port){
+async function conn_control(app, client, cb, auth_error, user_id, ip, port){
     let result1, result2, result3;
 
     try{
         //Verifica se o dispositivo existe no registro
-        result1 = await app.app.controllers.devices.check_device_reg(app, id_user, client.id);
+        result1 = await app.app.controllers.devices.check_device_reg(app, user_id, client.id);
 
         //Verifica se é permitida a conexão do dispositivo
-        result2 = await app.app.controllers.settings.get_server_option(app, 1, id_user);
+        result2 = await app.app.controllers.settings.get_server_option(app, 1, user_id);
     }catch (e) {
         console.log(e)
     }
@@ -154,14 +159,14 @@ async function conn_control(app, client, cb, auth_error, id_user, ip, port){
 
     try{
         //controller de conexões
-        let resposta  = await app.app.controllers.connections.conn_mgmt_insert(app, id_user, client.id, ip, port, device_id);
+        let resposta  = await app.app.controllers.connections.conn_mgmt_insert(app, user_id, client.id, ip, port, device_id);
 
         //Recuperação de token
         //app.app.controllers.tokens.token_check(app, request);
         //Carrega prefixo do usuario
 
         //Prefixo do usuário
-        result3 = await app.app.controllers.prefix.prefix_db_get(app, id_user);
+        result3 = await app.app.controllers.prefix.prefix_db_get(app, user_id);
 
         client.conn.conn_id = resposta.insertId;
         client.prefix  = result3;

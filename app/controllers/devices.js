@@ -3,7 +3,7 @@ module.exports.list_devices = function(app, request, response){
 	let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
 	let dados = {};
-	dados.id_user = request.session.id_user;
+	dados.user_id = request.session.user_id;
 
 	dadosDispositivos.list_devices_db(dados, function(error, result){
 		if(!error){
@@ -22,7 +22,7 @@ module.exports.register_devices = function(app, request, response){
 	let dados = request.body;
 
 	console.log(dados);
-    dados.id_user = request.session.id_user;
+    dados.user_id = request.session.user_id;
 
     if(dados.device_topic == 'undefined'){
     	dados.device_topic = '';
@@ -44,7 +44,7 @@ module.exports.count_devices_db = function(app, request, response){
 	let dadosDispositivos = new app.app.models.devicesDAO(conn);
 	let dados = {};
 
-	dados.id_user = request.session.id_user;
+	dados.user_id = request.session.user_id;
 
 	return new Promise(function(resolve, reject){
 
@@ -64,7 +64,7 @@ module.exports.connected_devices = function(app, request, response){
 	let conn = app.config.dbconn();
 	let dadosDispositivos = new app.app.models.devicesDAO(conn);
 	let dados = {};
-	dados.id_user = request.session.id_user;
+	dados.user_id = request.session.user_id;
 
 	return new Promise((resolve, reject)=>{
 		dadosDispositivos.connected_device_db(dados, function(error, result){
@@ -79,11 +79,11 @@ module.exports.connected_devices = function(app, request, response){
 	})
 };
 
-module.exports.check_device_reg = function(app, id_user, client_id){
+module.exports.check_device_reg = function(app, user_id, client_id){
 	let conn = app.config.dbconn();
 	let dadosDispositivos = new app.app.models.devicesDAO(conn);
 	let dados = {};
-	dados.id_user = id_user;
+	dados.user_id = user_id;
 	dados.client_id = client_id;
 
 	return new Promise((resolve, reject)=>{

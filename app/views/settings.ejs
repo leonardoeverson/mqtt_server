@@ -13,11 +13,11 @@
         <%
         if(opts[i].id_server_option != null){
             %>
-                <input type="checkbox" id=<%= opts[i].id_option %> id_user=<%= id_user %> checked="" class="form-check-input"/>
+                <input type="checkbox" id=<%= opts[i].id_option %> user_id=<%= user_id %> checked="" class="form-check-input"/>
             <%
         }else{
             %>
-                <input type="checkbox" id=<%= opts[i].id_option %> id_user=<%= id_user %> class="form-check-input"/>
+                <input type="checkbox" id=<%= opts[i].id_option %> user_id=<%= user_id %> class="form-check-input"/>
             <%
         }
         %>
@@ -43,7 +43,7 @@
             chk_checkbox = [];
             for(let i = 0; i < checkbox.length; i++){
                 if(checkbox[i].checked){
-                    chk_checkbox.push({'id_user' : checkbox[i].getAttribute('id_user'), 'id_server_option' : checkbox[i].id});
+                    chk_checkbox.push({'user_id' : checkbox[i].getAttribute('user_id'), 'id_server_option' : checkbox[i].id});
                 }
             }
 

@@ -27,7 +27,7 @@ module.exports.publish_metrics_insert = function(app, packet, client){
     dados.topic = packet.topic;
     dados.device_id = client.conn.device_id;
     dados.conn_id = client.conn.conn_id;
-    dados.user_id = client.conn.id_user;
+    dados.user_id = client.conn.user_id;
     topicsDAO.publish_metrics_db(dados, (error, result)=>{
         if(!error){
             conn.destroy();
@@ -47,7 +47,7 @@ module.exports.message_metric = function(app, request, response){
     let conn = app.config.dbconn();
     let topicsDAO = new app.app.models.topicsDAO(conn);
     let dados = {};
-    dados.user_id = request.session.id_user;
+    dados.user_id = request.session.user_id;
     dados.periodo = request.query.periodo;
 
     topicsDAO.traffic_message_metric_db(dados, (error, result)=>{
@@ -66,7 +66,7 @@ module.exports.conn_metrics = function(app, request, response){
     let conn = app.config.dbconn();
     let topicsDAO = new app.app.models.topicsDAO(conn);
     let dados = {};
-    dados.user_id = request.session.id_user;
+    dados.user_id = request.session.user_id;
     topicsDAO.conn_metrics_db(dados, (error, result)=>{
         if(!error){
             conn.destroy();
