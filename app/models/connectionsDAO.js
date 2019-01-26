@@ -14,7 +14,7 @@ connectionsDAO.prototype.conn_db_insert = function(user_id, client_id, client_ad
 		if (err) {
 			callback(err, null);
 		}
-		conn.query("insert into conn_clients(user_id, client_id, client_address, client_port, device_id) values(?)", [dados], function(err, result) {
+		conn.query("insert into conn_clients(user_id, client_id, client_address, client_port, device_id) values(?, ?, ?, ?, ?)", [dados.user_id, dados.client_id, dados.client_address, dados.client_port, dados.device_id], function(err, result) {
 			if (err) {
 				conn.rollback(function() {
 					callback(err, null);

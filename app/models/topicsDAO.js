@@ -35,7 +35,6 @@ topicsDAO.prototype.traffic_message_metric_db = function(dados, callback){
     }
 
     this.connection.query(query, [dados.user_id, dados.user_id], callback);
-    this.connection.query(query, [dados.user_id, dados.user_id], callback);
 };
 
 
