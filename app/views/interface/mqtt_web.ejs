@@ -5,6 +5,7 @@
 </head>
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+
 <div class="col-sm-3">
     <form>
         <h4>Publish</h4>
@@ -78,7 +79,7 @@
             connectTimeout: 30 * 1000,
             will: {
                 topic: 'WillMsg',
-                payload: 'Connection Closed abnormally..!',
+                payload: 'conexão fechada de forma anormal..!',
                 qos: 0,
                 retain: false
             },
@@ -179,6 +180,15 @@
 
         subscribe(topic, qos);
 
+    })
+
+    $(document).ready(function(){
+       $.notify("Conectando ao servidor...", "info")
+       if(server_connect()){
+           $.notify("Conectado!", "success");
+       }else{
+           $.notify("Falha ao conectar ao servidor, atualize a página", "error");
+       }
     })
 </script>
 <%- include('../footer'); %>

@@ -31,7 +31,7 @@ aedes.authorizeSubscribe = function (client, sub, callback) {
 //Aedes Events
 aedes.on("clientDisconnect",function(client){
 	console.log('cliente de id:', client.id, 'desconectou');
-	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.user_id, client.id, client.conn.remoteIp, client.conn.remotePort);
+	app.app.controllers.connections.conn_mgmt_delete(app, client.conn.conn_id);
 });
 
 aedes.on('clientError', function (client, err) {
@@ -45,7 +45,6 @@ aedes.on('connectionError', function (client, err) {
 
 aedes.on('publish', function (packet, client) {
 	if (client) {
-    	console.log("publish");
 		app.app.controllers.topics.publish_metrics_insert(app, packet, client);
 	}
 });

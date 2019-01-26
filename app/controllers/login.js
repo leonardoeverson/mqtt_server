@@ -160,7 +160,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port){
     try{
         //controller de conexões
         let resposta  = await app.app.controllers.connections.conn_mgmt_insert(app, user_id, client.id, ip, port, device_id);
-
+        
         //Recuperação de token
         //app.app.controllers.tokens.token_check(app, request);
         //Carrega prefixo do usuario

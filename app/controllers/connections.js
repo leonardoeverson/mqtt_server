@@ -3,11 +3,11 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 	let connMgmt = new app.app.models.connectionsDAO(conn);
 
 	return new Promise((resolve, reject)=>{
-		connMgmt.conn_db_insert(user_id, client_id, client_address, client_port, db_device_id, function(err, result){
+		connMgmt.conn_db_insert(user_id, client_id, client_address, client_port, db_device_id, function(err, result, result_id){
 			if(!err){
 				console.log("conn_db_insert");
 				app.app.controllers.connections.db_end_connection(conn);
-				resolve(result);
+				resolve(result_id);
 			}else{
 				if(err){
 					app.app.controllers.connections.db_end_connection(conn);
@@ -25,11 +25,11 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 
 };
 
-module.exports.conn_mgmt_delete = function(app, user_id, client_id, client_address, client_port, db_device_id){
+module.exports.conn_mgmt_delete = function(app, id_conn){
 	let conn = app.config.dbconn();
 	let connMgmt = new app.app.models.connectionsDAO(conn);
 
-	connMgmt.conn_db_delete(user_id, client_id, client_address, client_port, function(err, result){
+	connMgmt.conn_db_delete(id_conn, function(err, result){
 		if(!err){
 			app.app.controllers.connections.db_end_connection(conn);
 		}else{
