@@ -15,6 +15,9 @@ module.exports.login_usuario = function(app, request, response){
 					//Finalização de conexão
 					app.app.controllers.connections.db_end_connection(conn);
 
+					//Prefixo do usuário
+                    request.session.prefix_user = await app.app.controllers.prefix.prefix_db_get(app, request.session.id_user);
+
 					//Recuperação de Token
                     request.session.user_token = await app.app.controllers.tokens.token_check(app, request);
 
@@ -126,7 +129,7 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
 };
 
 async function conn_control(app, client, cb, auth_error, id_user, ip, port){
-    let result1, result2;
+    let result1, result2, result3;
 
     try{
         //Verifica se o dispositivo existe no registro
@@ -155,8 +158,13 @@ async function conn_control(app, client, cb, auth_error, id_user, ip, port){
 
         //Recuperação de token
         //app.app.controllers.tokens.token_check(app, request);
+        //Carrega prefixo do usuario
+
+        //Prefixo do usuário
+        result3 = await app.app.controllers.prefix.prefix_db_get(app, id_user);
 
         client.conn.conn_id = resposta.insertId;
+        client.prefix  = result3;
     }catch (e) {
 
         console.log(e)

@@ -20,12 +20,12 @@ aedes.authenticate = function (client, username, password, callback) {
 
 //Autorização de publish
 aedes.authorizePublish = function (client, packet, callback) {
-	callback(null)
+	app.app.controllers.topics.topic_validation(app, client.prefix, packet.topic, callback, 1);
 };
 
 //Autorização de subscribe
 aedes.authorizeSubscribe = function (client, sub, callback) {
-	callback(null, sub)
+	app.app.controllers.topics.topic_validation(app, client.prefix, sub, callback, 2);
 };
 
 //Aedes Events
@@ -45,8 +45,7 @@ aedes.on('connectionError', function (client, err) {
 
 aedes.on('publish', function (packet, client) {
 	if (client) {
-    	//console.log('message from client', client.id);
-		//console.log(Buffer.from(packet.payload.toString()).length);
+    	console.log("publish");
 		app.app.controllers.topics.publish_metrics_insert(app, packet, client);
 	}
 });

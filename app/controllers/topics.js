@@ -78,7 +78,7 @@ module.exports.conn_metrics = function(app, request, response){
     })
 };
 
-module.exports.topic_validation = function(app, topic, prefix, callback){
+module.exports.topic_validation = function(app, prefix, topic, callback, type){
     /*
     let Qlobber = require('qlobber').Qlobber;
     let opts = {};
@@ -93,8 +93,24 @@ module.exports.topic_validation = function(app, topic, prefix, callback){
     assert.deepEqual(matcher.match(prefix), ['it matched!']);
     */
 
-    if(topic.search(prefix)){
-        callback();
+    if(type === 1){
+        if(topic.search(prefix) > -1){
+            callback(null);
+        }else{
+            console.log("não é possível publicar neste tópico");
+            return callback(new Error('tópico não permitido'));
+        }
     }
+
+    else if(type === 2){
+        let sub = topic.topic;
+        if(sub.search(prefix) > -1){
+            callback(null, sub);
+        }else{
+            console.log("não é possível subscrever neste tópico");
+            return callback(new Error('tópico não permitido'));
+        }
+    }
+
 
 };

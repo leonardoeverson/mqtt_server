@@ -26,12 +26,15 @@ module.exports.prefix_db_get = function(app, dados){
     let conn = app.config.dbconn();
     let utilsDAO = new app.app.models.utilsDAO(conn);
 
-    utilsDAO.get_prefix_db(dados, (error, result) =>{
-        app.app.controllers.connections.db_end_connection(conn);
-        if(!error){
-            return result;
-        }else{
-            console.log(error);
-        }
-    })
+    return new Promise((resolve, rejetct) =>{
+        utilsDAO.get_prefix_db(dados, (error, result) =>{
+            app.app.controllers.connections.db_end_connection(conn);
+            if(!error){
+                resolve(result[0].prefix_value);
+            }else{
+                console.log(error);
+                rejetct(error);
+            }
+        });
+    });
 };
