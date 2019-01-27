@@ -8,13 +8,17 @@ tokensDAO.prototype.user_token_insert = function(dados, callback){
 };
 
 tokensDAO.prototype.user_token_get = function(dados, callback){
-    let query = 'select * from tokens where user_id = ?';
+    let query = 'select * from tokens where user_id = ? and datediff(now(), timestamp) < 1';
     this.connection.query(query, [dados.user_id], callback);
 };
 
 tokensDAO.prototype.user_token_compare = function(dados, callback){
-    let query = 'select * from tokens where token_value= ?';
-    this.connection.query(query, [dados], callback);
+    let query = 'select * from tokens where token_value= ? and user_id= ?';
+    this.connection.query(query, [dados[0], dados[1]], callback);
+};
+
+tokensDAO.prototype.delete_tokens = function(callback){
+    this.connection.query('delete from tokens', callback);
 };
 
 module.exports = function(){

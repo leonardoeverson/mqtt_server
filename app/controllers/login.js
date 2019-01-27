@@ -113,13 +113,17 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
     } else if (username.search("token") > -1) {
         let resposta;
         //checa se o token é válido
+
+        let dados = username.split(',');
+        dados[0] = dados[0].replace("token:","");
+        dados[1] = dados[1].replace("user:","");
         try{
-            resposta = await app.app.controllers.tokens.token_user_compare(app, username.replace("token:",""));
+            resposta = await app.app.controllers.tokens.token_user_compare(app, dados);
         }catch (e) {
             console.log(e);
         }
 
-        console.log(resposta);
+        //console.log(resposta);
 
         //Id do usuário
         client.conn.user_id = resposta[0].user_id;

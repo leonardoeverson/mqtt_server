@@ -5,10 +5,10 @@ module.exports = function(app){
 
 	app.post('/cadastro/inserir',function(request, response){
 		//response.render("login/cadastro");
-		app.app.controllers.cadastro.cadastro_usuario(app, request, response)
+		app.app.controllers.cadastro.cadastro_usuario(app, request, response);
 	});
 
 	app.get('/profile', function(request, response){
-		response.render('profile');
+		app.app.controllers.cadastro.dados_cadastro(app, request, response);
 	})
 };

@@ -73,7 +73,7 @@
     function server_connect(){
         let options = {
             clientId: clientid,
-            username: '<%= token %>',
+            username: '<%= token %>' +',user:'+'<%= user %>',
             protocolId: 'MQTT',
             protocolVersion: 4,
             clean: true,

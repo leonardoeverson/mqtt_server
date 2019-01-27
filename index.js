@@ -12,6 +12,9 @@ let aedes = require('./config/aedes_server');
 //Exclui os registros das conexões anteriores
 app.app.controllers.connections.conn_mgmt_delete_all(app);
 
+//Exclui registros de tokens
+app.app.controllers.tokens.delete_tokens_(app);
+
 //Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
    //checar novo de usuário e senha

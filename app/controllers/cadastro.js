@@ -67,6 +67,7 @@ module.exports.cadastro_usuario = function(app, request, response){
 		}
 
 	], function(err, results){
+		app.app.controllers.connections.db_end_connection(conn);
 		if(err){
 			response.render('cadastro/cadastro',{validacao : [erro_cadastro[nivel]]});
 		}
@@ -84,6 +85,16 @@ TODO:
 module.exports.dados_cadastro = function(app, request, response){
 	let conn = app.config.dbconn();
 	let cadastroUsuario = new app.app.models.cadastroDAO(conn);
+
+	cadastroUsuario.dados_cadastro(request.session.user_id, (err, result)=>{
+		app.app.controllers.connections.db_end_connection(conn);
+		if(!err){
+			response.render('profile',{dados: result});
+		}else{
+			console.log(err);
+		}
+
+	})
 };
 
 module.exports.grava_dados_cadastro = function(app, request, response){

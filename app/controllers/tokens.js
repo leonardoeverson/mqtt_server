@@ -4,12 +4,11 @@ let token_user_insert = function(app, dados){
 
     return new Promise((resolve, reject)=>{
         tokensDAO.user_token_insert(dados, (error, result)=>{
+            app.app.controllers.connections.db_end_connection(conn);
             if(!error){
-                app.app.controllers.connections.db_end_connection(conn);
                 resolve(result);
             }else{
                 console.log(error);
-                app.app.controllers.connections.db_end_connection(conn);
                 reject(error);
             }
 
@@ -42,12 +41,11 @@ module.exports.token_user_compare = function(app, dados){
 
     return new Promise((resolve, reject)=>{
         tokensDAO.user_token_compare(dados, (error, result)=>{
+            app.app.controllers.connections.db_end_connection(conn);
             if(!error){
-                app.app.controllers.connections.db_end_connection(conn);
                 resolve(result);
             }else{
                 console.log(error);
-                app.app.controllers.connections.db_end_connection(conn);
                 reject(error);
             }
 
@@ -78,4 +76,18 @@ module.exports.token_check = function (app, request) {
         }
     })
 
+};
+
+module.exports.delete_tokens_ = function(app){
+    let conn = app.config.dbconn();
+    let tokensDAO = new app.app.models.tokensDAO(conn);
+
+    tokensDAO.delete_tokens((err, result)=>{
+        app.app.controllers.connections.db_end_connection(conn);
+        if(!err){
+            console.log('delete_tokens');
+        }else{
+            console.log(result);
+        }
+    })
 };

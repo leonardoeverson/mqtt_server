@@ -17,6 +17,11 @@ cadastroDAO.prototype.verifica_email_existente = function(email, callback) {
 	this.connection.query(query, [email], callback);
 };
 
+cadastroDAO.prototype.dados_cadastro = function(dados, callback){
+	let query = "select * from users where user_id = ?";
+	this.connection.query(query, [dados], callback);
+};
+
 module.exports = function() {
 	return cadastroDAO;
 };
