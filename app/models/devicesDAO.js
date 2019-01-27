@@ -3,8 +3,19 @@ function devicesDAO(conn){
 }
 
 devicesDAO.prototype.register_devices_db = function(dados, callback) {
-    console.log(dados);
-    let query = "insert into user_devices(user_id, device_name, publish, subscribe) values(?)";
+    //console.log(dados);
+    let query = "insert into user_devices(user_id, device_name, publish, subscribe) values(?, ?, ?, ?)";
+    this.connection.query(query,[dados.user_id, dados.device_name, dados.publish, dados.subscribe], callback);
+
+};
+
+devicesDAO.prototype.device_pb_topic_db = function(dados, callback){
+    let query = "insert into device_pb_topic(device_id, pb_topic) values ?";
+    this.connection.query(query,[dados], callback);
+};
+
+devicesDAO.prototype.device_sb_topic_db = function(dados, callback){
+    let query = "insert into device_sb_topic(device_id, sb_topic) values ?";
     this.connection.query(query,[dados], callback);
 };
 

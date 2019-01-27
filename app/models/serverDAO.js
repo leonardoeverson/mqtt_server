@@ -48,8 +48,8 @@ serverDAO.prototype.post_server_user_settings = function (dados, user_id, callba
 };
 
 serverDAO.prototype.get_server_option_db = function(dados, callback){
-    let query = "select * from user_options where id_server_option = "+ dados.id_option+" and user_id = "+dados.user_id;
-    conn.query(query, callback);
+    let query = "select * from user_options where id_server_option = ? and user_id = ?";
+    conn.query(query,[dados.id_server_option, dados.user_id], callback);
 
 };
 

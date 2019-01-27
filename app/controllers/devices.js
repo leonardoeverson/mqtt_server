@@ -16,22 +16,70 @@ module.exports.list_devices = function(app, request, response){
 	})
 };
 
-module.exports.register_devices = function(app, request, response){
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.register_devices = function(app, request, response) {
+	let conn = app.config.dbconn();
+	let dadosDispositivos = new app.app.models.devicesDAO(conn);
 	let dados = request.body;
+	let async = require('async');
 
 	console.log(dados);
-    dados.user_id = request.session.user_id;
+	dados.user_id = request.session.user_id;
 
-    if(dados.device_topic == 'undefined'){
-    	dados.device_topic = '';
-    }
+	if (typeof(dados.device_topic) == "undefined"){
+		dados.device_topic = '';
+	}
 
     dadosDispositivos.register_devices_db(dados, function(error, result){
     	if(!error){
-			app.app.controllers.connections.db_end_connection(conn);
-    		response.render("devices/register",{validacao:[{'mensagem':'dados gravados com sucesso', 'status': 0}]});
+
+			if (dados.pb_topic.search(";") > -1){
+				let temp;
+				temp = dados.pb_topic.split(';');
+				dados.pb_topic = [];
+				for(let i = 0; i < temp.length; i++){
+					dados.pb_topic[i] = [];
+					dados.pb_topic[i].push(result.insertId, temp[i]);
+				}
+			}
+
+			if (dados.sb_topic.search(";") > -1){
+				let temp;
+				temp = dados.sb_topic.split(';');
+				dados.sb_topic = [];
+				for(let i = 0; i < temp.length; i++){
+					dados.sb_topic[i] = [];
+					dados.sb_topic[i].push(result.insertId, temp[i]);
+				}
+			}
+
+			async.parallel([
+					function(callback) {
+						dadosDispositivos.device_pb_topic_db(dados,(err, result) =>{
+							if(!err){
+								callback(null, 'one');
+							}
+						});
+
+					},
+					function(callback) {
+						dadosDispositivos.device_sb_topic_db(dados,(err, result) =>{
+							if(!err){
+								callback(null, 'two');
+							}
+						});
+					}
+				],
+				// optional callback
+				function(err, results) {
+					if(!err){
+						app.app.controllers.connections.db_end_connection(conn);
+						response.render("devices/register",{validacao:[{'mensagem':'dados gravados com sucesso', 'status': 0}]});
+					}
+					// the results array will equal ['one','two'] even though
+					// the second function had a shorter timeout.
+				});
+
+
     	}else{
     		console.log(error);
     		response.render("devices/register",{validacao:[{'mensagem':'erro ao cadastrar o dispositivo', 'status': 1}]});
