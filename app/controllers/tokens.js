@@ -69,7 +69,6 @@ module.exports.token_check = function (app, request) {
             } else {
                 dados.token_value = require('uuid/v4')();
                 let check2 = await token_user_insert(app, dados);
-                console.log('ch2', check2[0]);
                 resolve("token:"+dados.token_value);
             }
 

@@ -3,8 +3,8 @@ function tokensDAO(conn){
 }
 
 tokensDAO.prototype.user_token_insert = function(dados, callback){
-    let query = 'INSERT into tokens(user_id, token_value) VALUES (?)';
-    this.connection.query(query, [dados], callback);
+    let query = 'INSERT into tokens(user_id, token_value) VALUES (?, ?)';
+    this.connection.query(query, [dados.user_id, dados.token_value], callback);
 };
 
 tokensDAO.prototype.user_token_get = function(dados, callback){

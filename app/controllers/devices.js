@@ -22,7 +22,6 @@ module.exports.register_devices = function(app, request, response) {
 	let dados = request.body;
 	let async = require('async');
 
-	console.log(dados);
 	dados.user_id = request.session.user_id;
 
 	if (typeof(dados.device_topic) == "undefined"){
@@ -40,6 +39,11 @@ module.exports.register_devices = function(app, request, response) {
 					dados.pb_topic[i] = [];
 					dados.pb_topic[i].push(result.insertId, temp[i]);
 				}
+			}else{
+				let temp;
+				temp = dados.pb_topic;
+				dados.pb_topic = [];
+				dados.pb_topic.push([result.insertId, temp]);
 			}
 
 			if (dados.sb_topic.search(";") > -1){
@@ -50,6 +54,11 @@ module.exports.register_devices = function(app, request, response) {
 					dados.sb_topic[i] = [];
 					dados.sb_topic[i].push(result.insertId, temp[i]);
 				}
+			}else{
+				let temp;
+				temp = dados.sb_topic;
+				dados.sb_topic = [];
+				dados.sb_topic.push([result.insertId, temp]);
 			}
 
 			async.series([
@@ -75,17 +84,16 @@ module.exports.register_devices = function(app, request, response) {
 				],
 				// optional callback
 				function(err, results) {
-					console.log(err);
+					app.app.controllers.connections.db_end_connection(conn);
 					if(!err){
-						app.app.controllers.connections.db_end_connection(conn);
 						response.render("devices/register",{validacao:[{'mensagem':'dados gravados com sucesso', 'status': 0}]});
 					}else{
+						console.log(err);
 						response.render("devices/register",{validacao:[{'mensagem':'erro ao cadastrar o dispositivo', 'status': 1}]});
 					}
 					// the results array will equal ['one','two'] even though
 					// the second function had a shorter timeout.
 				});
-
 
     	}else{
     		console.log(error);

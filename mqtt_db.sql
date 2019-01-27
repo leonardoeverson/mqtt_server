@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           10.3.11-MariaDB - mariadb.org binary distribution
--- OS do Servidor:               Win32
+-- Versão do servidor:           10.3.12-MariaDB - mariadb.org binary distribution
+-- OS do Servidor:               Win64
 -- HeidiSQL Versão:              9.4.0.5125
 -- --------------------------------------------------------
 
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `tokens` (
   `token_value` varchar(200) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`token_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.tokens: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `tp_subscribe` (
   `client_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.tp_subscribe: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.tp_subscribe: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `tp_subscribe` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tp_subscribe` ENABLE KEYS */;
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `user_devices` (
   `publish` int(1) DEFAULT NULL,
   `subscribe` int(1) DEFAULT NULL,
   PRIMARY KEY (`device_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.user_devices: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `user_devices` DISABLE KEYS */;
