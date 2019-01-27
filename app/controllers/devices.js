@@ -52,28 +52,35 @@ module.exports.register_devices = function(app, request, response) {
 				}
 			}
 
-			async.parallel([
+			async.series([
 					function(callback) {
-						dadosDispositivos.device_pb_topic_db(dados,(err, result) =>{
+						dadosDispositivos.device_pb_topic_db(dados.pb_topic,(err, result) =>{
 							if(!err){
 								callback(null, 'one');
+							}else{
+								callback(err, 'one');
 							}
 						});
 
 					},
 					function(callback) {
-						dadosDispositivos.device_sb_topic_db(dados,(err, result) =>{
+						dadosDispositivos.device_sb_topic_db(dados.sb_topic,(err, result) =>{
 							if(!err){
 								callback(null, 'two');
+							}else{
+								callback(err, 'one');
 							}
 						});
 					}
 				],
 				// optional callback
 				function(err, results) {
+					console.log(err);
 					if(!err){
 						app.app.controllers.connections.db_end_connection(conn);
 						response.render("devices/register",{validacao:[{'mensagem':'dados gravados com sucesso', 'status': 0}]});
+					}else{
+						response.render("devices/register",{validacao:[{'mensagem':'erro ao cadastrar o dispositivo', 'status': 1}]});
 					}
 					// the results array will equal ['one','two'] even though
 					// the second function had a shorter timeout.
