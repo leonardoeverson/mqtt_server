@@ -22,6 +22,10 @@ cadastroDAO.prototype.dados_cadastro = function(dados, callback){
 	this.connection.query(query, [dados], callback);
 };
 
+cadastroDAO.prototype.grava_dados_usuario = function(dados, callback){
+
+};
+
 module.exports = function() {
 	return cadastroDAO;
 };

@@ -8,15 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/controllers/cadastro.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/cadastro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/tokens.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/tokens.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/cadastroDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/cadastroDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/tokensDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/tokensDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/cadastro.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/cadastro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/interfaces.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/interfaces.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/interface/mqtt_web.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/interface/mqtt_web.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,20 +95,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/cadastro.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="69" column="64" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+            <state relative-caret-position="535">
+              <caret line="88" column="28" lean-forward="true" selection-start-line="88" selection-start-column="28" selection-end-line="88" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/cadastroDAO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+            <state relative-caret-position="425">
+              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -215,12 +208,12 @@
         <option value="$PROJECT_DIR$/app/controllers/tokens.js" />
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/app/routes/cadastro.js" />
-        <option value="$PROJECT_DIR$/app/models/cadastroDAO.js" />
         <option value="$PROJECT_DIR$/app/controllers/cadastro.js" />
+        <option value="$PROJECT_DIR$/app/models/cadastroDAO.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="97" />
     <option name="y" value="-8" />
     <option name="width" value="1040" />
@@ -450,13 +443,13 @@
       <workItem from="1548374409906" duration="6986000" />
       <workItem from="1548417987049" duration="15627000" />
       <workItem from="1548522126033" duration="14988000" />
-      <workItem from="1548606087818" duration="14546000" />
+      <workItem from="1548606087818" duration="15039000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="281743000" />
+    <option name="totallyTimeSpent" value="282236000" />
     <option name="showClosedTasks" value="false" />
   </component>
   <component name="TodoView">
@@ -803,13 +796,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/cadastroDAO.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="508">
@@ -840,8 +826,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/cadastro.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="69" column="64" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+        <state relative-caret-position="535">
+          <caret line="88" column="28" lean-forward="true" selection-start-line="88" selection-start-column="28" selection-end-line="88" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/cadastroDAO.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
         </state>
       </provider>
     </entry>
