@@ -23,7 +23,13 @@ cadastroDAO.prototype.dados_cadastro = function(dados, callback){
 };
 
 cadastroDAO.prototype.grava_dados_usuario = function(dados, callback){
+    let query = "update users set nome = ? and email = ? where user_id = ?";
+    this.connection.query(query, [dados.nome, dados.email, dados.user_id], callback);
+};
 
+cadastroDAO.prototype.altera_senha = function(dados, callback){
+    let query = "update users set senha = ? where user_id = ?";
+    this.connection.query(query, [dados.senha, dados.user_id], callback);
 };
 
 module.exports = function() {
