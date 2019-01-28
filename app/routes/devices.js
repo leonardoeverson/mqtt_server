@@ -35,4 +35,12 @@ module.exports = function(app){
 			response.redirect("/");
 		}
 	});
+
+	app.get('/traffic', function(request, response){
+		if(request.session.logged){
+			response.render('traffic');
+		}else{
+			response.redirect("/");
+		}
+	});
 };
