@@ -9,6 +9,19 @@ module.exports = function(app){
 	});
 
 	app.get('/profile', function(request, response){
-		app.app.controllers.cadastro.dados_cadastro(app, request, response);
+		if(request.session.logged){
+			app.app.controllers.cadastro.dados_cadastro(app, request, response);
+		}else{
+			response.redirect("/");
+		}
+
+	});
+
+	app.post('/dados/usuario/salvar', function(request, response){
+
+	});
+
+	app.post('/dados/usuario/senha', function(request, response){
+
 	})
 };
