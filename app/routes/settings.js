@@ -27,6 +27,8 @@ module.exports =  function(app){
 
     app.get('/server/metrics', function(request, response){
         if(request.session.logged){
+            //console.log(request.query);
+            console.log(request.query);
             let body = request.query;
 
             if(body.filtro == 1 || body.filtro == 2 ){

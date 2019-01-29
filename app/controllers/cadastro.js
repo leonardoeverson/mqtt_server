@@ -2,7 +2,7 @@ module.exports.cadastro_usuario = function(app, request, response){
 	let conn = app.config.dbconn();
 	let cadastroUsuario = new app.app.models.cadastroDAO(conn);
 	let body = request.body;
-	console.log(body);
+	//console.log(body);
 
 	//Erros de cadastro
 	let erro_cadastro = [];
@@ -114,6 +114,16 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 	let bcrypt = require('bcrypt');
 	let dados = request.body;
 
+	// request.assert('senha_nova_1', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
+	// request.assert('senha_nova_2', 'as senhas não são iguais').trim().isEqual(body.senhav);
+	//
+	// let erros = request.validationErrors();
+	//
+	// if(erros){
+	// 	response.render("cadastro/cadastro",{validacao : erros});
+	// 	return;
+	// }
+
 	//verifica se a senha inicial tá correta;
 	async.series([
 		function(callback){
@@ -132,10 +142,10 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 
 			let saltRounds = 10;
 			let salt = bcrypt.genSaltSync(saltRounds);
-			dados.senha = bcrypt.hashSync(dados.senha_antiga, salt);
+			dados.senha = bcrypt.hashSync(dados.senha_nova_1, salt);
 			dados.user_id = request.session.user_id;
-			
-			cadastroUsuario.altera_senha(request.session.user_id, (err, result)=>{
+
+			cadastroUsuario.altera_senha(dados, (err, result)=>{
 				app.app.controllers.connections.db_end_connection(conn);
 				if(!err){
 					response.render('profile',{dados: result});

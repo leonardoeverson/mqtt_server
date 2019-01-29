@@ -26,6 +26,8 @@ module.exports = function(app){
 	});
 
 	app.post('/dados/usuario/senha', function(request, response){
-
+		let body = request.body;
+		console.log(body);
+		response.sendStatus(200);
 	})
 };
