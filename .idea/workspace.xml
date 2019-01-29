@@ -8,8 +8,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/controllers/cadastro.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/cadastro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/cadastro.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/cadastro.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/profile.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/profile.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -101,8 +99,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/profile.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
+            <state relative-caret-position="353">
+              <caret line="58" column="101" selection-start-line="58" selection-start-column="101" selection-end-line="58" selection-end-column="101" />
+              <folding>
+                <element signature="e#2113#2143#0#HTML" expanded="true" />
+                <element signature="e#2553#2583#0#HTML" expanded="true" />
+                <element signature="e#2980#3010#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -421,13 +424,13 @@
       <workItem from="1548522126033" duration="14988000" />
       <workItem from="1548606087818" duration="15039000" />
       <workItem from="1548679319625" duration="12320000" />
-      <workItem from="1548761682952" duration="17373000" />
+      <workItem from="1548761682952" duration="18129000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="311929000" />
+    <option name="totallyTimeSpent" value="312685000" />
     <option name="showClosedTasks" value="false" />
   </component>
   <component name="TodoView">
@@ -810,8 +813,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/profile.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
+        <state relative-caret-position="353">
+          <caret line="58" column="101" selection-start-line="58" selection-start-column="101" selection-end-line="58" selection-end-column="101" />
+          <folding>
+            <element signature="e#2113#2143#0#HTML" expanded="true" />
+            <element signature="e#2553#2583#0#HTML" expanded="true" />
+            <element signature="e#2980#3010#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
