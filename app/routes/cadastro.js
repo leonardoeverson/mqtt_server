@@ -18,7 +18,11 @@ module.exports = function(app){
 	});
 
 	app.post('/dados/usuario/salvar', function(request, response){
-
+		if(request.session.logged){
+			app.app.controllers.cadastro.atualiza_dados_cadastro(app, request, response);
+		}else{
+			response.sendStatus(403);
+		}
 	});
 
 	app.post('/dados/usuario/senha', function(request, response){

@@ -90,11 +90,11 @@ module.exports.dados_cadastro = function(app, request, response){
 	})
 };
 
-module.exports.grava_dados_cadastro = function(app, request, response){
+module.exports.atualiza_dados_cadastro = function(app, request, response){
 	let conn = app.config.dbconn();
 	let cadastroUsuario = new app.app.models.cadastroDAO(conn);
 	
-	cadastroUsuario.grava_dados_usuario(request.session.user_id, (err, result)=>{
+	cadastroUsuario.atualiza_dados_usuario_db(request.session.user_id, (err, result)=>{
 		app.app.controllers.connections.db_end_connection(conn);
 		if(!err){
 			response.render('profile',{dados: result});
@@ -109,20 +109,47 @@ module.exports.grava_dados_cadastro = function(app, request, response){
 module.exports.altera_senha_cadastro = function(app, request, response){
 	let conn = app.config.dbconn();
 	let cadastroUsuario = new app.app.models.cadastroDAO(conn);
-
+	let loginUsuario = new app.app.models.loginDAO(conn);
+	const async = require('async');
 	let bcrypt = require('bcrypt');
-	let saltRounds = 10;
-	let salt = bcrypt.genSaltSync(saltRounds);
-	dados.senha = bcrypt.hashSync(dados.senha, salt);
-	
-	cadastroUsuario.altera_senha(request.session.user_id, (err, result)=>{
-		app.app.controllers.connections.db_end_connection(conn);
-		if(!err){
-			response.render('profile',{dados: result});
-		}else{
-			console.log(err);
+	let dados = request.body;
+
+	//verifica se a senha inicial tá correta;
+	async.series([
+		function(callback){
+			loginUsuario.valida_senha(user_id, (err, result)=>{
+				bcrypt.compare(password.toString(), result[0].senha, async function (err, res) {
+					if (res === true) {
+						//Senhas
+						callback(null, result);
+					} else {
+						callback(err, result);
+					}
+				})
+			});
+		},
+		function(callback){
+
+			let saltRounds = 10;
+			let salt = bcrypt.genSaltSync(saltRounds);
+			dados.senha = bcrypt.hashSync(dados.senha_antiga, salt);
+			dados.user_id = request.session.user_id;
+			
+			cadastroUsuario.altera_senha(request.session.user_id, (err, result)=>{
+				app.app.controllers.connections.db_end_connection(conn);
+				if(!err){
+					response.render('profile',{dados: result});
+				}else{
+					console.log(err);
+				}
+
+			});
 		}
+	], function (err, result) {
+		if(!err){
 
+		}else{
+
+		}
 	});
-
 };

@@ -4,18 +4,16 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 
 	return new Promise((resolve, reject)=>{
 		connMgmt.conn_db_insert(user_id, client_id, client_address, client_port, db_device_id, function(err, result, result_id){
+			app.app.controllers.connections.db_end_connection(conn);
 			if(!err){
 				console.log("conn_db_insert");
-				app.app.controllers.connections.db_end_connection(conn);
 				resolve(result_id);
 			}else{
 				if(err){
-					app.app.controllers.connections.db_end_connection(conn);
 					reject(err);
 				}
 
 				if(result){
-					app.app.controllers.connections.db_end_connection(conn);
 					console.log("result",result);
 					resolve(result);
 				}
@@ -30,16 +28,15 @@ module.exports.conn_mgmt_delete = function(app, id_conn){
 	let connMgmt = new app.app.models.connectionsDAO(conn);
 
 	connMgmt.conn_db_delete(id_conn, function(err, result){
+		app.app.controllers.connections.db_end_connection(conn);
 		if(!err){
-			app.app.controllers.connections.db_end_connection(conn);
+			console.log('conn_db_delete');
 		}else{
 			if(err){
-				app.app.controllers.connections.db_end_connection(conn);
 				console.log("err",err);
 			}
 
 			if(result){
-				app.app.controllers.connections.db_end_connection(conn);
 				console.log("result",result);
 			}
 		}
@@ -52,17 +49,15 @@ module.exports.conn_mgmt_delete_all = function(app){
 	let connMgmt = new app.app.models.connectionsDAO(conn);
 
 	connMgmt.conn_db_delete_all(null, function(err, result){
+		app.app.controllers.connections.db_end_connection(conn);
 		if(!err){
 			console.log("conn_db_delete_all");
-			app.app.controllers.connections.db_end_connection(conn);
 		}else{
 			if(err){
-				app.app.controllers.connections.db_end_connection(conn);
 				console.log("erro:",err);
 			}
 
 			if(result){
-				app.app.controllers.connections.db_end_connection(conn);
 				console.log("result",result);
 			}
 		}

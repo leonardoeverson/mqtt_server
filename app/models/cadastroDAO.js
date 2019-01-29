@@ -22,7 +22,7 @@ cadastroDAO.prototype.dados_cadastro = function(dados, callback){
     this.connection.query(query, [dados], callback);
 };
 
-cadastroDAO.prototype.grava_dados_usuario = function(dados, callback){
+cadastroDAO.prototype.atualiza_dados_usuario_db = function(dados, callback){
     let query = "update users set nome = ? and email = ? where user_id = ?";
     this.connection.query(query, [dados.nome, dados.email, dados.user_id], callback);
 };
