@@ -112,17 +112,17 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 	let loginUsuario = new app.app.models.loginDAO(conn);
 	const async = require('async');
 	let bcrypt = require('bcrypt');
-	let dados = request.body;
+	let body = request.body;
 
-	// request.assert('senha_nova_1', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
-	// request.assert('senha_nova_2', 'as senhas não são iguais').trim().isEqual(body.senhav);
-	//
-	// let erros = request.validationErrors();
-	//
-	// if(erros){
-	// 	response.render("cadastro/cadastro",{validacao : erros});
-	// 	return;
-	// }
+	request.assert('senha_nova_1', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
+	request.assert('senha_nova_2', 'as senhas não são iguais').trim().isEqual(body.senha_nova_1);
+
+	let erros = request.validationErrors();
+
+	if(erros){
+		response.send(erros).end();
+		return;
+	}
 
 	//verifica se a senha inicial tá correta;
 	async.series([

@@ -39,18 +39,24 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="alert alert-danger" role="alert" id="mensagem" hidden>
+
+                </div>
                 <form id="troca_senha">
                     <div class="form-group">
                         <label for="exampleInputPassword1">Senha antiga</label>
-                        <input type="password" id="senha_antiga" name="senha_antiga" class="form-control">
+                        <input type="password" id="senha_antiga" name="senha_antiga" class="form-control" minlength="8" required>
+                        <small id="emailHelp" class="form-text text-muted" id="msg1" hidden>Este campo é obrigatório</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Digite a nova senha</label>
-                        <input type="password" id="senha_nova_1" name="senha_nova_1" class="form-control">
+                        <input type="password" id="senha_nova_1" name="senha_nova_1" class="form-control" minlength="8" required>
+                        <small id="emailHelp" class="form-text text-muted" id="msg2" hidden>Este campo é obrigatório</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Redigite a nova senha</label>
-                        <input type="password" id="senha_nova_2" name="senha_nova_2" class="form-control">
+                        <input type="password" id="senha_nova_2" name="senha_nova_2" class="form-control" minlength="8" required>
+                        <small id="emailHelp" class="form-text text-muted" id="msg3" hidden>Este campo é obrigatório</small>
                     </div>
                 </form>
             </div>
@@ -101,6 +107,25 @@
     })
 
     btn_senha_.addEventListener('click', function(e){
+
+        if(senha_antiga.value.trim().length < 9){
+            alert('é necessário inserir a senha antiga');
+            return;
+        }else{
+            if(senha_nova_1.value.trim().length < 9){
+                alert('digite a nova senha');
+                return;
+            }else{
+                if(senha_nova_2.value.trim().length < 9){
+                    alert('Redigite a nova senha');
+                    return;
+                }
+            }
+        }
+
+
+
+
 
         let req = 'senha_antiga='+senha_antiga.value;
         req += '&senha_nova_1='+senha_nova_1.value

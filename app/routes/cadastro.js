@@ -26,8 +26,12 @@ module.exports = function(app){
 	});
 
 	app.post('/dados/usuario/senha', function(request, response){
-		let body = request.body;
-		console.log(body);
-		response.sendStatus(200);
+		if(request.session.logged){
+			//response.sendStatus(200);
+			app.app.controllers.cadastro.altera_senha_cadastro(app, request, response)
+		}else{
+			response.sendStatus(503);
+		}
+
 	})
 };
