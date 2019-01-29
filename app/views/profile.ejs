@@ -108,23 +108,20 @@
 
     btn_senha_.addEventListener('click', function(e){
 
-        if(senha_antiga.value.trim().length == 0){
+        if(senha_antiga.value.trim().length === 0){
             msg1.hidden = false;
             return;
         }
 
-        if(senha_nova_1.value.trim().length == 0){
+        if(senha_nova_1.value.trim().length === 0){
             msg2.hidden = false;
             return;
         }
 
-        if(senha_nova_2.value.trim().length == 0){
+        if(senha_nova_2.value.trim().length === 0){
             msg3.hidden = false;
             return;
         }
-
-
-
 
         let req = 'senha_antiga='+senha_antiga.value;
         req += '&senha_nova_1='+senha_nova_1.value
@@ -134,7 +131,7 @@
 
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                alert("Senha Atualizada com sucesso");
+                //alert("Senha Atualizada com sucesso");
             }else{
                 //location.reload(true);
             }
@@ -142,6 +139,13 @@
         xhttp.open("POST", "/dados/usuario/senha", true);
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
         xhttp.send(req);
+    })
+
+
+    $('#modal').on('hidden.bs.modal', function (e) {
+        senha_antiga.value = '';
+        senha_nova_1.value = '';
+        senha_nova_2.value = '';
     })
 </script>
 

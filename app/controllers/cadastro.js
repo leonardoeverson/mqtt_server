@@ -114,6 +114,12 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 	let bcrypt = require('bcrypt');
 	let body = request.body;
 
+	//Erros de cadastro
+	let erro_cadastro = [];
+	let nivel = 0;
+	erro_cadastro.push({ 'msg': 'a senha está incorreta'});
+	erro_cadastro.push({ 'msg': 'Houve um erro ao atualizar a senha'});
+
 	request.assert('senha_nova_1', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
 	request.assert('senha_nova_2', 'as senhas não são iguais').trim().isEqual(body.senha_nova_1);
 
@@ -148,18 +154,20 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 			cadastroUsuario.altera_senha(dados, (err, result)=>{
 				app.app.controllers.connections.db_end_connection(conn);
 				if(!err){
-					response.render('profile',{dados: result});
-				}else{
+					callback(null, result);
+				} else {
+					nivel++;
 					console.log(err);
+					callback(err, result);
 				}
 
 			});
 		}
 	], function (err, result) {
 		if(!err){
-
+			response.send('ok');
 		}else{
-
+			response.send(JSON.stringify({validacao : [erro_cadastro[nivel]]}));
 		}
 	});
 };
