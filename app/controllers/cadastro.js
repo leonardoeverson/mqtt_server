@@ -98,9 +98,10 @@ module.exports.atualiza_dados_cadastro = function(app, request, response){
 	cadastroUsuario.atualiza_dados_usuario_db(request.session.user_id, body, (err, result)=>{
 		app.app.controllers.connections.db_end_connection(conn);
 		if(!err){
-			response.sendStatus(200);
+			response.send(JSON.stringify([{msg : 'Dados atualizados com sucesso', status : 2}]))
 		}else{
 			console.log(err);
+			response.send(JSON.stringify([{msg : 'Dados atualizados com sucesso', status : 1}]))
 		}
 
 	});
@@ -163,7 +164,6 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 
 
 			cadastroUsuario.altera_senha(dados, (err, result)=>{
-				app.app.controllers.connections.db_end_connection(conn);
 				if(!err){
 					callback(null, result);
 				} else {
@@ -175,6 +175,7 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 			});
 		}
 	], function (err, result) {
+		app.app.controllers.connections.db_end_connection(conn);
 		if(!err){
 			response.send(JSON.stringify([{msg: 'Senha alterada com sucesso', status : 2}]));
 		}else{

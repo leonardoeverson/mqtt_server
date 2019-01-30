@@ -77,10 +77,11 @@
             protocolId: 'MQTT',
             protocolVersion: 4,
             clean: true,
+            keepalive: 120,
             reconnectPeriod: 1000,
             connectTimeout: 30 * 1000,
             will: {
-                topic: 'WillMsg',
+                topic: prefix_user + '/WillMsg',
                 payload: 'conexão fechada de forma anormal..!',
                 qos: 0,
                 retain: false
@@ -135,7 +136,7 @@
 
     function subscribe(topic, qos){
         if(client != null){
-            client.subscribe(topic, {qos: 0});
+            client.subscribe(topic, {qos: qos});
         }else{
             alert("null connection!");
         }
@@ -152,7 +153,7 @@
     }
 
 
-    $('#pub_btn').on('click', function(event){
+    pub_btn.addEventListener('click', function(event){
         event.preventDefault();
 
         if(topic_pub.value.trim().length === 0|| mensagem.value.trim().length === ""){
@@ -161,7 +162,7 @@
         }
 
         let topic = prefix_user+"/"+topic_pub.value;
-        let qos = qos_1.value;
+        let qos = Number(qos_1.value);
         let mensagem_ = mensagem.value;
 
         publish(topic, mensagem_, qos);
@@ -169,7 +170,7 @@
     })
 
 
-    $('#subs_btn').on('click', function(event){
+    subs_btn.addEventListener('click', function(event){
         event.preventDefault();
 
         if(topic_sub.value.trim().length === 0){
@@ -178,7 +179,7 @@
         }
 
         let topic = prefix_user+"/"+topic_sub.value;
-        let qos = qos_2.value;
+        let qos = Number(qos_2.value);
 
         subscribe(topic, qos);
 
