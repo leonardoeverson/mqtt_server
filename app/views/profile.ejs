@@ -131,6 +131,27 @@
 
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                mensagem.innerHTML = '<ul>'
+                let check = false;
+                try{
+                    let temp = JSON.parse(this.responseText);
+                    for(let i = 0; i < temp.length; i++){
+                        if(temp[i].msg){
+                            mensagem.hidden = false;
+                            mensagem.innerHTML += '<li>'+temp[i].msg+'</li>';
+                            check = true;
+                        }
+                    }
+                    mensagem.innerHTML += '</ul>';
+
+                    if(!check){
+                        alert('Senha alterada com sucesso');
+                    }
+                }catch(e){
+                    console.log(e);
+                }
+
                 //alert("Senha Atualizada com sucesso");
             }else{
                 //location.reload(true);

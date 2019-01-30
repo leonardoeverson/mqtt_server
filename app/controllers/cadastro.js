@@ -117,8 +117,8 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 	//Erros de cadastro
 	let erro_cadastro = [];
 	let nivel = 0;
-	erro_cadastro.push({ 'msg': 'a senha está incorreta'});
-	erro_cadastro.push({ 'msg': 'Houve um erro ao atualizar a senha'});
+	erro_cadastro.push({ 'msg': 'a senha antiga está incorreta',status : 1});
+	erro_cadastro.push({ 'msg': 'Houve um erro ao atualizar a senha',status : 2});
 
 	request.assert('senha_nova_1', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
 	request.assert('senha_nova_2', 'as senhas não são iguais').trim().isEqual(body.senha_nova_1);
@@ -133,23 +133,33 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 	//verifica se a senha inicial tá correta;
 	async.series([
 		function(callback){
-			loginUsuario.valida_senha(user_id, (err, result)=>{
-				bcrypt.compare(password.toString(), result[0].senha, async function (err, res) {
-					if (res === true) {
-						//Senhas
-						callback(null, result);
-					} else {
-						callback(err, result);
-					}
-				})
+			loginUsuario.valida_senha(request.session.user_id, (err, result)=>{
+				try{
+					bcrypt.compare(body.senha_antiga, result[0].senha, async function (err, res) {
+						if (res === true) {
+							//Senhas
+							callback(null, result);
+						} else {
+							callback(err, result);
+						}
+					})
+				}catch (e) {
+					callback(e, null);
+				}
+
 			});
 		},
 		function(callback){
+			let dados = {};
+			try{
+				let saltRounds = 10;
+				let salt = bcrypt.genSaltSync(saltRounds);
+				dados.senha = bcrypt.hashSync(body.senha_nova_1, salt);
+				dados.user_id = request.session.user_id;
+			}catch(e){
+				callback(e, null);
+			}
 
-			let saltRounds = 10;
-			let salt = bcrypt.genSaltSync(saltRounds);
-			dados.senha = bcrypt.hashSync(dados.senha_nova_1, salt);
-			dados.user_id = request.session.user_id;
 
 			cadastroUsuario.altera_senha(dados, (err, result)=>{
 				app.app.controllers.connections.db_end_connection(conn);
@@ -165,7 +175,7 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 		}
 	], function (err, result) {
 		if(!err){
-			response.send('ok');
+			response.send(JSON.stringify([{msg: 'Senha alterada com sucesso', status : 2}]));
 		}else{
 			response.send(JSON.stringify({validacao : [erro_cadastro[nivel]]}));
 		}
