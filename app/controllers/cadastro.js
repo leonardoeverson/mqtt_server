@@ -120,13 +120,13 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 	erro_cadastro.push({ 'msg': 'a senha antiga está incorreta',status : 1});
 	erro_cadastro.push({ 'msg': 'Houve um erro ao atualizar a senha',status : 2});
 
-	request.assert('senha_nova_1', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
+	request.assert('senha_nova_1', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8, 16);
 	request.assert('senha_nova_2', 'as senhas não são iguais').trim().isEqual(body.senha_nova_1);
 
 	let erros = request.validationErrors();
 
 	if(erros){
-		response.send(erros).end();
+		response.send(erros);
 		return;
 	}
 
@@ -177,7 +177,7 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 		if(!err){
 			response.send(JSON.stringify([{msg: 'Senha alterada com sucesso', status : 2}]));
 		}else{
-			response.send(JSON.stringify({validacao : [erro_cadastro[nivel]]}));
+			response.send(JSON.stringify([{msg : [erro_cadastro[nivel]], status: 2, erro : err}]));
 		}
 	});
 };
