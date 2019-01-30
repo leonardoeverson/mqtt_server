@@ -92,7 +92,7 @@
             let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    alert('ok');
+                    cancelar_();
                 }
             };
             xhttp.open("POST", "/dados/usuario/salvar?email=" + email.value + "&nome=" + nome.value, true);
@@ -101,12 +101,7 @@
     })
 
     cancelar.addEventListener('click', function (e) {
-        e.preventDefault();
-        enviar.innerHTML = "Atualizar Dados";
-        enviar.removeAttribute('enviar')
-        nome.readOnly = true;
-        email.readOnly = true;
-        cancelar.hidden = true;
+        cancelar_(e);
     });
 
     senha.addEventListener('click', function (e) {
@@ -144,11 +139,7 @@
                 try {
                     let temp = JSON.parse(this.responseText);
                     for (let i = 0; i < temp.length; i++) {
-                        if (temp[i].msg && !temp[i].status) {
-                            mensagem.hidden = false;
-                            mensagem.innerHTML += '<li>' + temp[i].msg + '</li>';
-                            check = true;
-                        } else if (temp[i].msg && temp[i].status && temp[i].status == 1) {
+                        if ((temp[i].msg && !temp[i].status) || (temp[i].msg && temp[i].status && temp[i].status == 1)){
                             mensagem.hidden = false;
                             mensagem.innerHTML += '<li>' + temp[i].msg + '</li>';
                             check = true;
@@ -180,6 +171,20 @@
         senha_nova_1.value = '';
         senha_nova_2.value = '';
     })
+
+
+    function cancelar_(e){
+
+        if(e){
+            e.preventDefault();
+        }
+
+        enviar.innerHTML = "Atualizar Dados";
+        enviar.removeAttribute('enviar')
+        nome.readOnly = true;
+        email.readOnly = true;
+        cancelar.hidden = true;
+    }
 </script>
 
 <%- include('footer'); %>
