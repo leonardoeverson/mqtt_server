@@ -93,11 +93,12 @@ module.exports.dados_cadastro = function(app, request, response){
 module.exports.atualiza_dados_cadastro = function(app, request, response){
 	let conn = app.config.dbconn();
 	let cadastroUsuario = new app.app.models.cadastroDAO(conn);
-	
-	cadastroUsuario.atualiza_dados_usuario_db(request.session.user_id, (err, result)=>{
+	let body = request.query;
+
+	cadastroUsuario.atualiza_dados_usuario_db(request.session.user_id, body, (err, result)=>{
 		app.app.controllers.connections.db_end_connection(conn);
 		if(!err){
-			response.render('profile',{dados: result});
+			response.sendStatus(200);
 		}else{
 			console.log(err);
 		}

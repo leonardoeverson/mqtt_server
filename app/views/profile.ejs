@@ -1,21 +1,23 @@
 <%- include('header'); %>
 <title>Perfil</title>
 <div class="col-sm-10">
-
     <hr/>
     <h5>Dados de cadastro</h5>
     <hr>
     <div class="row col-sm-10">
-
         <form>
-            <div class="form-group" id="form">
-                <label for="exampleInputEmail1">Nome</label>
-                <input type="text" id="nome" name="nome" class="form-control" aria-describedby="Nome do usuário" readonly value='<%= dados[0].nome %>'>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="email" id="email" name="email" class="form-control" aria-describedby="Email do usuário" readonly value='<%= dados[0].email %>'>
-            </div>
+            <% if(typeof (dados[0]) != "undefined"){ %>
+                <div class="form-group" id="form">
+                    <label for="exampleInputEmail1">Nome</label>
+                    <input type="text" id="nome" name="nome" class="form-control" aria-describedby="Nome do usuário"
+                           readonly value='<%= dados[0].nome %>'>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" aria-describedby="Email do usuário"
+                           readonly value='<%= dados[0].email %>'>
+                </div>
+            <% }else{console.log(dados)} %>
             <button type="submit" id="enviar" class="btn btn-primary">Atualizar Dados</button>
             <button type="cancelar" id="cancelar" class="btn btn-danger" hidden>Cancelar</button>
         </form>
@@ -26,7 +28,6 @@
     <div class="row col-sm-10" style="margin-top: 40px">
         <button type="button" id="senha" class="btn btn-primary">Atualizar Senha</button>
     </div>
-
 </div>
 
 <div class="modal" id="modal" tabindex="-1" role="dialog">
@@ -46,17 +47,23 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">Senha antiga</label>
                         <input type="password" id="senha_antiga" name="senha_antiga" class="form-control" minlength="8">
-                        <small class="form-text text-muted" style="color: red !important;" id="msg1" hidden>Este campo é obrigatório</small>
+                        <small class="form-text text-muted" style="color: red !important;" id="msg1" hidden>Este campo é
+                            obrigatório
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Digite a nova senha</label>
-                        <input type="password" id="senha_nova_1" name="senha_nova_1" class="form-control" minlength="8" >
-                        <small class="form-text text-muted" id="msg2" style="color: red !important;" hidden>digite a nova senha</small>
+                        <input type="password" id="senha_nova_1" name="senha_nova_1" class="form-control" minlength="8">
+                        <small class="form-text text-muted" id="msg2" style="color: red !important;" hidden>digite a
+                            nova senha
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Redigite a nova senha</label>
                         <input type="password" id="senha_nova_2" name="senha_nova_2" class="form-control" minlength="8">
-                        <small class="form-text text-muted" id="msg3" style="color: red !important;" hidden>Redigite a nova senha</small>
+                        <small class="form-text text-muted" id="msg3" style="color: red !important;" hidden>Redigite a
+                            nova senha
+                        </small>
                     </div>
                 </form>
             </div>
@@ -74,26 +81,26 @@
 <script>
 
     enviar.addEventListener('click', function (e) {
-        if(!enviar.getAttribute('enviar')){
-            e.preventDefault();
+        e.preventDefault();
+        if (!enviar.getAttribute('enviar')) {
             this.innerHTML = "Salvar";
-            this.setAttribute('enviar',true);
+            this.setAttribute('enviar', true);
             nome.readOnly = false;
             email.readOnly = false;
             cancelar.hidden = false;
-        }else{
+        } else {
             let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
+            xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    alert(this.responseText);
+                    alert('ok');
                 }
             };
-            xhttp.open("POST", "/dados/usuario/salvar?email="+email.value+"&nome="+nome.value, true);
+            xhttp.open("POST", "/dados/usuario/salvar?email=" + email.value + "&nome=" + nome.value, true);
             xhttp.send();
         }
     })
 
-    cancelar.addEventListener('click', function(e){
+    cancelar.addEventListener('click', function (e) {
         e.preventDefault();
         enviar.innerHTML = "Atualizar Dados";
         enviar.removeAttribute('enviar')
@@ -102,65 +109,63 @@
         cancelar.hidden = true;
     });
 
-    senha.addEventListener('click', function(e){
+    senha.addEventListener('click', function (e) {
         $('#modal').modal('show');
     })
 
-    btn_senha_.addEventListener('click', function(e){
+    btn_senha_.addEventListener('click', function (e) {
 
-        if(senha_antiga.value.trim().length === 0){
+        if (senha_antiga.value.trim().length === 0) {
             msg1.hidden = false;
             return;
         }
 
-        if(senha_nova_1.value.trim().length === 0){
+        if (senha_nova_1.value.trim().length === 0) {
             msg2.hidden = false;
             return;
         }
 
-        if(senha_nova_2.value.trim().length === 0){
+        if (senha_nova_2.value.trim().length === 0) {
             msg3.hidden = false;
             return;
         }
 
-        let req = 'senha_antiga='+senha_antiga.value;
-        req += '&senha_nova_1='+senha_nova_1.value
-        req += '&senha_nova_2='+senha_nova_2.value
+        let req = 'senha_antiga=' + senha_antiga.value;
+        req += '&senha_nova_1=' + senha_nova_1.value
+        req += '&senha_nova_2=' + senha_nova_2.value
 
         let xhttp = new XMLHttpRequest();
 
-        xhttp.onreadystatechange = function() {
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
                 mensagem.innerHTML = '<ul>'
                 let check = false;
-                try{
+                try {
                     let temp = JSON.parse(this.responseText);
-                    for(let i = 0; i < temp.length; i++){
-                        if(temp[i].msg && !temp[i].status){
+                    for (let i = 0; i < temp.length; i++) {
+                        if (temp[i].msg && !temp[i].status) {
                             mensagem.hidden = false;
-                            mensagem.innerHTML += '<li>'+temp[i].msg+'</li>';
+                            mensagem.innerHTML += '<li>' + temp[i].msg + '</li>';
                             check = true;
-                        }
-
-                        else if(temp[i].msg && temp[i].status && temp[i].status == 1){
+                        } else if (temp[i].msg && temp[i].status && temp[i].status == 1) {
                             mensagem.hidden = false;
-                            mensagem.innerHTML += '<li>'+temp[i].msg+'</li>';
+                            mensagem.innerHTML += '<li>' + temp[i].msg + '</li>';
                             check = true;
                         }
                     }
                     mensagem.innerHTML += '</ul>';
 
-                    if(!check){
+                    if (!check) {
                         alert('Senha alterada com sucesso');
                         $('#modal').modal('hide');
                     }
-                }catch(e){
+                } catch (e) {
                     console.log(e);
                 }
 
                 //alert("Senha Atualizada com sucesso");
-            }else{
+            } else {
                 //location.reload(true);
             }
         };
