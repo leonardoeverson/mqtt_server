@@ -95,6 +95,14 @@ module.exports.atualiza_dados_cadastro = function(app, request, response){
 	let cadastroUsuario = new app.app.models.cadastroDAO(conn);
 	let body = request.query;
 
+
+	/*
+	TODO:
+		- 1: Verificar se o email existe
+		- 2: 
+	*/
+
+
 	cadastroUsuario.atualiza_dados_usuario_db(request.session.user_id, body, (err, result)=>{
 		app.app.controllers.connections.db_end_connection(conn);
 		if(!err){
@@ -152,6 +160,8 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 			});
 		},
 		function(callback){
+
+			//gerando hash para a nova senha
 			let dados = {};
 			try{
 				let saltRounds = 10;
@@ -162,7 +172,7 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 				callback(e, null);
 			}
 
-
+			//Grava a senha no banco
 			cadastroUsuario.altera_senha(dados, (err, result)=>{
 				if(!err){
 					callback(null, result);
@@ -183,3 +193,77 @@ module.exports.altera_senha_cadastro = function(app, request, response){
 		}
 	});
 };
+
+module.exports.senha_reset = function(app, request, response){
+	var connection = app.config.dbconn();
+	var cadUser = new app.app.models.dados_usuariosDAO(connection);
+	var body = request.body;
+	var mailer = new app.app.controllers.mailer();
+
+	//Verifica se o email existe
+	cadUser.validaEmail(body, function(error, result){
+		if(result.length > 0){
+
+			//duração da validade do token
+			var lifetime = 12;
+
+			var token;
+
+			//Instância da classe
+			var utils = new app.app.models.utilsDAO(connection);
+
+			async.series([
+				function (callback) {
+					token = (function(){
+						g = function(){
+							c='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+							p='';
+							for(i=0;i<128;i++){
+								p+=c.charAt(Math.floor(Math.random()*64));
+							}
+							return p;
+						};
+
+						p = g();
+						while(!/[A-Z]/.test(p)||!/[0-9]/.test(p)||!/[a-z]/.test(p)){
+							p=g();
+						}return p;
+					})()
+
+					callback(null,null);
+				},
+				function (callback) {
+					//Gravando Token
+					utils.grava_token(result[0].id, token, lifetime, function(error, result){
+						if(!error){
+							mailer.send_mail(body.email, 'Link para redefinição de senha', token, result.insertId, function(err, info){
+								if (err) {
+									console.log('Error occurred. ' + err.message);
+									return process.exit(1);
+								}
+								console.log('Message sent: %s', info.messageId);
+								//console.log('Preview URL: %s', nodemailer.getTestMessageUrl(result));
+								// Preview only available when sending through an Ethereal account
+
+								response.render('cadastro/reset',{validacao: [{'msg':'email enviado com sucesso'},{'erro':'false'}]});
+
+							});
+
+						}else{
+							callback(error,result);
+						}
+					})
+				}
+			],function(err, results){
+				if(err){
+					console.log(err);
+					response.render('cadastro/reset',{validacao: [{'msg':err,'erro':'true'}]});
+				}
+			})
+
+
+		}else{
+			response.render('cadastro/reset',{validacao: [{'msg':'email não encontrado','erro':'true'}]});
+		}
+	}, 1);
+}

@@ -172,7 +172,13 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port){
         //Prefixo do usuário
         result3 = await app.app.controllers.prefix.prefix_db_get(app, user_id);
 
+        //Permissões do dispositivo
+
+
+        //id de Conexão
         client.conn.conn_id = resposta.insertId;
+
+        //Prefixo
         client.prefix  = result3;
     }catch (e) {
 

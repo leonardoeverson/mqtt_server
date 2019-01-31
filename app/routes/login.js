@@ -20,13 +20,5 @@ module.exports = function(app){
 		request.session.destroy(function(err){
 			response.redirect("/");
 		});
-	})
-
-	app.get('/password/change',function(request, response){
-		if(request.session.logged){
-			response.redirect("/home");
-		}else{
-			response.render('login/index');
-		}
-	})
+	});
 };

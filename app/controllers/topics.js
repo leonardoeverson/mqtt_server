@@ -93,6 +93,10 @@ module.exports.topic_validation = function(app, prefix, topic, callback, type){
     assert.deepEqual(matcher.match(prefix), ['it matched!']);
     */
 
+    //Verificar se tem o prefixo
+
+    //Verificar se é permitido publicar  ou subscrever no tópico
+
     if(type === 1){
         if(topic.search(prefix) > -1){
             callback(null);

@@ -17,8 +17,15 @@ module.exports = function(app){
 
 	});
 
-	app.post('/dados/usuario/salvar', function(request, response){
+	app.get('/recuperar/senha', (request, response)=>{
+		response.render('recuperar_acesso');
+	});
 
+	app.post('/recuperar/senha/verificar', (request, response)=>{
+		//response.render('recuperar_acesso');
+	});
+
+	app.post('/dados/usuario/salvar', function(request, response){
 		if(request.session.logged){
 			app.app.controllers.cadastro.atualiza_dados_cadastro(app, request, response);
 		}else{
