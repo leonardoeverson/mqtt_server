@@ -52,18 +52,35 @@ module.exports.cadastro_usuario = function(app, request, response){
 					request.session.nome = body.nome;
 					request.session.user = body.nome_usuario;
 					request.session.user_id = result.insertId;
-					response.redirect("/home");
+					callback(null, result);
 				}else{
 					nivel++;
 					if(error){
-						callback("null",error);
+						callback(error, null);
 					}
 
 					if(result){
-						callback("null",result);
+						callback("null", result);
 					}
 				}
 			})
+		},
+		function (callback) {
+
+			let dados = {};
+			dados.username = makeid(8, false, true, false, false);
+			dados.senha = makeid(12, true, true, true, false);
+			dados.user_id = request.session.user_id;
+
+			cadastroUsuario.cria_usuario_senha(dados, (err, result)=>{
+				if(!err){
+					response.redirect("/home");
+				}else{
+					if(err){
+						callback(err, null);
+					}
+				}
+			});
 		}
 
 	], function(err, results){
@@ -132,17 +149,6 @@ module.exports.atualiza_dados_cadastro = function(app, request, response){
 				response.send(JSON.stringify([{msg: err, status: 1}]))
 			}
 	});
-
-	/*
-	TODO:
-		- 1: Verificar se o email existe
-		- 2: Caso contrário, atualizar dos dados
-	*/
-
-
-
-
-
 };
 
 module.exports.altera_senha_cadastro = function(app, request, response){
@@ -295,4 +301,35 @@ module.exports.senha_reset = function(app, request, response){
 			response.render('cadastro/reset',{validacao: [{'msg':'email não encontrado','erro':'true'}]});
 		}
 	}, 1);
+};
+
+
+function makeid(tamanho, usa_maiusculas, usa_minusculas, usa_numeros, usa_simbolos) {
+	let text = "";
+	let maiusculas = "abcdefghijklmnopqrstuvwxyz";
+	let minusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	let numeros = '0123456789';
+	let simbolos = '_-*?;:{}{@#$%¨&*()]!';
+	let possible = '';
+
+	if(usa_maiusculas){
+		possible += maiusculas;
+	}
+
+	if(usa_minusculas){
+		possible += minusculas;
+	}
+
+	if(usa_numeros){
+		possible += numeros;
+	}
+
+	if(usa_simbolos){
+		possible += simbolos
+	}
+
+	for (let i = 0; i < tamanho; i++)
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+	return text;
 }

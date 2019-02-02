@@ -22,6 +22,11 @@ cadastroDAO.prototype.verifica_email_existente_user = function(email, user_id, c
     this.connection.query(query, [email, user_id], callback);
 };
 
+cadastroDAO.prototype.cria_usuario_senha = function(dados){
+    let query = 'INSERT into device_username_password(user_id, username, password) VALUE (?, ?, ?)';
+    this.connection.query(query, [dados.user_id, dados.username, dados.password], callback);
+};
+
 cadastroDAO.prototype.dados_cadastro = function(dados, callback){
     let query = "select * from users where user_id = ?";
     this.connection.query(query, [dados], callback);
