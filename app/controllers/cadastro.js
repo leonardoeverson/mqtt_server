@@ -4,12 +4,6 @@ module.exports.cadastro_usuario = function(app, request, response){
 	let body = request.body;
 	//console.log(body);
 
-	//Erros de cadastro
-	let erro_cadastro = [];
-	let nivel = 0;
-	erro_cadastro.push({ 'msg': 'email existente, insira outro'});
-	erro_cadastro.push({ 'msg': 'falha ao cadastrar o usuario'});
-
 	request.assert('email', 'O campo email não pode ficar vazio').trim().notEmpty().isEmail();
 	request.assert('senha', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
 	request.assert('senhav', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
@@ -26,7 +20,10 @@ module.exports.cadastro_usuario = function(app, request, response){
 	/*
 		1 - Verifica se o email existe
 		2 - Se não existe, grava o usuário
+		3 - cria o login genérico para login em dispositivos
+		4 - cria o prefixo do usuário
 	*/
+
 	let async = require('async');
 	async.series([
 		function(callback){
@@ -35,13 +32,12 @@ module.exports.cadastro_usuario = function(app, request, response){
 					callback(null, result);
 				}else{
 					if(error){
-						callback("null",error);
+						callback(error, null);
 					}
 
 					if(result){
-						callback("null",result);
+						callback("null", result, 'falha ao cadastrar o usuario');
 					}
-
 				}
 			})
 		},
@@ -54,39 +50,28 @@ module.exports.cadastro_usuario = function(app, request, response){
 					request.session.user_id = result.insertId;
 					callback(null, result);
 				}else{
-					nivel++;
 					if(error){
-						callback(error, null);
+						callback(error, null, 'falha ao cadastrar o usuario');
 					}
 
 					if(result){
-						callback("null", result);
+						callback("null", result, 'falha ao cadastrar o usuario');
 					}
 				}
 			})
 		},
-		function (callback) {
+		async function (callback) {
 
-			let dados = {};
-			dados.username = makeid(8, false, true, false, false);
-			dados.senha = makeid(12, true, true, true, false);
-			dados.user_id = request.session.user_id;
 
-			cadastroUsuario.cria_usuario_senha(dados, (err, result)=>{
-				if(!err){
-					response.redirect("/home");
-				}else{
-					if(err){
-						callback(err, null);
-					}
-				}
-			});
+		},
+		async function (callback) {
+
+
 		}
 
-	], function(err, results){
-		app.app.controllers.connections.db_end_connection(conn);
+	], function(err, result, mensagem){
 		if(err){
-			response.render('cadastro/cadastro',{validacao : [erro_cadastro[nivel]]});
+			response.render('cadastro/cadastro',{validacao : mensagem, err: err});
 		}
 	})
 
@@ -303,33 +288,3 @@ module.exports.senha_reset = function(app, request, response){
 	}, 1);
 };
 
-
-function makeid(tamanho, usa_maiusculas, usa_minusculas, usa_numeros, usa_simbolos) {
-	let text = "";
-	let maiusculas = "abcdefghijklmnopqrstuvwxyz";
-	let minusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	let numeros = '0123456789';
-	let simbolos = '_-*?;:{}{@#$%¨&*()]!';
-	let possible = '';
-
-	if(usa_maiusculas){
-		possible += maiusculas;
-	}
-
-	if(usa_minusculas){
-		possible += minusculas;
-	}
-
-	if(usa_numeros){
-		possible += numeros;
-	}
-
-	if(usa_simbolos){
-		possible += simbolos
-	}
-
-	for (let i = 0; i < tamanho; i++)
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-	return text;
-}

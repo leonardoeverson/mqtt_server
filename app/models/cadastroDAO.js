@@ -8,8 +8,8 @@ cadastroDAO.prototype.grava_usuario = function(dados, callback) {
     let salt = bcrypt.genSaltSync(saltRounds);
     dados.senha = bcrypt.hashSync(dados.senha, salt);
 
-    let query = "insert into users (nome, email, senha) values(?)";
-    this.connection.query(query, [dados], callback);
+    let query = "insert into users (nome, email, senha) values(?, ? , ?)";
+    this.connection.query(query, [dados.nome, dados.email, dados.senha], callback);
 };
 
 cadastroDAO.prototype.verifica_email_existente = function(email, callback) {
@@ -20,11 +20,6 @@ cadastroDAO.prototype.verifica_email_existente = function(email, callback) {
 cadastroDAO.prototype.verifica_email_existente_user = function(email, user_id, callback) {
     let query = "select email from users where email = ? and user_id != ?";
     this.connection.query(query, [email, user_id], callback);
-};
-
-cadastroDAO.prototype.cria_usuario_senha = function(dados){
-    let query = 'INSERT into device_username_password(user_id, username, password) VALUE (?, ?, ?)';
-    this.connection.query(query, [dados.user_id, dados.username, dados.password], callback);
 };
 
 cadastroDAO.prototype.dados_cadastro = function(dados, callback){

@@ -1,16 +1,4 @@
-module.exports.prefix_gen = function (prefix_size) {
-
-    let text = "";
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (let i = 0; i < prefix_size; i++)
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-
-};
-
-module.exports.prefix_db_insert = function(app, dados){
+module.exports.prefix_db_insert = function(app, dados, prefix){
     let conn = app.config.dbconn();
     let utilsDAO = new app.app.models.utilsDAO(conn);
 
@@ -22,7 +10,7 @@ module.exports.prefix_db_insert = function(app, dados){
     })
 };
 
-module.exports.prefix_db_get = function(app, dados){
+module.exports.prefix_db_get = function(app, user_id){
     let conn = app.config.dbconn();
     let utilsDAO = new app.app.models.utilsDAO(conn);
 
@@ -36,5 +24,22 @@ module.exports.prefix_db_get = function(app, dados){
                 rejetct(error);
             }
         });
+    });
+};
+
+module.exports.create_prefix = async function(app, prefix){
+
+    let utilsDAO = new app.app.models.utilsDAO(conn);
+    let dados = {};
+    dados.prefix = await app.app.controllers.id.make_id(6,true, true, true, false);
+    dados.user_id = request.session.user_id;
+
+    utilsDAO.insert_prefix_db(dados, (err, result)=>{
+        app.app.controllers.connections.db_end_connection(conn);
+        if(!err){
+            response.redirect("/home");
+        }else{
+            callback(err, null, 'erro ao criar o prefixo');
+        }
     });
 };
