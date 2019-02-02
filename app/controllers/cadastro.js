@@ -94,25 +94,54 @@ module.exports.atualiza_dados_cadastro = function(app, request, response){
 	let conn = app.config.dbconn();
 	let cadastroUsuario = new app.app.models.cadastroDAO(conn);
 	let body = request.query;
+	let async = require('async');
 
+	async.series([
+			(callback) => {
+				cadastroUsuario.verifica_email_existente_user(body.email, request.session.user_id, (err, result) => {
+					if (!err && result.length == 0) {
+						callback(null, result);
+					} else {
+						if(err){
+							callback(err, null);
+						}else{
+							callback("O email inserido não pode ser usado", null);
+						}
+
+					}
+
+				});
+			},
+			(callback) => {
+				cadastroUsuario.atualiza_dados_usuario_db(request.session.user_id, body, (err, result) => {
+					if (!err) {
+						callback(null, result);
+					} else {
+						callback(err, null);
+					}
+
+				});
+			}
+		],
+		(err, result) => {
+			app.app.controllers.connections.db_end_connection(conn);
+			if (!err) {
+				response.send(JSON.stringify([{msg: 'Dados atualizados com sucesso', status: 2}]))
+			} else {
+				console.log(err);
+				response.send(JSON.stringify([{msg: err, status: 1}]))
+			}
+	});
 
 	/*
 	TODO:
 		- 1: Verificar se o email existe
-		- 2:
+		- 2: Caso contrário, atualizar dos dados
 	*/
 
 
-	cadastroUsuario.atualiza_dados_usuario_db(request.session.user_id, body, (err, result)=>{
-		app.app.controllers.connections.db_end_connection(conn);
-		if(!err){
-			response.send(JSON.stringify([{msg : 'Dados atualizados com sucesso', status : 2}]))
-		}else{
-			console.log(err);
-			response.send(JSON.stringify([{msg : 'Dados atualizados com sucesso', status : 1}]))
-		}
 
-	});
+
 
 };
 
