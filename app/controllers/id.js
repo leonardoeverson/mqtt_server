@@ -37,34 +37,43 @@ module.exports.create_ids = async function(app, request){
 
     let conn = app.config.dbconn();
     let idDAO = new app.app.models.utilsDAO(conn);
-    let async = require('async');
     let dados = {};
 
-    dados.username = await make_id(8, false, true, false, false);
-    dados.senha = await make_id(12, true, true, true, false);
-    dados.user_id = request.session.user_id;
-
-    while(true){
-        let test = await pesquisa_username(dados.username);
-        if(test){
-            break;
-        }
-        dados.username = await make_id(8, false, true, false, false);
+    try{
+        dados.username = await app.app.controllers.id.make_id(8, false, true, false, false);
+        dados.senha = await app.app.controllers.id.make_id(12, true, true, true, false);
+        dados.user_id = request.session.user_id;
+    }catch (e) {
+        console.log(e);
     }
 
-    return new Promise((resolve, reject) =>{
-        idDAO.grava_ids(dados, (err, result)=>{
-            if(!err){
-                resolve(true);
-            }else{
+    let test = false;
+    console.log(dados);
+
+    return new Promise(async (resolve, reject) => {
+
+        while (!test) {
+            console.log(test);
+            test = await app.app.controllers.id.pesquisa_username(app, dados.username);
+            if (test) {
+                break;
+            }
+            console.log(test);
+            dados.username = await make_id(8, false, true, false, false);
+        }
+
+        idDAO.grava_ids(dados, (err, result) => {
+            if (!err) {
+                resolve(result);
+            } else {
                 console.log(err);
-                reject(false);
+                reject(err);
             }
         });
     });
 };
 
-module.exports.pesquisa_username = function(id){
+module.exports.pesquisa_username = function(app, id){
 
     let conn = app.config.dbconn();
     let idDAO = new app.app.models.utilsDAO(conn);
@@ -72,9 +81,9 @@ module.exports.pesquisa_username = function(id){
     return new Promise((resolve, reject) =>{
         idDAO.pesquisa_username_seq(id, (err, result) =>{
             if(!err && result.length == 0){
-                resolve(true);
+                resolve(result);
             }else{
-                reject(false);
+                reject(err);
             }
         })
     });

@@ -4,6 +4,7 @@ module.exports.cadastro_usuario = function(app, request, response){
 	let body = request.body;
 	//console.log(body);
 
+	let nivel = 0;
 	request.assert('email', 'O campo email não pode ficar vazio').trim().notEmpty().isEmail();
 	request.assert('senha', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
 	request.assert('senhav', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
@@ -29,6 +30,7 @@ module.exports.cadastro_usuario = function(app, request, response){
 		function(callback){
 			cadastroUsuario.verifica_email_existente(body.email, function(error, result){
 				if(!error && result.length == 0){
+					nivel++;
 					callback(null, result);
 				}else{
 					if(error){
@@ -44,11 +46,11 @@ module.exports.cadastro_usuario = function(app, request, response){
 		function(callback){
 			cadastroUsuario.grava_usuario(body, function(error, result){
 				if(!error && result.affectedRows > 0){
-					request.session.autorizado = true;
+					nivel++;
+					request.session.logged = true;
 					request.session.nome = body.nome;
-					request.session.user = body.nome_usuario;
 					request.session.user_id = result.insertId;
-
+					callback(null, result);
 				}else{
 					if(error){
 						callback(error, null, 'falha ao cadastrar o usuario');
@@ -61,19 +63,34 @@ module.exports.cadastro_usuario = function(app, request, response){
 			})
 		},
 		async function (callback) {
-			let result = await app.app.controllers.prefix.create_prefix(app, request);
-			if(result){
-				callback(null, result);
-			}else{
-				callback(err, null, 'erro ao criar o prefixo');
+			nivel++;
+			let result;
+
+			try{
+				result = await app.app.controllers.id.create_ids(app, request);
+			}catch (e) {
+				console.log(e);
+				return e;
 			}
+
+			return result
+
 		},
 		async function (callback) {
+			nivel++;
+			let result;
+			try{
+				result = await app.app.controllers.prefix.create_prefix(app, request);
+			}catch (e) {
+				console.log(e);
+				return e;
+			}
 
-
+			return result
 		}
 
 	], function(err, result, mensagem){
+		console.log(nivel);
 		if(err){
 			response.render('cadastro/cadastro',{validacao : mensagem, err: err});
 		}

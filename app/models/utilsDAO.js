@@ -19,11 +19,12 @@ utilsDAO.prototype.insert_prefix_db = function(prefix, callback){
 
 utilsDAO.prototype.grava_ids = function(dados, callback){
     let query = 'INSERT into device_username_password(user_id, username, password) VALUE (?, ?, ?)';
-    this.conn.query(query, [dados.user_id, dados.username, dados.password], callback);
+    this.conn.query(query, [dados.user_id, dados.username, dados.senha], callback);
 };
 
 utilsDAO.prototype.pesquisa_username_seq = function(dados, callback){
-    let query = "select * from device_username_password where username like '%?%'";
+    dados = '%'+dados+'%';
+    let query = "select * from device_username_password where username like ?";
     this.conn.query(query, [dados], callback);
 };
 

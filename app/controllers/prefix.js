@@ -35,9 +35,9 @@ module.exports.prefix_db_search = async function(app, prefix){
     return new Promise((resolve, reject) => {
         utilsDAO.pesquisa_username_seq(prefix, (err, result) =>{
             if(!err && result.length == 0){
-                resolve(true);
+                resolve(result);
             }else{
-                reject(false);
+                reject(err);
             }
         })
     })
@@ -45,33 +45,30 @@ module.exports.prefix_db_search = async function(app, prefix){
 
 module.exports.create_prefix = async function(app, request){
 
-    let conn = app.config.dbconn();
-    let utilsDAO = new app.app.models.utilsDAO(conn);
-    let dados = {};
-    dados.prefix = await app.app.controllers.id.make_id(6,true, true, true, false);
-    dados.user_id = request.session.user_id;
+    return new Promise(async (resolve, reject) => {
+        let conn = app.config.dbconn();
+        let utilsDAO = new app.app.models.utilsDAO(conn);
+        let dados = {};
+        dados.prefix = await app.app.controllers.id.make_id(6, true, true, true, false);
+        dados.user_id = request.session.user_id;
 
-    while(true){
-        let test = await prefix_db_search(app, dados.username);
-        if(test){
-            break;
+        while (true) {
+            let test = await prefix_db_search(app, dados.username);
+            if (test) {
+                break;
+            }
+            dados.prefix = await app.app.controllers.id.make_id(6, true, true, true, false);
         }
-        dados.prefix = await app.app.controllers.id.make_id(6,true, true, true, false);
-    }
 
-    return new Promise((resolve, reject) =>{
-        utilsDAO.insert_prefix_db(dados, (err, result)=>{
+        utilsDAO.insert_prefix_db(dados, (err, result) => {
             app.app.controllers.connections.db_end_connection(conn);
-            if(!err){
-                resolve(true);
-
-            }else{
-                reject(false);
+            if (!err) {
+                resolve(result);
+            } else {
+                console.log(err)
+                reject(err);
             }
         });
     });
-
-
-
 
 };
