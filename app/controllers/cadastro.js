@@ -61,11 +61,11 @@ module.exports.cadastro_usuario = function(app, request, response){
 			})
 		},
 		async function (callback) {
-			let result = await app.app.controllers.id.create_ids(app, request);
+			let result = await app.app.controllers.prefix.create_prefix(app, request);
 			if(result){
 				callback(null, result);
 			}else{
-				callback(result, null, 'problema na geração de prefixos');
+				callback(err, null, 'erro ao criar o prefixo');
 			}
 		},
 		async function (callback) {

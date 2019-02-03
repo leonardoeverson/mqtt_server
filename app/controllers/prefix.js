@@ -43,7 +43,7 @@ module.exports.prefix_db_search = async function(app, prefix){
     })
 };
 
-module.exports.create_prefix = async function(app, prefix){
+module.exports.create_prefix = async function(app, request){
 
     let conn = app.config.dbconn();
     let utilsDAO = new app.app.models.utilsDAO(conn);
@@ -51,22 +51,22 @@ module.exports.create_prefix = async function(app, prefix){
     dados.prefix = await app.app.controllers.id.make_id(6,true, true, true, false);
     dados.user_id = request.session.user_id;
 
-
     while(true){
         let test = await prefix_db_search(app, dados.username);
         if(test){
             break;
         }
-        dados.username = await make_id(8, false, true, false, false);
+        dados.prefix = await app.app.controllers.id.make_id(6,true, true, true, false);
     }
 
     return new Promise((resolve, reject) =>{
         utilsDAO.insert_prefix_db(dados, (err, result)=>{
             app.app.controllers.connections.db_end_connection(conn);
             if(!err){
-                //response.redirect("/home");
+                resolve(true);
+
             }else{
-               // callback(err, null, 'erro ao criar o prefixo');
+                reject(false);
             }
         });
     });
