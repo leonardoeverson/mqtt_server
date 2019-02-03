@@ -61,6 +61,7 @@ module.exports.create_ids = async function(app, request){
         }
 
         idDAO.grava_ids(dados, (err, result) => {
+            app.app.controllers.connections.db_end_connection(conn);
             if (!err) {
                 resolve(result);
             } else {
@@ -77,6 +78,7 @@ module.exports.pesquisa_username = function(app, id){
 
     return new Promise((resolve, reject) =>{
         idDAO.pesquisa_username_seq(id, (err, result) =>{
+            app.app.controllers.connections.db_end_connection(conn);
             if(!err && result.length == 0){
                 resolve(result);
             }else{

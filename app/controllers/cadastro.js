@@ -4,7 +4,12 @@ module.exports.cadastro_usuario = function(app, request, response){
 	let body = request.body;
 	//console.log(body);
 
+	let erro_cadastro = [];
 	let nivel = 0;
+	erro_cadastro.push({ 'msg': 'email existente, insira outro'});
+	erro_cadastro.push({ 'msg': 'falha ao cadastrar o usuario'});
+	erro_cadastro.push({ 'msg': 'falha na geração dos tokens'});
+
 	request.assert('email', 'O campo email não pode ficar vazio').trim().notEmpty().isEmail();
 	request.assert('senha', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
 	request.assert('senhav', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8,8);
@@ -38,7 +43,7 @@ module.exports.cadastro_usuario = function(app, request, response){
 					}
 
 					if(result){
-						callback("null", result, 'falha ao cadastrar o usuario');
+						callback('falha ao cadastrar o usuario', result);
 					}
 				}
 			})
@@ -53,11 +58,11 @@ module.exports.cadastro_usuario = function(app, request, response){
 					callback(null, result);
 				}else{
 					if(error){
-						callback(error, null, 'falha ao cadastrar o usuario');
+						callback(error, null);
 					}
 
 					if(result){
-						callback("null", result, 'falha ao cadastrar o usuario');
+						callback('falha ao cadastrar o usuario', result);
 					}
 				}
 			})
@@ -76,7 +81,6 @@ module.exports.cadastro_usuario = function(app, request, response){
 			return result
 		},
 		async function (callback) {
-			nivel++;
 			let result;
 			try{
 				result = await app.app.controllers.prefix.create_prefix(app, request);
@@ -88,11 +92,11 @@ module.exports.cadastro_usuario = function(app, request, response){
 			return result
 		}
 
-	], function(err, result, mensagem){
-		console.log(result);
+	], function(err, result){
+		console.log(err);
 		app.app.controllers.connections.db_end_connection(conn);
 		if(err){
-			response.render('cadastro/cadastro',{validacao : mensagem, err: err});
+			response.render('cadastro/cadastro',{validacao : [erro_cadastro[nivel]], err: err});
 		}else{
 			response.redirect('/home');
 		}
