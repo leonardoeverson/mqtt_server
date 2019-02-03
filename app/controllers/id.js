@@ -36,7 +36,7 @@ module.exports.make_id = function(tamanho, usa_maiusculas, usa_minusculas, usa_n
 module.exports.create_ids = async function(app, request){
 
     let conn = app.config.dbconn();
-    let idDAO = new app.app.models.idDAO(conn);
+    let idDAO = new app.app.models.utilsDAO(conn);
     let async = require('async');
     let dados = {};
 
@@ -55,9 +55,10 @@ module.exports.create_ids = async function(app, request){
     return new Promise((resolve, reject) =>{
         idDAO.grava_ids(dados, (err, result)=>{
             if(!err){
-                resolve(result);
+                resolve(true);
             }else{
-                reject(err);
+                console.log(err);
+                reject(false);
             }
         });
     });
@@ -66,7 +67,7 @@ module.exports.create_ids = async function(app, request){
 module.exports.pesquisa_username = function(id){
 
     let conn = app.config.dbconn();
-    let idDAO = new app.app.models.idDAO(conn);
+    let idDAO = new app.app.models.utilsDAO(conn);
 
     return new Promise((resolve, reject) =>{
         idDAO.pesquisa_username_seq(id, (err, result) =>{

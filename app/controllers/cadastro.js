@@ -48,7 +48,7 @@ module.exports.cadastro_usuario = function(app, request, response){
 					request.session.nome = body.nome;
 					request.session.user = body.nome_usuario;
 					request.session.user_id = result.insertId;
-					callback(null, result);
+
 				}else{
 					if(error){
 						callback(error, null, 'falha ao cadastrar o usuario');
@@ -61,8 +61,12 @@ module.exports.cadastro_usuario = function(app, request, response){
 			})
 		},
 		async function (callback) {
-
-
+			let result = await app.app.controllers.id.create_ids(app, request);
+			if(result){
+				callback(null, result);
+			}else{
+				callback(result, null, 'problema na geração de prefixos');
+			}
 		},
 		async function (callback) {
 
