@@ -1,21 +1,21 @@
-module.exports.prefix_db_insert = function(app, dados, prefix){
-    let conn = app.config.dbconn();
-    let utilsDAO = new app.app.models.utilsDAO(conn);
-
-    utilsDAO.insert_prefix_db(dados, (error, result) =>{
-        app.app.controllers.connections.db_end_connection(conn);
-        if(error){
-            console.log(error)
-        }
-    })
-};
+// module.exports.prefix_db_insert = function(app, dados, prefix){
+//     let conn = app.config.dbconn();
+//     let utilsDAO = new app.app.models.utilsDAO(conn);
+//
+//     utilsDAO.insert_prefix_db(dados, (error, result) =>{
+//         app.app.controllers.connections.db_end_connection(conn);
+//         if(error){
+//             console.log(error)
+//         }
+//     })
+// };
 
 module.exports.prefix_db_get = function(app, user_id){
     let conn = app.config.dbconn();
     let utilsDAO = new app.app.models.utilsDAO(conn);
 
     return new Promise((resolve, rejetct) =>{
-        utilsDAO.get_prefix_db(dados, (error, result) =>{
+        utilsDAO.get_prefix_db(user_id, (error, result) =>{
             app.app.controllers.connections.db_end_connection(conn);
             if(!error){
                 resolve(result[0].prefix_value);
