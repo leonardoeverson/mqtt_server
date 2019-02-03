@@ -9,8 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app/controllers/id.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/id.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/idDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/idDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/cadastro/cadastro.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cadastro/cadastro.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqtt_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/mqtt_db.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,8 +98,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/id.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="824">
-              <caret line="74" column="7" lean-forward="true" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
+            <state relative-caret-position="620">
+              <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -457,13 +456,13 @@
       <workItem from="1548850612520" duration="10910000" />
       <workItem from="1548870172677" duration="4545000" />
       <workItem from="1548937085943" duration="5341000" />
-      <workItem from="1549132610889" duration="11850000" />
+      <workItem from="1549132610889" duration="12074000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="346328000" />
+    <option name="totallyTimeSpent" value="346552000" />
     <option name="showClosedTasks" value="false" />
   </component>
   <component name="TodoView">
@@ -509,13 +508,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/aedes/lib/handlers/subscribe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-391">
-          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/fastparallel/parallel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2945" />
@@ -837,10 +829,17 @@
         <state relative-caret-position="-383" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mqtt_db.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="103" selection-start-line="103" selection-end-line="103" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/id.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="824">
-          <caret line="74" column="7" lean-forward="true" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
+        <state relative-caret-position="620">
+          <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
         </state>
       </provider>
     </entry>

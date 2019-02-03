@@ -52,12 +52,14 @@ module.exports.create_ids = async function(app, request){
         dados.username = await make_id(8, false, true, false, false);
     }
 
-    idDAO.grava_ids(dados, (err, result)=>{
-        if(!err){
-            callback(null, result);
-        }else{
-            callback(err, null, 'erro ao criar os ids de usuário e senha');
-        }
+    return new Promise((resolve, reject) =>{
+        idDAO.grava_ids(dados, (err, result)=>{
+            if(!err){
+                resolve(result);
+            }else{
+                reject(err);
+            }
+        });
     });
 };
 
