@@ -48,17 +48,15 @@ module.exports.create_ids = async function(app, request){
     }
 
     let test = false;
-    console.log(dados);
 
     return new Promise(async (resolve, reject) => {
 
         while (!test) {
-            console.log(test);
             test = await app.app.controllers.id.pesquisa_username(app, dados.username);
             if (test) {
                 break;
             }
-            console.log(test);
+
             dados.username = await make_id(8, false, true, false, false);
         }
 
@@ -66,7 +64,6 @@ module.exports.create_ids = async function(app, request){
             if (!err) {
                 resolve(result);
             } else {
-                console.log(err);
                 reject(err);
             }
         });

@@ -74,7 +74,6 @@ module.exports.cadastro_usuario = function(app, request, response){
 			}
 
 			return result
-
 		},
 		async function (callback) {
 			nivel++;
@@ -90,9 +89,12 @@ module.exports.cadastro_usuario = function(app, request, response){
 		}
 
 	], function(err, result, mensagem){
-		console.log(nivel);
+		console.log(result);
+		app.app.controllers.connections.db_end_connection(conn);
 		if(err){
 			response.render('cadastro/cadastro',{validacao : mensagem, err: err});
+		}else{
+			response.redirect('/home');
 		}
 	})
 

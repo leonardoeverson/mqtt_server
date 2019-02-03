@@ -21,7 +21,7 @@ module.exports.prefix_db_get = function(app, user_id){
                 resolve(result[0].prefix_value);
             }else{
                 console.log(error);
-                rejetct(error);
+                rejetct(throw new Error(error));
             }
         });
     });
@@ -33,11 +33,12 @@ module.exports.prefix_db_search = async function(app, prefix){
     let utilsDAO = new app.app.models.utilsDAO(conn);
 
     return new Promise((resolve, reject) => {
-        utilsDAO.pesquisa_username_seq(prefix, (err, result) =>{
+        utilsDAO.search_prefix_db(prefix, (err, result) =>{
             if(!err && result.length == 0){
                 resolve(result);
             }else{
-                reject(err);
+                console.log(err);
+                reject(throw new Error(err));
             }
         })
     })
@@ -53,7 +54,7 @@ module.exports.create_prefix = async function(app, request){
         dados.user_id = request.session.user_id;
 
         while (true) {
-            let test = await prefix_db_search(app, dados.username);
+            let test = await app.app.controllers.prefix.prefix_db_search(app, dados.prefix);
             if (test) {
                 break;
             }
@@ -65,7 +66,7 @@ module.exports.create_prefix = async function(app, request){
             if (!err) {
                 resolve(result);
             } else {
-                console.log(err)
+                console.log(err);
                 reject(err);
             }
         });

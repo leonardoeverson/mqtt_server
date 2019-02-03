@@ -9,11 +9,12 @@ utilsDAO.prototype.get_prefix_db = function(user_id, callback){
 
 utilsDAO.prototype.insert_prefix_db = function(dados, callback){
     let query = "INSERT INTO user_prefix(user_id, prefix_value) VALUES (?,?)";
-    this.conn.query(query, [dados], callback);
+    this.conn.query(query, [dados.user_id, dados.prefix], callback);
 };
 
-utilsDAO.prototype.insert_prefix_db = function(prefix, callback){
-    let query = "select * from user_prefix where prefix_value like '%?%'";
+utilsDAO.prototype.search_prefix_db = function(prefix, callback){
+    prefix = '%'+prefix+'%';
+    let query = "select * from user_prefix where prefix_value like ?";
     this.conn.query(query, [prefix], callback);
 };
 
