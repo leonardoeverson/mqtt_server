@@ -29,13 +29,11 @@
     
     <% if(typeof(validacao) != "undefined"){%>
         <div class="alert alert-danger" role="alert">
-        <% for(var i = 0; i < validacao.length; i++){ %>
-            <%= validacao[i].msg %>   
-        <% } %>
+            <%= validacao[i].msg %>
+            <% if(typeof(msg) != "undefined"){console.log(msg)}%>
         </div>
     <% }%>
 
-    <% if(typeof(msg) != "undefined"){console.log(msg)}%>
     
     <div class="container">
         <form action="/cadastro/inserir" method="post" style="margin-top: 30px">
