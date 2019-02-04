@@ -38,6 +38,7 @@ module.exports.create_ids = async function(app, request){
     let conn = app.config.dbconn();
     let idDAO = new app.app.models.utilsDAO(conn);
     let dados = {};
+    let test = false;
 
     try{
         dados.username = await app.app.controllers.id.make_id(8, false, true, false, false);
@@ -47,25 +48,25 @@ module.exports.create_ids = async function(app, request){
         console.log(e);
     }
 
-    let test = false;
+    test = await app.app.controllers.id.pesquisa_username(app, dados.username);
+    if (!test) {
+        app.app.controllers.id.create_ids(app, request);
+    }
+
+
 
     return new Promise(async (resolve, reject) => {
-
-        while (!test) {
-            test = await app.app.controllers.id.pesquisa_username(app, dados.username);
-            if (test) {
-                break;
-            }
-
-            dados.username = await make_id(8, false, true, false, false);
-        }
 
         idDAO.grava_ids(dados, (err, result) => {
             app.app.controllers.connections.db_end_connection(conn);
             if (!err) {
                 resolve(result);
             } else {
-                reject(err);
+                if(err){
+                    reject(err);
+                }
+
+                resolve(false);
             }
         });
     });
@@ -80,9 +81,14 @@ module.exports.pesquisa_username = function(app, id){
         idDAO.pesquisa_username_seq(id, (err, result) =>{
             app.app.controllers.connections.db_end_connection(conn);
             if(!err && result.length == 0){
-                resolve(result);
+                resolve(true);
             }else{
-                reject(err);
+                if(err){
+                    console.log(err);
+                    reject(err);
+                }
+
+                resolve(false);
             }
         })
     });
