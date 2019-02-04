@@ -19,7 +19,7 @@ module.exports.login_usuario = function (app, request, response) {
                     request.session.prefix_user = await app.app.controllers.prefix.prefix_db_get(app, request.session.user_id);
 
                     //Recuperação de Token
-                    request.session.user_token = await app.app.controllers.tokens.token_check(app, request);
+                    //request.session.user_token = await app.app.controllers.tokens.token_check(app, request);
 
                     //Recuperação de usuário e senha
                     let username_password = await app.app.controllers.tokens.get_username_password(app, request.session.user_id);
@@ -55,8 +55,9 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
     //let bcrypt = require('bcrypt');
     let auth_error = new Error('Auth error');
     let ip, method, port;
-    dados = {};
-    dados.email = username;
+    let dados = {};
+    dados.username = username;
+    dados.password = password;
 
     try {
         method = "mqtt_socket";

@@ -97,14 +97,21 @@ module.exports.get_username_password = function(app, user_id){
     let conn = app.config.dbconn();
     let tokensDAO = new app.app.models.tokensDAO(conn);
 
-    tokensDAO.get_username_password_db(user_id,(err, result)=>{
-        app.app.controllers.connections.db_end_connection(conn);
-        if(!err){
-            return result;
-        }else{
-            console.log(result);
-        }
-    })
+    return new Promise((resolve, reject) => {
+        tokensDAO.get_username_password_db(user_id,(err, result)=>{
+            app.app.controllers.connections.db_end_connection(conn);
+            if(!err){
+                resolve(result);
+            }else{
+                if(err){
+                    reject(err);
+                }
+
+                resolve(false);
+            }
+        })
+    });
+
 };
 
 
