@@ -21,6 +21,11 @@ tokensDAO.prototype.delete_tokens = function(callback){
     this.connection.query('delete from tokens', callback);
 };
 
+tokensDAO.prototype.get_username_password_db = function(user_id, callback){
+    let query = 'select * from device_username_password where user_id= ?';
+    this.connection.query(query, [user_id], callback);
+};
+
 module.exports = function(){
     return tokensDAO;
 };

@@ -79,19 +79,6 @@ module.exports.conn_metrics = function(app, request, response){
 };
 
 module.exports.topic_validation = function(app, prefix, topic, callback, type){
-    /*
-    let Qlobber = require('qlobber').Qlobber;
-    let opts = {};
-    let assert = require('assert');
-
-    opts.wildcardOne = '+';
-    opts.wildcardSome = '#';
-    opts.separator = '/';
-
-    let matcher = new Qlobber(opts);
-    matcher.add(topic, "Valor");
-    assert.deepEqual(matcher.match(prefix), ['it matched!']);
-    */
 
     //Verificar se tem o prefixo
 

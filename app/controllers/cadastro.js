@@ -72,7 +72,7 @@ module.exports.cadastro_usuario = function (app, request, response) {
             let result;
 
             try {
-                result = await app.app.controllers.id.create_ids(app, request);
+                result = await app.app.controllers.tokens.create_ids(app, request);
             } catch (e) {
                 console.log(e);
                 return e;
