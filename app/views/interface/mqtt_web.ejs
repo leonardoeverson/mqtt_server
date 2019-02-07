@@ -67,25 +67,6 @@
     let clientid = "mqtt_webclient_" + makeid();
     let prefix_user = '<%= prefix_user %>';
 
-    function subscribe(topic, qos){
-        if(client != null){
-            client.subscribe(topic, {qos: qos});
-        }else{
-            alert("null connection!");
-        }
-    }
-
-    function makeid() {
-        let text = "";
-        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        for (let i = 0; i < 10; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-        return text;
-    }
-
-
     pub_btn.addEventListener('click', function(event){
         event.preventDefault();
 
