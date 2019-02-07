@@ -75,6 +75,7 @@ module.exports.cadastro_usuario = function (app, request, response) {
                 result = await app.app.controllers.tokens.create_ids(app, request);
             } catch (e) {
                 console.log(e);
+                //throw new Error('Erro na geração do prefixo');
                 return e;
             }
 
@@ -86,6 +87,7 @@ module.exports.cadastro_usuario = function (app, request, response) {
                 result = await app.app.controllers.prefix.create_prefix(app, request);
             } catch (e) {
                 console.log(e);
+                //throw new Error('Erro na geração do prefixo');
                 return e;
             }
 

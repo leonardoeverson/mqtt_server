@@ -67,22 +67,6 @@
     let clientid = "mqtt_webclient_" + makeid();
     let prefix_user = '<%= prefix_user %>';
 
-    function publish(topic, message, qos){
-        console.log(topic);
-        console.log(message);
-        if(client != null){
-            try{
-                client.publish(topic, message,{qos: qos, retain: false});
-                tabela.innerHTML += "<tr><td>"+topic+"</td><td>"+message+"</td></tr>";
-            }catch(e){
-                console.log(e);
-            }
-
-        }else{
-            alert("null connection!");
-        }
-    }
-
     function subscribe(topic, qos){
         if(client != null){
             client.subscribe(topic, {qos: qos});

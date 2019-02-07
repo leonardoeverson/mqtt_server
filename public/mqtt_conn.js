@@ -1,5 +1,39 @@
 
 
+function subscribe(topic, qos){
+    if(client != null){
+        client.subscribe(topic, {qos: qos});
+    }else{
+        alert("null connection!");
+    }
+}
+
+function makeid() {
+    let text = "";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (let i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+function publish(topic, message, qos){
+    console.log(topic);
+    console.log(message);
+    if(client != null){
+        try{
+            client.publish(topic, message,{qos: qos, retain: false});
+            tabela.innerHTML += "<tr><td>"+topic+"</td><td>"+message+"</td></tr>";
+        }catch(e){
+            console.log(e);
+        }
+
+    }else{
+        alert("null connection!");
+    }
+}
+
 function server_connect(clientid, username, password){
     let options = {
         clientId: clientid,
@@ -50,3 +84,5 @@ function server_connect(clientid, username, password){
     }
 
 }
+
+

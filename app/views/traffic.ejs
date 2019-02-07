@@ -23,5 +23,20 @@
         </tbody>
     </table>
 </div>
+<script>
+    let client = null;
+    let clientid = "mqtt_webclient_" + makeid();
+    let prefix_user = '<%= prefix_user %>';
 
+    $(document).ready(function(){
+        $.notify("Conectando ao servidor...", "info")
+        if(server_connect(clientid, '<%= username %>', '<%= password %>')){
+            subscribe(prefix_user + '/#', 0);
+            $.notify("Conectado!", "success");
+        }else{
+            $.notify("Falha ao conectar ao servidor, atualize a página", "error");
+        }
+    });
+
+</script>
 <%- include('footer'); %>
