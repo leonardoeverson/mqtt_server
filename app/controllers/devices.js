@@ -8,10 +8,10 @@ module.exports.list_devices = function(app, request, response){
 	dadosDispositivos.list_devices_db(dados, function(error, result){
 		if(!error){
 			app.app.controllers.connections.db_end_connection(conn);
-			response.render("devices/list",{validacao : result});
+			response.render("devices/list",{validacao : result, prefixo : request.session.prefix_user});
 		}else{
 			console.log(error);
-			response.render("devices/list",{validacao : {}});
+			response.render("devices/list",{validacao : {}, prefixo : request.session.prefix_user});
 		}
 	})
 };
@@ -156,8 +156,12 @@ module.exports.check_device_reg = function(app, user_id, client_id){
 				app.app.controllers.connections.db_end_connection(conn);
 				resolve(result);
 			}else{
-				console.log(error);
-				reject(error);
+			    if(error){
+                    console.log(error);
+                    reject(error);
+                }
+
+			    resolve(false);
 			}
 		});
 	})

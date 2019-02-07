@@ -1,7 +1,7 @@
 module.exports = function(app){
 	app.get('/devices/register',function(request, response){
 		if(request.session.logged) {
-			response.render('devices/register');
+			response.render('devices/register',{prefixo : request.session.prefix_user});
 		}else{
 			response.redirect("/")
 		}

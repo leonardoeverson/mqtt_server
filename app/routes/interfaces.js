@@ -8,6 +8,7 @@ module.exports = function(app){
             req_data.user_id = request.session.user_id;
             req_data.username = request.session.username;
             req_data.password = request.session.password;
+            req_data.prefixo = request.session.prefix_user;
             response.render('interface/mqtt_web', req_data);
         }else{
             response.redirect("/");

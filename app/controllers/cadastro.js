@@ -111,7 +111,7 @@ module.exports.dados_cadastro = function (app, request, response) {
     cadastroUsuario.dados_cadastro(request.session.user_id, (err, result) => {
         app.app.controllers.connections.db_end_connection(conn);
         if (!err) {
-            response.render('profile', {dados: result});
+            response.render('profile', {dados: result, prefixo : request.session.prefix_user});
         } else {
             console.log(err);
         }

@@ -6,7 +6,7 @@ module.exports.get_server_opts = function(app, request, response){
         if(!error){
             conn.destroy();
             console.log("get_server_user_settings");
-            response.render("settings",{flag: true,  opts:result, user_id: request.session.user_id});
+            response.render("settings",{flag: true,  opts:result, user_id: request.session.user_id, prefixo: request.session.prefix_user});
         }else{
             response.render("settings",{flag: false, opts:result});
         }

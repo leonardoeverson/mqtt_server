@@ -21,7 +21,7 @@ module.exports =  function(app){
         response.send(JSON.stringify(resposta));
     });
 
-    app.get('/dados/connections', async function(request, response){
+    app.get('/dados/connections', function(request, response){
         let resposta;
     });
 
