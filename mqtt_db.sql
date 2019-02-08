@@ -26,12 +26,11 @@ CREATE TABLE IF NOT EXISTS `conn_clients` (
   `device_id` int(11) DEFAULT NULL,
   `method` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.conn_clients: ~0 rows (aproximadamente)
+DELETE FROM `conn_clients`;
 /*!40000 ALTER TABLE `conn_clients` DISABLE KEYS */;
-REPLACE INTO `conn_clients` (`id_conn`, `user_id`, `client_id`, `client_address`, `client_port`, `device_id`, `method`) VALUES
-	(3, 39, 'mqtt_webclient_t4Vni94Nmv', '::1', 51717, 0, NULL);
 /*!40000 ALTER TABLE `conn_clients` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.conn_log
@@ -44,12 +43,11 @@ CREATE TABLE IF NOT EXISTS `conn_log` (
   `user_id` int(11) DEFAULT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.conn_log: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.conn_log: ~39 rows (aproximadamente)
+DELETE FROM `conn_log`;
 /*!40000 ALTER TABLE `conn_log` DISABLE KEYS */;
-REPLACE INTO `conn_log` (`id_conn`, `device_id`, `client_id`, `client_address`, `client_port`, `user_id`, `datetime`) VALUES
-	(3, NULL, 'mqtt_webclient_t4Vni94Nmv', '::1', 51717, 39, '2019-02-03 22:25:47');
 /*!40000 ALTER TABLE `conn_log` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.device_pb_topic
@@ -59,9 +57,8 @@ CREATE TABLE IF NOT EXISTS `device_pb_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.device_pb_topic: ~2 rows (aproximadamente)
+DELETE FROM `device_pb_topic`;
 /*!40000 ALTER TABLE `device_pb_topic` DISABLE KEYS */;
-REPLACE INTO `device_pb_topic` (`device_id`, `pb_topic`) VALUES
-	(1, 'teste/teste');
 /*!40000 ALTER TABLE `device_pb_topic` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.device_sb_topic
@@ -71,9 +68,8 @@ CREATE TABLE IF NOT EXISTS `device_sb_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.device_sb_topic: ~1 rows (aproximadamente)
+DELETE FROM `device_sb_topic`;
 /*!40000 ALTER TABLE `device_sb_topic` DISABLE KEYS */;
-REPLACE INTO `device_sb_topic` (`device_id`, `sb_topic`) VALUES
-	(1, '');
 /*!40000 ALTER TABLE `device_sb_topic` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.device_username_password
@@ -84,10 +80,8 @@ CREATE TABLE IF NOT EXISTS `device_username_password` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.device_username_password: ~2 rows (aproximadamente)
+DELETE FROM `device_username_password`;
 /*!40000 ALTER TABLE `device_username_password` DISABLE KEYS */;
-REPLACE INTO `device_username_password` (`user_id`, `username`, `password`) VALUES
-	(39, 'zputflpo', 'iULZWt942rgB'),
-	(40, 'wiujqmsd', 'OxF3339QiPyW');
 /*!40000 ALTER TABLE `device_username_password` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.mqtt_metrics
@@ -100,11 +94,9 @@ CREATE TABLE IF NOT EXISTS `mqtt_metrics` (
   `conn_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.mqtt_metrics: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.mqtt_metrics: ~21 rows (aproximadamente)
+DELETE FROM `mqtt_metrics`;
 /*!40000 ALTER TABLE `mqtt_metrics` DISABLE KEYS */;
-REPLACE INTO `mqtt_metrics` (`device_id`, `topic`, `length`, `timestamp`, `user_id`, `conn_id`) VALUES
-	(0, 'e23yLc/sensor/luz', 0, '2019-02-03 22:27:21', 39, 3),
-	(0, 'e23yLc/sensor/luz', 11, '2019-02-03 22:27:26', 39, 3);
 /*!40000 ALTER TABLE `mqtt_metrics` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.server_options
@@ -112,13 +104,15 @@ CREATE TABLE IF NOT EXISTS `server_options` (
   `id_option` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(200) DEFAULT NULL,
   KEY `Index 1` (`id_option`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.server_options: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.server_options: ~3 rows (aproximadamente)
+DELETE FROM `server_options`;
 /*!40000 ALTER TABLE `server_options` DISABLE KEYS */;
-REPLACE INTO `server_options` (`id_option`, `description`) VALUES
+INSERT INTO `server_options` (`id_option`, `description`) VALUES
 	(1, 'Não permitir conexões de itens que não estão cadastrados'),
-	(2, 'Permitir somente conexões seguras');
+	(2, 'Permitir somente conexões seguras'),
+	(3, 'Não permitir subscribe no tópico #');
 /*!40000 ALTER TABLE `server_options` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.tokens
@@ -131,6 +125,7 @@ CREATE TABLE IF NOT EXISTS `tokens` (
 ) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.tokens: ~0 rows (aproximadamente)
+DELETE FROM `tokens`;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 
@@ -142,6 +137,7 @@ CREATE TABLE IF NOT EXISTS `tp_publish` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.tp_publish: ~0 rows (aproximadamente)
+DELETE FROM `tp_publish`;
 /*!40000 ALTER TABLE `tp_publish` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tp_publish` ENABLE KEYS */;
 
@@ -153,7 +149,8 @@ CREATE TABLE IF NOT EXISTS `tp_subscribe` (
   `client_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.tp_subscribe: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.tp_subscribe: ~11 rows (aproximadamente)
+DELETE FROM `tp_subscribe`;
 /*!40000 ALTER TABLE `tp_subscribe` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tp_subscribe` ENABLE KEYS */;
 
@@ -167,10 +164,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.users: ~2 rows (aproximadamente)
+DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`user_id`, `nome`, `email`, `senha`) VALUES
-	(39, 'Leonardo Everson', 'leonardo@batista.g12.br', '$2b$10$2RfHiIB29MNlRVkBq1Eideq6EZrjjZuRyromkyiZsFDnMglJwQYia'),
-	(40, 'Leonardo Everson', 'llinharespinheiro@gmail.com', '$2b$10$IFlTlspC7lSk069WNCVu.uFRt7zUJnCsJ/B5ENbDWbXe8mIneqUpa');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mqtt.user_devices
@@ -181,9 +176,10 @@ CREATE TABLE IF NOT EXISTS `user_devices` (
   `publish` int(1) DEFAULT NULL,
   `subscribe` int(1) DEFAULT NULL,
   PRIMARY KEY (`device_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mqtt.user_devices: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela mqtt.user_devices: ~5 rows (aproximadamente)
+DELETE FROM `user_devices`;
 /*!40000 ALTER TABLE `user_devices` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user_devices` ENABLE KEYS */;
 
@@ -194,6 +190,7 @@ CREATE TABLE IF NOT EXISTS `user_options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.user_options: ~0 rows (aproximadamente)
+DELETE FROM `user_options`;
 /*!40000 ALTER TABLE `user_options` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user_options` ENABLE KEYS */;
 
@@ -204,10 +201,8 @@ CREATE TABLE IF NOT EXISTS `user_prefix` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mqtt.user_prefix: ~2 rows (aproximadamente)
+DELETE FROM `user_prefix`;
 /*!40000 ALTER TABLE `user_prefix` DISABLE KEYS */;
-REPLACE INTO `user_prefix` (`user_id`, `prefix_value`) VALUES
-	(39, 'e23yLc'),
-	(40, '6EMY3Y');
 /*!40000 ALTER TABLE `user_prefix` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

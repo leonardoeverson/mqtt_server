@@ -1,8 +1,7 @@
-module.exports.cadastro_usuario = function (app, request, response) {
+module.exports.cadastro_usuario = async function (app, request, response) {
     let conn = app.config.dbconn();
     let cadastroUsuario = new app.app.models.cadastroDAO(conn);
     let body = request.body;
-    //console.log(body);
 
     let erro_cadastro = [];
     let nivel = 0;
@@ -22,88 +21,42 @@ module.exports.cadastro_usuario = function (app, request, response) {
         return;
     }
 
-    //Encadeamento de funções
-    /*
-        1 - Verifica se o email existe
-        2 - Se não existe, grava o usuário
-        3 - cria o login genérico para login em dispositivos
-        4 - cria o prefixo do usuário
-    */
+    let check_email, check_cad, check_prefixos;
 
-    let async = require('async');
-    async.series([
-        function (callback) {
-            cadastroUsuario.verifica_email_existente(body.email, function (error, result) {
-                if (!error && result.length == 0) {
-                    nivel++;
-                    callback(null, result);
-                } else {
-                    if (error) {
-                        callback(error, null);
-                    }
-
-                    if (result) {
-                        callback('falha ao cadastrar o usuario', result);
-                    }
-                }
-            })
-        },
-        function (callback) {
-            cadastroUsuario.grava_usuario(body, function (error, result) {
-                if (!error && result.affectedRows > 0) {
-                    nivel++;
-                    request.session.logged = true;
-                    request.session.nome = body.nome;
-                    request.session.user_id = result.insertId;
-                    callback(null, result);
-                } else {
-                    if (error) {
-                        callback(error, null);
-                    }
-
-                    if (result) {
-                        callback('falha ao cadastrar o usuario', result);
-                    }
-                }
-            })
-        },
-        async function (callback) {
-            nivel++;
-            let result;
-
-            try {
-                result = await app.app.controllers.tokens.create_ids(app, request);
-            } catch (e) {
-                console.log(e);
-                //throw new Error('Erro na geração do prefixo');
-                return e;
-            }
-
-            return result
-        },
-        async function (callback) {
-            let result;
-            try {
-                result = await app.app.controllers.prefix.create_prefix(app, request);
-            } catch (e) {
-                console.log(e);
-                //throw new Error('Erro na geração do prefixo');
-                return e;
-            }
-
-            return result
+    //Verifica se o email existe
+    try{
+        check_email =  await verifica_email(cadastroUsuario, body);
+        if (check_email === false) {
+            return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]]});
         }
+    }catch(e){
+        throw new Error(e);
+    }
 
-    ], function (err, result) {
-        console.log(err);
+    //Grava Cadastro
+    try{
+        check_cad = await grava_cadastro(cadastroUsuario, request, body);
         app.app.controllers.connections.db_end_connection(conn);
-        if (err) {
-            response.render('cadastro/cadastro', {validacao: [erro_cadastro[nivel]], err: err});
-        } else {
-            response.redirect('/home');
+        if (check_cad === false) {
+            nivel++;
+            return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]]});
         }
-    })
+    }catch(e){
+        throw new Error(e);
+    }
 
+    //Cria id's e prefixos
+    try{
+        check_prefixos = await cria_prefixos(app, request);
+        if (check_prefixos === false) {
+            nivel++;
+            return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]]});
+        }
+    }catch(e){
+        throw new Error(e);
+    }
+
+    response.redirect('/home');
 };
 
 module.exports.dados_cadastro = function (app, request, response) {
@@ -113,7 +66,7 @@ module.exports.dados_cadastro = function (app, request, response) {
     cadastroUsuario.dados_cadastro(request.session.user_id, (err, result) => {
         app.app.controllers.connections.db_end_connection(conn);
         if (!err) {
-            response.render('profile', {dados: result, prefixo : request.session.prefix_user});
+            response.render('profile', {dados: result, prefixo: request.session.prefix_user});
         } else {
             console.log(err);
         }
@@ -255,12 +208,12 @@ module.exports.senha_reset = function (app, request, response) {
         if (result.length > 0) {
 
             //duração da validade do token
-            var lifetime = 12;
+            let lifetime = 12;
 
-            var token;
+            let token;
 
             //Instância da classe
-            var utils = new app.app.models.utilsDAO(connection);
+            let utils = new app.app.models.utilsDAO(connection);
 
             async.series([
                 function (callback) {
@@ -318,3 +271,63 @@ module.exports.senha_reset = function (app, request, response) {
         }
     }, 1);
 };
+
+function verifica_email(cadastroUsuario, body) {
+    return new Promise(((resolve, reject) => {
+        cadastroUsuario.verifica_email_existente(body.email, function (error, result) {
+            if (!error && result.length === 0) {
+                resolve(true);
+            } else {
+                if (error) {
+                    reject(error)
+                }
+
+                resolve(false);
+            }
+        });
+    }))
+}
+
+function grava_cadastro(cadastroUsuario, request, body) {
+    return new Promise(((resolve, reject) => {
+        cadastroUsuario.grava_usuario(body, function (error, result) {
+            if (!error && result.affectedRows > 0) {
+                request.session.logged = true;
+                request.session.nome = body.nome;
+                request.session.user_id = result.insertId;
+                resolve(result);
+            } else {
+                if (error) {
+                    reject(error, null);
+                }
+
+                resolve(false);
+            }
+        });
+    }))
+}
+
+async function cria_prefixos(app, request) {
+
+    let result, result1, error;
+
+    try {
+        result = await app.app.controllers.tokens.create_ids(app, request);
+        result1 = await app.app.controllers.prefix.create_prefix(app, request);
+    } catch (e) {
+        error = e;
+    }
+
+    return new Promise(((resolve, reject) => {
+        if (!error) {
+            resolve([result, result1]);
+        } else {
+            reject(error);
+        }
+    }))
+
+}
+
+function resposta_cadastro(response, resp) {
+    response.render('cadastro/cadastro', resp);
+}

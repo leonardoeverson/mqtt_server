@@ -52,7 +52,6 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
 
     let conn = app.config.dbconn();
     let loginUsuario = new app.app.models.loginDAO(conn);
-    //let bcrypt = require('bcrypt');
     let auth_error = new Error('Auth error');
     let ip, method, port;
     let dados = {};
@@ -144,6 +143,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
         //Se houver um registro no banco, atribui, se não tem, recebe 0
         client.conn.device_id = result1[0] ? result1[0].device_id : 0;
 
+        //Busca as permissões de publish e subscribe
         if (typeof (result1[0]) != "undefined") {
             client.publish_permission = result1[0].publish;
             client.subscribe_permission = result1[0].subscribe;
@@ -160,7 +160,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
             }
         }
 
-        //controller de conexões
+        //controller de registro de conexões
         let resposta = await app.app.controllers.connections.conn_mgmt_insert(app, user_id, client.id, ip, port, client.conn.device_id, method);
 
         //Prefixo do usuário
@@ -172,12 +172,13 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
         //Prefixo
         client.prefix = result3;
 
+        //callback de aceitação da conexão do dispositivo
+        cb(null, true);
+
     } catch (e) {
         throw new Error(e);
     }
 
 
-    //callback de aceitação da conexão do dispositivo
-    cb(null, true);
 }
 

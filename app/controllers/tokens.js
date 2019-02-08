@@ -158,19 +158,17 @@ module.exports.create_ids = async function(app, request){
     let test = false;
 
     try{
-        dados.username = await app.app.controllers.id.make_id(8, false, true, false, false);
-        dados.senha = await app.app.controllers.id.make_id(12, true, true, true, false);
+        dados.username = await app.app.controllers.tokens.make_id(8, false, true, false, false);
+        dados.senha = await app.app.controllers.tokens.make_id(12, true, true, true, false);
         dados.user_id = request.session.user_id;
     }catch (e) {
         console.log(e);
     }
 
-    test = await app.app.controllers.id.pesquisa_username(app, dados.username);
+    test = await app.app.controllers.tokens.pesquisa_username(app, dados.username);
     if (!test) {
-        app.app.controllers.id.create_ids(app, request);
+        return app.app.controllers.id.create_ids(app, request);
     }
-
-
 
     return new Promise(async (resolve, reject) => {
 
