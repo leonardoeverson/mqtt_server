@@ -40,28 +40,27 @@
     </table>
     <script>
 
-        $('.btn').on('click',function(){
+        $('.btn').on('click', function () {
             let id_ = $(this).attr('device_id')
             console.log(id_)
-            if($(this).attr('op') == 1){
-                window.location.href = '/device/data?device_id='+id_;
-            }
-            else if($(this).attr('op') == 2){
+            if ($(this).attr('op') == 1) {
+                window.location.href = '/device/data?device_id=' + id_;
+            } else if ($(this).attr('op') == 2) {
                 $.ajax({
                     url: '/device/delete',
                     type: 'DELETE',
                     dataType: 'json',
                     data: {device_id: id_},
                 })
-                    .done(function() {
+                    .done(function () {
                         alert("Operação concluída com sucesso");
                         location.reload(true);
                     })
-                    .fail(function() {
+                    .fail(function () {
                         alert("falha na execução da operação");
                         location.reload(true);
                     })
-                    .always(function() {
+                    .always(function () {
                         console.log("complete");
                     });
 

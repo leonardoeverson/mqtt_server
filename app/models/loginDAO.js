@@ -13,6 +13,7 @@ loginDAO.prototype.valida_senha = function(user_id, callback){
 };
 
 loginDAO.prototype.login_dispositivo = function(dados, callback){
+	console.log(dados);
 	let query = 'select * from device_username_password where username = ?  and password = ?';
 	this.connection.query(query, [dados.username, dados.password], callback);
 };

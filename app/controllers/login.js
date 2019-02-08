@@ -132,7 +132,7 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
 };
 
 async function conn_control(app, client, cb, auth_error, user_id, ip, port) {
-    let result1, result2, result3;
+    let result1, result2, result3, result4, result5;
 
     try {
         //Verifica se o dispositivo existe no registro

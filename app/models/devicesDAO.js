@@ -3,21 +3,27 @@ function devicesDAO(conn){
 }
 
 devicesDAO.prototype.register_devices_db = function(dados, callback) {
-    //console.log(dados);
     let query = "insert into user_devices(user_id, device_name, publish, subscribe) values(?, ?, ?, ?)";
     this.connection.query(query,[dados.user_id, dados.device_name, dados.publish, dados.subscribe], callback);
-
 };
 
 devicesDAO.prototype.device_pb_topic_db = function(dados, callback){
-    let query;
-    query = "insert into device_pb_topic(device_id, pb_topic) values ?";
+    let query = "insert into device_pb_topic(device_id, pb_topic) values ?";
     this.connection.query(query,[dados], callback);
 };
 
 devicesDAO.prototype.device_sb_topic_db = function(dados, callback){
-    let query;
-    query = "insert into device_sb_topic(device_id, sb_topic) values ?";
+    let query = "insert into device_sb_topic(device_id, sb_topic) values ?";
+    this.connection.query(query,[dados], callback);
+};
+
+devicesDAO.prototype.get_device_pb_topic_db = function(dados, callback){
+    let query = "";
+    this.connection.query(query,[dados], callback);
+};
+
+devicesDAO.prototype.get_device_sb_topic_db = function(dados, callback){
+    let query = "";
     this.connection.query(query,[dados], callback);
 };
 
@@ -35,7 +41,6 @@ devicesDAO.prototype.delete_device_db = function(device_id, callback){
 
 devicesDAO.prototype.connected_device_db = function(dados, callback){
     let query = "SELECT * FROM conn_clients WHERE user_id = ?";
-
     this.connection.query(query, [dados.user_id], callback);
 };
 
