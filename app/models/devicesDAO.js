@@ -18,12 +18,12 @@ devicesDAO.prototype.device_sb_topic_db = function(dados, callback){
 };
 
 devicesDAO.prototype.get_device_pb_topic_db = function(dados, callback){
-    let query = "";
+    let query = "select * from device_pb_topic where device_id = ?";
     this.connection.query(query,[dados], callback);
 };
 
 devicesDAO.prototype.get_device_sb_topic_db = function(dados, callback){
-    let query = "";
+    let query = "select * from device_sb_topic where device_id = ?";
     this.connection.query(query,[dados], callback);
 };
 

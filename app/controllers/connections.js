@@ -1,9 +1,17 @@
-module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_address, client_port, db_device_id){
+module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_address, client_port, db_device_id, method){
 	let conn = app.config.dbconn();
 	let connMgmt = new app.app.models.connectionsDAO(conn);
 
+	let dados = {};
+	dados.user_id = user_id;
+	dados.client_id = client_id;
+	dados.client_address = client_address;
+	dados.client_port = client_port;
+	dados.device_id = db_device_id;
+	dados.method = method;
+
 	return new Promise((resolve, reject)=>{
-		connMgmt.conn_db_insert(user_id, client_id, client_address, client_port, db_device_id, function(err, result, result_id){
+		connMgmt.conn_db_insert(dados, function(err, result, result_id){
 			app.app.controllers.connections.db_end_connection(conn);
 			if(!err){
 				console.log("conn_db_insert");

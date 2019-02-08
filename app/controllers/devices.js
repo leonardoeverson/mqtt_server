@@ -20,7 +20,6 @@ module.exports.register_devices = function (app, request, response) {
     let conn = app.config.dbconn();
     let dadosDispositivos = new app.app.models.devicesDAO(conn);
     let dados = request.body;
-    let async = require('async');
 
     dados.user_id = request.session.user_id;
 
@@ -46,7 +45,6 @@ module.exports.register_devices = function (app, request, response) {
                     dados.pb_topic = [];
                     dados.pb_topic.push([result.insertId, temp]);
                 }
-
 
                 dadosDispositivos.device_pb_topic_db(dados.pb_topic, (err, result) => {
                     if (err) {
@@ -76,7 +74,6 @@ module.exports.register_devices = function (app, request, response) {
                     dados.sb_topic = [];
                     dados.sb_topic.push([result.insertId, temp]);
                 }
-
 
                 dadosDispositivos.device_sb_topic_db(dados.sb_topic, (err, result) => {
                     if (err) {
@@ -188,16 +185,13 @@ module.exports.delete_device = function (app, request, response) {
     })
 };
 
-module.exports.publish_perm = function (app, user_id, client_id) {
+module.exports.publish_perm = function (app, device_id) {
     let conn = app.config.dbconn();
     let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
-    let dados = {};
-    dados.user_id = user_id;
-    dados.device_id = client_id;
 
     return new Promise((resolve, reject) => {
-        dadosDispositivos.get_device_pb_topic_db(dados, function (error, result) {
+        dadosDispositivos.get_device_pb_topic_db(device_id, function (error, result) {
             app.app.controllers.connections.db_end_connection(conn);
             if (!error) {
                 resolve(result);
@@ -213,16 +207,12 @@ module.exports.publish_perm = function (app, user_id, client_id) {
     })
 };
 
-module.exports.subscribe_perm = function (app, user_id, client_id) {
+module.exports.subscribe_perm = function (app, device_id) {
     let conn = app.config.dbconn();
     let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
-    let dados = {};
-    dados.user_id = user_id;
-    dados.device_id = client_id;
-
     return new Promise((resolve, reject) => {
-        dadosDispositivos.get_device_sb_topic_db(dados, function (error, result) {
+        dadosDispositivos.get_device_sb_topic_db(device_id, function (error, result) {
             app.app.controllers.connections.db_end_connection(conn);
             if (!error) {
                 resolve(result);

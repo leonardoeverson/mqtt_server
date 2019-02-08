@@ -59,22 +59,16 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
     dados.username = username;
     dados.password = password;
 
-    try {
-        method = "mqtt_socket";
+    if(client.conn.remoteAddress){
+        method = "MQTT";
         ip = client.conn.remoteAddress.replace("::ffff:", "");
         port = client.conn.remotePort;
-    } catch (e) {
-        console.log(e)
     }
 
-    if (typeof (ip) == "undefined") {
-        try {
-            method = "websocket";
-            ip = client.conn.socket._socket.remoteAddress.replace("::ffff:", "");
-            port = client.conn.socket._socket.remotePort;
-        } catch (e) {
-            console.log(e)
-        }
+    if(client.conn.socket._socket.remoteAddress){
+        method = "WebSocket";
+        ip = client.conn.socket._socket.remoteAddress.replace("::ffff:", "");
+        port = client.conn.socket._socket.remotePort;
     }
 
     console.log(method, ip, port);
@@ -92,7 +86,7 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
             //Finalização de conexão
             app.app.controllers.connections.db_end_connection(conn);
 
-            conn_control(app, client, cb, auth_error, result[0].user_id, ip, port);
+            conn_control(app, client, cb, auth_error, result[0].user_id, ip, port, method);
 
         } else {
             if (error) {
@@ -131,7 +125,7 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
 
 };
 
-async function conn_control(app, client, cb, auth_error, user_id, ip, port) {
+async function conn_control(app, client, cb, auth_error, user_id, ip, port, method) {
     let result1, result2, result3, result4, result5;
 
     try {
@@ -155,19 +149,37 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port) {
         client.conn.device_id = device_id;
     }
 
+    if(typeof(result1[0]) != "undefined"){
+        client.publish_permission = result1[0].publish;
+        client.subscribe_permission = result1[0].publish;
+
+        //Permissões do dispositivo
+        if (Number(result1[0].publish) === 2) {
+            try {
+                result4 = await app.app.controllers.publish_perm(app, device_id);
+                client.publish_topics = result4[0];
+            } catch (e) {
+                throw new Error(e);
+            }
+        }
+
+        if(Number(result[0].subscribe) === 2){
+            try{
+                result5 = await app.app.controllers.subscribe_perm(app, device_id);
+                client.publish_topics = result5[0];
+            }catch(e){
+                throw new Error(e);
+            }
+        }
+    }
+
+
     try {
         //controller de conexões
-        let resposta = await app.app.controllers.connections.conn_mgmt_insert(app, user_id, client.id, ip, port, device_id);
-
-        //Recuperação de token
-        //app.app.controllers.tokens.token_check(app, request);
-        //Carrega prefixo do usuario
+        let resposta = await app.app.controllers.connections.conn_mgmt_insert(app, user_id, client.id, ip, port, device_id, method);
 
         //Prefixo do usuário
         result3 = await app.app.controllers.prefix.prefix_db_get(app, user_id);
-
-        //Permissões do dispositivo
-
 
         //id de Conexão
         client.conn.conn_id = resposta.insertId;

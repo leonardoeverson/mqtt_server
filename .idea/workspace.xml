@@ -8,13 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/11a9c702-7edd-4c4f-8695-08c59773de07.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/11a9c702-7edd-4c4f-8695-08c59773de07.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/connections.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/connections.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/devices.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/devices.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/connectionsDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/connectionsDAO.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/devicesDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/devicesDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/loginDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/loginDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/devices/list.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devices/list.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,15 +73,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/login.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1208">
-              <caret line="59" column="29" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/loginDAO.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
@@ -91,20 +81,47 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/devices.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="81" column="30" lean-forward="true" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
+            <state relative-caret-position="-123">
+              <caret line="127" column="82" selection-start-line="127" selection-start-column="82" selection-end-line="127" selection-end-column="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/connections.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes/cadastro.js">
+        <entry file="file://$PROJECT_DIR$/app/models/connectionsDAO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="12" column="53" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
+            <state relative-caret-position="170">
+              <caret line="10" column="243" selection-start-line="10" selection-start-column="243" selection-end-line="10" selection-end-column="243" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/devices.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="333">
+              <caret line="156" column="37" selection-start-line="156" selection-start-column="37" selection-end-line="156" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/devicesDAO.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="328">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
@@ -132,15 +149,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
               <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/devicesDAO.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -185,10 +193,8 @@
         <option value="$PROJECT_DIR$/node_modules/aedes/aedes.js" />
         <option value="$PROJECT_DIR$/app/models/dadosUsuarioDAO.js" />
         <option value="$PROJECT_DIR$/app/models/topicsDAO.js" />
-        <option value="$PROJECT_DIR$/app/models/connectionsDAO.js" />
         <option value="$PROJECT_DIR$/app/models/serverDAO.js" />
         <option value="$PROJECT_DIR$/index.js" />
-        <option value="$PROJECT_DIR$/app/controllers/connections.js" />
         <option value="$PROJECT_DIR$/app/views/profile.ejs" />
         <option value="$PROJECT_DIR$/app/views/settings.ejs" />
         <option value="$PROJECT_DIR$/app/views/devices/register.ejs" />
@@ -219,11 +225,13 @@
         <option value="$PROJECT_DIR$/app/controllers/cadastro.js" />
         <option value="$PROJECT_DIR$/app/views/interface/mqtt_web.ejs" />
         <option value="$PROJECT_DIR$/app/routes/home.js" />
-        <option value="$PROJECT_DIR$/app/models/devicesDAO.js" />
         <option value="$PROJECT_DIR$/app/views/devices/list.ejs" />
         <option value="$PROJECT_DIR$/app/models/loginDAO.js" />
-        <option value="$PROJECT_DIR$/app/controllers/login.js" />
+        <option value="$PROJECT_DIR$/app/models/devicesDAO.js" />
         <option value="$PROJECT_DIR$/app/controllers/devices.js" />
+        <option value="$PROJECT_DIR$/app/models/connectionsDAO.js" />
+        <option value="$PROJECT_DIR$/app/controllers/login.js" />
+        <option value="$PROJECT_DIR$/app/controllers/connections.js" />
       </list>
     </option>
   </component>
@@ -485,13 +493,13 @@
       <workItem from="1549297200473" duration="2470000" />
       <workItem from="1549546696187" duration="2329000" />
       <workItem from="1549550054365" duration="7550000" />
-      <workItem from="1549627019597" duration="6564000" />
+      <workItem from="1549627019597" duration="8863000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="380136000" />
+    <option name="totallyTimeSpent" value="382435000" />
     <option name="showClosedTasks" value="false" />
   </component>
   <component name="TodoView">
@@ -507,7 +515,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49404117" visible="true" weight="0.19742814" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49404117" visible="true" weight="0.19742814" />
       <window_info id="Structure" order="1" sideWeight="0.503792" side_tool="true" weight="0.21428572" />
       <window_info id="npm" order="2" sideWeight="0.50595886" side_tool="true" weight="0.16791044" />
       <window_info id="Favorites" order="3" sideWeight="0.5016251" side_tool="true" weight="0.20895523" />
@@ -529,8 +537,8 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="540" y="47" width="286" height="633" id="Database" order="3" weight="0.20306122" />
-      <window_info anchor="right" x="1160" y="139" width="206" height="589" id="Time Tracking" order="4" visible="true" weight="0.1376702" />
+      <window_info active="true" anchor="right" x="540" y="47" width="286" height="633" id="Database" order="3" visible="true" weight="0.20272315" />
+      <window_info anchor="right" x="1160" y="139" width="206" height="589" id="Time Tracking" order="4" weight="0.1376702" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,13 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/connections.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/login/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -667,13 +668,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/idDAO.js" />
-    <entry file="file://$PROJECT_DIR$/app/models/connectionsDAO.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/cadastro/cadastro.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -807,20 +801,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/loginDAO.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1208">
-          <caret line="59" column="29" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/devices/register.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -835,6 +815,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/cadastro.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-106">
+          <caret line="12" column="53" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/devices.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -844,22 +831,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/devicesDAO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="328">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/cadastro.js">
+    <entry file="file://$PROJECT_DIR$/app/models/loginDAO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="12" column="53" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
+        <state relative-caret-position="255">
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/devices.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="81" column="30" lean-forward="true" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
+        <state relative-caret-position="333">
+          <caret line="156" column="37" selection-start-line="156" selection-start-column="37" selection-end-line="156" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-123">
+          <caret line="127" column="82" selection-start-line="127" selection-start-column="82" selection-end-line="127" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/connectionsDAO.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="243" selection-start-line="10" selection-start-column="243" selection-end-line="10" selection-end-column="243" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/connections.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
         </state>
       </provider>
     </entry>
