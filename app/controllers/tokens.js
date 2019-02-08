@@ -146,8 +146,6 @@ module.exports.make_id = function(tamanho, usa_maiusculas, usa_minusculas, usa_n
 
         resolve(text);
     });
-
-
 };
 
 module.exports.create_ids = async function(app, request){
@@ -155,7 +153,7 @@ module.exports.create_ids = async function(app, request){
     let conn = app.config.dbconn();
     let idDAO = new app.app.models.utilsDAO(conn);
     let dados = {};
-    let test = false;
+    let test;
 
     try{
         dados.username = await app.app.controllers.tokens.make_id(8, false, true, false, false);

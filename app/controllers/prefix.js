@@ -59,7 +59,7 @@ module.exports.create_prefix = async function (app, request) {
     let conn = app.config.dbconn();
     let utilsDAO = new app.app.models.utilsDAO(conn);
     let dados = {};
-    let test = false;
+    let test;
     dados.prefix = await app.app.controllers.tokens.make_id(6, true, true, true, false);
     dados.user_id = request.session.user_id;
 
@@ -68,7 +68,7 @@ module.exports.create_prefix = async function (app, request) {
         return app.app.controllers.prefix.create_prefix(app, request);
     }
 
-    request.session.prefix = dados.prefix;
+    request.session.prefix_user = dados.prefix;
     return new Promise(async (resolve, reject) => {
         utilsDAO.insert_prefix_db(dados, (err, result) => {
             app.app.controllers.connections.db_end_connection(conn);
