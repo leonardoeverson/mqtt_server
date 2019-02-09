@@ -117,36 +117,38 @@ module.exports.get_username_password = function(app, user_id){
 
 module.exports.make_id = function(tamanho, usa_maiusculas, usa_minusculas, usa_numeros, usa_simbolos){
 
-    return new Promise((resolve, reject)=>{
-        let text = "";
-        let minusculas = "abcdefghijklmnopqrstuvwxyz";
-        let maiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        let numeros = '0123456789';
-        let simbolos = '_-*?;:{}{@#$%¨&*()]!';
-        let possible = '';
+    let text = "";
+    let minusculas = "abcdefghijklmnopqrstuvwxyz";
+    let maiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let numeros = '0123456789';
+    let simbolos = '_-*?;:{}{@#$%¨&*()]!';
+    let possible = '';
 
-        if(usa_maiusculas){
-            possible += maiusculas;
-        }
+    if(usa_maiusculas){
+        possible += maiusculas;
+    }
 
-        if(usa_minusculas){
-            possible += minusculas;
-        }
+    if(usa_minusculas){
+        possible += minusculas;
+    }
 
-        if(usa_numeros){
-            possible += numeros;
-        }
+    if(usa_numeros){
+        possible += numeros;
+    }
 
-        if(usa_simbolos){
-            possible += simbolos
-        }
+    if(usa_simbolos){
+        possible += simbolos
+    }
 
-        for (let i = 0; i < tamanho; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
+    for (let i = 0; i < tamanho; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-        resolve(text);
-    });
-};
+    //return new Promise((resolve, reject)=>{
+    //    resolve(text);
+    //});
+
+    return text;
+}
 
 module.exports.create_ids = async function(app, request){
 
@@ -156,8 +158,8 @@ module.exports.create_ids = async function(app, request){
     let test;
 
     try{
-        dados.username = await app.app.controllers.tokens.make_id(8, false, true, false, false);
-        dados.senha = await app.app.controllers.tokens.make_id(12, true, true, true, false);
+        dados.username = app.app.controllers.tokens.make_id(8, false, true, false, false);
+        dados.senha = app.app.controllers.tokens.make_id(12, true, true, true, false);
         dados.user_id = request.session.user_id;
     }catch (e) {
         console.log(e);

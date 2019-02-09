@@ -39,7 +39,7 @@ module.exports.cadastro_usuario = async function (app, request, response) {
         app.app.controllers.connections.db_end_connection(conn);
         if (check_cad === false) {
             nivel++;
-            return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]]});
+            return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]], status : 0});
         }
     }catch(e){
         throw new Error(e);
@@ -50,13 +50,15 @@ module.exports.cadastro_usuario = async function (app, request, response) {
         check_prefixos = await cria_prefixos(app, request);
         if (check_prefixos === false) {
             nivel++;
-            return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]]});
+            return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]], status : 0});
         }
     }catch(e){
         throw new Error(e);
     }
 
-    response.redirect('/home');
+    //response.redirect('/');
+
+    response.render("cadastro/cadastro", { validacao :[{'msg': 'cadastro criado com sucesso, redirecionando para a página de login...'}], status: 1});
 };
 
 module.exports.dados_cadastro = function (app, request, response) {
@@ -292,8 +294,8 @@ function grava_cadastro(cadastroUsuario, request, body) {
     return new Promise(((resolve, reject) => {
         cadastroUsuario.grava_usuario(body, function (error, result) {
             if (!error && result.affectedRows > 0) {
-                request.session.logged = true;
-                request.session.nome = body.nome;
+                // request.session.logged = true;
+                // request.session.nome = body.nome;
                 request.session.user_id = result.insertId;
                 resolve(result);
             } else {

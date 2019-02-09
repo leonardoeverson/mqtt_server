@@ -77,7 +77,7 @@ function server_connect(clientid, username, password){
             console.log(options.clientId + ' disconnected')
         });
 
-        return true;
+        return client.connected;
     }catch (e) {
         console.log(e);
         return false;
