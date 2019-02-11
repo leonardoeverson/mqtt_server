@@ -34,7 +34,7 @@ function publish(topic, message, qos){
     }
 }
 
-function server_connect(clientid, username, password){
+function server_connect(clientid, username, password, callback){
     let options = {
         clientId: clientid,
         username: username,
@@ -65,6 +65,7 @@ function server_connect(clientid, username, password){
         });
 
         client.on('connect', function () {
+            callback();
             console.log('client connected:' + options.clientId)
         });
 
@@ -77,7 +78,7 @@ function server_connect(clientid, username, password){
             console.log(options.clientId + ' disconnected')
         });
 
-        return client.connected;
+        return true;
     }catch (e) {
         console.log(e);
         return false;

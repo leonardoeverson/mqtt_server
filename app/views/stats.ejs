@@ -1,4 +1,10 @@
-
+<%- include('header'); %>
+<head>
+    <title>Estatísticas</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+<div class="col-sm-8">
 
 $SYS/broker/bytes/received
 1396
@@ -96,4 +102,5 @@ The total number of subscriptions active on the broker.
 $SYS/broker/version
 mosquitto version 1.4.15
 The version of the broker. Static.
-
+</div>
+<%- include('footer'); %>

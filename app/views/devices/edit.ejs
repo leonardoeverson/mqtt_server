@@ -1,0 +1,96 @@
+<%- include('../header'); %>
+
+
+<div class="col-sm-8">
+    <h5>Cadastro de dispositivos</h5>
+    <hr/>
+    <% if(typeof (validacao) != 'undefined'){
+            if(validacao[0].status == 0){
+    %>
+        <div class="alert alert-success" role="alert">
+            <%= validacao[0].mensagem %>
+        </div>
+    <%
+         }else{
+    %>
+        <div class="alert alert-danger" role="alert">
+            <%= validacao[0].mensagem %>
+        </div>
+    <%
+        }
+    }
+    %>
+    <form action="/devices/register" method="post">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Nome do dispositivo</label>
+            <input type="text" class="form-control" id="device_name" name="device_name" required/>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Permissão de publish</label>
+            <select class="form-control" id="publish" name="publish">
+                <option value="" selected disabled hidden></option>
+                <option value="1">Publicar em um tópico específico</option>
+                <option value="2">Qualquer tópico</option>
+                <option value="3">Não publicar</option>
+            </select>
+        </div>
+        <div class="form-group" id="pb_op" style="display: none">
+            <label for="exampleFormControlInput1">Tópico(s) (Separe os tópicos por ;)</label>
+            <input type="text" class="form-control" id="pb_topic" name="pb_topic"/>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Permissão de subscribe</label>
+            <select class="form-control" id="subscribe" name="subscribe">
+                <option value="" selected disabled hidden></option>
+                <option value="1">Subscrever um tópico específico</option>
+                <option value="2">Qualquer tópico</option>
+                <option value="3">Não permitir subscrever</option>
+            </select>
+        </div>
+        <div class="form-group" id="sb_op" style="display: none">
+            <label for="exampleFormControlInput1">Tópico(s) (Separe os tópicos por ;)</label>
+            <input type="text" class="form-control" id="sb_topic" name="sb_topic">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Cadastrar">
+    </form>
+</div>
+<script>
+
+    $('#publish option').prop('selected', function() {
+        return this.defaultSelected;
+    });
+
+    $('#subscribe option').prop('selected', function() {
+        return this.defaultSelected;
+    });
+
+
+    $("#publish").on("change", function () {
+        if(this.selectedIndex === 1){
+            $("#pb_op").css("display","inherit");
+            $("#pb_op").prop('required',true);
+        }else{
+            $("#pb_op").css("display","none");
+            $("#pb_op").prop('required',false);
+        }
+    })
+
+    $("#subscribe").on("change", function () {
+        if(this.selectedIndex === 1){
+            $("#sb_op").css("display","inherit");
+            $("#sb_op").prop('required',true);
+        }else{
+            $("#sb_op").css("display","none");
+            $("#sb_op").prop('required',false);
+        }
+    })
+
+</script>
+</div>
+<div class="d-none d-xl-block col-xl-2 bd-toc">
+
+</div>
+
+</div>
+
+<%- include('../footer'); %>

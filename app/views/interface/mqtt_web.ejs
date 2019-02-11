@@ -100,12 +100,8 @@
     });
 
     $(document).ready(function(){
-        $.notify("Conectando ao servidor...", "info")
-        if(server_connect(clientid, '<%= username %>', '<%= password %>')){
-            $.notify("Conectado!", "success");
-        }else{
-            $.notify("Falha ao conectar ao servidor, atualize a página", "error");
-        }
+        $.notify("Conectando ao servidor...", "info");
+        server_connect(clientid, '<%= username %>', '<%= password %>', $.notify("Conectado!", "success"));
     });
 
 </script>

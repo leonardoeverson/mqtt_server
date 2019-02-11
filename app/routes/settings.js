@@ -38,4 +38,13 @@ module.exports =  function(app){
             }
         }
     });
+
+
+    app.get('/stats', function(request, response){
+        if(request.session.logged){
+            response.render("stats",{prefixo : request.session.prefix_user});
+        }else{
+            response.redirect("/");
+        }
+    });
 };
