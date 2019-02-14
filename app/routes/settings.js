@@ -47,4 +47,12 @@ module.exports =  function(app){
             response.redirect("/");
         }
     });
+
+    app.get('/info', function(request, response){
+        if(request.session.logged){
+            response.render("info",{prefixo : request.session.prefix_user});
+        }else{
+            response.redirect("/");
+        }
+    });
 };

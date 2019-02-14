@@ -78,16 +78,21 @@ module.exports.conn_metrics = function(app, request, response){
     })
 };
 
-module.exports.topic_validation = function(app, prefix, topic, callback, type){
-
-    //Verificar se tem o prefixo
+module.exports.topic_validation = function(app, client, topic, callback, type){
 
     //Verificar se é permitido publicar  ou subscrever no tópico
 
-    if(type === 1){
-        if(topic.search(prefix) > -1){
-            callback(null);
-        }else{
+    //Verificar se tem o prefixo
+
+    if(type === 1) {
+        if (client.publish_permission !== 3) {
+            if (topic.search(client.prefix) > -1) {
+                callback(null);
+            } else {
+                console.log("não é possível publicar neste tópico");
+                return callback(new Error('tópico não permitido'));
+            }
+        } else {
             console.log("não é possível publicar neste tópico");
             return callback(new Error('tópico não permitido'));
         }
@@ -95,12 +100,18 @@ module.exports.topic_validation = function(app, prefix, topic, callback, type){
 
     else if(type === 2){
         let sub = topic.topic;
-        if(sub.search(prefix) > -1){
-            callback(null, topic);
+        if(client.subscribe_permission !== 3){
+            if(sub.search(client.prefix) > -1){
+                callback(null, topic);
+            }else{
+                console.log("não é possível subscrever neste tópico");
+                return callback(new Error('tópico não permitido'));
+            }
         }else{
             console.log("não é possível subscrever neste tópico");
             return callback(new Error('tópico não permitido'));
         }
+
     }
 
 

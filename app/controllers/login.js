@@ -156,7 +156,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
 
             if (Number(result[0].subscribe) === 2) {
                 result5 = await app.app.controllers.subscribe_perm(app, result1[0].device_id);
-                client.publish_topics = result5[0];
+                client.subscribe_topics = result5[0];
             }
         }
 
