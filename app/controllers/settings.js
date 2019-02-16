@@ -67,3 +67,16 @@ module.exports.get_server_option = function(app, id_option, user_id){
         });
     })
 };
+
+module.exports.get_username_password_device = function (app, request, response) {
+    let conn = app.config.dbconn();
+    let dadosUsuarios = new app.app.models.dadosUsuarioDAO(conn);
+
+    dadosUsuarios.dados_conexao_dispositivo(request.session.user_id, (err, result)=>{
+        if(!err){
+            response.render('info',{prefixo : request.session.prefix_user, result: result[0]});
+        }else{
+            console.log(err);
+        }
+    })
+};

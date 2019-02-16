@@ -85,7 +85,7 @@ module.exports.topic_validation = function(app, client, topic, callback, type){
     //Verificar se tem o prefixo
 
     if(type === 1) {
-        if (client.publish_permission !== 3) {
+        if (Number(client.publish_permission) !== 3) {
             if (topic.search(client.prefix) > -1) {
                 callback(null);
             } else {
@@ -100,7 +100,7 @@ module.exports.topic_validation = function(app, client, topic, callback, type){
 
     else if(type === 2){
         let sub = topic.topic;
-        if(client.subscribe_permission !== 3){
+        if(Number(client.subscribe_permission) !== 3){
             if(sub.search(client.prefix) > -1){
                 callback(null, topic);
             }else{

@@ -1,10 +1,18 @@
 <%- include('header'); %>
 <head>
-    <title>Informações</title>
+    <title>Informações de Conexão</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-<div class="col-sm-8">
-
+<div class="col-sm-4">
+    <hr/>
+    <div class="jumbotron">
+        <p class="lead">Dados de conexão</p>
+        <hr/>
+        <p>Usuário: <%= result.username %></p>
+        <p>Senha: <%= result.password %></p>
+        <p>Porta MQTT: 1883</p>
+        <p>Porta WebSocket: 8888</p>
+    </div>
 </div>
 <%- include('footer'); %>

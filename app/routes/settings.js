@@ -50,7 +50,7 @@ module.exports =  function(app){
 
     app.get('/info', function(request, response){
         if(request.session.logged){
-            response.render("info",{prefixo : request.session.prefix_user});
+            app.app.controllers.settings.get_username_password_device(app, request, response);
         }else{
             response.redirect("/");
         }
