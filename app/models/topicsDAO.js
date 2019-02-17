@@ -3,9 +3,8 @@ function topicsDAO(conn){
 }
 
 topicsDAO.prototype.topic_subscribe_register_db = function(dados, callback) {
-    let query = "INSERT INTO tp_subscribe(device_id, tp_subscribe, qos) VALUES(";
-    query += "'"+dados.device_id+"','"+dados.tp_subscribe+"',"+dados.qos+")";
-    this.connection.query(query, callback);
+    let query = "INSERT INTO tp_subscribe(client_id, tp_subscribe, qos, device_id) VALUES (?,?,?,?)";
+    this.connection.query(query,[dados.client_id, dados.tp_subscribe, dados.qos, dados.device_id],callback);
 };
 
 topicsDAO.prototype.publish_metrics_db = function(dados, callback){

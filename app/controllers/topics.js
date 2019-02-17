@@ -3,7 +3,8 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
     let topicsDAO = new app.app.models.topicsDAO(conn);
     let dados = {};
     dados.tp_subscribe = subscriptions[0].topic;
-    dados.device_id = client;
+    dados.client_id = client.id;
+    dados.device_id = client.conn.device_id;
     dados.qos = subscriptions[0].qos;
 
     topicsDAO.topic_subscribe_register_db(dados, (error, result)=>{

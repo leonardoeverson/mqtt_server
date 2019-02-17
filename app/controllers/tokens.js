@@ -148,7 +148,7 @@ module.exports.make_id = function(tamanho, usa_maiusculas, usa_minusculas, usa_n
     //});
 
     return text;
-}
+};
 
 module.exports.create_ids = async function(app, request){
 
