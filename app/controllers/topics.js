@@ -19,7 +19,7 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
 
 };
 
-module.exports.publish_metrics_insert = function(app, packet, client){
+ module.exports.publish_metrics_insert = function(app, packet, client){
     let conn = app.config.dbconn();
     let topicsDAO = new app.app.models.topicsDAO(conn);
     let dados = {};
