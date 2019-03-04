@@ -1,10 +1,8 @@
-
 node_modules
-\.idea\workspace.xml
+.idea/workspace.xml
 .DS_Store
 /*.env
 
-
 *.meta
-/.idea/workspace.xml
-/.idea/dataSources/11a9c702-7edd-4c4f-8695-08c59773de07.xml
+.idea/workspace.xml
+.idea/dataSources/11a9c702-7edd-4c4f-8695-08c59773de07.xml
