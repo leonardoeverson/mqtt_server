@@ -17,6 +17,11 @@ devicesDAO.prototype.device_sb_topic_db = function(dados, callback){
     this.connection.query(query,[dados], callback);
 };
 
+devicesDAO.prototype.device_sb_pb_topic_delete = function(device_id, callback){
+    let query = 'delete from device_pb_topic where device_id = ?; delete from device_sb_topic where device_id = ?';
+    this.connection.query(query, [device_id], callback);
+}
+
 devicesDAO.prototype.get_device_pb_topic_db = function(dados, callback){
     let query = "select * from device_pb_topic where device_id = ?";
     this.connection.query(query,[dados], callback);
@@ -47,6 +52,16 @@ devicesDAO.prototype.connected_device_db = function(dados, callback){
 devicesDAO.prototype.check_device_reg_db = function(dados, callback){
     let query = "SELECT * FROM user_devices WHERE user_id = ? and device_name = ?";
     this.connection.query(query, [dados.user_id, dados.device_name], callback);
+};
+
+devicesDAO.prototype.get_device_data_db = function(dados, callback){
+    let query = 'SELECT device_name, subscribe, publish from user_devices where device_id = ? and user_id = ?';
+    this.connection.query(query,[dados.device_id, dados.user_id], callback);
+};
+
+devicesDAO.prototype.insert_device_data_db = function(dados, callback){
+    let query = 'UPDATE user_devices set user_id = ?, publish = ?, subscribe = ? where device_id = ?  and user_id = ?';
+    this.connection.query(query,[dados.device_id, dados.user_id], callback);
 };
 
 module.exports = function(){

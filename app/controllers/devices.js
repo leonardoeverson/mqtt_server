@@ -30,71 +30,15 @@ module.exports.register_devices = function (app, request, response) {
     dadosDispositivos.register_devices_db(dados, function (error, result) {
         if (!error) {
 
-            if (Number(dados.publish) === 1) {
-                if (dados.pb_topic.search(";") > -1) {
-                    let temp;
-                    temp = dados.pb_topic.split(';');
-                    dados.pb_topic = [];
-                    for (let i = 0; i < temp.length; i++) {
-                        dados.pb_topic[i] = [];
-                        dados.pb_topic[i].push(result.insertId, temp[i]);
-                    }
-                } else {
-                    let temp;
-                    temp = dados.pb_topic;
-                    dados.pb_topic = [];
-                    dados.pb_topic.push([result.insertId, temp]);
-                }
-
-                dadosDispositivos.device_pb_topic_db(dados.pb_topic, (err, result) => {
-                    if (err) {
-                        response.render("devices/register", {
-                            validacao: [{
-                                'mensagem': 'erro ao cadastrar o dispositivo',
-                                'status': 1
-                            }], prefixo: request.session.prefix_user
-                        });
-                    }
+            update_sb_pb_topic(dados, request, response,function(request, response){
+                response.render("devices/register", {
+                    validacao: [{'mensagem': 'dados gravados com sucesso', 'status': 0}],
+                    prefixo: request.session.prefix_user
                 });
-            }
-
-            if (Number(dados.subscribe) === 1) {
-
-                if (dados.sb_topic.search(";") > -1) {
-                    let temp;
-                    temp = dados.sb_topic.split(';');
-                    dados.sb_topic = [];
-                    for (let i = 0; i < temp.length; i++) {
-                        dados.sb_topic[i] = [];
-                        dados.sb_topic[i].push(result.insertId, temp[i]);
-                    }
-                } else {
-                    let temp;
-                    temp = dados.sb_topic;
-                    dados.sb_topic = [];
-                    dados.sb_topic.push([result.insertId, temp]);
-                }
-
-                dadosDispositivos.device_sb_topic_db(dados.sb_topic, (err, result) => {
-                    if (err) {
-                        response.render("devices/register", {
-                            validacao: [{
-                                'mensagem': 'erro ao cadastrar o dispositivo',
-                                'status': 1
-                            }], prefixo: request.session.prefix_user
-                        });
-                    }
-                });
-
-            }
-
-            response.render("devices/register", {
-                validacao: [{'mensagem': 'dados gravados com sucesso', 'status': 0}],
-                prefixo: request.session.prefix_user
             });
 
         } else {
-            console.log(error);
+
             response.render("devices/register", {
                 validacao: [{
                     'mensagem': 'erro ao cadastrar o dispositivo',
@@ -227,3 +171,110 @@ module.exports.subscribe_perm = function (app, device_id) {
         });
     })
 };
+
+module.exports.get_device_data = function(app, request, response){
+    let conn = app.config.dbconn();
+    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let dados = {
+        device_id : request.query.device_id,
+        user_id : request.session.user_id
+    };
+
+    dadosDispositivos.get_device_data_db(dados, (error, result)=>{
+        if(!error){
+            response.render('devices/edit', {dados : result[0], prefixo: request.session.prefix })
+        }else{
+            console.log(error);
+        }
+    })
+};
+
+module.exports.insert_device_data = function(app, request, response){
+    let conn = app.config.dbconn();
+    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let dados = {
+        device_id : request.query.device_id,
+        user_id : request.session.user_id,
+        publish : request.body.publish,
+        subscribe : request.body.subscribe
+    };
+
+    dadosDispositivos.insert_device_data_db(dados, (error, result)=>{
+        if(!error){
+            //response.render('devices/edit',{validacao:{}})
+            update_sb_pb_topic(dados,function(request, response){
+                response.render("devices/edit", {
+                    validacao: [{'mensagem': 'dados gravados com sucesso', 'status': 0}],
+                    prefixo: request.session.prefix_user
+                });
+            });
+        }else{
+            console.log(error);
+        }
+    })
+};
+
+function update_sb_pb_topic(dados, request, response, callback){
+    let conn = app.config.dbconn();
+    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+
+    if (Number(dados.publish) === 1) {
+        if (dados.pb_topic.search(";") > -1) {
+            let temp;
+            temp = dados.pb_topic.split(';');
+            dados.pb_topic = [];
+            for (let i = 0; i < temp.length; i++) {
+                dados.pb_topic[i] = [];
+                dados.pb_topic[i].push(result.insertId, temp[i]);
+            }
+        } else {
+            let temp;
+            temp = dados.pb_topic;
+            dados.pb_topic = [];
+            dados.pb_topic.push([result.insertId, temp]);
+        }
+
+        dadosDispositivos.device_pb_topic_db(dados.pb_topic, (err, result) => {
+            if (err) {
+                response.render("devices/register", {
+                    validacao: [{
+                        'mensagem': 'erro ao cadastrar o dispositivo',
+                        'status': 1
+                    }], prefixo: request.session.prefix_user
+                });
+            }
+        });
+    }
+
+    if (Number(dados.subscribe) === 1) {
+
+        if (dados.sb_topic.search(";") > -1) {
+            let temp;
+            temp = dados.sb_topic.split(';');
+            dados.sb_topic = [];
+            for (let i = 0; i < temp.length; i++) {
+                dados.sb_topic[i] = [];
+                dados.sb_topic[i].push(result.insertId, temp[i]);
+            }
+        } else {
+            let temp;
+            temp = dados.sb_topic;
+            dados.sb_topic = [];
+            dados.sb_topic.push([result.insertId, temp]);
+        }
+
+        dadosDispositivos.device_sb_topic_db(dados.sb_topic, (err, result) => {
+            if (err) {
+                response.render("devices/register", {
+                    validacao: [{
+                        'mensagem': 'erro ao cadastrar o dispositivo',
+                        'status': 1
+                    }], prefixo: request.session.prefix_user
+                });
+            }
+        });
+
+    }
+
+    callback();
+}

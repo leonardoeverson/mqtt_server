@@ -1,6 +1,6 @@
 <%- include('../header'); %>
 
-
+<title>Alteração de Permissões</title>
 <div class="col-sm-8">
     <h5>Cadastro de dispositivos</h5>
     <hr/>
@@ -20,7 +20,7 @@
         }
     }
     %>
-    <form action="/devices/register" method="post">
+    <form action="/devices/edit" method="post">
         <div class="form-group">
             <label for="exampleFormControlInput1">Nome do dispositivo</label>
             <input type="text" class="form-control" id="device_name" name="device_name" required/>
@@ -56,13 +56,11 @@
 </div>
 <script>
 
-    $('#publish option').prop('selected', function() {
-        return this.defaultSelected;
-    });
-
-    $('#subscribe option').prop('selected', function() {
-        return this.defaultSelected;
-    });
+    <% if(typeof (dados) != "undefined"){%>
+        $('#device_name').val('<%= dados.device_name %>');
+        $('#publish').val('<%= dados.publish %>');
+        $('#subscribe').val('<%= dados.publish %>');
+    <% }%>
 
 
     $("#publish").on("change", function () {

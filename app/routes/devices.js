@@ -35,4 +35,20 @@ module.exports = function(app){
 			response.redirect("/");
 		}
 	});
+
+	app.get('/device/perm/change', function(request, response){
+		if(request.session.logged){
+			app.app.controllers.devices.get_device_data(app, request, response);
+		}else{
+			response.redirect('/');
+		}
+	});
+
+	app.get('/devices/edit', (request, response)=>{
+		if(request.session.logged){
+			app.app.controllers.devices.change_device_data(app, request, response);
+		}else{
+			response.redirect('/')
+		}
+	})
 };
