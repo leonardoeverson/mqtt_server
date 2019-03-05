@@ -8,9 +8,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/devices.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/devices.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/devicesDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/devicesDAO.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/devices/edit.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devices/edit.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -91,8 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/devices/edit.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="92" column="32" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="32" />
+            <state relative-caret-position="274">
+              <caret line="92" column="95" selection-start-line="92" selection-start-column="95" selection-end-line="92" selection-end-column="95" />
             </state>
           </provider>
         </entry>
@@ -438,13 +435,13 @@
       <workItem from="1551546553364" duration="839000" />
       <workItem from="1551631681572" duration="9289000" />
       <workItem from="1551731339580" duration="2823000" />
-      <workItem from="1551803572963" duration="4663000" />
+      <workItem from="1551803572963" duration="5187000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="437859000" />
+    <option name="totallyTimeSpent" value="438383000" />
     <option name="showClosedTasks" value="false" />
   </component>
   <component name="TodoView">
@@ -837,8 +834,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/devices/edit.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="92" column="32" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="32" />
+        <state relative-caret-position="274">
+          <caret line="92" column="95" selection-start-line="92" selection-start-column="95" selection-end-line="92" selection-end-column="95" />
         </state>
       </provider>
     </entry>
