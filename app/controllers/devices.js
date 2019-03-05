@@ -182,7 +182,7 @@ module.exports.get_device_data = function(app, request, response){
 
     dadosDispositivos.get_device_data_db(dados, (error, result)=>{
         if(!error){
-            response.render('devices/edit', {dados : result[0], prefixo: request.session.prefix })
+            response.render('devices/edit', {dados : result, prefixo: request.session.prefix })
         }else{
             console.log(error);
         }

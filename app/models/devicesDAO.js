@@ -55,8 +55,11 @@ devicesDAO.prototype.check_device_reg_db = function(dados, callback){
 };
 
 devicesDAO.prototype.get_device_data_db = function(dados, callback){
-    let query = 'SELECT device_name, subscribe, publish from user_devices where device_id = ? and user_id = ?';
-    this.connection.query(query,[dados.device_id, dados.user_id], callback);
+    let query = 'SELECT device_name, subscribe, publish from user_devices where device_id = ? and user_id =?;';
+    let query2 = 'SELECT * from device_pb_topic where device_id = ?;';
+    let query3 = 'SELECT * from device_sb_topic where device_id = ?;';
+
+    this.connection.query(query + query2 + query3,[dados.device_id, dados.user_id, dados.device_id, dados.device_id], callback);
 };
 
 devicesDAO.prototype.insert_device_data_db = function(dados, callback){

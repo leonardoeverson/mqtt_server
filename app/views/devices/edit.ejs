@@ -56,13 +56,6 @@
 </div>
 <script>
 
-    <% if(typeof (dados) != "undefined"){%>
-        $('#device_name').val('<%= dados.device_name %>');
-        $('#publish').val('<%= dados.publish %>');
-        $('#subscribe').val('<%= dados.publish %>');
-    <% }%>
-
-
     $("#publish").on("change", function () {
         if(this.selectedIndex === 1){
             $("#pb_op").css("display","inherit");
@@ -83,6 +76,43 @@
         }
     })
 
+    <% if(typeof (dados) != "undefined"){%>
+
+        $('#device_name').val('<%= dados[0][0].device_name %>');
+        $('#publish').val('<%= dados[0][0].publish %>');
+
+        <% if(Number(dados[0][0].publish) == 1){ %>
+            $("#pb_op").css("display","inherit");
+            $("#pb_op").prop('required',true);
+
+            <%if(dados[1].length > 1){%>
+                $("#pb_topic").val('<%= dados[1][0].pb_topic %>');
+            <%}else{
+                for (let i = 0; i < dados[1].length; i++){
+                %>
+                    $("#pb_topic").val('<%= dados[1][i].pb_topic + ';'%>');
+                <%
+                }
+            }%>
+        <%}%>
+
+        $('#subscribe').val('<%= dados[0][0].subscribe %>');
+
+        <% if(Number(dados[0][0].subscribe) == 1){ %>
+            $("#sb_op").css("display","inherit");
+            $("#sb_op").prop('required',true);
+
+            <%if(dados[1].length > 1){%>
+                $("#sb_topic").val('<%= dados[2][0].sb_topic %>');
+            <%}else{
+            for (let i = 0; i < dados[2].length; i++){
+            %>
+                $("#sb_topic").val('<%= dados[2][i].sb_topic + ';'%>');
+            <%
+            }
+            }%>
+        <%}%>
+    <% }%>
 </script>
 </div>
 <div class="d-none d-xl-block col-xl-2 bd-toc">
