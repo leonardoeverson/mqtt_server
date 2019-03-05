@@ -3,15 +3,23 @@ let ws = require('websocket-stream');
 let port = 1883;
 let wsPort = 8888;
 let aedesPersistenceMongoDB = require('aedes-persistence-mongodb');
+let url = 'mongodb://localhost:27017/aedes_mq' ;
+let url_prst = 'mongodb://127.0.0.1:27017/aedes_persistence';
+let dbname = 'aedes_mq';
+
+if(process.env.OPENSHIFT_MONGODB_DB_URL){
+    url = process.env.OPENSHIFT_MONGODB_DB_URL + dbname;
+    url_prst = process.env.OPENSHIFT_MONGODB_DB_URL + 'aedes_persistence'
+}
 
 //Aedes Persistence
-let persistence = aedesPersistenceMongoDB({url: 'mongodb://127.0.0.1:27017/aedes_persistence'});
+let persistence = aedesPersistenceMongoDB({url: url_prst});
 
 //Emitter
 let mqmongo = require('mqemitter-mongodb');
 
 let emitter = mqmongo({
-    url: 'mongodb://localhost:27017/aedes_mq'
+    url: url
 });
 
 //Aedes Server
