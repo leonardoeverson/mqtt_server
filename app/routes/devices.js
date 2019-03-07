@@ -36,7 +36,7 @@ module.exports = function(app){
 		}
 	});
 
-	app.get('/device/perm/change', function(request, response){
+	app.get('/device/edit', function(request, response){
 		if(request.session.logged){
 			app.app.controllers.devices.get_device_data(app, request, response);
 		}else{
@@ -44,9 +44,9 @@ module.exports = function(app){
 		}
 	});
 
-	app.get('/devices/edit', (request, response)=>{
+	app.post('/devices/edit', (request, response)=>{
 		if(request.session.logged){
-			app.app.controllers.devices.change_device_data(app, request, response);
+			app.app.controllers.devices.update_device_data(app, request, response);
 		}else{
 			response.redirect('/')
 		}

@@ -214,6 +214,25 @@ module.exports.insert_device_data = function(app, request, response){
     })
 };
 
+module.exports.update_device_data = function(app, request, response){
+
+};
+
+function delete_all_device_data(app, request, response){
+    let conn = app.config.dbconn();
+    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+
+    dadosDispositivos.device_sb_pb_topic_delete(request.body.device_id, (err, result)=>{
+        if(!err){
+
+        }else{
+            console.log(err);
+        }
+    });
+
+};
+
+
 function update_sb_pb_topic(dados, app, request, response, result, callback){
     let conn = app.config.dbconn();
     let dadosDispositivos = new app.app.models.devicesDAO(conn);

@@ -5,7 +5,7 @@ let helmet = require('helmet');
 let session = require("express-session");
 let morgan = require("morgan");
 
-console.log(process.env);
+//console.log(process.env);
 
 //Express
 let app = express();
@@ -23,18 +23,18 @@ app.use(helmet());
 
 //Express Session
 app.use(session({
-  secret: '1234567890![]?:>.;@#$%¨&*()_-+§qazxswedcvfrtgbnyujmkiolpç^~;.',
-  resave: false,
-  saveUninitialized: false
+    secret: '1234567890![]?:>.;@#$%¨&*()_-+§qazxswedcvfrtgbnyujmkiolpç^~;.',
+    resave: false,
+    saveUninitialized: false
 }));
 
 app.use(function(request, response, next){
-  //response.setHeader("Access-Control-Allow-Origin","*")//Cross-domain
-  response.setHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");//Cross-domain
-  //response.setHeader("Access-Control-Allow-Headers","*")//Cross-domain
-  response.setHeader("Access-Control-Allow-Credentials",true);//Cross-domain
+    //response.setHeader("Access-Control-Allow-Origin","*")//Cross-domain
+    response.setHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");//Cross-domain
+    //response.setHeader("Access-Control-Allow-Headers","*")//Cross-domain
+    response.setHeader("Access-Control-Allow-Credentials",true);//Cross-domain
 
-  next();
+    next();
 });
 
 //morgan
@@ -57,21 +57,21 @@ let expressValidator = require('express-validator');
 
 //validação de senhas
 app.use(expressValidator({
-  customValidators: {
-    isEqual: (value1, value2) => {
-      return value1 === value2
+    customValidators: {
+        isEqual: (value1, value2) => {
+            return value1 === value2
+        }
     }
-  }
 }));
 
 //Localizando arquivos
 //Localizando rotas e models
 
 consign({cwd: process.cwd()})
-  .include('./app/routes')
-  .then('./config/dbconn.js')
-  .then('app/models')
-  .then('app/controllers')
-  .into(app);
+    .include('./app/routes')
+    .then('./config/dbconn.js')
+    .then('app/models')
+    .then('app/controllers')
+    .into(app);
 
 module.exports = app;
