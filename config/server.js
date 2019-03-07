@@ -5,7 +5,7 @@ let helmet = require('helmet');
 let session = require("express-session");
 let morgan = require("morgan");
 
-//console.log(process.env);
+console.log(process.env);
 
 //Express
 let app = express();
