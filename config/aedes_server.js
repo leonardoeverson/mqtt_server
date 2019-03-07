@@ -13,12 +13,11 @@ if(process.env.MONGODB_PORT_27017_TCP_ADDR){
 }
 
 //Aedes Persistence
-//let persistence = aedesPersistenceMongoDB({url: url_prst});
+let persistence = aedesPersistenceMongoDB({url: url_prst});
 
 //Emitter
-//let mqmongo = require('mqemitter-mongodb');
+let mqmongo = require('mqemitter-mongodb');
 
-/*
 let emitter = mqmongo({
     url: url
 });
@@ -28,9 +27,8 @@ let aedes = require("aedes")({
     mq: emitter,
     persistence: persistence
 });
-*/
 
-let aedes = require('aedes')();
+//let aedes = require('aedes')();
 
 let server = require('net').createServer(aedes.handle);
 
