@@ -7,9 +7,9 @@ let url = 'mongodb://localhost:27017/aedes_mq' ;
 let url_prst = 'mongodb://127.0.0.1:27017/aedes_persistence';
 let dbname = 'aedes_mq';
 
-if(process.env.OPENSHIFT_MONGODB_DB_URL){
-    url = process.env.OPENSHIFT_MONGODB_DB_URL + dbname;
-    url_prst = process.env.OPENSHIFT_MONGODB_DB_URL + 'aedes_persistence'
+if(process.env.MONGODB_PORT_27017_TCP_ADDR){
+    url = process.env.MONGODB_PORT_27017_TCP_ADDR + dbname;
+    url_prst = process.env.MONGODB_PORT_27017_TCP_ADDR + 'aedes_persistence'
 }
 
 //Aedes Persistence
