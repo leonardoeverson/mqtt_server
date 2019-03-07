@@ -2,7 +2,7 @@ let mysql = require('mysql');
 
 function dbconn(){
 
-	if(!process.env.OPENSHIFT_MYSQL_DB_HOST){
+	if(!process.env.MARIADB_SERVICE_HOST){
 		return conn = mysql.createConnection({
 			host: 'localhost',
 			user: 'root',
@@ -13,7 +13,7 @@ function dbconn(){
 		});
 	}else{
 		return conn = mysql.createConnection({
-			host: 'mysql://'+process.env.OPENSHIFT_MYSQL_DB_HOST+':3306',
+			host: 'mysql://'+process.env.MARIADB_SERVICE_HOST+process.env.MARIADB_PORT_3306_TCP_PORT,
 			user: 'userDAK',
 			password : 'e75WNMWXP0JEkID5',
 			database: 'sampledb',
