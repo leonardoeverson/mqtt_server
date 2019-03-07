@@ -13,7 +13,7 @@ function dbconn(){
 		});
 	}else{
 		return conn = mysql.createConnection({
-			host: 'mysql://mariadb:'+process.env.MARIADB_PORT_3306_TCP_PORT,
+			host: 'mysql://mariadb:3306',
 			user: 'userDAK',
 			password : 'e75WNMWXP0JEkID5',
 			database: 'sampledb',
