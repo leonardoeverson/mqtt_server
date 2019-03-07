@@ -8,8 +8,8 @@ let url_prst = 'mongodb://127.0.0.1:27017/aedes_persistence';
 let dbname = 'aedes_mq';
 
 if(process.env.MONGODB_PORT_27017_TCP_ADDR){
-    url = process.env.MONGODB_PORT_27017_TCP_ADDR + ':' + process.env.MONGODB_SERVICE_PORT +'/' + dbname;
-    url_prst = process.env.MONGODB_PORT_27017_TCP_ADDR + ':' + process.env.MONGODB_SERVICE_PORT +'/aedes_persistence';
+    url = 'mongodb://'+process.env.MONGODB_USER+':'+process.env.MONGODB_PASSWORD+'@'+process.env.MONGODB_PORT_27017_TCP_ADDR + ':' + process.env.MONGODB_SERVICE_PORT +'/' + dbname;
+    url_prst = 'mongodb://'+process.env.MONGODB_USER+':'+process.env.MONGODB_PASSWORD+'@'+process.env.MONGODB_PORT_27017_TCP_ADDR + ':' + process.env.MONGODB_SERVICE_PORT +'/aedes_persistence';
 }
 
 //Aedes Persistence
