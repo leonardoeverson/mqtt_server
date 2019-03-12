@@ -4,6 +4,7 @@ let bodyParser = require('body-parser');
 let helmet = require('helmet');
 let session = require("express-session");
 let morgan = require("morgan");
+let error = require("../app/middleware/error");
 
 console.log(process.env);
 
@@ -37,6 +38,10 @@ app.use(function(request, response, next){
     next();
 });
 
+//Verificação de Sessão
+app.use(error.notFound);
+app.use(error.serverError);
+
 //morgan
 if(app.get('env') === 'development'){
     app.use(morgan('dev'))
@@ -66,8 +71,8 @@ app.use(expressValidator({
 
 //Localizando arquivos
 //Localizando rotas e models
-
-consign({cwd: process.cwd()})
+//{cwd: process.cwd()}{cwd: 'app'}
+consign({cwd: 'app'})
     .include('./app/routes')
     .then('./config/dbconn.js')
     .then('app/models')
