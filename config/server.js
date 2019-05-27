@@ -4,7 +4,7 @@ let bodyParser = require('body-parser');
 let helmet = require('helmet');
 let session = require("express-session");
 let morgan = require("morgan");
-let error = require("../app/middleware/error");
+//let error = require("../app/middleware/error");
 //console.log(process.env);
 
 //Express
@@ -72,9 +72,5 @@ consign()
     .then('app/models')
     .then('app/controllers')
     .into(app);
-
-//Error
-//app.use(error.notFound);
-//app.use(error.serverError);
 
 module.exports = app;

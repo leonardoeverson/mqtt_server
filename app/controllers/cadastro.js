@@ -199,14 +199,15 @@ module.exports.altera_senha_cadastro = function (app, request, response) {
 };
 
 module.exports.senha_reset = function (app, request, response) {
-    let connection = app.config.dbconn();
-    let cadUser = new app.app.models.dados_usuariosDAO(connection);
+    let conn = app.config.dbconn();
+    let cadastroUsuario = new app.app.models.cadastroDAO(conn);
+    //let loginUsuario = new app.app.models.loginDAO(conn);
     let body = request.body;
     let mailer = new app.app.controllers.mailer();
     let async = require('async');
 
     //Verifica se o email existe
-    cadUser.validaEmail(body, function (error, result) {
+    cadastroUsuario.verifica_email_existente(body, function (error, result) {
         if (result.length > 0) {
 
             //duração da validade do token
@@ -215,7 +216,7 @@ module.exports.senha_reset = function (app, request, response) {
             let token;
 
             //Instância da classe
-            let utils = new app.app.models.utilsDAO(connection);
+            let utils = new app.app.models.utilsDAO(conn);
 
             async.series([
                 function (callback) {
@@ -251,7 +252,7 @@ module.exports.senha_reset = function (app, request, response) {
                                 //console.log('Preview URL: %s', nodemailer.getTestMessageUrl(result));
                                 // Preview only available when sending through an Ethereal account
 
-                                response.render('cadastro/reset', {validacao: [{'msg': 'email enviado com sucesso'}, {'erro': 'false'}]});
+                                response.render('/recuperar/senha', {validacao: [{'msg': 'email enviado com sucesso'}, {'erro': 'false'}]});
 
                             });
 
@@ -263,7 +264,7 @@ module.exports.senha_reset = function (app, request, response) {
             ], function (err, results) {
                 if (err) {
                     console.log(err);
-                    response.render('cadastro/reset', {validacao: [{'msg': err, 'erro': 'true'}]});
+                    response.render('/recuperar/senha', {validacao: [{'msg': err, 'erro': 'true'}]});
                 }
             })
 

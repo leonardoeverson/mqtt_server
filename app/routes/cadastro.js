@@ -22,7 +22,7 @@ module.exports = function(app){
 	});
 
 	app.post('/recuperar/senha/verificar', (request, response)=>{
-		//response.render('recuperar_acesso');
+		app.app.controllers.cadastro.senha_reset(app, request, response);
 	});
 
 	app.post('/dados/usuario/salvar', function(request, response){

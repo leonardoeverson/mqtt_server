@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/app/views/settings.ejs" line="6" />
     <bookmark url="file://$PROJECT_DIR$/config/aedes_server.js" line="24" />
     <bookmark url="file://$PROJECT_DIR$/config/dbconn.js" line="30" />
+    <bookmark url="file://$PROJECT_DIR$/app/models/topicsDAO.js" line="22" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,25 +93,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/topics.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/devices.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="216" selection-start-line="216" selection-end-line="216" />
+            <state relative-caret-position="1377">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/devices.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="512">
+              <caret line="216" selection-start-line="216" selection-end-line="216" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package-lock.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
+            <state relative-caret-position="53805">
               <caret line="3165" column="31" selection-start-line="3165" selection-start-column="31" selection-end-line="3165" selection-end-column="31" />
             </state>
           </provider>
@@ -119,8 +120,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="510">
+              <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -249,8 +250,8 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="234" />
-    <option name="y" value="270" />
+    <option name="x" value="712" />
+    <option name="y" value="-19" />
     <option name="width" value="1040" />
     <option name="height" value="742" />
   </component>
@@ -489,13 +490,15 @@
       <workItem from="1551878099687" duration="3129000" />
       <workItem from="1554055991777" duration="1352000" />
       <workItem from="1554556363244" duration="29000" />
-      <workItem from="1558116379128" duration="443000" />
+      <workItem from="1558116379128" duration="1042000" />
+      <workItem from="1558295193548" duration="3074000" />
+      <workItem from="1558724875508" duration="599000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="444909000" />
+    <option name="totallyTimeSpent" value="449181000" />
     <option name="showClosedTasks" value="false" />
   </component>
   <component name="TodoView">
@@ -509,9 +512,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49404117" visible="true" weight="0.24733475" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49404117" visible="true" weight="0.25266525" />
       <window_info id="Structure" order="1" sideWeight="0.503792" side_tool="true" weight="0.21428572" />
       <window_info id="npm" order="2" sideWeight="0.50595886" side_tool="true" weight="0.16791044" />
       <window_info id="Favorites" order="3" sideWeight="0.5016251" side_tool="true" weight="0.20895523" />
@@ -854,15 +856,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/topics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+        <state relative-caret-position="1377">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53805">
+          <caret line="3165" column="31" selection-start-line="3165" selection-start-column="31" selection-end-line="3165" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="510">
+          <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -889,15 +898,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/devices.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
+        <state relative-caret-position="512">
           <caret line="216" selection-start-line="216" selection-end-line="216" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="3165" column="31" selection-start-line="3165" selection-start-column="31" selection-end-line="3165" selection-end-column="31" />
         </state>
       </provider>
     </entry>
