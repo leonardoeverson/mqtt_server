@@ -283,7 +283,7 @@ module.exports.valida_token = function(app, request, response){
     utils.pesquisa_token(request.query.request_id, request.query.token_id, function(error, result){
         if(!error){
             if(result.length > 0 ){
-                response.cookie("data",result[0].user_id);
+                request.session.user_id = result[0].user_id;
                 utils.atualiza_token(request.query.token_id, function(error, result){
                     if(!error){
                         response.render("cadastro/alterar_senha");

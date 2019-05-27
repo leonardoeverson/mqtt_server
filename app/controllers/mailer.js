@@ -18,7 +18,7 @@ mailer.prototype.send_mail = function(to, link, token, token_id, callback){
         to: to,
         subject: 'Link para redefinição de senha',
         text: 'Link para redefinição de senha!',
-        html: '<p><b>Link para redefinicão de senha: </b> http://localhost/password/request/reset?request_id='+token+'&token_id='+token_id+'</p>'
+        html: '<p><b>Link para redefinicão de senha: </b> http://localhost:3000/password/request/reset?request_id='+token+'&token_id='+token_id+'</p>'
     };
 
     console.log(message.html)
