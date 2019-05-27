@@ -286,15 +286,15 @@ module.exports.valida_token = function(app, request, response){
                 response.cookie("data",result[0].user_id);
                 utils.atualiza_token(request.query.token_id, function(error, result){
                     if(!error){
-                        response.render("cadastro/reset_password");
+                        response.render("cadastro/alterar_senha");
                     }   
                 })
                 
             }else{
-                response.render("cadastro/reset_password",{validacao : [{'msg':'Link inválido','erro':'true'}]});
+                response.render("cadastro/alterar_senha",{validacao : [{'msg':'Link inválido','erro':'true'}]});
             }
         }else{
-            response.render("cadastro/reset_password",{validacao : [{'msg':'A página está inacessível','erro':'true'}]});
+            response.render("cadastro/alterar_senha",{validacao : [{'msg':'A página está inacessível','erro':'true'}]});
         }
     })
 }
@@ -312,11 +312,11 @@ module.exports.troca_senha = function(app, request, response){
 
     if (erros) {
         console.log(erros)
-        response.render('alterar_senha',{validacao: erros});
+        response.render('cadastro/alterar_senha',{validacao: erros});
         return;
     }
 
-    cadastroDAO.atualizar_senha_usuario(body.senha_nova, response.cookie("data"), function(error, result){
+    cadastroDAO.altera_senha(body, function(error, result){
         if(!error){
             response.clearCookie("data")
             //response.cookie("senha_atualizada","true");

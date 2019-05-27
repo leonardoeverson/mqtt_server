@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Recuperação de acesso</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="#">#</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	       <li class="nav-item">
+	        <a class="nav-link" href="/">Página Inicial<span class="sr-only"></span></a>	        
+	      </li>
+	       <li class="nav-item active">
+	        <a class="nav-link" href="#">Cadastro<span class="sr-only">(current)</span></a>	        
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	<div class="container">
+	<% if(typeof(validacao) != "undefined"){%>
+	<ul>
+		<% if(validacao[0].erro == 'true'){ %>
+			<div class="alert alert-danger" role="alert"><li><%= validacao[0].msg %></li></div>	
+		<% } %>			
+	</ul>
+	<% }else{%>
+		<h3>Alterar senha</h3>
+		<div id="message"></div>
+		<form action="/password/request/reset" method="post" style="margin-top: 30px">	
+			  <div class="form-group">
+			    <label for="senha_nova">Nova Senha</label>
+			    <input type="password" class="form-control" id="senha_nova" name="senha_nova" aria-describedby="emailHelp" value="" required="">
+			  </div>
+			  <div class="form-group">
+			    <label for="senha_nova_conf">Redigite a nova senha</label>
+			    <input type="password" class="form-control" id="senha_nova_conf" name="senha_nova_conf" aria-describedby="emailHelp" length='8' value="" required="">
+			  </div>
+			  
+			  <button type="submit" class="btn btn-primary">Atualizar Senha</button>	
+		</form>
+	<%}%>
+		
+	</div>
+		<script type="text/javascript">
+	</script>
+</body>
+</html>
