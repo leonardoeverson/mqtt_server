@@ -275,6 +275,61 @@ module.exports.senha_reset = function (app, request, response) {
     }, 1);
 };
 
+
+module.exports.valida_token = function(app, request, response){
+    var connection = new app.config.dbconn();
+    var utils = new app.app.models.utilsDAO(connection);
+
+    utils.pesquisa_token(request.query.request_id, request.query.token_id, function(error, result){
+        if(!error){
+            if(result.length > 0 ){
+                response.cookie("data",result[0].user_id);
+                utils.atualiza_token(request.query.token_id, function(error, result){
+                    if(!error){
+                        response.render("cadastro/reset_password");
+                    }   
+                })
+                
+            }else{
+                response.render("cadastro/reset_password",{validacao : [{'msg':'Link inválido','erro':'true'}]});
+            }
+        }else{
+            response.render("cadastro/reset_password",{validacao : [{'msg':'A página está inacessível','erro':'true'}]});
+        }
+    })
+}
+
+module.exports.troca_senha = function(app, request, response){
+    let conn = app.config.dbconn();
+    let cadastroUsuario = new app.app.models.cadastroDAO(conn);
+
+    var body = request.body;
+
+    request.assert('senha_nova', 'Senha inválida').trim().notEmpty();
+    request.assert('senha_nova', 'as senhas não são iguais').trim().isEqual(body.senha_nova_conf);
+
+    var erros = request.validationErrors();
+
+    if (erros) {
+        console.log(erros)
+        response.render('alterar_senha',{validacao: erros});
+        return;
+    }
+
+    cadastroDAO.atualizar_senha_usuario(body.senha_nova, response.cookie("data"), function(error, result){
+        if(!error){
+            response.clearCookie("data")
+            //response.cookie("senha_atualizada","true");
+            response.redirect('/');
+        }else{
+            //console.log(error);
+            //response.cookie("senha_atualizada","false")
+            response.redirect('/');
+        }
+    })
+}
+
+
 function verifica_email(cadastroUsuario, body) {
     return new Promise(((resolve, reject) => {
         cadastroUsuario.verifica_email_existente(body.email, function (error, result) {

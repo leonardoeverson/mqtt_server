@@ -25,6 +25,14 @@ module.exports = function(app){
 		app.app.controllers.cadastro.senha_reset(app, request, response);
 	});
 
+	app.get('/password/request/reset', function(request, response){
+		app.app.controllers.cadastro.valida_token(app, request, response);
+	})
+
+	app.post('/password/request/reset', function(request, response){
+		app.app.controllers.cadastro.troca_senha(app, request, response);
+	})
+
 	app.post('/dados/usuario/salvar', function(request, response){
 		if(request.session.logged){
 			app.app.controllers.cadastro.atualiza_dados_cadastro(app, request, response);
