@@ -7,14 +7,14 @@ mailer.prototype.send_mail = function(to, link, token, token_id, callback){
         host: 'smtp.ethereal.email',
         port: 587,
         auth: {
-            user: 'rzl4kwpipwopmfdy@ethereal.email',
-            pass: 'CHBpcGAJyPsxcsPmxD'
+            user: 'shad.quigley22@ethereal.email',
+            pass: 'ZA2jTVaavfBBhq41eM'
         }
     });
 
     // Message object
     let message = {
-        from: 'Sistemas de Envio de Emails <rzl4kwpipwopmfdy@ethereal.emai>',
+        from: 'Sistemas de Envio de Emails <shad.quigley22@ethereal.email>',
         to: to,
         subject: 'Link para redefinição de senha',
         text: 'Link para redefinição de senha!',

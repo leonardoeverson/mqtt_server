@@ -207,7 +207,7 @@ module.exports.senha_reset = function (app, request, response) {
     let async = require('async');
 
     //Verifica se o email existe
-    cadastroUsuario.verifica_email_existente(body, function (error, result) {
+    cadastroUsuario.verifica_email_existente(body.email, function (error, result) {
         if (result.length > 0) {
 
             //duração da validade do token
@@ -241,7 +241,7 @@ module.exports.senha_reset = function (app, request, response) {
                 },
                 function (callback) {
                     //Gravando Token
-                    utils.grava_token(result[0].id, token, lifetime, function (error, result) {
+                    utils.grava_token(result[0].user_id, token, lifetime, function (error, result) {
                         if (!error) {
                             mailer.send_mail(body.email, 'Link para redefinição de senha', token, result.insertId, function (err, info) {
                                 if (err) {
@@ -252,7 +252,7 @@ module.exports.senha_reset = function (app, request, response) {
                                 //console.log('Preview URL: %s', nodemailer.getTestMessageUrl(result));
                                 // Preview only available when sending through an Ethereal account
 
-                                response.render('/recuperar/senha', {validacao: [{'msg': 'email enviado com sucesso'}, {'erro': 'false'}]});
+                                response.render('recuperar_acesso', {validacao: [{'msg': 'email enviado com sucesso'}, {'erro': 'false'}]});
 
                             });
 
@@ -264,13 +264,13 @@ module.exports.senha_reset = function (app, request, response) {
             ], function (err, results) {
                 if (err) {
                     console.log(err);
-                    response.render('/recuperar/senha', {validacao: [{'msg': err, 'erro': 'true'}]});
+                    response.render('recuperar_acesso', {validacao: [{'msg': err, 'erro': 'true'}]});
                 }
             })
 
 
         } else {
-            response.render('cadastro/reset', {validacao: [{'msg': 'email não encontrado', 'erro': 'true'}]});
+            response.render('recuperar_acesso', {validacao: [{'msg': 'email não encontrado', 'erro': 'true'}]});
         }
     }, 1);
 };

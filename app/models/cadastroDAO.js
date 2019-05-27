@@ -13,9 +13,10 @@ cadastroDAO.prototype.grava_usuario = function(dados, callback) {
 };
 
 cadastroDAO.prototype.verifica_email_existente = function(email, callback) {
-    let query = "select email from users where email = ?";
+    let query = "select user_id, email from users where email = ?";
     this.connection.query(query, [email], callback);
 };
+
 
 cadastroDAO.prototype.verifica_email_existente_user = function(email, user_id, callback) {
     let query = "select email from users where email = ? and user_id != ?";
