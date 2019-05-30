@@ -29,7 +29,7 @@ app.use(session({
 }));
 
 app.use(function(request, response, next){
-    //response.setHeader("Access-Control-Allow-Origin","*")//Cross-domain
+    response.setHeader("Access-Control-Allow-Origin","*")//Cross-domain
     response.setHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");//Cross-domain
     //response.setHeader("Access-Control-Allow-Headers","*")//Cross-domain
     response.setHeader("Access-Control-Allow-Credentials",true);//Cross-domain

@@ -44,6 +44,14 @@ module.exports = function(app){
 		}
 	});
 
+	app.get('/device/data', function(request, response){
+		if(request.session.logged){
+			app.app.controllers.devices.get_device_data_topic(app, request, response);
+		}else{
+			response.redirect('/');
+		}
+	});
+
 	app.post('/devices/edit', (request, response)=>{
 		if(request.session.logged){
 			app.app.controllers.devices.update_device_data(app, request, response);

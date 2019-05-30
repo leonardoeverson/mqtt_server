@@ -189,6 +189,23 @@ module.exports.get_device_data = function(app, request, response){
     })
 };
 
+module.exports.get_device_data_topic = function(app, request, response){
+    let conn = app.config.dbconn();
+    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let dados = {
+        device_id : request.query.device_id,
+        user_id : request.session.user_id
+    };
+
+    dadosDispositivos.get_device_data_db(dados, (error, result)=>{
+        if(!error){
+            response.send(result);
+        }else{
+            console.log(error);
+        }
+    })
+};
+
 module.exports.update_device_data = function(app, request, response){
     let conn = app.config.dbconn();
     let dadosDispositivos = new app.app.models.devicesDAO(conn);
