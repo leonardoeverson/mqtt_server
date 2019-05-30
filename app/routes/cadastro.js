@@ -1,10 +1,10 @@
 module.exports = function(app){
+
 	app.get('/cadastro',function(request, response){
 		response.render("cadastro/cadastro");
 	});
 
 	app.post('/cadastro/inserir',function(request, response){
-		//response.render("login/cadastro");
 		app.app.controllers.cadastro.cadastro_usuario(app, request, response);
 	});
 
@@ -14,7 +14,6 @@ module.exports = function(app){
 		}else{
 			response.redirect("/");
 		}
-
 	});
 
 	app.get('/recuperar/senha', (request, response)=>{
@@ -43,7 +42,6 @@ module.exports = function(app){
 
 	app.post('/dados/usuario/senha', function(request, response){
 		if(request.session.logged){
-			//response.sendStatus(200);
 			app.app.controllers.cadastro.altera_senha_cadastro(app, request, response)
 		}else{
 			response.sendStatus(503);

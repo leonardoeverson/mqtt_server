@@ -19,7 +19,8 @@
         }
     }
     %>
-    <form action="/devices/edit" method="post">
+    <form>
+        <input type=text name="device_id" id="device_id" hidden>
         <div class="form-group">
             <label for="exampleFormControlInput1">Nome do dispositivo</label>
             <input type="text" class="form-control" id="device_name" name="device_name" required/>
@@ -79,6 +80,7 @@
 
         $('#device_name').val('<%= dados[0][0].device_name %>');
         $('#publish').val('<%= dados[0][0].publish %>');
+        $('#device_id').val('<%= dados[0][0].device_id %>')
 
         <% if(Number(dados[0][0].publish) == 1){ %>
             $("#pb_op").css("display","inherit");
@@ -113,6 +115,41 @@
             }%>
         <%}%>
     <% }%>
+
+    if(sb_topic.value[sb_topic.value.length - 1] == ';'){
+        sb_topic.value = sb_topic.value.slice(0, sb_topic.value.length - 1)
+    }
+
+    if(pb_topic.value[pb_topic.value.length - 1] == ';'){
+        pb_topic.value = pb_topic.value.slice(0, pb_topic.value.length - 1)
+    }
+
+    $('form').on('submit',(function(event) {
+        
+        event.preventDefault();
+        let dados = $('form').serialize()
+        
+        $.ajax({
+            url: '/devices/edit',
+            type: 'POST',
+            dataType: 'html',
+            data: dados,
+        })
+        .done(function() {
+            alert('dados atualizados com sucesso');
+            location.reload(true)
+        })
+        .fail(function() {
+            alert('falha ao atualizar os dados');
+            location.reload(true)
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+
+        console.log('ok');
+    }));
 </script>
 </div>
 <div class="d-none d-xl-block col-xl-2 bd-toc">

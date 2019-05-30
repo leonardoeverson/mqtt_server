@@ -99,29 +99,6 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
             }
         }
     })
-    // } else if (username.search("token") > -1) {
-    //     let resposta;
-    //     //checa se o token é válido
-    //
-    //     let dados = username.split(',');
-    //     dados[0] = dados[0].replace("token:","");
-    //     dados[1] = dados[1].replace("user:","");
-    //     try{
-    //         resposta = await app.app.controllers.tokens.token_user_compare(app, dados);
-    //     }catch (e) {
-    //         console.log(e);
-    //     }
-    //
-    //     //console.log(resposta);
-    //
-    //     //Id do usuário
-    //     client.conn.user_id = resposta[0].user_id;
-    //     conn_control(app, client, cb, auth_error, resposta[0].user_id, ip, port);
-    // else {
-    //     auth_error.returnCode = 4;
-    //     cb(auth_error, null);
-    // }
-
 };
 
 async function conn_control(app, client, cb, auth_error, user_id, ip, port, method) {

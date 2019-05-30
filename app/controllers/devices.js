@@ -30,7 +30,7 @@ module.exports.register_devices = function (app, request, response) {
     dadosDispositivos.register_devices_db(dados, function (error, result) {
         if (!error) {
 
-            update_sb_pb_topic(dados, app,  request, response, result,()=>{
+            update_sb_pb_topic(dados, app,  request, response, result.insertedId,()=>{
                 response.render("devices/register", {
                     validacao: [{'mensagem': 'dados gravados com sucesso', 'status': 0}],
                     prefixo: request.session.prefix_user
@@ -182,32 +182,7 @@ module.exports.get_device_data = function(app, request, response){
 
     dadosDispositivos.get_device_data_db(dados, (error, result)=>{
         if(!error){
-            response.render('devices/edit', {dados : result, prefixo: request.session.prefix })
-        }else{
-            console.log(error);
-        }
-    })
-};
-
-module.exports.insert_device_data = function(app, request, response){
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
-    let dados = {
-        device_id : request.query.device_id,
-        user_id : request.session.user_id,
-        publish : request.body.publish,
-        subscribe : request.body.subscribe
-    };
-
-    dadosDispositivos.insert_device_data_db(dados, (error, result)=>{
-        if(!error){
-            //response.render('devices/edit',{validacao:{}})
-            update_sb_pb_topic(dados,function(request, response){
-                response.render("devices/edit", {
-                    validacao: [{'mensagem': 'dados gravados com sucesso', 'status': 0}],
-                    prefixo: request.session.prefix_user
-                });
-            });
+            response.render('devices/edit', {dados : result, prefixo: request.session.prefix_user })
         }else{
             console.log(error);
         }
@@ -215,8 +190,54 @@ module.exports.insert_device_data = function(app, request, response){
 };
 
 module.exports.update_device_data = function(app, request, response){
+    let conn = app.config.dbconn();
+    let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
+    let sb_topic, pb_topic;
+
+    if(request.body.sb_topic[request.body.sb_topic.length - 1] == ';'){
+        sb_topic = request.body.sb_topic.slice(0, request.body.sb_topic.length - 1)
+    }else{
+        sb_topic = request.body.sb_topic
+    }
+
+    if(request.body.pb_topic[request.body.pb_topic.length - 1] == ';'){
+        pb_topic = request.body.pb_topic.slice(0, request.body.pb_topic.length - 1)
+    }else{
+        pb_topic = request.body.pb_topic
+    }
+
+    let dados = {
+        device_id : request.body.device_id,
+        user_id : request.session.user_id,
+        device_name: request.body.device_name,
+        publish : request.body.publish,
+        subscribe : request.body.subscribe,
+        sb_topic: sb_topic,
+        pb_topic: pb_topic
+    };
+        
+    console.log(dados);
+
+    dadosDispositivos.device_sb_pb_topic_delete(request.body.device_id, (error, result)=>{
+        if(!error){
+            dadosDispositivos.update_device_data_db(dados, (error, result)=>{
+                if(!error){
+                    update_sb_pb_topic(dados, app, request, response, dados.device_id,(error, result)=>{
+                        response.sendStatus(200)
+                    });
+                }else{
+                    response.sendStatus(503)
+                }
+            })
+        }else{
+            response.sendStatus(503);
+        }
+    })
+
+    
 };
+
 
 function delete_all_device_data(app, request, response){
     let conn = app.config.dbconn();
@@ -233,7 +254,7 @@ function delete_all_device_data(app, request, response){
 };
 
 
-function update_sb_pb_topic(dados, app, request, response, result, callback){
+function update_sb_pb_topic(dados, app, request, response, id, callback){
     let conn = app.config.dbconn();
     let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
@@ -242,25 +263,21 @@ function update_sb_pb_topic(dados, app, request, response, result, callback){
             let temp;
             temp = dados.pb_topic.split(';');
             dados.pb_topic = [];
+
             for (let i = 0; i < temp.length; i++) {
                 dados.pb_topic[i] = [];
-                dados.pb_topic[i].push(result.insertId, temp[i]);
+                dados.pb_topic[i].push(id, temp[i]);
             }
         } else {
             let temp;
             temp = dados.pb_topic;
             dados.pb_topic = [];
-            dados.pb_topic.push([result.insertId, temp]);
+            dados.pb_topic.push([id, temp]);
         }
 
         dadosDispositivos.device_pb_topic_db(dados.pb_topic, (err, result) => {
             if (err) {
-                response.render("devices/register", {
-                    validacao: [{
-                        'mensagem': 'erro ao cadastrar o dispositivo',
-                        'status': 1
-                    }], prefixo: request.session.prefix_user
-                });
+                response.sendStatus(503);
             }
         });
     }
@@ -273,23 +290,18 @@ function update_sb_pb_topic(dados, app, request, response, result, callback){
             dados.sb_topic = [];
             for (let i = 0; i < temp.length; i++) {
                 dados.sb_topic[i] = [];
-                dados.sb_topic[i].push(result.insertId, temp[i]);
+                dados.sb_topic[i].push(id, temp[i]);
             }
         } else {
             let temp;
             temp = dados.sb_topic;
             dados.sb_topic = [];
-            dados.sb_topic.push([result.insertId, temp]);
+            dados.sb_topic.push([id, temp]);
         }
 
         dadosDispositivos.device_sb_topic_db(dados.sb_topic, (err, result) => {
             if (err) {
-                response.render("devices/register", {
-                    validacao: [{
-                        'mensagem': 'erro ao cadastrar o dispositivo',
-                        'status': 1
-                    }], prefixo: request.session.prefix_user
-                });
+                response.sendStatus(503);
             }
         });
 
