@@ -43,7 +43,7 @@ aedes.on('clientError', function (client, err) {
 });
 
 aedes.on('connectionError', function (client, err) {
-    console.log('Erro de conexão', client, err.message, err.stack)
+    //console.log('Erro de conexão', client, err.message, err.stack)
 });
 
 aedes.on('publish', function (packet, client) {
@@ -60,5 +60,5 @@ aedes.on('subscribe', function (subscriptions, client) {
 });
 
 aedes.on('client', function (client) {
-    console.log('new client', client.id);
+    //console.log('new client', client.id);
 });

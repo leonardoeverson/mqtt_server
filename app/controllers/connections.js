@@ -14,7 +14,7 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 		connMgmt.conn_db_insert(dados, function(err, result, result_id){
 			app.app.controllers.connections.db_end_connection(conn);
 			if(!err){
-				console.log("conn_db_insert");
+				//console.log("conn_db_insert");
 				resolve(result_id);
 			}else{
 				if(err){
@@ -38,7 +38,7 @@ module.exports.conn_mgmt_delete = function(app, id_conn){
 	connMgmt.conn_db_delete(id_conn, function(err, result){
 		app.app.controllers.connections.db_end_connection(conn);
 		if(!err){
-			console.log('conn_db_delete');
+			//console.log('conn_db_delete');
 		}else{
 			if(err){
 				console.log("err",err);
@@ -59,14 +59,14 @@ module.exports.conn_mgmt_delete_all = function(app){
 	connMgmt.conn_db_delete_all(null, function(err, result){
 		app.app.controllers.connections.db_end_connection(conn);
 		if(!err){
-			console.log("conn_db_delete_all");
+			//console.log("conn_db_delete_all");
 		}else{
 			if(err){
 				console.log("erro:",err);
 			}
 
 			if(result){
-				console.log("result",result);
+				//console.log("result",result);
 			}
 		}
 	})

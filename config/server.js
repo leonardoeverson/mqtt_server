@@ -38,7 +38,7 @@ app.use(function(request, response, next){
 });
 
 //morgan
-if(app.get('env') === 'development'){app.use(morgan('dev'))}
+//if(app.get('env') === 'development'){app.use(morgan('dev'))}
 
 //Arquivos Estáticos
 //Pastas estáticas
