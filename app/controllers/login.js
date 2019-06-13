@@ -70,7 +70,7 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
         port = client.conn.socket._socket.remotePort;
     }
 
-    console.log(method, ip, port);
+    //console.log(method, ip, port);
     //informações de conexão do cliente conectado
 
     client.conn.remoteIp = ip;

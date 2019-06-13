@@ -1,0 +1,47 @@
+{
+  "MQTT Connect" : {
+    "transaction" : "MQTT Connect",
+    "sampleCount" : 1000,
+    "errorCount" : 11,
+    "errorPct" : 1.1,
+    "meanResTime" : 140.02,
+    "minResTime" : 11.0,
+    "maxResTime" : 10368.0,
+    "pct1ResTime" : 45.89999999999998,
+    "pct2ResTime" : 52.0,
+    "pct3ResTime" : 10001.0,
+    "throughput" : 16.763616247296866,
+    "receivedKBytesPerSec" : 0.17935759727088327,
+    "sentKBytesPerSec" : 0.0
+  },
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 2000,
+    "errorCount" : 22,
+    "errorPct" : 1.1,
+    "meanResTime" : 860.3775000000002,
+    "minResTime" : 0.0,
+    "maxResTime" : 10368.0,
+    "pct1ResTime" : 2825.7000000000003,
+    "pct2ResTime" : 3259.749999999999,
+    "pct3ResTime" : 3986.99,
+    "throughput" : 16.03322083356715,
+    "receivedKBytesPerSec" : 0.1715429369653923,
+    "sentKBytesPerSec" : 0.0
+  },
+  "MQTT DisConnect" : {
+    "transaction" : "MQTT DisConnect",
+    "sampleCount" : 1000,
+    "errorCount" : 11,
+    "errorPct" : 1.1,
+    "meanResTime" : 1580.7350000000001,
+    "minResTime" : 0.0,
+    "maxResTime" : 4009.0,
+    "pct1ResTime" : 3218.2,
+    "pct2ResTime" : 3564.95,
+    "pct3ResTime" : 3985.99,
+    "throughput" : 198.37333862328904,
+    "receivedKBytesPerSec" : 2.122439744098393,
+    "sentKBytesPerSec" : 0.0
+  }
+}
