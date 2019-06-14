@@ -8,7 +8,7 @@ topicsDAO.prototype.topic_subscribe_register_db = function(dados, callback) {
 };
 
 topicsDAO.prototype.publish_metrics_db = function(dados, callback){
-    let query= "INSERT INTO mqtt_metrics(device_id, topic, length, user_id, conn_id, timestamp) VALUES ";
+    let query= "INSERT INTO mqtt_metrics(device_id, topic, length, user_id, conn_id, timestamp) VALUES";
     query += "("+dados.device_id+",'"+dados.topic+"',"+dados.length+","+dados.user_id+",";
     query += dados.conn_id+", NOW())";
     this.connection.query(query, dados, callback);
