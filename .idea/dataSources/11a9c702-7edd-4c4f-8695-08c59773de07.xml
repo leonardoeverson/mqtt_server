@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="mqtt@localhost">
-  <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.14">
+  <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.15">
     <root id="1">
-      <ServerVersion>10.3.12</ServerVersion>
-      <Dbms>MARIADB</Dbms>
+      <ServerVersion>10.3.15</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultCasing>lower/lower</DefaultCasing>
     </root>
@@ -1548,7 +1547,7 @@
     </column>
     <column id="384" parent="338" name="device_id">
       <Position>2</Position>
-      <DataType>varchar(200)|0s</DataType>
+      <DataType>int(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="385" parent="338" name="qos">
@@ -1558,7 +1557,7 @@
     </column>
     <column id="386" parent="338" name="client_id">
       <Position>4</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="387" parent="339" name="user_id">

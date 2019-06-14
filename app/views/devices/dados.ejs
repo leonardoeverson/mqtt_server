@@ -58,11 +58,16 @@
 
     $(document).ready(function(){
         $.notify("Conectando ao servidor...", "info");
-        server_connect(clientid, '<%= username %>', '<%= password %>', () =>{$.notify("Conectado!", "success")});
+        server_connect(clientid, '<%= username %>', '<%= password %>', ()=>{$.notify("Conectado!", "success")});
 
-        for(let i=0; i < topics.length; i++){
-            subscribe(topics[i], 0);
+        if(topics.length > 0){
+            for(let i=0; i < topics.length; i++){
+                subscribe(topics[i], 0);
+            }
+        }else{
+            alert('Não há tópicos disponíveis para este dispositivo')
         }
+
     });
 
 </script>

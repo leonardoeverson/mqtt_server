@@ -101,7 +101,7 @@
 
     $(document).ready(function(){
         $.notify("Conectando ao servidor...", "info");
-        server_connect(clientid, '<%= username %>', '<%= password %>', $.notify("Conectado!", "success"));
+        server_connect(clientid, '<%= username %>', '<%= password %>', ()=>{$.notify("Conectado!", "success")});
     });
 
 </script>
