@@ -1319,200 +1319,201 @@
     <table id="334" parent="3" name="mqtt_metrics"/>
     <table id="335" parent="3" name="server_options"/>
     <table id="336" parent="3" name="tokens"/>
-    <table id="337" parent="3" name="tp_publish"/>
-    <table id="338" parent="3" name="tp_subscribe"/>
-    <table id="339" parent="3" name="user_devices"/>
-    <table id="340" parent="3" name="user_options"/>
-    <table id="341" parent="3" name="user_prefix"/>
-    <table id="342" parent="3" name="users"/>
-    <column id="343" parent="329" name="id_conn">
+    <table id="337" parent="3" name="tokens_links"/>
+    <table id="338" parent="3" name="tp_publish"/>
+    <table id="339" parent="3" name="tp_subscribe"/>
+    <table id="340" parent="3" name="user_devices"/>
+    <table id="341" parent="3" name="user_options"/>
+    <table id="342" parent="3" name="user_prefix"/>
+    <table id="343" parent="3" name="users"/>
+    <column id="344" parent="329" name="id_conn">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="344" parent="329" name="user_id">
+    <column id="345" parent="329" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="345" parent="329" name="client_id">
+    <column id="346" parent="329" name="client_id">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="346" parent="329" name="client_address">
+    <column id="347" parent="329" name="client_address">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="347" parent="329" name="client_port">
+    <column id="348" parent="329" name="client_port">
       <Position>5</Position>
       <DataType>int(6)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="348" parent="329" name="device_id">
+    <column id="349" parent="329" name="device_id">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="349" parent="329" name="method">
+    <column id="350" parent="329" name="method">
       <Position>7</Position>
       <DataType>varchar(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="350" parent="329" name="PRIMARY">
+    <key id="351" parent="329" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_conn</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="351" parent="330" name="id_conn">
+    <column id="352" parent="330" name="id_conn">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="352" parent="330" name="device_id">
+    <column id="353" parent="330" name="device_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="353" parent="330" name="client_id">
+    <column id="354" parent="330" name="client_id">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="354" parent="330" name="client_address">
+    <column id="355" parent="330" name="client_address">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="355" parent="330" name="client_port">
+    <column id="356" parent="330" name="client_port">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="356" parent="330" name="user_id">
+    <column id="357" parent="330" name="user_id">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="357" parent="330" name="datetime">
+    <column id="358" parent="330" name="datetime">
       <Position>7</Position>
       <DataType>timestamp|0s</DataType>
       <DefaultExpression>current_timestamp()</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="358" parent="330" name="PRIMARY">
+    <key id="359" parent="330" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_conn</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="359" parent="331" name="device_id">
+    <column id="360" parent="331" name="device_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="360" parent="331" name="pb_topic">
+    <column id="361" parent="331" name="pb_topic">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="361" parent="332" name="device_id">
+    <column id="362" parent="332" name="device_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="362" parent="332" name="sb_topic">
+    <column id="363" parent="332" name="sb_topic">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="363" parent="333" name="user_id">
+    <column id="364" parent="333" name="user_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="364" parent="333" name="username">
+    <column id="365" parent="333" name="username">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="365" parent="333" name="password">
+    <column id="366" parent="333" name="password">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="366" parent="334" name="device_id">
+    <column id="367" parent="334" name="device_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="367" parent="334" name="topic">
+    <column id="368" parent="334" name="topic">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="368" parent="334" name="length">
+    <column id="369" parent="334" name="length">
       <Position>3</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="369" parent="334" name="timestamp">
+    <column id="370" parent="334" name="timestamp">
       <Position>4</Position>
       <DataType>timestamp|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="370" parent="334" name="user_id">
+    <column id="371" parent="334" name="user_id">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="371" parent="334" name="conn_id">
+    <column id="372" parent="334" name="conn_id">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="372" parent="335" name="id_option">
+    <column id="373" parent="335" name="id_option">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="373" parent="335" name="description">
+    <column id="374" parent="335" name="description">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="374" parent="335" name="Index 1">
+    <index id="375" parent="335" name="Index 1">
       <ColNames>id_option</ColNames>
       <Type>btree</Type>
     </index>
-    <column id="375" parent="336" name="token_id">
+    <column id="376" parent="336" name="token_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="376" parent="336" name="user_id">
+    <column id="377" parent="336" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="377" parent="336" name="token_value">
+    <column id="378" parent="336" name="token_value">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="378" parent="336" name="timestamp">
+    <column id="379" parent="336" name="timestamp">
       <Position>4</Position>
       <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
@@ -1520,127 +1521,164 @@
       <ColumnKind>normal</ColumnKind>
       <OnUpdate>current_timestamp()</OnUpdate>
     </column>
-    <key id="379" parent="336" name="PRIMARY">
+    <key id="380" parent="336" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>token_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="380" parent="337" name="device_id">
+    <column id="381" parent="337" name="user_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="381" parent="337" name="tp_publish">
+    <column id="382" parent="337" name="activate_date">
       <Position>2</Position>
-      <DataType>varchar(200)|0s</DataType>
+      <DataType>timestamp|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="382" parent="337" name="client_id">
+    <column id="383" parent="337" name="lifetime">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="383" parent="338" name="tp_subscribe">
+    <column id="384" parent="337" name="token">
+      <Position>4</Position>
+      <DataType>varchar(500)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="385" parent="337" name="used_date">
+      <Position>5</Position>
+      <DataType>timestamp|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="386" parent="337" name="token_id">
+      <Position>6</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="387" parent="337" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>token_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="388" parent="338" name="device_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="389" parent="338" name="tp_publish">
+      <Position>2</Position>
+      <DataType>varchar(200)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="390" parent="338" name="client_id">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="391" parent="339" name="tp_subscribe">
       <Position>1</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="384" parent="338" name="device_id">
+    <column id="392" parent="339" name="device_id">
       <Position>2</Position>
       <DataType>int(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="385" parent="338" name="qos">
+    <column id="393" parent="339" name="qos">
       <Position>3</Position>
       <DataType>int(2)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="386" parent="338" name="client_id">
+    <column id="394" parent="339" name="client_id">
       <Position>4</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="387" parent="339" name="user_id">
+    <column id="395" parent="340" name="user_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="388" parent="339" name="device_id">
+    <column id="396" parent="340" name="device_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="389" parent="339" name="device_name">
+    <column id="397" parent="340" name="device_name">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="390" parent="339" name="publish">
+    <column id="398" parent="340" name="publish">
       <Position>4</Position>
       <DataType>int(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="391" parent="339" name="subscribe">
+    <column id="399" parent="340" name="subscribe">
       <Position>5</Position>
       <DataType>int(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="392" parent="339" name="PRIMARY">
+    <key id="400" parent="340" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>device_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="393" parent="340" name="user_id">
+    <column id="401" parent="341" name="user_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="394" parent="340" name="id_server_option">
+    <column id="402" parent="341" name="id_server_option">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="395" parent="341" name="user_id">
+    <column id="403" parent="342" name="user_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="396" parent="341" name="prefix_value">
+    <column id="404" parent="342" name="prefix_value">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="397" parent="342" name="user_id">
+    <column id="405" parent="343" name="user_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="398" parent="342" name="nome">
+    <column id="406" parent="343" name="nome">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="399" parent="342" name="email">
+    <column id="407" parent="343" name="email">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="400" parent="342" name="senha">
+    <column id="408" parent="343" name="senha">
       <Position>4</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="401" parent="342" name="PRIMARY">
+    <key id="409" parent="343" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>

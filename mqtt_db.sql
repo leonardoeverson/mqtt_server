@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `conn_clients` (
   `device_id` int(11) DEFAULT NULL,
   `method` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela mqtt.conn_log
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `conn_log` (
   `user_id` int(11) DEFAULT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela mqtt.device_pb_topic
@@ -93,6 +93,18 @@ CREATE TABLE IF NOT EXISTS `tokens` (
 ) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
+-- Copiando estrutura para tabela mqtt.tokens_links
+CREATE TABLE IF NOT EXISTS `tokens_links` (
+  `user_id` int(11) DEFAULT NULL,
+  `activate_date` timestamp NULL DEFAULT NULL,
+  `lifetime` int(11) DEFAULT NULL,
+  `token` varchar(500) DEFAULT NULL,
+  `used_date` timestamp NULL DEFAULT NULL,
+  `token_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`token_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+-- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela mqtt.tp_publish
 CREATE TABLE IF NOT EXISTS `tp_publish` (
   `device_id` int(11) DEFAULT NULL,
@@ -117,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(50) NOT NULL,
   `senha` varchar(200) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela mqtt.user_devices

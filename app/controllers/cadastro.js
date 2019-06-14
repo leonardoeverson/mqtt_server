@@ -280,6 +280,12 @@ module.exports.valida_token = function(app, request, response){
     var connection = new app.config.dbconn();
     var utils = new app.app.models.utilsDAO(connection);
 
+    if(typeof (request.query.request_id) == undefined)
+        response.redirect('/recuperar/senha');
+
+    if(typeof (request.query.token_id) == undefined)
+        response.redirect('/recuperar/senha');
+
     utils.pesquisa_token(request.query.request_id, request.query.token_id, function(error, result){
         if(!error){
             if(result.length > 0 ){
@@ -291,10 +297,10 @@ module.exports.valida_token = function(app, request, response){
                 })
                 
             }else{
-                response.render("cadastro/alterar_senha",{validacao : [{'msg':'Link inválido','erro':'true'}]});
+                response.redirect('/recuperar/senha');
             }
         }else{
-            response.render("cadastro/alterar_senha",{validacao : [{'msg':'A página está inacessível','erro':'true'}]});
+            response.redirect('/recuperar/senha');
         }
     })
 }
@@ -302,28 +308,33 @@ module.exports.valida_token = function(app, request, response){
 module.exports.troca_senha = function(app, request, response){
     let conn = app.config.dbconn();
     let cadastroUsuario = new app.app.models.cadastroDAO(conn);
-
-    var body = request.body;
+    const bcrypt = require('bcrypt');
+    let body = request.body;
 
     request.assert('senha_nova', 'Senha inválida').trim().notEmpty();
     request.assert('senha_nova', 'as senhas não são iguais').trim().isEqual(body.senha_nova_conf);
 
-    var erros = request.validationErrors();
+    let erros = request.validationErrors();
 
     if (erros) {
-        console.log(erros)
         response.render('cadastro/alterar_senha',{validacao: erros});
         return;
     }
 
-    cadastroDAO.altera_senha(body, function(error, result){
+    let dados = {};
+    try {
+        let saltRounds = 10;
+        let salt = bcrypt.genSaltSync(saltRounds);
+        dados.senha = bcrypt.hashSync(body.senha_nova, salt);
+        dados.user_id = request.session.user_id;
+    } catch (e) {
+        console.log(e);
+    }
+
+    cadastroUsuario.altera_senha(dados, function(error, result){
         if(!error){
-            response.clearCookie("data")
-            //response.cookie("senha_atualizada","true");
             response.redirect('/');
         }else{
-            //console.log(error);
-            //response.cookie("senha_atualizada","false")
             response.redirect('/');
         }
     })
