@@ -5,48 +5,13 @@
 </head>
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-<script src="mqtt_conn.js"></script>
-<div class="col-sm-3">
-    <form>
-        <h5>Publish</h5>
-        <div class="form-group">
-            <label for="topic_pub">Tópico</label>
-            <input type="text" class="form-control" id="topic_pub" required>
-            <label for="qos_1">QoS</label>
-            <select class="form-control" id="qos_1">
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-            </select>
-            <div class="form-check" style="margin-top: 20px; margin-bottom: 20px">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Reter
-                </label>
-            </div>
-            <label for="mensagem">Mensagem</label>
-            <input type="text" class="form-control" id="mensagem" required>
-        </div>
-        <button type="submit" id="pub_btn" class="btn btn-primary">Enviar</button>
-    </form>
+<script src="../mqtt_conn.js"></script>
+
+<div class="col-sm-8">
+    <h3>Dados</h3>
+    <hr/>
 </div>
-<div class="col-sm-3">
-    <form>
-        <h5>Subscribe</h5>
-        <div class="form-group">
-            <label for="topic_sub">Tópico</label>
-            <input type="text" class="form-control" id="topic_sub">
-            <label for="qos_2">QoS</label>
-            <select class="form-control" id="qos_2">
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-            </select>
-        </div>
-        <button type="submit" id="subs_btn" class="btn btn-primary">Enviar</button>
-    </form>
-</div>
-<div class="col-sm-8" style="margin-top: 30px; margin-left: 15%">
+<div class="col-sm-10" style="margin-left: 15%;margin-top: -10%;">
     <table class="table">
         <thead>
         <tr>
@@ -63,41 +28,41 @@
     </table>
 </div>
 <script>
+
     let client = null;
     let clientid = "mqtt_webclient_" + makeid();
-    let prefix_user = '<%= prefix_user %>';
+    let prefix_user = '<%= prefixo %>';
+    let topics = []
 
-    pub_btn.addEventListener('click', function(event){
-        event.preventDefault();
+    <%
 
-        if(topic_pub.value.trim().length === 0|| mensagem.value.trim().length === ""){
-            alert("valores vazios");
-            return;
+        if(typeof(dados[1] != undefined)){
+            console.log(1)
+            if(dados[1].length > 0){
+                console.log(2)
+                for(let i = 0; i < dados[1].length; i++){
+                    %> topics.push('<%= prefixo + '/' + dados[1][i].pb_topic%>'); <%
+                }
+            }
         }
 
-        let topic = prefix_user+"/"+topic_pub.value;
-        let qos = Number(qos_1.value);
-        let mensagem_ = mensagem.value;
-
-        publish(topic, mensagem_, qos);
-
-    });
-
-
-    subs_btn.addEventListener('click', function(event){
-        event.preventDefault();
-
-        if(topic_sub.value.trim().length === 0){
-            alert("tópico vazio");
-            return;
+        if(typeof(dados[2] != undefined)){
+            if(dados[2].length > 0){
+                for(let i = 0; i < dados[2].length; i++){
+                    %> topics.push('<%= prefixo + '/' + dados[2][i].sb_topic%>'); <%
+                }
+            }
         }
 
-        let topic = prefix_user+"/"+topic_sub.value;
-        let qos = Number(qos_2.value);
+    %>;
 
-        subscribe(topic, qos);
-
-    });
+    // for(let i = 0; i < subs_tp1.length; i++){
+    //     subscribe(prefix_user+'/'+subs_tp1[i].pb_topic, 0);
+    // }
+    //
+    // for(let i = 0; i < subs_tp2.length; i++){
+    //     subscribe(prefix_user+'/'+subs_tp2[i].sb_topic, 0);
+    // }
 
     $(document).ready(function(){
         $.notify("Conectando ao servidor...", "info");

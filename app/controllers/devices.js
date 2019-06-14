@@ -199,8 +199,9 @@ module.exports.get_device_data_topic = function(app, request, response){
     };
 
     dadosDispositivos.get_device_data_db(dados, (error, result)=>{
+
         if(!error){
-            response.render('devices/dados',{dados : result, prefixo: request.session.prefix_user })
+            response.render('devices/dados',{dados : result, prefixo: request.session.prefix_user , username : request.session.username, password: request.session.password})
         }else{
             console.log(error);
         }

@@ -1,5 +1,3 @@
-
-
 function subscribe(topic, qos){
     if(client != null){
         client.subscribe(topic, {qos: qos});
