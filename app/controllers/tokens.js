@@ -143,10 +143,6 @@ module.exports.make_id = function(tamanho, usa_maiusculas, usa_minusculas, usa_n
     for (let i = 0; i < tamanho; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-    //return new Promise((resolve, reject)=>{
-    //    resolve(text);
-    //});
-
     return text;
 };
 
