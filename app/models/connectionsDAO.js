@@ -29,7 +29,7 @@ connectionsDAO.prototype.conn_db_insert = function (dados, callback) {
                         });
                     }
 
-                    conn.close();
+                    //conn.close();
                     callback(null, result, result_id);
 
                 });

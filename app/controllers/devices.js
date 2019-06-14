@@ -28,9 +28,10 @@ module.exports.register_devices = function (app, request, response) {
     }
 
     dadosDispositivos.register_devices_db(dados, function (error, result) {
+
         if (!error) {
 
-            update_sb_pb_topic(dados, app,  request, response, result.insertedId,()=>{
+            update_sb_pb_topic(dados, app,  request, response, result.insertId,()=>{
                 response.render("devices/register", {
                     validacao: [{'mensagem': 'dados gravados com sucesso', 'status': 0}],
                     prefixo: request.session.prefix_user
@@ -199,7 +200,7 @@ module.exports.get_device_data_topic = function(app, request, response){
 
     dadosDispositivos.get_device_data_db(dados, (error, result)=>{
         if(!error){
-            response.send(result);
+            response.render('devices/dados',{dados : result, prefixo: request.session.prefix_user })
         }else{
             console.log(error);
         }

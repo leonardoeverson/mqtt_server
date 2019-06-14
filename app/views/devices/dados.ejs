@@ -1,0 +1,108 @@
+<!-- Navigation -->
+<%- include('../header'); %>
+<head>
+    <title>WebClient</title>
+</head>
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script src="mqtt_conn.js"></script>
+<div class="col-sm-3">
+    <form>
+        <h5>Publish</h5>
+        <div class="form-group">
+            <label for="topic_pub">Tópico</label>
+            <input type="text" class="form-control" id="topic_pub" required>
+            <label for="qos_1">QoS</label>
+            <select class="form-control" id="qos_1">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <div class="form-check" style="margin-top: 20px; margin-bottom: 20px">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Reter
+                </label>
+            </div>
+            <label for="mensagem">Mensagem</label>
+            <input type="text" class="form-control" id="mensagem" required>
+        </div>
+        <button type="submit" id="pub_btn" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+<div class="col-sm-3">
+    <form>
+        <h5>Subscribe</h5>
+        <div class="form-group">
+            <label for="topic_sub">Tópico</label>
+            <input type="text" class="form-control" id="topic_sub">
+            <label for="qos_2">QoS</label>
+            <select class="form-control" id="qos_2">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </div>
+        <button type="submit" id="subs_btn" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+<div class="col-sm-8" style="margin-top: 30px; margin-left: 15%">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Tópico
+            </th>
+            <th>
+                Mensagem
+            </th>
+        </tr>
+        </thead>
+        <tbody id="tabela">
+        </tbody>
+    </table>
+</div>
+<script>
+    let client = null;
+    let clientid = "mqtt_webclient_" + makeid();
+    let prefix_user = '<%= prefix_user %>';
+
+    pub_btn.addEventListener('click', function(event){
+        event.preventDefault();
+
+        if(topic_pub.value.trim().length === 0|| mensagem.value.trim().length === ""){
+            alert("valores vazios");
+            return;
+        }
+
+        let topic = prefix_user+"/"+topic_pub.value;
+        let qos = Number(qos_1.value);
+        let mensagem_ = mensagem.value;
+
+        publish(topic, mensagem_, qos);
+
+    });
+
+
+    subs_btn.addEventListener('click', function(event){
+        event.preventDefault();
+
+        if(topic_sub.value.trim().length === 0){
+            alert("tópico vazio");
+            return;
+        }
+
+        let topic = prefix_user+"/"+topic_sub.value;
+        let qos = Number(qos_2.value);
+
+        subscribe(topic, qos);
+
+    });
+
+    $(document).ready(function(){
+        $.notify("Conectando ao servidor...", "info");
+        server_connect(clientid, '<%= username %>', '<%= password %>', $.notify("Conectado!", "success"));
+    });
+
+</script>
+<%- include('../footer'); %>
