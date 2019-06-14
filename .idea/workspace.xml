@@ -7,13 +7,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/models/topicsDAO.js" line="22" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/11a9c702-7edd-4c4f-8695-08c59773de07.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/11a9c702-7edd-4c4f-8695-08c59773de07.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/devices/dados.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devices/dados.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/interface/mqtt_web.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/interface/mqtt_web.ejs" afterDir="false" />
-    </list>
+    <list default="true" id="bf81ae2a-897a-4dd6-89e6-4d239235bfef" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +68,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/devices/dados.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="770">
+            <state relative-caret-position="668">
               <caret line="67" column="20" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
               <folding>
                 <element signature="e#367#390#0#HTML" expanded="true" />
@@ -440,13 +434,13 @@
       <workItem from="1560395115209" duration="39000" />
       <workItem from="1560395633776" duration="25000" />
       <workItem from="1560532071858" duration="374000" />
-      <workItem from="1560532481052" duration="6234000" />
+      <workItem from="1560532481052" duration="6272000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="455853000" />
+    <option name="totallyTimeSpent" value="455891000" />
     <option name="showClosedTasks" value="false" />
   </component>
   <component name="TodoView">
@@ -863,7 +857,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/devices/dados.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
+        <state relative-caret-position="668">
           <caret line="67" column="20" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
           <folding>
             <element signature="e#367#390#0#HTML" expanded="true" />
