@@ -280,10 +280,7 @@ module.exports.valida_token = function(app, request, response){
     var connection = new app.config.dbconn();
     var utils = new app.app.models.utilsDAO(connection);
 
-    if(typeof (request.query.request_id) == undefined)
-        response.redirect('/recuperar/senha');
-
-    if(typeof (request.query.token_id) == undefined)
+    if(typeof (request.query.request_id) == undefined || typeof (request.query.token_id) == undefined)
         response.redirect('/recuperar/senha');
 
     utils.pesquisa_token(request.query.request_id, request.query.token_id, function(error, result){
@@ -303,7 +300,7 @@ module.exports.valida_token = function(app, request, response){
             response.redirect('/recuperar/senha');
         }
     })
-}
+};
 
 module.exports.troca_senha = function(app, request, response){
     let conn = app.config.dbconn();
@@ -338,7 +335,7 @@ module.exports.troca_senha = function(app, request, response){
             response.redirect('/');
         }
     })
-}
+};
 
 
 function verifica_email(cadastroUsuario, body) {
