@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `conn_clients` (
   `device_id` int(11) DEFAULT NULL,
   `method` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela mqtt.conn_log
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `conn_log` (
   `user_id` int(11) DEFAULT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_conn`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela mqtt.device_pb_topic
