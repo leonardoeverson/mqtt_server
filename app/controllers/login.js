@@ -133,25 +133,26 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
         client.subscribe_permission = result1[0].subscribe;
 
         //Permissões do dispositivo
-        if (Number(result1[0].publish) === 2) {
+        if (Number(result1[0].publish) === 1) {
             try{
                 result4 = await app.app.controllers.devices.publish_perm(app, result1[0].device_id);
             }catch(e){
                 throw new Error(e);
             }
 
-            client.publish_topics = result4[0];
+            client.publish_topics = result4;
         }
 
-        if (Number(result1[0].subscribe) === 2) {
+        if (Number(result1[0].subscribe) === 1) {
 
             try{
                 result5 = await app.app.controllers.devices.subscribe_perm(app, result1[0].device_id);
+
             }catch (e) {
                 throw new Error(e);
             }
 
-            client.subscribe_topics = result5[0];
+            client.subscribe_topics = result5;
         }
     }
 

@@ -84,7 +84,6 @@ module.exports.topic_validation = function(app, client, topic, callback, type){
     //Verificar se é permitido publicar  ou subscrever no tópico
 
     //Verificar se tem o prefixo
-
     if(type === 1) {
         if (Number(client.publish_permission) !== 3) {
             if (topic.search(client.prefix) > -1) {
