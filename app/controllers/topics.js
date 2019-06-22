@@ -87,6 +87,8 @@ module.exports.topic_validation = function(app, client, topic, callback, type){
     if(type === 1) {
         if (Number(client.publish_permission) !== 3) {
             if (topic.search(client.prefix) > -1) {
+                //Verificar as permissões de publicação
+
                 callback(null);
             } else {
                 console.log("não é possível publicar neste tópico");
@@ -103,6 +105,8 @@ module.exports.topic_validation = function(app, client, topic, callback, type){
         if(Number(client.subscribe_permission) !== 3){
             if(sub.search(client.prefix) > -1){
                 callback(null, topic);
+                //Verificar as permissões de assinatura
+
             }else{
                 console.log("não é possível subscrever neste tópico");
                 return callback(new Error('tópico não permitido'));
