@@ -135,7 +135,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
         //Permissões do dispositivo
         if (Number(result1[0].publish) === 2) {
             try{
-                result4 = await app.app.controllers.publish_perm(app, result1[0].device_id);
+                result4 = await app.app.controllers.devices.publish_perm(app, result1[0].device_id);
             }catch(e){
                 throw new Error(e);
             }
@@ -146,7 +146,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
         if (Number(result1[0].subscribe) === 2) {
 
             try{
-                result5 = await app.app.controllers.subscribe_perm(app, result1[0].device_id);
+                result5 = await app.app.controllers.devices.subscribe_perm(app, result1[0].device_id);
             }catch (e) {
                 throw new Error(e);
             }
