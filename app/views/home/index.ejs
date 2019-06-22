@@ -54,7 +54,7 @@
             <tr>
                 <td><%= dados[i].client_id %></td>
                 <td><%= dados[i].client_address %></td>
-                <td><a href="/device/data?device_id"><input type="button" class="btn btn-primary btn-sm" value="Ver dados" /></a></td>
+                <td><a href="/device/data?device_id" <%= dados[i].device_id %></a><input type="button" class="btn btn-primary btn-sm" value="Ver dados" /></a></td>
             </tr>
             <%
                 }

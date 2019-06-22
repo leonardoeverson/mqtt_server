@@ -102,60 +102,82 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
 };
 
 async function conn_control(app, client, cb, auth_error, user_id, ip, port, method) {
-    let result1, result2, result3, result4, result5;
+    let result1, result2, result3, result4, result5, resposta;
 
     try {
         //Verifica se é permitida a conexão do dispositivo
         result2 = await app.app.controllers.settings.get_server_option(app, 1, user_id);
-
-        if (result2.length > 0) {
-            auth_error.returnCode = 3;
-            cb(auth_error, null);
-            return;
-        }
-
-        //Verifica se o dispositivo existe no registro
-        result1 = await app.app.controllers.devices.check_device_reg(app, user_id, client.id);
-
-        //Se houver um registro no banco, atribui, se não tem, recebe 0
-        client.conn.device_id = result1[0] ? result1[0].device_id : 0;
-
-        //Busca as permissões de publish e subscribe
-        if (typeof (result1[0]) != "undefined") {
-            client.publish_permission = result1[0].publish;
-            client.subscribe_permission = result1[0].subscribe;
-
-            //Permissões do dispositivo
-            if (Number(result1[0].publish) === 2) {
-                result4 = await app.app.controllers.publish_perm(app, result1[0].device_id);
-                client.publish_topics = result4[0];
-            }
-
-            if (Number(result[0].subscribe) === 2) {
-                result5 = await app.app.controllers.subscribe_perm(app, result1[0].device_id);
-                client.subscribe_topics = result5[0];
-            }
-        }
-
-        //controller de registro de conexões
-        let resposta = await app.app.controllers.connections.conn_mgmt_insert(app, user_id, client.id, ip, port, client.conn.device_id, method);
-
-        //Prefixo do usuário
-        result3 = await app.app.controllers.prefix.prefix_db_get(app, user_id);
-
-        //id de Conexão
-        client.conn.conn_id = resposta.insertId;
-
-        //Prefixo
-        client.prefix = result3;
-
-        //callback de aceitação da conexão do dispositivo
-        cb(null, true);
-
     } catch (e) {
         throw new Error(e);
     }
 
+    if (result2.length > 0) {
+        auth_error.returnCode = 3;
+        cb(auth_error, null);
+        return;
+    }
+
+    try{
+        //Verifica se o dispositivo existe no registro
+        result1 = await app.app.controllers.devices.check_device_reg(app, user_id, client.id);
+    }catch(e){
+        throw new Error(e);
+    }
+
+    //Se houver um registro no banco, atribui, se não tem, recebe 0
+    client.conn.device_id = result1[0] ? result1[0].device_id : 0;
+
+    //Busca as permissões de publish e subscribe
+    if (typeof (result1[0]) != "undefined") {
+        client.publish_permission = result1[0].publish;
+        client.subscribe_permission = result1[0].subscribe;
+
+        //Permissões do dispositivo
+        if (Number(result1[0].publish) === 2) {
+            try{
+                result4 = await app.app.controllers.publish_perm(app, result1[0].device_id);
+            }catch(e){
+                throw new Error(e);
+            }
+
+            client.publish_topics = result4[0];
+        }
+
+        if (Number(result1[0].subscribe) === 2) {
+
+            try{
+                result5 = await app.app.controllers.subscribe_perm(app, result1[0].device_id);
+            }catch (e) {
+                throw new Error(e);
+            }
+
+            client.subscribe_topics = result5[0];
+        }
+    }
+
+    try{
+        //controller de registro de conexões
+        resposta = await app.app.controllers.connections.conn_mgmt_insert(app, user_id, client.id, ip, port, client.conn.device_id, method);
+    }catch (e) {
+        throw new Error(e);
+    }
+
+
+    try{
+        //Prefixo do usuário
+        result3 = await app.app.controllers.prefix.prefix_db_get(app, user_id);
+    }catch (e) {
+        throw new Error(e);
+    }
+
+    //id de Conexão
+    client.conn.conn_id = resposta.insertId;
+
+    //Prefixo
+    client.prefix = result3;
+
+    //callback de aceitação da conexão do dispositivo
+    cb(null, true);
 
 }
 
