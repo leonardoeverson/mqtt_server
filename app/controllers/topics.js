@@ -87,9 +87,24 @@ module.exports.topic_validation = function(app, client, topic, callback, type){
     if(type === 1) {
         if (Number(client.publish_permission) !== 3) {
             if (topic.search(client.prefix) > -1) {
-                //Verificar as permissões de publicação
 
-                callback(null);
+                if(client.publish_permission == 1){
+
+                    for(let i = 0; i < client.publish_topics.length; i++){
+                        if(topic.search(client.publish_topics[i].pb_topic) > -1){
+                            callback(null);
+                            return;
+                        }
+                    }
+
+                    console.log("não é possível publicar neste tópico");
+                    return callback(new Error('tópico não permitido'));
+                }
+                //Verificar as permissões de publicação
+                else if(client.publish_permission == 2) {
+                    callback(null);
+                }
+
             } else {
                 console.log("não é possível publicar neste tópico");
                 return callback(new Error('tópico não permitido'));
@@ -104,8 +119,24 @@ module.exports.topic_validation = function(app, client, topic, callback, type){
         let sub = topic.topic;
         if(Number(client.subscribe_permission) !== 3){
             if(sub.search(client.prefix) > -1){
-                callback(null, topic);
+
                 //Verificar as permissões de assinatura
+                if(client.subscribe_permission == 1){
+
+                    for(let i = 0; i < client.subscribe_topics.length; i++){
+                        if(sub.search(client.subscribe_topics[i].sb_topic) > -1){
+                            callback(null, topic);
+                            return;
+                        }
+                    }
+
+                    console.log("não é possível subscrever neste tópico");
+                    return callback(new Error('tópico não permitido'));
+                }
+                //Verificar as permissões de publicação
+                else if(client.subscribe_permission == 2) {
+                    callback(null, topic);
+                }
 
             }else{
                 console.log("não é possível subscrever neste tópico");
