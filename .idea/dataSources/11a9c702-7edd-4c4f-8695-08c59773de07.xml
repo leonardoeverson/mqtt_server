@@ -2,7 +2,7 @@
 <dataSource name="mqtt@localhost">
   <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.15">
     <root id="1">
-      <ServerVersion>10.3.15</ServerVersion>
+      <ServerVersion>10.4.6</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultCasing>lower/lower</DefaultCasing>
     </root>
