@@ -1,7 +1,7 @@
 let mysql = require('mysql');
 
 function dbconn(){
-
+	console.log(process.env)
 	if(!process.env.MARIADB_SERVICE_HOST){
 		return conn = mysql.createConnection({
 			host: 'localhost',
