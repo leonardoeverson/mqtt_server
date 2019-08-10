@@ -13,10 +13,10 @@ function dbconn(){
 		});
 	}else{
 		return conn = mysql.createConnection({
-			host: 'mysql://mariadb:3306',
-			user: 'userDAK',
-			password : 'e75WNMWXP0JEkID5',
-			database: 'sampledb',
+			host: 'mysql://remotemysql.com:3306',
+			user: 'uSANkH0aYN',
+			password : 'gOmWfFmBTa',
+			database: 'uSANkH0aYN',
 			dateStrings : true,
 			multipleStatements: true
 		});

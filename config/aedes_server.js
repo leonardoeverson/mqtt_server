@@ -3,8 +3,8 @@ let ws = require('websocket-stream');
 let port = 1883;
 let wsPort = 8888;
 let aedesPersistenceMongoDB = require('aedes-persistence-mongodb');
-let url = 'mongodb://localhost:27017/aedes_mq' ;
-let url_prst = 'mongodb://127.0.0.1:27017/aedes_persistence';
+let url = 'mongodb+srv://dbAccess:zS6gPI0bnz2eU5Y0@cluster0-7fkit.mongodb.net/test?retryWrites=true&w=majority/aedes_mq' ;
+let url_prst = 'mongodb+srv://dbAccess:zS6gPI0bnz2eU5Y0@cluster0-7fkit.mongodb.net/test?retryWrites=true&w=majority/aedes_persistence';
 let dbname = 'aedes_mq';
 
 if(process.env.MONGODB_PORT_27017_TCP_ADDR){
