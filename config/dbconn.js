@@ -22,7 +22,6 @@ function dbconn(){
 		});
 	//}
 
-
 }
 
 module.exports = dbconn;

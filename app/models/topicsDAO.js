@@ -18,10 +18,10 @@ topicsDAO.prototype.traffic_message_metric_db = function(dados, callback){
 
     let query;
     if(dados.periodo == 1){
-        query = "select count(*) as quantidade, timestamp as marca from mqtt_metrics where DAY(timestamp) = DAY(CURDATE())";
+        query = "select count(*) as quantidade, timestamp as marca from mqtt_metrics where DAY(timestamp) = DAY(CURDATE()) ";
         query += "and user_id = ?";
         query += " group by(hour(timestamp)) asc;";
-        query += "select sum(length) as quantidade, timestamp as marca from mqtt_metrics where DAY(timestamp) = DAY(CURDATE())";
+        query += "select sum(length) as quantidade, timestamp as marca from mqtt_metrics where DAY(timestamp) = DAY(CURDATE()) ";
         query += "and user_id = ?";
         query += " group by(hour(timestamp)) asc;";
     }else{
