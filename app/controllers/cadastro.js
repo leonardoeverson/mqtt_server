@@ -373,6 +373,7 @@ function grava_cadastro(cadastroUsuario, request, body) {
     return new Promise((resolve, reject) => {
 
         cadastroUsuario.grava_usuario(body, function (error, result) {
+            
             if (!error && result.affectedRows > 0) {
                 // request.session.logged = true;
                 // request.session.nome = body.nome;

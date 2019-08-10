@@ -1,10 +1,10 @@
 module.exports.login_usuario = function (request, response) {
-    let conn = require('../../config/dbconn')()();
+    let conn = require('../../config/dbconn')();
     let loginDAO = require('../models/loginDAO')();
     let loginUsuario = new loginDAO(conn);
-    
     let prefix = require('../controllers/prefix');
     let tokens = require('../controllers/tokens');
+    let connections = require('../controllers/connections');
 
     let body = request.body;
     let bcrypt = require('bcrypt');
@@ -18,7 +18,7 @@ module.exports.login_usuario = function (request, response) {
                     request.session.logged = true;
 
                     //Finalização de conexão
-                    app.app.controllers.connections.db_end_connection(conn);
+                    connections.db_end_connection(conn);
 
                     //Prefixo do usuário
                     request.session.prefix_user = await prefix.prefix_db_get(request.session.user_id);
@@ -55,8 +55,11 @@ module.exports.login_usuario = function (request, response) {
 
 module.exports.login_dispositivo = async function ( client, username, password, cb) {
 
-    let conn = app.config.dbconn();
-    let loginUsuario = new app.app.models.loginDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let loginDAO = require('../models/loginDAO')();
+    let loginUsuario = new loginDAO(conn);
+    let connections = require('../controllers/connections');
+    
     let auth_error = new Error('Auth error');
     let ip, method, port;
     let dados = {};

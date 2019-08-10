@@ -1,13 +1,14 @@
 module.exports.list_devices = function (request, response) {
-   //let conn = app.config.dbconn();
-    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
-
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     let dados = {};
     dados.user_id = request.session.user_id;
 
     dadosDispositivos.list_devices_db(dados, function (error, result) {
         if (!error) {
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             response.render("devices/list", {validacao: result, prefixo: request.session.prefix_user});
         } else {
             console.log(error);
@@ -17,8 +18,10 @@ module.exports.list_devices = function (request, response) {
 };
 
 module.exports.register_devices = function (request, response) {
-    //let conn = app.config.dbconn();
-    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     let dados = request.body;
 
     dados.user_id = request.session.user_id;
@@ -51,8 +54,9 @@ module.exports.register_devices = function (request, response) {
 };
 
 module.exports.count_devices_db = function (request, response) {
-    //let conn = app.config.dbconn();
-    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
     let dados = {};
 
     dados.user_id = request.session.user_id;
@@ -60,7 +64,7 @@ module.exports.count_devices_db = function (request, response) {
     return new Promise(function (resolve, reject) {
 
         dadosDispositivos.list_devices_db(dados, function (error, result) {
-            app.app.controllers.connections.db_end_connection(conn);
+           connections.db_end_connection(conn);
             if (!error) {
                 resolve(result)
             } else {
@@ -72,14 +76,16 @@ module.exports.count_devices_db = function (request, response) {
 };
 
 module.exports.connected_devices = function (request, response) {
-    //let conn = app.config.dbconn();
-    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     let dados = {};
     dados.user_id = request.session.user_id;
 
     return new Promise((resolve, reject) => {
         dadosDispositivos.connected_device_db(dados, function (error, result) {
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if (!error) {
                 resolve(result)
             } else {
@@ -91,16 +97,17 @@ module.exports.connected_devices = function (request, response) {
 };
 
 module.exports.check_device_reg = function (user_id, client_id) {
-    //let conn = app.config.dbconn();
-    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
-
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     let dados = {};
     dados.user_id = user_id;
     dados.device_name = client_id;
 
     return new Promise((resolve, reject) => {
         dadosDispositivos.check_device_reg_db(dados, function (error, result) {
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if (!error) {
                 resolve(result);
             } else {
@@ -116,8 +123,10 @@ module.exports.check_device_reg = function (user_id, client_id) {
 };
 
 module.exports.delete_device = function (request, response) {
-    //let conn = app.config.dbconn();
-    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     let dados = request.body;
 
     dadosDispositivos.delete_device_db(dados.device_id, (error, result) => {
@@ -131,9 +140,10 @@ module.exports.delete_device = function (request, response) {
 };
 
 module.exports.publish_perm = function (app, device_id) {
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
-
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
 
     return new Promise((resolve, reject) => {
         dadosDispositivos.get_device_pb_topic_db(device_id, function (error, result) {
@@ -153,9 +163,10 @@ module.exports.publish_perm = function (app, device_id) {
 };
 
 module.exports.subscribe_perm = function (app, device_id) {
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
-
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     return new Promise((resolve, reject) => {
         dadosDispositivos.get_device_sb_topic_db(device_id, function (error, result) {
             connections.db_end_connection(conn);
@@ -174,9 +185,10 @@ module.exports.subscribe_perm = function (app, device_id) {
 };
 
 module.exports.get_device_data = function(request, response){
-    //let conn = app.config.dbconn();
-    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
-
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     let dados = {
         device_id : request.query.device_id,
         user_id : request.session.user_id
@@ -192,9 +204,10 @@ module.exports.get_device_data = function(request, response){
 };
 
 module.exports.get_device_data_topic = function(request, response){
-    //let conn = app.config.dbconn();
-    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
-
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     let dados = {
         device_id : request.query.device_id,
         user_id : request.session.user_id
@@ -211,9 +224,10 @@ module.exports.get_device_data_topic = function(request, response){
 };
 
 module.exports.update_device_data = function(request, response){
-    //let conn = app.config.dbconn();
-    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
-
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     let sb_topic, pb_topic;
 
     if(request.body.sb_topic[request.body.sb_topic.length - 1] == ';'){

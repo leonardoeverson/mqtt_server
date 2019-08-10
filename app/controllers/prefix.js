@@ -10,7 +10,7 @@
 //     })
 // };
 
-module.exports.prefix_db_get = function (app, user_id) {
+module.exports.prefix_db_get = function (user_id) {
     
     let conn = require('../../config/dbconn')();
     let connections = require('../controllers/connections');
@@ -35,7 +35,7 @@ module.exports.prefix_db_get = function (app, user_id) {
     });
 };
 
-module.exports.prefix_db_search = async function (app, prefix) {
+module.exports.prefix_db_search = async function (prefix) {
 
     let conn = require('../../config/dbconn')();
     let connections = require('../controllers/connections');
@@ -60,7 +60,7 @@ module.exports.prefix_db_search = async function (app, prefix) {
     })
 };
 
-module.exports.create_prefix = async function (app, request) {
+module.exports.create_prefix = async function (request) {
 
     let conn = require('../../config/dbconn')();
     let tokens = require('../controllers/tokens');
@@ -74,9 +74,9 @@ module.exports.create_prefix = async function (app, request) {
     dados.prefix = tokens.make_id(6, true, true, true, false);
     dados.user_id = request.session.user_id;
 
-    test = await module.exports.prefix_db_search(app, dados.prefix);
+    test = await module.exports.prefix_db_search(dados.prefix);
     if (!test) {
-        return  module.exports.create_prefix(app, request);
+        return  module.exports.create_prefix(request);
     }
 
     //request.session.prefix_user = dados.prefix;
