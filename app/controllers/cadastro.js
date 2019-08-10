@@ -76,10 +76,11 @@ module.exports.dados_cadastro = function ( request, response) {
 
 module.exports.atualiza_dados_cadastro = function ( request, response) {
     let cadastro = require('../models/cadastroDAO')();
+    let cadastroUsuario = new cadastro(conn);
     let connections = require('../controllers/connections')();
     let conn = require('../../config/dbconn')();
 
-    let cadastroUsuario = new cadastro(conn);
+    
     let body = request.query;
     let async = require('async');
 

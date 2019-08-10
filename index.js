@@ -8,8 +8,6 @@ let connections = require('./app/controllers/connections');
 let tokens = require('./app/controllers/tokens');
 let topics = require('./app/controllers/topics');
 
-console.log(process.env)
-
 app.listen(port, function(){
     console.log('Servidor Iniciado na Porta:',port);
 });
