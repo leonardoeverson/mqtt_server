@@ -1,4 +1,4 @@
-module.exports.get_server_opts = function(app, request, response){
+module.exports.get_server_opts = function(request, response){
     let conn = require('../../config/dbconn')();
     let serverDAO = require('../models/serverDAO')();
     serverDAO = new serverDAO(conn);
@@ -14,7 +14,7 @@ module.exports.get_server_opts = function(app, request, response){
     })
 };
 
-module.exports.post_server_opts = function(app, request, response){
+module.exports.post_server_opts = function(request, response){
 
     let conn = require('../../config/dbconn')();
     let serverDAO = require('../models/serverDAO')();
@@ -43,7 +43,7 @@ module.exports.post_server_opts = function(app, request, response){
     })
 };
 
-module.exports.get_server_option = function(app, id_option, user_id){
+module.exports.get_server_option = function(id_option, user_id){
     let conn = require('../../config/dbconn')();
     let serverDAO = require('../models/serverDAO')();
     serverDAO = new serverDAO(conn);
@@ -72,7 +72,7 @@ module.exports.get_server_option = function(app, id_option, user_id){
     })
 };
 
-module.exports.get_username_password_device = function (app, request, response) {
+module.exports.get_username_password_device = function (request, response) {
     let conn = require('../../config/dbconn')();
     let dadosUsuarios = require('../models/dadosUsuarioDAO')();
     dadosUsuarios = new dadosUsuarios(conn);

@@ -1,4 +1,4 @@
-module.exports.topic_subscribe_register = function(app, subscriptions, client){
+module.exports.topic_subscribe_register = function(subscriptions, client){
     let conn = require('../../config/dbconn')();
     let topicsDAO = require('../models/topicsDAO');
     topicsDAO = new topicsDAO(conn);
@@ -20,12 +20,12 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
 
 };
 
- module.exports.publish_metrics_insert = function(app, packet, client){
+ module.exports.publish_metrics_insert = function(packet, client){
     let conn = require('../../config/dbconn')();
     let topicsDAO = require('../models/topicsDAO')();
     topicsDAO = new topicsDAO(conn);
     let dados = {};
-
+   
     dados.length = packet.payload.byteLength;
     dados.topic = packet.topic;
     dados.device_id = client.conn.device_id;
@@ -39,17 +39,15 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
             conn.destroy();
         }
     })
-
-    // let conn_mongogb = mongodb_conn({length: Number, topic : String , client_id: Number});
-    // let data_mqtt_metrics = new conn_mongogb({length: packet.payload.byteLength, topic : packet.topic, client_id: client.conn.user_id});
-    // data_mqtt_metrics.save().then();
-
 };
 
-module.exports.message_metric = function(app, request, response){
+module.exports.message_metric = function(request, response){
     let conn = require('../../config/dbconn')();
     let topicsDAO = require('../models/topicsDAO')();
     let dados = {};
+
+    console.log(request.session);
+
     dados.user_id = request.session.user_id;
     dados.periodo = request.query.periodo;
 
@@ -65,7 +63,7 @@ module.exports.message_metric = function(app, request, response){
 };
 
 
-module.exports.conn_metrics = function(app, request, response){
+module.exports.conn_metrics = function(request, response){
     let conn = require('../../config/dbconn')();
     let topicsDAO = require('../models/topicsDAO')();
     let dados = {};
@@ -81,7 +79,7 @@ module.exports.conn_metrics = function(app, request, response){
     })
 };
 
-module.exports.topic_validation = function(app, client, topic, callback, type){
+module.exports.topic_validation = function(client, topic, callback, type){
 
     //Verificar se é permitido publicar  ou subscrever no tópico
 

@@ -6,6 +6,8 @@ let settings = require('../controllers/settings');
 let topics = require('../controllers/topics');
 
 router.get('/settings', function (request, response) {
+    console.log(request.session);
+
     if (request.session.logged) {
         settings.get_server_opts(request, response);
     } else {
@@ -14,6 +16,7 @@ router.get('/settings', function (request, response) {
 });
 
 router.post('/settings', function (request, response) {
+    console.log(request.session);
     if (request.session.logged) {
         settings.post_server_opts(request, response);
     } else {
