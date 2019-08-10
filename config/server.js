@@ -1,5 +1,5 @@
 let express = require('express');
-let consign = require('consign');
+//let consign = require('consign');
 let bodyParser = require('body-parser');
 let helmet = require('helmet');
 let session = require("express-session");
@@ -64,11 +64,11 @@ app.use(expressValidator({
 
 //Localizando arquivos
 //Localizando rotas e models
-consign()
-    .include('./app/routes')
-    .then('./config/dbconn.js')
-    .then('app/models')
-    .then('app/controllers')
-    .into(app);
+// consign()
+//     .include('./app/routes')
+//     .then('./config/dbconn.js')
+//     .then('app/models')
+//     .then('app/controllers')
+//     .into(app);
 
 module.exports = app;

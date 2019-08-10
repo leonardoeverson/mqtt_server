@@ -2,6 +2,12 @@
 let app = require('./config/server');
 let port = process.env.PORT || 3000;
 
+//requires
+let login = require('./app/controllers/login')
+let connections = require('./app/controllers/connections');
+let tokens = require('./app/controllers/tokens');
+let topics = require('./app/controllers/topics');
+
 app.listen(port, function(){
     console.log('Servidor Iniciado na Porta:',port);
 });
@@ -10,7 +16,7 @@ app.listen(port, function(){
 let aedes = require('./config/aedes_server');
 
 //Exclui os registros das conexões anteriores
-app.app.controllers.connections.conn_mgmt_delete_all(app);
+connections.conn_mgmt_delete_all(app);
 
 //Exclui registros de tokens
 app.app.controllers.tokens.delete_tokens_(app);
@@ -18,23 +24,23 @@ app.app.controllers.tokens.delete_tokens_(app);
 //Autenticação de clientes
 aedes.authenticate = function (client, username, password, callback) {
     //checar novo de usuário e senha
-    app.app.controllers.login.login_dispositivo(app, client, username, password, callback)
+    login.login_dispositivo(app, client, username, password, callback)
 };
 
 //Autorização de publish
 aedes.authorizePublish = function (client, packet, callback) {
-    app.app.controllers.topics.topic_validation(app, client, packet.topic, callback, 1);
+    topics.topic_validation(app, client, packet.topic, callback, 1);
 };
 
 //Autorização de subscribe
 aedes.authorizeSubscribe = function (client, sub, callback) {
-    app.app.controllers.topics.topic_validation(app, client, sub, callback, 2);
+    topics.topic_validation(app, client, sub, callback, 2);
 };
 
 //Aedes Events
 aedes.on("clientDisconnect",function(client){
     console.log('cliente de id:', client.id, 'desconectou');
-    app.app.controllers.connections.conn_mgmt_delete(app, client.conn.conn_id);
+    connections.conn_mgmt_delete(app, client.conn.conn_id);
 });
 
 aedes.on('clientError', function (client, err) {
@@ -48,13 +54,13 @@ aedes.on('connectionError', function (client, err) {
 
 aedes.on('publish', function (packet, client) {
     if (client) {
-        app.app.controllers.topics.publish_metrics_insert(app, packet, client);
+        topics.publish_metrics_insert(app, packet, client);
     }
 });
 
 aedes.on('subscribe', function (subscriptions, client) {
     if (client) {
-        app.app.controllers.topics.topic_subscribe_register(app, subscriptions, client);
+        topics.topic_subscribe_register(app, subscriptions, client);
         //console.log('subscribe from client', subscriptions, client.id);
     }
 });
