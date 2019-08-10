@@ -1,6 +1,8 @@
 module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_address, client_port, db_device_id, method){
-	let conn = app.config.dbconn();
-	let connMgmt = new app.app.models.connectionsDAO(conn);
+	let conn = require('../../config/dbconn')();
+	conn = conn();
+	let connectionsDAO = require('../models/connectionsDAO')();
+	let connMgmt = new connectionsDAO(conn);
 
 	let dados = {};
 	dados.user_id = user_id;
@@ -32,8 +34,10 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 };
 
 module.exports.conn_mgmt_delete = function(app, id_conn){
-	let conn = app.config.dbconn();
-	let connMgmt = new app.app.models.connectionsDAO(conn);
+	let conn = require('../../config/dbconn')();
+	conn = conn();
+	let connectionsDAO = require('../models/connectionsDAO')();
+	let connMgmt = new connectionsDAO(conn);
 
 	connMgmt.conn_db_delete(id_conn, function(err, result){
 		//app.app.controllers.connections.db_end_connection(conn);
@@ -45,9 +49,13 @@ module.exports.conn_mgmt_delete = function(app, id_conn){
 
 
 module.exports.conn_mgmt_delete_all = function(app){
-	let conn = app.config.dbconn();
-	let connMgmt = new app.app.models.connectionsDAO(conn);
+	let conn = require('../../config/dbconn')();
+	conn = conn();
 
+	let connectionsDAO = require('../models/connectionsDAO')();
+
+	let connMgmt = new connectionsDAO(conn);
+	
 	connMgmt.conn_db_delete_all(null, function(err, result){
 		//app.app.controllers.connections.db_end_connection(conn);
 		if(err){

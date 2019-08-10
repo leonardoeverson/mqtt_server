@@ -1,10 +1,12 @@
 let token_user_insert = function(app, dados){
-    let conn = app.config.dbconn();
-    let tokensDAO = new app.app.models.tokensDAO(conn);
+    let conn = require('../../config/dbconn')()();
+    let connections = require('../controllers/connections')
+    let tokens = require('../models/tokensDAO')();
+    let tokensDAO = new tokens(conn);
 
     return new Promise((resolve, reject)=>{
         tokensDAO.user_token_insert(dados, (error, result)=>{
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if(!error){
                 resolve(result);
             }else{
@@ -17,17 +19,19 @@ let token_user_insert = function(app, dados){
 };
 
 let token_user_get = function(app, dados){
-    let conn = app.config.dbconn();
-    let tokensDAO = new app.app.models.tokensDAO(conn);
+    let conn = require('../../config/dbconn')()();
+    let connections = require('../controllers/connections')
+    let tokens = require('../models/tokensDAO')();
+    let tokensDAO = new tokens(conn);
 
     return new Promise((resolve, reject)=>{
         tokensDAO.user_token_get(dados, (error, result)=>{
             if(!error){
-                app.app.controllers.connections.db_end_connection(conn);
+                connections.db_end_connection(conn);
                 resolve(result);
             }else{
                 console.log(error);
-                app.app.controllers.connections.db_end_connection(conn);
+                connections.db_end_connection(conn);
                 reject(error);
             }
 
@@ -36,12 +40,13 @@ let token_user_get = function(app, dados){
 };
 
 module.exports.token_user_compare = function(app, dados){
-    let conn = app.config.dbconn();
-    let tokensDAO = new app.app.models.tokensDAO(conn);
+    let conn = require('../../config/dbconn')()();
+    let tokens = require('../models/tokensDAO')();
+    let tokensDAO = new tokens(conn);
 
     return new Promise((resolve, reject)=>{
         tokensDAO.user_token_compare(dados, (error, result)=>{
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if(!error){
                 resolve(result);
             }else{
@@ -79,11 +84,13 @@ module.exports.token_check = function (app, request) {
 };
 
 module.exports.delete_tokens_ = function(app){
-    let conn = app.config.dbconn();
-    let tokensDAO = new app.app.models.tokensDAO(conn);
+    let conn = require('../../config/dbconn')()();
+    let connections = require('../controllers/connections')
+    let tokens = require('../models/tokensDAO')();
+    let tokensDAO = new tokens(conn);
 
     tokensDAO.delete_tokens((err, result)=>{
-        app.app.controllers.connections.db_end_connection(conn);
+        connections.db_end_connection(conn);
         if(!err){
             console.log('delete_tokens');
         }else{
@@ -94,12 +101,14 @@ module.exports.delete_tokens_ = function(app){
 
 
 module.exports.get_username_password = function(app, user_id){
-    let conn = app.config.dbconn();
-    let tokensDAO = new app.app.models.tokensDAO(conn);
+    let conn = require('../../config/dbconn')()();
+    let connections = require('../controllers/connections')
+    let tokens = require('../models/tokensDAO')();
+    let tokensDAO = new tokens(conn);
 
     return new Promise((resolve, reject) => {
         tokensDAO.get_username_password_db(user_id,(err, result)=>{
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if(!err){
                 resolve(result);
             }else{
@@ -185,12 +194,13 @@ module.exports.create_ids = async function(app, request){
 
 module.exports.pesquisa_username = function(app, id){
 
-    let conn = app.config.dbconn();
-    let idDAO = new app.app.models.utilsDAO(conn);
+    let conn = require('../../config/dbconn')()();
+    let utils_file = require('../models/utilsDAO')();
+    let idDAO = new utils_file(conn);
 
     return new Promise((resolve, reject) =>{
         idDAO.pesquisa_username_seq(id, (err, result) =>{
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if(!err && result.length == 0){
                 resolve(true);
             }else{

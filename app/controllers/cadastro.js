@@ -1,6 +1,10 @@
 module.exports.cadastro_usuario = async function (app, request, response) {
+    
+    let cadastro = require('../models/cadastroDAO');
+    let connections = require('../controllers/connections');
+
     let conn = app.config.dbconn();
-    let cadastroUsuario = new app.app.models.cadastroDAO(conn);
+    let cadastroUsuario = new cadastro(conn);
     let body = request.body;
 
     let erro_cadastro = [];
@@ -36,7 +40,9 @@ module.exports.cadastro_usuario = async function (app, request, response) {
     //Grava Cadastro
     try{
         check_cad = await grava_cadastro(cadastroUsuario, request, body);
-        app.app.controllers.connections.db_end_connection(conn);
+
+        connections.db_end_connection(conn);
+
         if (check_cad === false) {
             nivel++;
             return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]], status : 0});
@@ -62,11 +68,16 @@ module.exports.cadastro_usuario = async function (app, request, response) {
 };
 
 module.exports.dados_cadastro = function (app, request, response) {
-    let conn = app.config.dbconn();
-    let cadastroUsuario = new app.app.models.cadastroDAO(conn);
+    
+    let cadastro = require('../models/cadastroDAO');
+    let connections = require('../controllers/connections');
+    let conn = require('../../config/dbconn')();
+
+
+    let cadastroUsuario = new cadastro(conn);
 
     cadastroUsuario.dados_cadastro(request.session.user_id, (err, result) => {
-        app.app.controllers.connections.db_end_connection(conn);
+        connections.db_end_connection(conn);
         if (!err) {
             response.render('profile', {dados: result, prefixo: request.session.prefix_user});
         } else {
@@ -77,8 +88,11 @@ module.exports.dados_cadastro = function (app, request, response) {
 };
 
 module.exports.atualiza_dados_cadastro = function (app, request, response) {
-    let conn = app.config.dbconn();
-    let cadastroUsuario = new app.app.models.cadastroDAO(conn);
+     let cadastro = require('../models/cadastroDAO');
+    let connections = require('../controllers/connections');
+    let conn = require('../../config/dbconn')();
+
+    let cadastroUsuario = new cadastro(conn);
     let body = request.query;
     let async = require('async');
 
