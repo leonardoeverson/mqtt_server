@@ -57,12 +57,19 @@ app.use(expressValidator({
 
 app.use('*', (request, response, next)=>{
     
-    if(request.session.user_id){
-        request.session.user_id = request.session.user_id
+    if(typeof(request.session) != "undefined"){
+        request.session = request.session
     }
     
     next();
 })
+
+//Express Session
+app.use(session({
+    secret: '1234567890![]?:>.;@#$%¨&*()_-+§qazxswedcvfrtgbnyujmkiolpç^~;.',
+    resave: false,
+    saveUninitialized: false
+}));
 
 //Rotas
 app.use(require('../app/routes/cadastro'));
@@ -72,11 +79,6 @@ app.use(require('../app/routes/interfaces'));
 app.use(require('../app/routes/login'));
 app.use(require('../app/routes/settings'));
 
-//Express Session
-app.use(session({
-    secret: '1234567890![]?:>.;@#$%¨&*()_-+§qazxswedcvfrtgbnyujmkiolpç^~;.',
-    resave: false,
-    saveUninitialized: false
-}));
+
 
 module.exports = app;

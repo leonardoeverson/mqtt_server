@@ -57,6 +57,7 @@ module.exports.count_devices_db = function (request, response) {
     let conn = require('../../config/dbconn')();
     let devicesDAO = require('../models/devicesDAO')();
     let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
     let dados = {};
 
     dados.user_id = request.session.user_id;
@@ -275,8 +276,10 @@ module.exports.update_device_data = function(request, response){
 
 
 function delete_all_device_data(request, response){
-    //let conn = app.config.dbconn();
-   //let dadosDispositivos = new app.app.models.devicesDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let devicesDAO = require('../models/devicesDAO')();
+    let dadosDispositivos = new devicesDAO(conn);
+    let connections = require('../controllers/connections')
 
     dadosDispositivos.device_sb_pb_topic_delete(request.body.device_id, (err, result)=>{
         if(!err){
