@@ -1,6 +1,6 @@
 module.exports.topic_subscribe_register = function(subscriptions, client){
     let conn = require('../../config/dbconn')();
-    let topicsDAO = require('../models/topicsDAO');
+    let topicsDAO = require('../models/topicsDAO')();
     topicsDAO = new topicsDAO(conn);
     let dados = {};
     dados.tp_subscribe = subscriptions[0].topic;
@@ -44,9 +44,8 @@ module.exports.topic_subscribe_register = function(subscriptions, client){
 module.exports.message_metric = function(request, response){
     let conn = require('../../config/dbconn')();
     let topicsDAO = require('../models/topicsDAO')();
+    topicsDAO = new topicsDAO(conn);
     let dados = {};
-
-    console.log(request.session);
 
     dados.user_id = request.session.user_id;
     dados.periodo = request.query.periodo;
@@ -66,6 +65,8 @@ module.exports.message_metric = function(request, response){
 module.exports.conn_metrics = function(request, response){
     let conn = require('../../config/dbconn')();
     let topicsDAO = require('../models/topicsDAO')();
+    topicsDAO = new topicsDAO(conn);
+    
     let dados = {};
     dados.user_id = request.session.user_id;
     topicsDAO.conn_metrics_db(dados, (error, result)=>{
