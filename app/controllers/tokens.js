@@ -1,5 +1,5 @@
-let token_user_insert = function(app, dados){
-    let conn = require('../../config/dbconn')()();
+let token_user_insert = function(dados){
+    let conn = require('../../config/dbconn')();
     let connections = require('../controllers/connections')
     let tokens = require('../models/tokensDAO')();
     let tokensDAO = new tokens(conn);
@@ -18,8 +18,8 @@ let token_user_insert = function(app, dados){
     });
 };
 
-let token_user_get = function(app, dados){
-    let conn = require('../../config/dbconn')()();
+let token_user_get = function(dados){
+    let conn = require('../../config/dbconn')();
     let connections = require('../controllers/connections')
     let tokens = require('../models/tokensDAO')();
     let tokensDAO = new tokens(conn);
@@ -39,11 +39,12 @@ let token_user_get = function(app, dados){
     });
 };
 
-module.exports.token_user_compare = function(app, dados){
-    let conn = require('../../config/dbconn')()();
+module.exports.token_user_compare = function(dados){
+    let conn = require('../../config/dbconn')();
     let tokens = require('../models/tokensDAO')();
     let tokensDAO = new tokens(conn);
-
+    let connections = require('../controllers/connections');
+    
     return new Promise((resolve, reject)=>{
         tokensDAO.user_token_compare(dados, (error, result)=>{
             connections.db_end_connection(conn);
@@ -58,20 +59,20 @@ module.exports.token_user_compare = function(app, dados){
     });
 };
 
-module.exports.token_check = function (app, request) {
+module.exports.token_check = function (request) {
 
     let dados = {};
     dados.user_id = request.session.user_id;
 
     return new Promise(async (resolve, reject)=>{
         try {
-            let check1 = await token_user_get(app, dados);
+            let check1 = await token_user_get(dados);
 
             if (check1.length > 0) {
                 resolve("token:"+check1[0].token_value);
             } else {
                 dados.token_value = require('uuid/v4')();
-                let check2 = await token_user_insert(app, dados);
+                let check2 = await token_user_insert(dados);
                 resolve("token:"+dados.token_value);
             }
 
@@ -84,7 +85,7 @@ module.exports.token_check = function (app, request) {
 };
 
 module.exports.delete_tokens_ = function(app){
-    let conn = require('../../config/dbconn')()();
+    let conn = require('../../config/dbconn')();
     let connections = require('../controllers/connections')
     let tokens = require('../models/tokensDAO')();
     let tokensDAO = new tokens(conn);
@@ -100,8 +101,8 @@ module.exports.delete_tokens_ = function(app){
 };
 
 
-module.exports.get_username_password = function(app, user_id){
-    let conn = require('../../config/dbconn')()();
+module.exports.get_username_password = function(user_id){
+    let conn = require('../../config/dbconn')();
     let connections = require('../controllers/connections')
     let tokens = require('../models/tokensDAO')();
     let tokensDAO = new tokens(conn);
@@ -155,30 +156,33 @@ module.exports.make_id = function(tamanho, usa_maiusculas, usa_minusculas, usa_n
     return text;
 };
 
-module.exports.create_ids = async function(app, request){
+module.exports.create_ids = async function(request){
 
-    let conn = app.config.dbconn();
-    let idDAO = new app.app.models.utilsDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let utilsDAO = require('../models/utilsDAO')();
+    let connections = require('../controllers/connections');
+
+    let idDAO = new utilsDAO(conn);
     let dados = {};
     let test;
 
     try{
-        dados.username = app.app.controllers.tokens.make_id(8, false, true, false, false);
-        dados.senha = app.app.controllers.tokens.make_id(12, true, true, true, false);
+        dados.username = tokens.make_id(8, false, true, false, false);
+        dados.senha = tokens.make_id(12, true, true, true, false);
         dados.user_id = request.session.user_id;
     }catch (e) {
         console.log(e);
     }
 
-    test = await app.app.controllers.tokens.pesquisa_username(app, dados.username);
+    test = await tokens.pesquisa_username(dados.username);
     if (!test) {
-        return app.app.controllers.id.create_ids(app, request);
+        return id.create_ids(request);
     }
 
     return new Promise(async (resolve, reject) => {
 
         idDAO.grava_ids(dados, (err, result) => {
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if (!err) {
                 resolve(result);
             } else {
@@ -192,11 +196,12 @@ module.exports.create_ids = async function(app, request){
     });
 };
 
-module.exports.pesquisa_username = function(app, id){
+module.exports.pesquisa_username = function(id){
 
-    let conn = require('../../config/dbconn')()();
-    let utils_file = require('../models/utilsDAO')();
-    let idDAO = new utils_file(conn);
+    let conn = require('../../config/dbconn')();
+    let utilsDAO = require('../models/utilsDAO')();
+    let connections = require('../controllers/connections');
+    let idDAO = new utilsDAO(conn);
 
     return new Promise((resolve, reject) =>{
         idDAO.pesquisa_username_seq(id, (err, result) =>{

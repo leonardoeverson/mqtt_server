@@ -25,6 +25,4 @@ function dbconn(){
 
 }
 
-module.exports = function(){
-	return dbconn;
-};
+module.exports = dbconn;

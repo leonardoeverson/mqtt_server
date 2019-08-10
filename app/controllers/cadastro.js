@@ -3,7 +3,7 @@ module.exports.cadastro_usuario = async function ( request, response) {
     let cadastro = require('../models/cadastroDAO');
     let connections = require('../controllers/connections');
 
-    let conn = app.config.dbconn();
+    let conn = require('../../config/dbconn')();
     let cadastroUsuario = new cadastro(conn);
     let body = request.body;
 
@@ -407,7 +407,7 @@ async function cria_prefixos( request) {
 
     let tokens = require('../controllers/tokens');
     let prefix = require('../controllers/prefix');
-    
+
     try {
         result = await tokens.create_ids( request);
         result1 = await prefix.create_prefix( request);
