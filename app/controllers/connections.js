@@ -1,4 +1,4 @@
-module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_address, client_port, db_device_id, method){
+module.exports.conn_mgmt_insert = function(user_id, client_id, client_address, client_port, db_device_id, method){
 	let conn = require('../../config/dbconn')();
 	let connectionsDAO = require('../models/connectionsDAO')();
 	let connMgmt = new connectionsDAO(conn);
@@ -32,7 +32,7 @@ module.exports.conn_mgmt_insert = function(app, user_id, client_id, client_addre
 
 };
 
-module.exports.conn_mgmt_delete = function(app, id_conn){
+module.exports.conn_mgmt_delete = function(id_conn){
 	let conn = require('../../config/dbconn')();
 	let connectionsDAO = require('../models/connectionsDAO')();
 	let connMgmt = new connectionsDAO(conn);
@@ -46,7 +46,7 @@ module.exports.conn_mgmt_delete = function(app, id_conn){
 };
 
 
-module.exports.conn_mgmt_delete_all = function(app){
+module.exports.conn_mgmt_delete_all = function(){
 	let conn = require('../../config/dbconn')();
 	let connectionsDAO = require('../models/connectionsDAO')();
 	let connMgmt = new connectionsDAO(conn);

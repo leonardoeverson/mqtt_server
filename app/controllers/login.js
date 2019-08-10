@@ -21,13 +21,13 @@ module.exports.login_usuario = function (request, response) {
                     app.app.controllers.connections.db_end_connection(conn);
 
                     //Prefixo do usuário
-                    request.session.prefix_user = await prefix.prefix_db_get( request.session.user_id);
+                    request.session.prefix_user = await prefix.prefix_db_get(request.session.user_id);
 
                     //Recuperação de Token
                     //request.session.user_token = await app.app.controllers.tokens.token_check( request);
 
                     //Recuperação de usuário e senha
-                    let username_password = await tokens.get_username_password( request.session.user_id);
+                    let username_password = await tokens.get_username_password(request.session.user_id);
                     request.session.username = username_password[0].username;
                     request.session.password = username_password[0].password;
                     response.redirect("/home");

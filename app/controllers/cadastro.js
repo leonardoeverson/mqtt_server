@@ -21,7 +21,7 @@ module.exports.cadastro_usuario = async function ( request, response) {
     let erros = request.validationErrors();
 
     if (erros) {
-        response.render("cadastro/cadastro", {validacao: erros});
+        response.render("cadastro/cadastro", {validacao: erros, status: 0});
         return;
     }
 
@@ -31,7 +31,7 @@ module.exports.cadastro_usuario = async function ( request, response) {
     try{
         check_email =  await verifica_email(cadastroUsuario, body);
         if (check_email === false) {
-            return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]]});
+            return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]], status : 0});
         }
     }catch(e){
         throw new Error(e);
