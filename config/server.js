@@ -21,13 +21,6 @@ app.use(bodyParser.json());
 //helmet
 app.use(helmet());
 
-//Express Session
-app.use(session({
-    secret: '1234567890![]?:>.;@#$%¨&*()_-+§qazxswedcvfrtgbnyujmkiolpç^~;.',
-    resave: false,
-    saveUninitialized: false
-}));
-
 app.use(function(request, response, next){
     response.setHeader("Access-Control-Allow-Origin","*")//Cross-domain
     response.setHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");//Cross-domain
@@ -62,6 +55,14 @@ app.use(expressValidator({
     }
 }));
 
+app.use('*', (request, response, next)=>{
+    
+    if(request.session.user_id){
+        request.session.user_id = request.session.user_id
+    }
+    
+    next();
+})
 
 //Rotas
 app.use(require('../app/routes/cadastro'));
@@ -71,14 +72,11 @@ app.use(require('../app/routes/interfaces'));
 app.use(require('../app/routes/login'));
 app.use(require('../app/routes/settings'));
 
-
-//Localizando arquivos
-//Localizando rotas e models
-// consign()
-//     .include('./app/routes')
-//     .then('./config/dbconn.js')
-//     .then('app/models')
-//     .then('app/controllers')
-//     .into(app);
+//Express Session
+app.use(session({
+    secret: '1234567890![]?:>.;@#$%¨&*()_-+§qazxswedcvfrtgbnyujmkiolpç^~;.',
+    resave: false,
+    saveUninitialized: false
+}));
 
 module.exports = app;

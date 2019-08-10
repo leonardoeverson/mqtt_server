@@ -5,18 +5,6 @@ let wsPort = 8888;
 let aedesPersistenceMongoDB = require('aedes-persistence-mongodb');
 let url = 'mongodb+srv://dbAccess:zS6gPI0bnz2eU5Y0@cluster0-7fkit.mongodb.net/test?retryWrites=true&w=majority/aedes_mq' ;
 let url_prst = 'mongodb+srv://dbAccess:zS6gPI0bnz2eU5Y0@cluster0-7fkit.mongodb.net/test?retryWrites=true&w=majority/aedes_persistence';
-let dbname = 'aedes_mq';
-
-if(process.env.MONGODB_PORT_27017_TCP_ADDR){
-    url = 'mongodb://'+process.env.MONGODB_USE;
-    url += ':' + process.env.MONGODB_PASSWORD;
-    url += '@'+process.env.MONGODB_PORT_27017_TCP_ADDR;
-    url += ':' + process.env.MONGODB_SERVICE_PORT +'/' + dbname
-    url_prst = 'mongodb://'+process.env.MONGODB_USER;
-    url_prst += ':'+process.env.MONGODB_PASSWORD;
-    url_prst += '@'+process.env.MONGODB_PORT_27017_TCP_ADDR;
-    url_prst += ':' + process.env.MONGODB_SERVICE_PORT +'/aedes_persistence';
-}
 
 //Aedes Persistence
 let persistence = aedesPersistenceMongoDB({url: url_prst});
