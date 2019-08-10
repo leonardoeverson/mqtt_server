@@ -1,6 +1,7 @@
 module.exports.topic_subscribe_register = function(app, subscriptions, client){
-    let conn = app.config.dbconn();
-    let topicsDAO = new app.app.models.topicsDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let topicsDAO = require('../models/topicsDAO');
+    topicsDAO = new topicsDAO(conn);
     let dados = {};
     dados.tp_subscribe = subscriptions[0].topic;
     dados.client_id = client.id;
@@ -9,7 +10,7 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
 
     topicsDAO.topic_subscribe_register_db(dados, (error, result)=>{
         if(!error){
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             console.log("topic_subscribe_register_db");
         }else{
             console.log(error);
@@ -20,8 +21,9 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
 };
 
  module.exports.publish_metrics_insert = function(app, packet, client){
-    let conn = app.config.dbconn();
-    let topicsDAO = new app.app.models.topicsDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let topicsDAO = require('../models/topicsDAO')();
+    topicsDAO = new topicsDAO(conn);
     let dados = {};
 
     dados.length = packet.payload.byteLength;
@@ -45,8 +47,8 @@ module.exports.topic_subscribe_register = function(app, subscriptions, client){
 };
 
 module.exports.message_metric = function(app, request, response){
-    let conn = app.config.dbconn();
-    let topicsDAO = new app.app.models.topicsDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let topicsDAO = require('../models/topicsDAO')();
     let dados = {};
     dados.user_id = request.session.user_id;
     dados.periodo = request.query.periodo;
@@ -64,8 +66,8 @@ module.exports.message_metric = function(app, request, response){
 
 
 module.exports.conn_metrics = function(app, request, response){
-    let conn = app.config.dbconn();
-    let topicsDAO = new app.app.models.topicsDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let topicsDAO = require('../models/topicsDAO')();
     let dados = {};
     dados.user_id = request.session.user_id;
     topicsDAO.conn_metrics_db(dados, (error, result)=>{
