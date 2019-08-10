@@ -1,51 +1,55 @@
-module.exports = function(app){
+let cadastro = require('../controllers/cadastro')
+let express = require('express');
+let router = express.Router();
 
-	app.get('/cadastro',function(request, response){
-		response.render("cadastro/cadastro");
-	});
+router.get('/cadastro', function (request, response) {
+	response.render("cadastro/cadastro");
+});
 
-	app.post('/cadastro/inserir',function(request, response){
-		app.app.controllers.cadastro.cadastro_usuario(app, request, response);
-	});
+router.post('/cadastro/inserir', function (request, response) {
+	cadastro.cadastro_usuario( request, response);
+});
 
-	app.get('/profile', function(request, response){
-		if(request.session.logged){
-			app.app.controllers.cadastro.dados_cadastro(app, request, response);
-		}else{
-			response.redirect("/");
-		}
-	});
+router.get('/profile', function (request, response) {
+	if (request.session.logged) {
+		cadastro.dados_cadastro( request, response);
+	} else {
+		response.redirect("/");
+	}
+});
 
-	app.get('/recuperar/senha', (request, response)=>{
-		response.render('recuperar_acesso');
-	});
+router.get('/recuperar/senha', (request, response) => {
+	response.render('recuperar_acesso');
+});
 
-	app.post('/recuperar/senha/verificar', (request, response)=>{
-		app.app.controllers.cadastro.senha_reset(app, request, response);
-	});
+router.post('/recuperar/senha/verificar', (request, response) => {
+	cadastro.senha_reset( request, response);
+});
 
-	app.get('/password/request/reset', function(request, response){
-		app.app.controllers.cadastro.valida_token(app, request, response);
-	})
+router.get('/password/request/reset', function (request, response) {
+	cadastro.valida_token( request, response);
+})
 
-	app.post('/password/request/reset', function(request, response){
-		app.app.controllers.cadastro.troca_senha(app, request, response);
-	})
+router.post('/password/request/reset', function (request, response) {
+	cadastro.troca_senha( request, response);
+})
 
-	app.post('/dados/usuario/salvar', function(request, response){
-		if(request.session.logged){
-			app.app.controllers.cadastro.atualiza_dados_cadastro(app, request, response);
-		}else{
-			response.sendStatus(403);
-		}
-	});
+router.post('/dados/usuario/salvar', function (request, response) {
+	if (request.session.logged) {
+		cadastro.atualiza_dados_cadastro( request, response);
+	} else {
+		response.sendStatus(403);
+	}
+});
 
-	app.post('/dados/usuario/senha', function(request, response){
-		if(request.session.logged){
-			app.app.controllers.cadastro.altera_senha_cadastro(app, request, response)
-		}else{
-			response.sendStatus(503);
-		}
+router.post('/dados/usuario/senha', function (request, response) {
+	if (request.session.logged) {
+		cadastro.altera_senha_cadastro( request, response)
+	} else {
+		response.sendStatus(503);
+	}
 
-	})
-};
+})
+
+
+module.exports = router

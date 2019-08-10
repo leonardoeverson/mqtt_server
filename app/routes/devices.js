@@ -1,62 +1,66 @@
-module.exports = function(app){
-	app.get('/devices/register',function(request, response){
-		if(request.session.logged) {
-			response.render('devices/register',{prefixo : request.session.prefix_user});
-		}else{
-			response.redirect("/")
-		}
-	});
+let express = require('express');
+let router = express.Router();
+let devices = require('../controllers/devices');
 
-	app.post('/devices/register', function(request, response){
-		app.app.controllers.devices.register_devices(app, request, response);	
-	});
+router.get('/devices/register', function (request, response) {
+	if (request.session.logged) {
+		response.render('devices/register', { prefixo: request.session.prefix_user });
+	} else {
+		response.redirect("/")
+	}
+});
+
+router.post('/devices/register', function (request, response) {
+	devices.register_devices(request, response);
+});
 
 
-	app.get('/devices/list',function(request, response){
-		if(request.session.logged){
-			app.app.controllers.devices.list_devices(app, request, response);
-		}else{
-			response.redirect("/");
-		}
-	});
+router.get('/devices/list', function (request, response) {
+	if (request.session.logged) {
+		devices.list_devices(request, response);
+	} else {
+		response.redirect("/");
+	}
+});
 
-	app.get('/devices/connected', function(request, response){
-		if(request.session.logged){
-			app.app.controllers.devices.connected_devices(app, request, response);
-		}else{
-			response.redirect("/");
-		}
-	});
+router.get('/devices/connected', function (request, response) {
+	if (request.session.logged) {
+		devices.connected_devices(request, response);
+	} else {
+		response.redirect("/");
+	}
+});
 
-	app.delete('/device/delete', function(request, response){
-		if(request.session.logged){
-			app.app.controllers.devices.delete_device(app, request, response);
-		}else{
-			response.redirect("/");
-		}
-	});
+router.delete('/device/delete', function (request, response) {
+	if (request.session.logged) {
+		devices.delete_device(request, response);
+	} else {
+		response.redirect("/");
+	}
+});
 
-	app.get('/device/edit', function(request, response){
-		if(request.session.logged){
-			app.app.controllers.devices.get_device_data(app, request, response);
-		}else{
-			response.redirect('/');
-		}
-	});
+router.get('/device/edit', function (request, response) {
+	if (request.session.logged) {
+		devices.get_device_data(request, response);
+	} else {
+		response.redirect('/');
+	}
+});
 
-	app.get('/device/data', function(request, response){
-		if(request.session.logged){
-			app.app.controllers.devices.get_device_data_topic(app, request, response);
-		}else{
-			response.redirect('/');
-		}
-	});
+router.get('/device/data', function (request, response) {
+	if (request.session.logged) {
+		devices.get_device_data_topic( request, response);
+	} else {
+		response.redirect('/');
+	}
+});
 
-	app.post('/devices/edit', (request, response)=>{
-		if(request.session.logged){
-			app.app.controllers.devices.update_device_data(app, request, response);
-		}else{
-			response.redirect('/')
-		}
-	})
-};
+router.post('/devices/edit', (request, response) => {
+	if (request.session.logged) {
+		devices.update_device_data( request, response);
+	} else {
+		response.redirect('/')
+	}
+})
+
+module.exports = router

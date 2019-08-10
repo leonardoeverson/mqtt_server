@@ -1,6 +1,6 @@
-module.exports.list_devices = function (app, request, response) {
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.list_devices = function (request, response) {
+   //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
     let dados = {};
     dados.user_id = request.session.user_id;
@@ -16,9 +16,9 @@ module.exports.list_devices = function (app, request, response) {
     })
 };
 
-module.exports.register_devices = function (app, request, response) {
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.register_devices = function (request, response) {
+    //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
     let dados = request.body;
 
     dados.user_id = request.session.user_id;
@@ -50,9 +50,9 @@ module.exports.register_devices = function (app, request, response) {
     })
 };
 
-module.exports.count_devices_db = function (app, request, response) {
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.count_devices_db = function (request, response) {
+    //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
     let dados = {};
 
     dados.user_id = request.session.user_id;
@@ -71,9 +71,9 @@ module.exports.count_devices_db = function (app, request, response) {
     });
 };
 
-module.exports.connected_devices = function (app, request, response) {
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.connected_devices = function (request, response) {
+    //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
     let dados = {};
     dados.user_id = request.session.user_id;
 
@@ -90,9 +90,9 @@ module.exports.connected_devices = function (app, request, response) {
     })
 };
 
-module.exports.check_device_reg = function (app, user_id, client_id) {
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.check_device_reg = function (user_id, client_id) {
+    //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
     let dados = {};
     dados.user_id = user_id;
@@ -115,13 +115,13 @@ module.exports.check_device_reg = function (app, user_id, client_id) {
     })
 };
 
-module.exports.delete_device = function (app, request, response) {
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.delete_device = function (request, response) {
+    //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
     let dados = request.body;
 
     dadosDispositivos.delete_device_db(dados.device_id, (error, result) => {
-        app.app.controllers.connections.db_end_connection(conn);
+        connections.db_end_connection(conn);
         if (!error) {
             response.send(JSON.stringify('ok')).end();
         } else {
@@ -137,7 +137,7 @@ module.exports.publish_perm = function (app, device_id) {
 
     return new Promise((resolve, reject) => {
         dadosDispositivos.get_device_pb_topic_db(device_id, function (error, result) {
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if (!error) {
                 resolve(result);
             } else {
@@ -158,7 +158,7 @@ module.exports.subscribe_perm = function (app, device_id) {
 
     return new Promise((resolve, reject) => {
         dadosDispositivos.get_device_sb_topic_db(device_id, function (error, result) {
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if (!error) {
                 resolve(result);
             } else {
@@ -173,9 +173,10 @@ module.exports.subscribe_perm = function (app, device_id) {
     })
 };
 
-module.exports.get_device_data = function(app, request, response){
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.get_device_data = function(request, response){
+    //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
+
     let dados = {
         device_id : request.query.device_id,
         user_id : request.session.user_id
@@ -190,9 +191,10 @@ module.exports.get_device_data = function(app, request, response){
     })
 };
 
-module.exports.get_device_data_topic = function(app, request, response){
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.get_device_data_topic = function(request, response){
+    //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
+
     let dados = {
         device_id : request.query.device_id,
         user_id : request.session.user_id
@@ -208,9 +210,9 @@ module.exports.get_device_data_topic = function(app, request, response){
     })
 };
 
-module.exports.update_device_data = function(app, request, response){
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+module.exports.update_device_data = function(request, response){
+    //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
     let sb_topic, pb_topic;
 
@@ -258,9 +260,9 @@ module.exports.update_device_data = function(app, request, response){
 };
 
 
-function delete_all_device_data(app, request, response){
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+function delete_all_device_data(request, response){
+    //let conn = app.config.dbconn();
+   //let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
     dadosDispositivos.device_sb_pb_topic_delete(request.body.device_id, (err, result)=>{
         if(!err){
@@ -273,9 +275,9 @@ function delete_all_device_data(app, request, response){
 };
 
 
-function update_sb_pb_topic(dados, app, request, response, id, callback){
-    let conn = app.config.dbconn();
-    let dadosDispositivos = new app.app.models.devicesDAO(conn);
+function update_sb_pb_topic(dados, request, response, id, callback){
+    //let conn = app.config.dbconn();
+    //let dadosDispositivos = new app.app.models.devicesDAO(conn);
 
     if (Number(dados.publish) === 1) {
         if (dados.pb_topic.search(";") > -1) {

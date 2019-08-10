@@ -1,24 +1,27 @@
-module.exports = function(app){
-	
-	app.get('/login', function(request, response){		
-		response.render('login/index',);
-	});
+let cadastro = require('../controllers/cadastro')
+let express = require('express');
+let router = express.Router();
 
-	app.get('/',function(request, response){
-	    if(request.session.logged){
-	        response.redirect("/home");
-        }else{
-            response.render('login/index');
-        }
-	});
+router.get('/login', function (request, response) {
+	response.render('login/index');
+});
 
-	app.post('/login',function(request, response){
-		app.app.controllers.login.login_usuario(app, request, response);
-	});
+router.get('/', function (request, response) {
+	if (request.session.logged) {
+		response.redirect("/home");
+	} else {
+		response.render('login/index');
+	}
+});
 
-	app.get('/logout',function(request, response){
-		request.session.destroy(function(err){
-			response.redirect("/");
-		});
+router.post('/login', function (request, response) {
+	login.login_usuario(request, response);
+});
+
+router.get('/logout', function (request, response) {
+	request.session.destroy(function (err) {
+		response.redirect("/");
 	});
-};
+});
+
+module.exports = router

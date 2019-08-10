@@ -1,4 +1,4 @@
-module.exports.cadastro_usuario = async function (app, request, response) {
+module.exports.cadastro_usuario = async function ( request, response) {
     
     let cadastro = require('../models/cadastroDAO');
     let connections = require('../controllers/connections');
@@ -53,7 +53,7 @@ module.exports.cadastro_usuario = async function (app, request, response) {
 
     //Cria id's e prefixos
     try{
-        check_prefixos = await cria_prefixos(app, request);
+        check_prefixos = await cria_prefixos( request);
         if (check_prefixos === false) {
             nivel++;
             return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]], status : 0});
@@ -67,7 +67,7 @@ module.exports.cadastro_usuario = async function (app, request, response) {
     response.render("cadastro/cadastro", { validacao :[{'msg': 'cadastro criado com sucesso, redirecionando para a página de login...'}], status: 1});
 };
 
-module.exports.dados_cadastro = function (app, request, response) {
+module.exports.dados_cadastro = function ( request, response) {
     
     let cadastro = require('../models/cadastroDAO');
     let connections = require('../controllers/connections');
@@ -87,7 +87,7 @@ module.exports.dados_cadastro = function (app, request, response) {
     })
 };
 
-module.exports.atualiza_dados_cadastro = function (app, request, response) {
+module.exports.atualiza_dados_cadastro = function ( request, response) {
      let cadastro = require('../models/cadastroDAO');
     let connections = require('../controllers/connections');
     let conn = require('../../config/dbconn')();
@@ -134,7 +134,7 @@ module.exports.atualiza_dados_cadastro = function (app, request, response) {
         });
 };
 
-module.exports.altera_senha_cadastro = function (app, request, response) {
+module.exports.altera_senha_cadastro = function ( request, response) {
     let conn = app.config.dbconn();
     let cadastroUsuario = new app.app.models.cadastroDAO(conn);
     let loginUsuario = new app.app.models.loginDAO(conn);
@@ -212,7 +212,7 @@ module.exports.altera_senha_cadastro = function (app, request, response) {
     });
 };
 
-module.exports.senha_reset = function (app, request, response) {
+module.exports.senha_reset = function ( request, response) {
     let conn = app.config.dbconn();
     let cadastroUsuario = new app.app.models.cadastroDAO(conn);
     //let loginUsuario = new app.app.models.loginDAO(conn);
@@ -290,7 +290,7 @@ module.exports.senha_reset = function (app, request, response) {
 };
 
 
-module.exports.valida_token = function(app, request, response){
+module.exports.valida_token = function( request, response){
     var connection = new app.config.dbconn();
     var utils = new app.app.models.utilsDAO(connection);
 
@@ -316,7 +316,7 @@ module.exports.valida_token = function(app, request, response){
     })
 };
 
-module.exports.troca_senha = function(app, request, response){
+module.exports.troca_senha = function( request, response){
     let conn = app.config.dbconn();
     let cadastroUsuario = new app.app.models.cadastroDAO(conn);
     const bcrypt = require('bcrypt');
@@ -387,13 +387,13 @@ function grava_cadastro(cadastroUsuario, request, body) {
     }))
 }
 
-async function cria_prefixos(app, request) {
+async function cria_prefixos( request) {
 
     let result, result1, error;
 
     try {
-        result = await app.app.controllers.tokens.create_ids(app, request);
-        result1 = await app.app.controllers.prefix.create_prefix(app, request);
+        result = await app.app.controllers.tokens.create_ids( request);
+        result1 = await app.app.controllers.prefix.create_prefix( request);
     } catch (e) {
         error = e;
     }

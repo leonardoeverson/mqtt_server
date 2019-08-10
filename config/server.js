@@ -62,6 +62,16 @@ app.use(expressValidator({
     }
 }));
 
+
+//Rotas
+app.use(require('../app/routes/cadastro'));
+app.use(require('../app/routes/devices'));
+app.use(require('../app/routes/home'));
+app.use(require('../app/routes/interfaces'));
+app.use(require('../app/routes/login'));
+app.use(require('../app/routes/settings'));
+
+
 //Localizando arquivos
 //Localizando rotas e models
 // consign()
