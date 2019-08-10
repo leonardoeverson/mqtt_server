@@ -57,7 +57,7 @@ module.exports.cadastro_usuario = async function (request, response) {
 
 module.exports.dados_cadastro = function ( request, response) {
     
-    let cadastro = require('../models/cadastroDAO');
+    let cadastro = require('../models/cadastroDAO')();
     let connections = require('../controllers/connections');
     let conn = require('../../config/dbconn')();
 
