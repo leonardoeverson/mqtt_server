@@ -1,29 +1,17 @@
-module.exports.cadastro_usuario = async function ( request, response) {
+module.exports.cadastro_usuario = async function (request, response) {
     
-    let cadastro = require('../models/cadastroDAO');
+    let cadastroDAO = require('../models/cadastroDAO')();
     let connections = require('../controllers/connections');
 
     let conn = require('../../config/dbconn')();
-    let cadastroUsuario = new cadastro(conn);
+    let cadastroUsuario = new cadastroDAO(conn);
     let body = request.body;
 
-    let erro_cadastro = [];
-    let nivel = 0;
+    let erro_cadastro = [], nivel = 0;
+
     erro_cadastro.push({'msg': 'email existente, insira outro'});
     erro_cadastro.push({'msg': 'falha ao cadastrar o usuario'});
     erro_cadastro.push({'msg': 'falha na geração dos tokens'});
-
-    request.assert('email', 'O campo email não pode ficar vazio').trim().notEmpty().isEmail();
-    request.assert('senha', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8, 8);
-    request.assert('senhav', 'A senha é inválida ou menor que 8 digitos').trim().notEmpty().len(8, 8);
-    request.assert('senha', 'as senhas não são iguais').trim().isEqual(body.senhav);
-
-    let erros = request.validationErrors();
-
-    if (erros) {
-        response.render("cadastro/cadastro", {validacao: erros, status: 0});
-        return;
-    }
 
     let check_email, check_cad, check_prefixos;
 
@@ -134,7 +122,7 @@ module.exports.atualiza_dados_cadastro = function ( request, response) {
         });
 };
 
-module.exports.altera_senha_cadastro = function ( request, response) {
+module.exports.altera_senha_cadastro = function (request, response) {
     let conn = app.config.dbconn();
     
     //Models Load
@@ -210,7 +198,7 @@ module.exports.altera_senha_cadastro = function ( request, response) {
             });
         }
     ], function (err, result) {
-        app.app.controllers.connections.db_end_connection(conn);
+        connections.db_end_connection(conn);
         if (!err) {
             response.send(JSON.stringify([{msg: 'Senha alterada com sucesso', status: 2}]));
         } else {
