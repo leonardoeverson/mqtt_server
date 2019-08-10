@@ -11,12 +11,15 @@
 // };
 
 module.exports.prefix_db_get = function (app, user_id) {
-    let conn = app.config.dbconn();
-    let utilsDAO = new app.app.models.utilsDAO(conn);
+    
+    let conn = require('../../config/dbconn')();
+    let connections = require('../controllers/connections');
+    let utils = require('../models/utilsDAO')();
+    let utilsDAO = new utils(conn);
 
     return new Promise((resolve, reject) => {
         utilsDAO.get_prefix_db(user_id, (error, result) => {
-            app.app.controllers.connections.db_end_connection(conn);
+           connections.db_end_connection(conn);
             if (!error && result.length > 0) {
                 resolve(result[0].prefix_value);
             } else {
@@ -34,12 +37,15 @@ module.exports.prefix_db_get = function (app, user_id) {
 
 module.exports.prefix_db_search = async function (app, prefix) {
 
-    let conn = app.config.dbconn();
-    let utilsDAO = new app.app.models.utilsDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let connections = require('../controllers/connections');
+    let utils = require('../models/utilsDAO')();
+    let utilsDAO = new utils(conn);
 
     return new Promise((resolve, reject) => {
         utilsDAO.search_prefix_db(prefix, (err, result) => {
-            app.app.controllers.connections.db_end_connection(conn);
+            
+            connections.db_end_connection(conn);
             if (!err && result.length === 0) {
                 resolve(true);
             } else {
@@ -56,22 +62,27 @@ module.exports.prefix_db_search = async function (app, prefix) {
 
 module.exports.create_prefix = async function (app, request) {
 
-    let conn = app.config.dbconn();
-    let utilsDAO = new app.app.models.utilsDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let tokens = require('../controllers/tokens');
+    let connections = require('../controllers/connections');
+    let utils = require('../models/utilsDAO')();
+
+    let utilsDAO = new utils(conn);
+    
     let dados = {};
     let test;
-    dados.prefix = app.app.controllers.tokens.make_id(6, true, true, true, false);
+    dados.prefix = tokens.make_id(6, true, true, true, false);
     dados.user_id = request.session.user_id;
 
-    test = await app.app.controllers.prefix.prefix_db_search(app, dados.prefix);
+    test = await module.exports.prefix_db_search(app, dados.prefix);
     if (!test) {
-        return app.app.controllers.prefix.create_prefix(app, request);
+        return  module.exports.create_prefix(app, request);
     }
 
     //request.session.prefix_user = dados.prefix;
     return new Promise(async (resolve, reject) => {
         utilsDAO.insert_prefix_db(dados, (err, result) => {
-            app.app.controllers.connections.db_end_connection(conn);
+           connections.db_end_connection(conn);
             if (!err) {
                 resolve(result);
             } else {

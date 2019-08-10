@@ -2,7 +2,7 @@ module.exports.cadastro_usuario = async function (request, response) {
     
     let cadastroDAO = require('../models/cadastroDAO')();
     let connections = require('../controllers/connections');
-
+    
     let conn = require('../../config/dbconn')();
     let cadastroUsuario = new cadastroDAO(conn);
     let body = request.body;
@@ -41,7 +41,7 @@ module.exports.cadastro_usuario = async function (request, response) {
 
     //Cria id's e prefixos
     try{
-        check_prefixos = await cria_prefixos( request);
+        check_prefixos = await cria_prefixos(request);
         if (check_prefixos === false) {
             nivel++;
             return resposta_cadastro(response, {validacao: [erro_cadastro[nivel]], status : 0});
@@ -60,7 +60,6 @@ module.exports.dados_cadastro = function ( request, response) {
     let cadastro = require('../models/cadastroDAO');
     let connections = require('../controllers/connections');
     let conn = require('../../config/dbconn')();
-
 
     let cadastroUsuario = new cadastro(conn);
 
@@ -320,7 +319,7 @@ module.exports.valida_token = function( request, response){
 
 module.exports.troca_senha = function( request, response){
     let conn = app.config.dbconn();
-    let cadastroUsuario = new app.app.models.cadastroDAO(conn);
+    let cadastroUsuario = new cadastroDAO(conn);
     const bcrypt = require('bcrypt');
     let body = request.body;
 
@@ -355,7 +354,7 @@ module.exports.troca_senha = function( request, response){
 
 
 function verifica_email(cadastroUsuario, body) {
-    return new Promise(((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         cadastroUsuario.verifica_email_existente(body.email, function (error, result) {
             if (!error && result.length === 0) {
                 resolve(true);
@@ -367,11 +366,12 @@ function verifica_email(cadastroUsuario, body) {
                 resolve(false);
             }
         });
-    }))
+    })
 }
 
 function grava_cadastro(cadastroUsuario, request, body) {
-    return new Promise(((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+
         cadastroUsuario.grava_usuario(body, function (error, result) {
             if (!error && result.affectedRows > 0) {
                 // request.session.logged = true;
@@ -386,10 +386,10 @@ function grava_cadastro(cadastroUsuario, request, body) {
                 resolve(false);
             }
         });
-    }))
+    })
 }
 
-async function cria_prefixos( request) {
+async function cria_prefixos(request) {
 
     let result, result1, error;
 
@@ -397,9 +397,11 @@ async function cria_prefixos( request) {
     let prefix = require('../controllers/prefix');
 
     try {
-        result = await tokens.create_ids( request);
-        result1 = await prefix.create_prefix( request);
+        result = await tokens.create_ids(request);
+        result1 = await prefix.create_prefix(request);
     } catch (e) {
+
+        console.log(e);
         error = e;
     }
 

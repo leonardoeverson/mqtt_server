@@ -1,6 +1,7 @@
 let token_user_insert = function(dados){
     let conn = require('../../config/dbconn')();
     let connections = require('../controllers/connections')
+    
     let tokens = require('../models/tokensDAO')();
     let tokensDAO = new tokens(conn);
 
@@ -161,20 +162,20 @@ module.exports.create_ids = async function(request){
     let conn = require('../../config/dbconn')();
     let utilsDAO = require('../models/utilsDAO')();
     let connections = require('../controllers/connections');
-
+    
     let idDAO = new utilsDAO(conn);
     let dados = {};
     let test;
 
     try{
-        dados.username = tokens.make_id(8, false, true, false, false);
-        dados.senha = tokens.make_id(12, true, true, true, false);
+        dados.username = module.exports.make_id(8, false, true, false, false);
+        dados.senha = module.exports.make_id(12, true, true, true, false);
         dados.user_id = request.session.user_id;
     }catch (e) {
         console.log(e);
     }
 
-    test = await tokens.pesquisa_username(dados.username);
+    test = await module.exports.pesquisa_username(dados.username);
     if (!test) {
         return id.create_ids(request);
     }

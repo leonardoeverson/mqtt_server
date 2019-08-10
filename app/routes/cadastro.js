@@ -17,16 +17,16 @@ router.post('/cadastro/inserir', [
 	check('senha').isLength({ min: 8 }),
 	check('senhav').isLength({ min: 8 })], (request, response) => {
 
-	const errors = validationResult(request);
+		const errors = validationResult(request);
 
-	if (!errors.isEmpty()) {
-		response.render("cadastro/cadastro", { validacao: errors, status: 0 });
-		return;
-	}else{
-		cadastro.cadastro_usuario(request, response);
-	}
+		if (!errors.isEmpty()) {
+			response.render("cadastro/cadastro", { validacao: errors, status: 0 });
+			return;
+		} else {
+			cadastro.cadastro_usuario(request, response);
+		}
 
-});
+	});
 
 router.get('/profile', (request, response) => {
 	if (request.session.logged) {
