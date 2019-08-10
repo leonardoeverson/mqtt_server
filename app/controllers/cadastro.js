@@ -88,8 +88,8 @@ module.exports.dados_cadastro = function ( request, response) {
 };
 
 module.exports.atualiza_dados_cadastro = function ( request, response) {
-     let cadastro = require('../models/cadastroDAO');
-    let connections = require('../controllers/connections');
+    let cadastro = require('../models/cadastroDAO')();
+    let connections = require('../controllers/connections')();
     let conn = require('../../config/dbconn')();
 
     let cadastroUsuario = new cadastro(conn);
@@ -124,7 +124,7 @@ module.exports.atualiza_dados_cadastro = function ( request, response) {
             }
         ],
         (err, result) => {
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
             if (!err) {
                 response.send(JSON.stringify([{msg: 'Dados atualizados com sucesso', status: 2}]))
             } else {
@@ -136,8 +136,15 @@ module.exports.atualiza_dados_cadastro = function ( request, response) {
 
 module.exports.altera_senha_cadastro = function ( request, response) {
     let conn = app.config.dbconn();
-    let cadastroUsuario = new app.app.models.cadastroDAO(conn);
-    let loginUsuario = new app.app.models.loginDAO(conn);
+    
+    //Models Load
+    let cadastro = require('../models/cadastroDAO')();
+    let login = require('../models/loginDAO')();
+
+    //Classes
+    let cadastroUsuario = new cadastro(conn);
+    let loginUsuario = new login(conn);
+    
     const async = require('async');
     let bcrypt = require('bcrypt');
     let body = request.body;
@@ -212,12 +219,15 @@ module.exports.altera_senha_cadastro = function ( request, response) {
     });
 };
 
-module.exports.senha_reset = function ( request, response) {
+module.exports.senha_reset = function (request, response) {
     let conn = app.config.dbconn();
-    let cadastroUsuario = new app.app.models.cadastroDAO(conn);
-    //let loginUsuario = new app.app.models.loginDAO(conn);
+
+    let cadastro = require('../models/cadastroDAO')();
+    let mailerClass = require('../controllers/mailer')()
+    let cadastroUsuario = new cadastro(conn);
+
     let body = request.body;
-    let mailer = new app.app.controllers.mailer();
+    let mailer = new mailerClass();
     let async = require('async');
 
     //Verifica se o email existe
@@ -230,7 +240,8 @@ module.exports.senha_reset = function ( request, response) {
             let token;
 
             //Instância da classe
-            let utils = new app.app.models.utilsDAO(conn);
+            let utilsDAO = require('../models/utilsDAO')();
+            let utils = new utilsDAO(conn);
 
             async.series([
                 function (callback) {
@@ -292,7 +303,10 @@ module.exports.senha_reset = function ( request, response) {
 
 module.exports.valida_token = function( request, response){
     var connection = new app.config.dbconn();
-    var utils = new app.app.models.utilsDAO(connection);
+    
+    //Instância da classe
+    let utilsDAO = require('../models/utilsDAO')();
+    let utils = new utilsDAO(conn);
 
     if(typeof (request.query.request_id) == undefined || typeof (request.query.token_id) == undefined)
         response.redirect('/recuperar/senha');
@@ -391,9 +405,12 @@ async function cria_prefixos( request) {
 
     let result, result1, error;
 
+    let tokens = require('../controllers/tokens');
+    let prefix = require('../controllers/prefix');
+    
     try {
-        result = await app.app.controllers.tokens.create_ids( request);
-        result1 = await app.app.controllers.prefix.create_prefix( request);
+        result = await tokens.create_ids( request);
+        result1 = await prefix.create_prefix( request);
     } catch (e) {
         error = e;
     }

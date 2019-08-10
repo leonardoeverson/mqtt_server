@@ -1,6 +1,11 @@
-module.exports.login_usuario = function (app, request, response) {
-    let conn = app.config.dbconn();
-    let loginUsuario = new app.app.models.loginDAO(conn);
+module.exports.login_usuario = function (request, response) {
+    let conn = require('../../config/dbconn')()();
+    let loginDAO = require('../models/loginDAO')();
+    let loginUsuario = new loginDAO(conn);
+    
+    let prefix = require('../controllers/prefix');
+    let tokens = require('../controllers/tokens');
+
     let body = request.body;
     let bcrypt = require('bcrypt');
 
@@ -16,13 +21,13 @@ module.exports.login_usuario = function (app, request, response) {
                     app.app.controllers.connections.db_end_connection(conn);
 
                     //Prefixo do usuário
-                    request.session.prefix_user = await app.app.controllers.prefix.prefix_db_get(app, request.session.user_id);
+                    request.session.prefix_user = await prefix.prefix_db_get( request.session.user_id);
 
                     //Recuperação de Token
-                    //request.session.user_token = await app.app.controllers.tokens.token_check(app, request);
+                    //request.session.user_token = await app.app.controllers.tokens.token_check( request);
 
                     //Recuperação de usuário e senha
-                    let username_password = await app.app.controllers.tokens.get_username_password(app, request.session.user_id);
+                    let username_password = await tokens.get_username_password( request.session.user_id);
                     request.session.username = username_password[0].username;
                     request.session.password = username_password[0].password;
                     response.redirect("/home");
@@ -48,7 +53,7 @@ module.exports.login_usuario = function (app, request, response) {
 };
 
 
-module.exports.login_dispositivo = async function (app, client, username, password, cb) {
+module.exports.login_dispositivo = async function ( client, username, password, cb) {
 
     let conn = app.config.dbconn();
     let loginUsuario = new app.app.models.loginDAO(conn);
@@ -83,9 +88,9 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
             client.conn.user_id = result[0].user_id;
 
             //Finalização de conexão
-            app.app.controllers.connections.db_end_connection(conn);
+            connections.db_end_connection(conn);
 
-            conn_control(app, client, cb, auth_error, result[0].user_id, ip, port, method);
+            conn_control( client, cb, auth_error, result[0].user_id, ip, port, method);
 
         } else {
             if (error) {
@@ -101,12 +106,14 @@ module.exports.login_dispositivo = async function (app, client, username, passwo
     })
 };
 
-async function conn_control(app, client, cb, auth_error, user_id, ip, port, method) {
+async function conn_control( client, cb, auth_error, user_id, ip, port, method) {
     let result1, result2, result3, result4, result5, resposta;
+    let devices = require('../controllers/devices');
+    let connections = require('../controllers/connections');
 
     try {
         //Verifica se é permitida a conexão do dispositivo
-        result2 = await app.app.controllers.settings.get_server_option(app, 1, user_id);
+        result2 = await settings.get_server_option( 1, user_id);
     } catch (e) {
         throw new Error(e);
     }
@@ -119,7 +126,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
 
     try{
         //Verifica se o dispositivo existe no registro
-        result1 = await app.app.controllers.devices.check_device_reg(app, user_id, client.id);
+        result1 = await devices.check_device_reg( user_id, client.id);
     }catch(e){
         throw new Error(e);
     }
@@ -135,7 +142,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
         //Permissões do dispositivo
         if (Number(result1[0].publish) === 1) {
             try{
-                result4 = await app.app.controllers.devices.publish_perm(app, result1[0].device_id);
+                result4 = await devices.publish_perm( result1[0].device_id);
             }catch(e){
                 throw new Error(e);
             }
@@ -146,7 +153,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
         if (Number(result1[0].subscribe) === 1) {
 
             try{
-                result5 = await app.app.controllers.devices.subscribe_perm(app, result1[0].device_id);
+                result5 = await devices.subscribe_perm( result1[0].device_id);
 
             }catch (e) {
                 throw new Error(e);
@@ -158,7 +165,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
 
     try{
         //controller de registro de conexões
-        resposta = await app.app.controllers.connections.conn_mgmt_insert(app, user_id, client.id, ip, port, client.conn.device_id, method);
+        resposta = await connections.conn_mgmt_insert( user_id, client.id, ip, port, client.conn.device_id, method);
     }catch (e) {
         throw new Error(e);
     }
@@ -166,7 +173,7 @@ async function conn_control(app, client, cb, auth_error, user_id, ip, port, meth
 
     try{
         //Prefixo do usuário
-        result3 = await app.app.controllers.prefix.prefix_db_get(app, user_id);
+        result3 = await prefix.prefix_db_get( user_id);
     }catch (e) {
         throw new Error(e);
     }

@@ -1,4 +1,7 @@
-let cadastro = require('../controllers/cadastro')
+let cadastro = require('../controllers/cadastro');
+let devices = require('../controllers/devices');
+let settings = require('../controllers/settings');
+let login = require('../controllers/login');
 let express = require('express');
 let router = express.Router();
 
@@ -7,7 +10,7 @@ router.get('/cadastro', function (request, response) {
 });
 
 router.post('/cadastro/inserir', function (request, response) {
-	cadastro.cadastro_usuario( request, response);
+	cadastro.cadastro_usuario(request, response);
 });
 
 router.get('/profile', function (request, response) {
@@ -23,20 +26,20 @@ router.get('/recuperar/senha', (request, response) => {
 });
 
 router.post('/recuperar/senha/verificar', (request, response) => {
-	cadastro.senha_reset( request, response);
+	cadastro.senha_reset(request, response);
 });
 
 router.get('/password/request/reset', function (request, response) {
-	cadastro.valida_token( request, response);
+	cadastro.valida_token(request, response);
 })
 
 router.post('/password/request/reset', function (request, response) {
-	cadastro.troca_senha( request, response);
+	cadastro.troca_senha(request, response);
 })
 
 router.post('/dados/usuario/salvar', function (request, response) {
 	if (request.session.logged) {
-		cadastro.atualiza_dados_cadastro( request, response);
+		cadastro.atualiza_dados_cadastro(request, response);
 	} else {
 		response.sendStatus(403);
 	}
@@ -44,7 +47,7 @@ router.post('/dados/usuario/salvar', function (request, response) {
 
 router.post('/dados/usuario/senha', function (request, response) {
 	if (request.session.logged) {
-		cadastro.altera_senha_cadastro( request, response)
+		cadastro.altera_senha_cadastro(request, response)
 	} else {
 		response.sendStatus(503);
 	}

@@ -1,7 +1,7 @@
-let cadastro = require('../controllers/cadastro')
-let devices = require('../controllers/devices')
-let settings = require('../controllers/settings')
-let login = require('../controllers/login')
+let cadastro = require('../controllers/cadastro');
+let devices = require('../controllers/devices');
+let settings = require('../controllers/settings');
+let login = require('../controllers/login');
 let express = require('express');
 let router = express.Router();
 

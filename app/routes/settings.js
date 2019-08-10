@@ -1,8 +1,9 @@
 let express = require('express');
 let router = express.Router();
-let cadastro = require('../controllers/cadastro')
-let devices = require('../controllers/devices')
-let settings = require('../controllers/settings')
+let cadastro = require('../controllers/cadastro');
+let devices = require('../controllers/devices');
+let settings = require('../controllers/settings');
+let login = require('../controllers/login');
 
 router.get('/settings', function (request, response) {
     if (request.session.logged) {
