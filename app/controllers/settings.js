@@ -1,6 +1,7 @@
 module.exports.get_server_opts = function(app, request, response){
-    let conn = app.config.dbconn();
-    let serverDAO = new app.app.models.serverDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let serverDAO = require('../models/serverDAO')();
+    serverDAO = new serverDAO(conn);
 
     serverDAO.get_server_user_settings(request.session.user_id,(error, result) =>{
         if(!error){
@@ -15,8 +16,9 @@ module.exports.get_server_opts = function(app, request, response){
 
 module.exports.post_server_opts = function(app, request, response){
 
-    let conn = app.config.dbconn();
-    let serverDAO = new app.app.models.serverDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let serverDAO = require('../models/serverDAO')();
+    serverDAO = new serverDAO(conn);
     let dados = request.body;
     let result = [];
     
@@ -42,14 +44,16 @@ module.exports.post_server_opts = function(app, request, response){
 };
 
 module.exports.get_server_option = function(app, id_option, user_id){
-    let conn = app.config.dbconn();
-    let serverOPT = new app.app.models.serverDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let serverDAO = require('../models/serverDAO')();
+    serverDAO = new serverDAO(conn);
+
     let dados = {};
     dados.user_id = user_id;
     dados.id_option = id_option;
 
     return new Promise((resolve, reject)=>{
-        serverOPT.get_server_option_db(dados, function(error, result){
+        serverDAO.get_server_option_db(dados, function(error, result){
             if(!error){
                 try{
                     console.log("get_server_option_db");
@@ -69,8 +73,10 @@ module.exports.get_server_option = function(app, id_option, user_id){
 };
 
 module.exports.get_username_password_device = function (app, request, response) {
-    let conn = app.config.dbconn();
-    let dadosUsuarios = new app.app.models.dadosUsuarioDAO(conn);
+    let conn = require('../../config/dbconn')();
+    let dadosUsuarios = require('../models/dadosUsuarioDAO')();
+    dadosUsuarios = new dadosUsuarios(conn);
+    let connections = require('../controllers/connections')
 
     dadosUsuarios.dados_conexao_dispositivo(request.session.user_id, (err, result)=>{
         if(!err){

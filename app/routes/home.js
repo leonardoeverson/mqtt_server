@@ -4,7 +4,7 @@ let devices = require('../controllers/devices');
 
 router.get('/home', async function (request, response) {
 	if (request.session.logged) {
-		let result = await devices.connected_devices(router, request, response);
+		let result = await devices.connected_devices(request, response);
 		response.render('home/index', { dados: result, prefixo: request.session.prefix_user });
 	} else {
 		response.redirect("/")
@@ -13,7 +13,7 @@ router.get('/home', async function (request, response) {
 
 router.get('/index', async function (request, response) {
 	if (request.session.logged) {
-		let result = await devices.connected_devices(router, request, response);
+		let result = await devices.connected_devices(request, response);
 		response.render('home/index', { dados: result, prefixo: request.session.prefix_user });
 	} else {
 		response.redirect("/")

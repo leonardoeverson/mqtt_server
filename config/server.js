@@ -6,6 +6,7 @@ let session = require("express-session");
 let morgan = require("morgan");
 //let error = require("../app/middleware/error");
 //console.log(process.env);
+let MongoDBStore = require('connect-mongodb-session')(session);
 
 //Express
 let app = express();
@@ -64,12 +65,25 @@ app.use('*', (request, response, next)=>{
     next();
 })
 
+let store = new MongoDBStore({
+    uri: 'mongodb+srv://dbAccess:zS6gPI0bnz2eU5Y0@cluster0-7fkit.mongodb.net/test?retryWrites=true&w=majority',
+    collection: 'mySessions'
+  });
+   
+// Catch errors
+store.on('error', function(error) {
+console.log(error);
+});
+
 //Express Session
 app.use(session({
     secret: '1234567890![]?:>.;@#$%¨&*()_-+§qazxswedcvfrtgbnyujmkiolpç^~;.',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: store
 }));
+
+app.use(express.Router())
 
 //Rotas
 app.use(require('../app/routes/cadastro'));
