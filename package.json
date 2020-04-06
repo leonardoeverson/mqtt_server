@@ -23,7 +23,7 @@
     "mysql": "^2.17.1",
     "node-report": "^2.2.6",
     "nodemailer": "^6.2.1",
-    "npm": "^6.9.0",
+    "npm": "^6.13.4",
     "uuid": "^3.3.2",
     "websocket-stream": "^5.5.0"
   },
